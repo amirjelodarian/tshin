@@ -5050,7 +5050,7 @@ a.btn_infobox:hover {
     width: 60px;
     height: 60px;
     display: inline-block;
-    background: darkorange;
+    background: #51bce6;
 }
 #username-panel-comment{
     display: inline-block;
@@ -5063,9 +5063,10 @@ a.btn_infobox:hover {
     color: black;
     padding-top: 1px;
     background: #f3f3f3;
-    border: 1px solid darkorange;
+    border: 1px solid #51bce6;
     border-bottom: none;
     border-radius: 5px;
+    opacity: 0.7;
     font-weight: bold;
     direction: ltr;
 }
@@ -5075,7 +5076,8 @@ a.btn_infobox:hover {
     padding-right: 5px;
     color: black;
     padding-top: 1px;
-    background-image: linear-gradient(darkorange,#f3f3f3);
+    background-image: linear-gradient(#51bce6,#f3f3f3);
+    opacity: 0.7;
     border-radius: 5px;
     font-weight: bold;
     direction: ltr;

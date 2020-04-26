@@ -85,7 +85,10 @@ require_once("functions.php");
                         }
 
                     }else{
-                        $_SESSION["errors_message"] .= 'شماره یا رمز اشتباه است !!';
+                        if(isset($_SESSION["errors_message"]))
+                            $_SESSION["errors_message"] .= 'شماره یا رمز اشتباه است !!';
+                        else
+                            $_SESSION["errors_message"] = 'شماره یا رمز اشتباه است !!';
                         $this->error_state = 1;
                         return $this->error_state;
                         $this->redirect_to("login.php");
@@ -192,6 +195,148 @@ require_once("functions.php");
                 return $this->error_state;
             }
         }
+
+        // this function for reset password
+        public function CheckResetPassword(){
+            global $database;
+            if (isset($_POST["submit"]) && isset($_POST["tel"])){
+                $this->tel = $database->escape_value($_POST["tel"]);
+                if ($this->check_tel_for_reset_pass($this->tel) == 0){
+                    $this->random_num_generator();
+                    /*$this->send_code_with_sms($this->tel,$_SESSION["random_code"],"تی شین");*/
+                    $_SESSION["reset_tel"] = $this->tel;
+                    $this->redirect_to("reset_password_check.php");
+                }else{
+                    $_SESSION["reset_tel"] = null;
+                    unset($_SESSION["reset_tel"]);
+                    $this->redirect_to("reset_password.php");
+                }
+            }
+        }
+        public function ResetPasswordCheckCode(){
+            global $database;
+            $this->tel = $database->escape_value($_SESSION["reset_tel"]);
+            $this->random_code = $_SESSION["random_code"];
+            if (isset($_POST["reset_pass_submit"]) && isset($_SESSION["random_code"]) && !(empty($_POST["code"])) && is_numeric($this->tel) && $this->check_tel_for_reset_pass($this->tel) == 0){
+                $code = $_POST["code"];
+                if ($code == $this->random_code){
+                    $_SESSION["random_code"] = null;
+                    unset($_SESSION["random_code"]);
+                    $_SESSION["reset_ok"] = true;
+                    $this->redirect_to("reset_password_submit.php");
+                }else{
+                    $_SESSION["errors_message"] .='کد اشتباه است .';
+                    $this->error_state = 1;
+                    return $this->error_state;
+                    $this->redirect_to("reset_password_check.php");
+                }
+            }else if(!(isset($_SESSION["random_code"]))){
+                $this->redirect_to("reset_password.php");
+            }else{
+                $_SESSION["errors_message"] =' ';
+                $_SESSION["errors_message"] .='لطفا کد را وارد کنید .';
+                $this->error_state = 1;
+                return $this->error_state;
+            }
+
+        }
+        public function ResetPassword(){
+            global $database,$Functions;
+            if (isset($_SESSION["reset_ok"]) && $_SESSION["reset_tel"] && isset($_POST["password"]) && isset($_POST["repeat_password"])){
+                $this->password = $this->mytrim($_POST["password"]);
+                $this->repeat_password = $this->mytrim($_POST["repeat_password"]);
+                if ($this->password_rate($this->password) == 0){
+                    $this->tel = $database->escape_value($_SESSION["reset_tel"]);
+                    $_SESSION["reset_tel"] = null;
+                    unset($_SESSION["reset_tel"]);
+                    $_SESSION["reset_ok"] = null;
+                    unset($_SESSION["reset_ok"]);
+                    $_SESSION["reset_tel"] = null;
+                    unset($_SESSION["reset_tel"]);
+                    $this->password = $database->escape_value($_POST["password"]);
+                    $this->repeat_password = $database->escape_value($_POST["repeat_password"]);
+                    $sql = "UPDATE users SET password='{$this->password}' WHERE tel={$this->tel}";
+                    $database->query("SET NAMES 'utf8'");
+                    $result = $database->query($sql);
+                    if ($result) {
+                        $_SESSION["logged_in"] = true;
+                        if($user_row = $database->fetch_array($this->SelectByTelAndPassword($this->tel,$this->password))){
+                            $this->username = $user_row["username"];
+                            $_SESSION["user_id"] = $user_row["id"];
+                            switch($user_row["user_mode"]) {
+                                case 0:
+                                    $_SESSION["user_mode"] = 0;
+                                    $_SESSION["errors_message"] = " ";
+                                    $_SESSION["errors_message"] = "رمز با موفقیت تغییر کرد";
+                                    $this->redirect_to("index.php");
+                                    break;
+                                case 1:
+                                    $_SESSION["user_mode"] = 1;
+                                    $_SESSION["logged_in_admin"] = true;
+                                    $_SESSION["errors_message"] = " ";
+                                    $_SESSION["errors_message"] = "رمز با موفقیت تغییر کرد";
+                                    $this->redirect_to("panel/admin.php");
+                                    break;
+                                case 13:
+                                    $_SESSION["user_mode"] = 13;
+                                    $_SESSION["logged_in_administrator"] = true;
+                                    $_SESSION["errors_message"] = " ";
+                                    $_SESSION["errors_message"] = "رمز با موفقیت تغییر کرد";
+                                    $this->redirect_to("panel/administrator.php");
+                                    break;
+                                default:
+                                    $this->redirect_to("index.php");
+                                    break;
+                            }
+                        }
+                        $Functions->write_logfile($this->username,$this->tel);
+                        $this->redirect_to("index.php");
+                    }else{
+                        $_SESSION["logged_in"] = false;
+                        echo '<script>window.replace("index.php");</script>';
+                        echo '<script>alert("خطا در ورود به سیستم")</script>';
+                    }
+                }
+            }
+        }
+        public function check_tel_for_reset_pass($tel){
+            global $database;
+            if (isset($tel)) {
+                $this->tel = $database->escape_value($tel);
+                $sql = "SELECT tel FROM users WHERE tel='{$this->tel}'";
+                $result = $database->query($sql);
+                if ($database->num_rows($result) == 0) {
+                    if (isset($_SESSION["errors_message"])) {
+                        $_SESSION["errors_message"] = 'این شماره موبایل ثبت نشده !! لطفا ثبت نام کنید .';
+                        $this->error_state = 1;
+                        return $this->error_state;
+                    }
+                }
+                if (strlen($this->tel) != 11){
+                    $_SESSION["errors_message"] .= 'شماره تلفن ۱۱ رقمی باشد .';
+                    $this->error_state = 1;
+                    return $this->error_state;
+                }
+                if ((substr($this->tel,0,2)) !== "09"){
+                    $_SESSION["errors_message"] = ' ';
+                    $_SESSION["errors_message"] .= 'شماره تلفن  با 09 شروع شود .';
+                    $this->error_state = 1;
+                    return $this->error_state;
+                }
+                if(!(is_numeric($this->tel))){
+                    $_SESSION["errors_message"] .= 'شماره تلفن عدد باشد .';
+                    $this->error_state = 1;
+                    return $this->error_state;
+                }
+                if(!preg_match( '/^[\-+]?[0-9]*\.*\,?[0-9]+$/', $this->tel)){
+                    $_SESSION["errors_message"] .= 'در فیلد شماره تلفن فقط از اعداد استفاده کنید .';
+                    $this->error_state = 1;
+                    return $this->error_state;
+                }
+            }
+        }
+        /////////////////////////////////////////
+
         public function password_encrypt($pass){
 
         }
@@ -234,9 +379,6 @@ require_once("functions.php");
                     return $this->error_state;
                 }
             }
-        }
-        public function reset_password(){
-
         }
         public function Errors(){
             if (isset($_SESSION["errors_message"])){
@@ -896,6 +1038,18 @@ require_once("functions.php");
                 }
             }else{
                 echo 'userimg/default_user.png';
+            }
+        }
+        public function select_user_image_for_comment($row){
+            global $database;
+            if(!(empty($row))){
+                if(filter_var($row,FILTER_VALIDATE_URL)){
+                    echo $row;
+                }else{
+                    echo 'panel/userimg/'.$database->escape_value($row);
+                }
+            }else{
+                echo 'panel/userimg/default_user.png';
             }
         }
 

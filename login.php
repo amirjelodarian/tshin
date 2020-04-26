@@ -53,7 +53,7 @@ if ($sessions->login_state()){
                         </div>
                         <div id="errors"><?php echo $users->Errors(); ?></div>
                         <input class="btn_full" onclick="toast_error()" value="ورود" name="login_submit" type="submit" />
-                        <p class="small"> <a href="#">رمز عبور خود را فراموش كرده ايد؟?</a></p>
+                        <p class="small"> <a href="reset_password.php">رمز عبور خود را فراموش كرده ايد؟?</a></p>
                     </form>
                     <a href="register.php" class="btn_full_outline">ثبت نام</a>
                 </div>

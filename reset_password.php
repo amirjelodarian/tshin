@@ -31,9 +31,6 @@
 </div>
 <div class="layer"></div>
 <?php include("includes/form_header.php"); ?>
-<?php
-
-?>
 
 <section id="hero" class="login">
     <div class="container">
@@ -44,20 +41,22 @@
                         <img src="img\logo_sticky.png" alt="" data-retina="true">
                     </div>
                     <hr>
-                    <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+                    <form method="post" action="reset_password_check.php">
+                        <h4 align="center">تغییر رمز</h4>
                         <div class="form-group">
                             <label>شماره موبایل</label>
                             <input type="tel" name="tel" id="tel" onkeyup="return toast_error();" class=" form-control" value="09" placeholder="شماره موبایل" minlength="11" maxlength="11" required />
                             <div class="icon-warning" id="toast-error" onclick="this.style.display='none'" style="display:none;">۱۱ رقم باشد و با 09 شروع شود</div>
                         </div>
                         <div id="errors"><?php echo $users->Errors(); ?></div>
-                        <input class="btn_full" onclick="toast_error()" value="ورود" name="login_submit" type="submit" />
+                        <input class="btn_full" onclick="toast_error()" value="ورود" name="submit" type="submit" />
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </section>
+<?php $sessions->DestroyPassResetSessions(); ?>
 <?php include("includes/footer.php"); ?>
 <script src="js/jquery-1.11.2.min.js"></script>
 <script src="js/common_scripts_min.js"></script>

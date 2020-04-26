@@ -1048,22 +1048,22 @@
         public function smile_voted_by_num($num){
             switch ($num) {
                 case 1:
-                    return "<i class='icon-smile voted'></i><i class='icon-smile'></i><i class='icon-smile'></i><i class='icon-smile'></i><i class='icon-smile'></i>";
+                    return "<i class='icon-star voted'></i><i class='icon-star'></i><i class='icon-star'></i><i class='icon-star'></i><i class='icon-star'></i>";
                     break;
                 case 2:
-                    return "<i class='icon-smile voted'></i><i class='icon-smile voted'></i><i class='icon-smile'></i><i class='icon-smile'></i><i class='icon-smile'></i>";
+                    return "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star'></i><i class='icon-star'></i><i class='icon-star'></i>";
                     break;
                 case 3:
-                    return "<i class='icon-smile voted'></i><i class='icon-smile voted'></i><i class='icon-smile voted'></i><i class='icon-smile'></i><i class='icon-smile'></i>";
+                    return "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star'></i><i class='icon-star'></i>";
                     break;
                 case 4:
-                    return "<i class='icon-smile voted'></i><i class='icon-smile voted'></i><i class='icon-smile voted'></i><i class='icon-smile voted'></i><i class='icon-smile'></i>";
+                    return "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star'></i>";
                     break;
                 case 5:
-                    return "<i class='icon-smile voted'></i><i class='icon-smile voted'></i><i class='icon-smile voted'></i><i class='icon-smile voted'></i><i class='icon-smile voted'></i>";
+                    return "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i>";
                     break;
                 case 13:
-                    return "<i class='icon-smile'></i><i class='icon-smile'></i><i class='icon-smile'></i><i class='icon-smile'></i><i class='icon-smile'></i>";
+                    return "<i class='icon-star'></i><i class='icon-star'></i><i class='icon-star'></i><i class='icon-star'></i><i class='icon-star'></i>";
                     break;
                 default:
                     return null;
@@ -1101,12 +1101,12 @@
             $this->room_score = (round($this->room_score)/2);
             $room_spec_avg = round(($this->room_price+$this->room_quality+$this->room_score+$this->room_comfort)/4);
             switch ($room_spec_avg){
-                case 0: return "<i class='icon-smile rotateIn'></i><i class='icon-smile'></i><i class='icon-smile'></i><i class='icon-smile'></i><i class='icon-smile'></i>"; break;
-                case 1: return "<i class='icon-smile voted'></i><i class='icon-smile'></i><i class='icon-smile'></i><i class='icon-smile'></i><i class='icon-smile'></i>"; break;
-                case 2: return "<i class='icon-smile voted'></i><i class='icon-smile voted'></i><i class='icon-smile'></i><i class='icon-smile'></i><i class='icon-smile'></i>"; break;
-                case 3: return "<i class='icon-smile voted'></i><i class='icon-smile voted'></i><i class='icon-smile voted'></i><i class='icon-smile'></i><i class='icon-smile'></i>"; break;
-                case 4: return "<i class='icon-smile voted'></i><i class='icon-smile voted'></i><i class='icon-smile voted'></i><i class='icon-smile voted'></i><i class='icon-smile'></i>"; break;
-                case 5: return "<i class='icon-smile voted'></i><i class='icon-smile voted'></i><i class='icon-smile voted'></i><i class='icon-smile voted'></i><i class='icon-smile voted'></i>"; break;
+                case 0: return "<i class='icon-star rotateIn'></i><i class='icon-star'></i><i class='icon-star'></i><i class='icon-star'></i><i class='icon-star'></i>"; break;
+                case 1: return "<i class='icon-star voted'></i><i class='icon-star'></i><i class='icon-star'></i><i class='icon-star'></i><i class='icon-star'></i>"; break;
+                case 2: return "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star'></i><i class='icon-star'></i><i class='icon-star'></i>"; break;
+                case 3: return "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star'></i><i class='icon-star'></i>"; break;
+                case 4: return "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star'></i>"; break;
+                case 5: return "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i>"; break;
 
             }
         }

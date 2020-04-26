@@ -67,7 +67,11 @@
 <?php
 
 if (isset($_SESSION["errors_message"])) {
-    $_SESSION["errors_message"] = '';
+    if ($_SESSION["errors_message"] == "رمز با موفقیت تغییر کرد"){
+     echo $_SESSION['errors_message'];
+    }else{
+     $_SESSION["errors_message"] = " ";
+    }
 }
 
 global $database;

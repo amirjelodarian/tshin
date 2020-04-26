@@ -36,6 +36,20 @@ class Sessions{
             }
         }
     }
+    public function DestroyPassResetSessions(){
+        if (isset($_SESSION["random_code"])){
+            $_SESSION["random_code"] = null;
+            unset($_SESSION["random_code"]);
+        }
+        if (isset($_SESSION["reset_ok"])){
+            $_SESSION["reset_ok"] = null;
+            unset($_SESSION["reset_ok"]);
+        }
+        if (isset($_SESSION["reset_tel"])){
+            $_SESSION["reset_tel"] = null;
+            unset($_SESSION["reset_tel"]);
+        }
+    }
     public function login_state(){
 	    if(isset($_SESSION["logged_in"]) && isset($_SESSION["user_id"]) && isset($_SESSION["user_mode"])){
 	        return true;

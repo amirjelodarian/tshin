@@ -284,7 +284,7 @@ if ((isset($_POST['submit']) && isset($_POST['room_id'])) || isset($_SESSION["ro
                                         $divid_date_time = $Functions->divid_date_time_database($room_survey['survey_date']);
                                         echo("
                                             <div id='single-hotel-comment' class='review_strip_single'>
-                                                <img id='finger-img-panel-comment' src='panel/"); Users::select_user_image($users_row["user_image"]); echo("' alt='تی شین' class='img-circle'>
+                                                <img id='finger-img-panel-comment' src='"); Users::select_user_image_for_comment($users_row["user_image"]); echo("' alt='تی شین' class='img-circle'>
                                                 <h4>{$users_row['username']}</h4>
                                                 <p>"); echo(nl2br($room_survey['survey'])); echo("</p>
                                                 <div class='rating'> {$rooms->smile_voted_by_price_quality_score_comfort($room_survey['room_price'],$room_survey['room_quality'],$room_survey['room_score'],$room_survey['room_comfort'])}</div>
@@ -370,6 +370,8 @@ if ((isset($_POST['submit']) && isset($_POST['room_id'])) || isset($_SESSION["ro
 </div>
             ");
     }
+}else{
+    $users->redirect_to("all_hotels_list.php");
 }
 ?>
 <?php
