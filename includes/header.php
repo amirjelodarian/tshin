@@ -11,12 +11,8 @@
                 <div class="col-md-6 col-sm-6 col-xs-6">
                     <ul id="top_links">
                         <li>
-                            <div class="dropdown dropdown-access"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="access_link">ورود</a>
-                                <div class="dropdown-menu">
-                                    <a href="login.php" id="Sign_in" class="button_drop">ورود</a>
-                                    <a href="register.php" name="Sign_up" id="Sign_up" class="button_drop outline">ثبت نام</a>
-                                </div>
-                            </div>
+                            <span class="icon-login"><a href="login.php" id="login-word">ورود</a><span>&nbsp;&nbsp;I&nbsp;</span></span>
+                            <span class="icon-list-add"><a href="register.php" id="register-word">ثبت نام</a></span>
                         </li>
                         <li><a href="" id="wishlist_link">لیست علاقه مندی ها</a>
                         </li>

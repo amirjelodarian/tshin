@@ -73,7 +73,6 @@ if (isset($_SESSION["errors_message"])) {
      $_SESSION["errors_message"] = " ";
     }
 }
-
 global $database;
     if ($database->open_connection()){
         $database->close_connection();

@@ -456,9 +456,9 @@ if (isset($_POST["review_submit"])){
                         <textarea name='room_text_review' id='review_text_textarea' class='form-control' style='height:100px' placeholder='متن خود را بنویسید' required></textarea>
                     </div>
                     <div class='form-group'>
-                        <img src="classes/captcha.php" class="captcha_code" />
-                        <input type='text' id="tel" name="random_captcha_code" class='verify_review' minlength="4" maxlength="4" placeholder='1234' required />
-                    </div>
+                        <img src="classes/captcha.php" class="captcha_code" title="کد را در کادر وارد کنید" />
+                        <input type='text' id="tel" name="random_captcha_code" class='verify_review' minlength="4" title="کد را در کادر وارد کنید" maxlength="4" placeholder='1234' required />
+                    </div><hr />
                     <input type='submit' value='Submit' name="review_submit" class='btn_1' id='submit-review'>
                 </form>
             </div>

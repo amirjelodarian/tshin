@@ -51,6 +51,10 @@ if ($sessions->login_state()){
                             <label>کلمه عبور</label>
                             <input type="password" name="password" class=" form-control" placeholder="کلمه عبور" minlength="8" required />
                         </div>
+                        <div class='form-group'>
+                            <img src="classes/captcha.php" class="captcha_code" />
+                            <input type='text' id="tel" name="random_captcha_code" class='verify_review' minlength="4" maxlength="4" placeholder='1234' required />
+                        </div>
                         <div id="errors"><?php echo $users->Errors(); ?></div>
                         <input class="btn_full" onclick="toast_error()" value="ورود" name="login_submit" type="submit" />
                         <p class="small"> <a href="reset_password.php">رمز عبور خود را فراموش كرده ايد؟?</a></p>

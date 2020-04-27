@@ -25,13 +25,14 @@
 <div class="layer"></div>
 <?php include("includes/form_header.php"); ?>
 <?php
-    $users->insert_user_verify_code();
-?>
-<?php
 if ($sessions->login_state()){
     $users->redirect_to("index.php");
 }
 ?>
+<?php
+   $users->insert_user_verify_code();
+?>
+<?php echo $_SESSION["random_code"]; ?>
 <section id="hero" class="login">
     <div class="container">
         <div class="row">
@@ -44,11 +45,12 @@ if ($sessions->login_state()){
                     <form method="post" action="<?php echo($_SERVER['PHP_SELF']); ?>">
                         <div class="form-group">
                             <label>کد ارسال شده را وارد کنید</label>
+                            <h4 align="center"><?php echo $_SESSION["tel"]; ?></h4>
                             <input type="text" name="code" minlength="5" maxlength="5" class=" form-control" id="code" onkeypress="return event.ctrlKey || event.metaKey || event.altKey || event.charCode >= 45 && event.charCode <= 57 && event.charCode!=47" placeholder="کد 5 رقمی" require />
                         </div>
                         <div id="errors">
                             <?php
-                                $_SESSION["errors_message"] = " ";
+                                if(!(isset($_SESSION["errors_message"])) && empty($_SESSION["errors_message"])) $_SESSION["errors_message"] = " ";
                                 if (!(empty($_SESSION["errors_message"])) && $_SESSION["errors_message"] != "" || $_SESSION["errors_message"] != " ") {
                                     echo $users->Errors();
                                 }else{
@@ -64,6 +66,7 @@ if ($sessions->login_state()){
         </div>
     </div>
 </section>
+
 <?php include("includes/footer.php"); ?>
 <script src="js\jquery-1.11.2.min.js"></script>
 <script src="js\common_scripts_min.js"></script>

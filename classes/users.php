@@ -29,15 +29,22 @@ require_once("functions.php");
                 $this->tel = $this->mytrim($_POST["tel"]);
                 $this->repeat_password = $this->mytrim($_POST["repeat_password"]);
                     if (isset($this->username) && !empty($this->username) && isset($this->password) && !empty($this->password) && isset($this->tel) && !empty($this->tel) && isset($this->repeat_password) && !empty($this->repeat_password) && $this->check_tel($this->tel) == 0 && $this->password_rate($this->password) == 0 && $this->check_username($this->username) == 0) {
-                        $this->username = $database->escape_value($this->username);
-                        $this->password = $database->escape_value($this->password);
-                        $this->tel = $database->escape_value($this->tel);
-                        $_SESSION["username"] = $this->username;
-                        $_SESSION["tel"] = $this->mytrim($this->tel);
-                        $_SESSION["password"] = $this->mytrim($this->password);
-                        $code = $this->random_num_generator();
-                        /*$this->send_code_with_sms($this->tel,$_SESSION["random_code"],$this->username);*/
-                        $this->redirect_to("code.php");
+                        if($_POST["random_captcha_code"] != $_SESSION["random_captcha_code"]){
+                            $_SESSION["errors_message"] = "کد کپچا نادرست وارد شده .";
+                            $this->error_state = 1;
+                            return $this->error_state;
+                            $this->redirect_to("register.php");
+                        }else {
+                            $this->username = $database->escape_value($this->username);
+                            $this->password = $database->escape_value($this->password);
+                            $this->tel = $database->escape_value($this->tel);
+                            $_SESSION["username"] = $this->username;
+                            $_SESSION["tel"] = $this->mytrim($this->tel);
+                            $_SESSION["password"] = $this->mytrim($this->password);
+                            $code = $this->random_num_generator();
+                            /*$this->send_code_with_sms($this->tel,$_SESSION["random_code"],$this->username);*/
+                            $this->redirect_to("code.php");
+                        }
 
                     } elseif (empty($this->username) || empty($this->password) || empty($this->tel) || empty($this->repeat_password)) {
                         $_SESSION["errors_message"] .= 'برخی از فیلد ها خالی است .';
@@ -55,13 +62,20 @@ require_once("functions.php");
                 $this->password = $database->escape_value($this->password);
                 if (isset($_POST["tel"]) && !(empty($_POST["tel"])) && isset($_POST["password"]) && !(empty($_POST["password"])) && $this->password_rate_login($this->password) == 0) {
                     $sql_login = "SELECT * FROM users WHERE tel='{$this->tel}' AND password='{$this->password}' LIMIT 1";
-
+                    if($_POST["random_captcha_code"] != $_SESSION["random_captcha_code"]){
+                        $_SESSION["errors_message"] = "کد کپچا نادرست وارد شده .";
+                        $this->error_state = 1;
+                        return $this->error_state;
+                        $this->redirect_to("login.php");
+                    }
                     $result = $database->query($sql_login);
                     if ($database->num_rows($result) == 1) {
                         $_SESSION["logged_in"] = true;
                         if($users_row = $database->fetch_array($result)){
                             $Functions->write_logfile($users_row["username"],$this->tel);
                             $_SESSION["user_id"] = $users_row["id"];
+                            $_SESSION["random_captcha_code"] = null;
+                            unset($_SESSION["random_captcha_code"]);
                             $_SESSION["username"] = $users_row["username"];
                             switch($users_row["user_mode"]) {
                                 case 0:
@@ -120,10 +134,9 @@ require_once("functions.php");
                 $this->password = $_SESSION["password"];
                 $this->tel = $_SESSION["tel"];
                 $this->random_code = $_SESSION["random_code"];
-                echo $this->random_code;
                 if (isset($_POST["submit"]) && isset($_SESSION["random_code"]) && !(empty($_POST["code"])) && is_numeric($this->tel) && $this->check_tel($this->tel) == 0){
                         $code = $_POST["code"];
-                        if ($code == $this->random_code){
+                    if ($code == $this->random_code){
                         $database->query("SET NAMES 'utf8'");
                         $sql = "INSERT INTO `users`(`username`,`password`,`tel`,user_mode) VALUES ('{$this->username}','{$this->password}','{$this->tel}',0)";
                         $result = $database->query($sql);
@@ -175,6 +188,9 @@ require_once("functions.php");
             }
         }
         public function password_rate($password){
+            if (!(isset($_SESSION["errors_message"])) && empty($_SESSION["errors_message"])){
+                $_SESSION["errors_message"] = " ";
+            }
             $this->password = $password;
             if (strlen($this->password) < 8 || strlen($this->repeat_password) < 8) {
                     $_SESSION["errors_message"] .= 'رمز بالای ۸ رقم باشد .';

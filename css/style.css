@@ -514,6 +514,10 @@ a#wishlist_link {
     position:relative;
     display:inline-block;
     padding-left:16px;
+    color: #fff;
+}
+#wishlist_link:hover{
+    color: #cb1d1d;
 }
 #access_link:before,
 #wishlist_link:before {
@@ -543,12 +547,6 @@ ul#top_links li {
 ul#top_links li:first-child {
     border-left:none;
     padding-left:0;
-}
-ul#top_links a {
-    color:#fff;
-}
-ul#top_links a:hover {
-    color:#e04f67;
 }
 header#plain {
     background-color:#fff;
@@ -4478,6 +4476,20 @@ a.btn_infobox:hover {
 .marker_tools {
     margin:10px 0 15px 0
 }
+#register-word{
+    color: #4cae4c;
+    padding: 3px;
+    padding-top: 0px;
+    border-radius: 2.9px;
+    font-weight: bold;
+}
+#login-word{
+    font-weight: bold;
+    color: #00A8FF;
+    padding: 3px;
+    padding-top: 0px;
+    border-radius: 2.9px;
+}
 #errors{
     width: 100%;
     background-color: #ffafc2;
@@ -4997,7 +5009,7 @@ a.btn_infobox:hover {
     display: inline-block;
     width: 65%;
     margin-top: 10px;
-    border: 3px solid #08E07B;
+    border: 3px solid #85c99d;
     border-radius: 0px;
     text-align: center;
     line-height: 30px;

@@ -7,7 +7,7 @@
     $img_width = 114;
     $img_height = 32;
     $image = imagecreate($img_width, $img_height); // create background image with dimensions
-    imagecolorallocate($image, 8, 224, 123); // set background color
+    imagecolorallocate($image, 133, 201, 157); // set background color
     $text_color = imagecolorallocate($image, 255, 255, 255); // set captcha text color
     imagettftext($image, $font_size, -5, 17, 24, $text_color, '../fonts/IRANSans-web.ttf', $captcha_num);
     imagepng($image);

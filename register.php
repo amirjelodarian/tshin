@@ -25,13 +25,16 @@
 </div>
 <div class="layer"></div>
 <?php include("includes/form_header.php"); ?>
+
 <?php
-    $users->signup();
+    if ($sessions->login_state()){
+        $users->redirect_to("index.php");
+    }
 ?>
 <?php
-if ($sessions->login_state()){
-    $users->redirect_to("index.php");
-}
+    if (isset($_POST["submit"])){
+        $users->signup();
+    }
 ?>
 <section id="hero" class="login">
     <div class="container">
@@ -59,6 +62,10 @@ if ($sessions->login_state()){
                         <div class="form-group">
                             <label>تکرار کلمه عبور</label>
                             <input type="password" name="repeat_password" minlength="8" maxlength="50" class=" form-control" id="password2" placeholder="تکرار کلمه عبور" require />
+                        </div>
+                        <div class='form-group'>
+                            <img src="classes/captcha.php" class="captcha_code" />
+                            <input type='text' id="tel" name="random_captcha_code" class='verify_review' minlength="4" maxlength="4" placeholder='1234' required />
                         </div>
                         <div id="errors"><?php echo $users->Errors(); ?></div>
                         <div id="pass-info" class="clearfix"></div>
