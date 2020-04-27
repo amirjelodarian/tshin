@@ -99,7 +99,7 @@ $all_room_survey_result = $all_room_survey_result[0];
                         </div>
                         
                         <small class='icon-clock-8' id='panel-time-comment'>&nbsp;"); echo $divid_date_time[0]; echo("</small>
-                        <small id='panel-date-comment'>"); echo $divid_date_time[1]; echo("</small><br />
+                        <small id='panel-date-comment'>"); echo $Functions->convert_db_format_for_gregorian_to_jalali($divid_date_time[1]); echo("</small><br />
                     <div class='comment-panel-btns col-xs-12 col-sm-12 col-md-12 col-lg-12'>
                         <form action='../single_hotel.php' id='see-room' method='post'>
                             <input type='hidden' name='room_id' value='"); echo($Functions->encrypt_id($room_survey['room_id'])); echo("' />
@@ -143,7 +143,6 @@ $sessions->null_room_id_while_comment(); ?>
                 <option value="title">Title</option>
                 <option value="survey">Survey</option>
                 <option value="score">Score 1-5</option>
-                <option value="date">Date 2020-01-01</option>
             </select>
             <input type="submit" value="Search" id="submit_search" name="submit_search" />
         </form>

@@ -9,6 +9,8 @@
     <link rel='shortcut icon' href=''#' type='image/x-icon'>
     <!-- CSS -->
     <link href='css/base.css' rel='stylesheet'>
+    <link href="datepicker/dist/jquery.md.bootstrap.datetimepicker.style.css" rel="stylesheet"/>
+    <script src="datepicker/dist/jquery.md.bootstrap.datetimepicker.js"></script>
 </head>
 <body>
 <div id='preloader'>
@@ -23,7 +25,7 @@
 <div class='layer'></div>
 <?php
 require_once('classes/initialize.php');
-global $sessions,$users,$rooms;
+global $sessions,$users,$rooms,$Functions;
 
 // this is for include header
 if ($sessions->login_state()){
@@ -289,7 +291,7 @@ if ((isset($_POST['submit']) && isset($_POST['room_id'])) || isset($_SESSION["ro
                                                 <p>"); echo(nl2br($room_survey['survey'])); echo("</p>
                                                 <div class='rating'> {$rooms->smile_voted_by_price_quality_score_comfort($room_survey['room_price'],$room_survey['room_quality'],$room_survey['room_score'],$room_survey['room_comfort'])}</div>
                                                 <small class='icon-clock-8' style='float: left;margin-top: 18px' id='panel-time-comment'>&nbsp;"); echo $divid_date_time[0]; echo("</small>
-                                                <small id='panel-date-comment' style='float: left;margin-top: 18px'>"); echo $divid_date_time[1]; echo("</small><br /><br />
+                                                <small id='panel-date-comment' style='float: left;margin-top: 18px'>"); echo $Functions->convert_db_format_for_gregorian_to_jalali($divid_date_time[1]); echo("</small><br /><br />
                                             </div>
                                         ");
                                     }

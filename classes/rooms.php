@@ -719,7 +719,7 @@
                         </div>
                         
                         <small class='icon-clock-8' id='panel-time-comment'>&nbsp;"); echo $divid_date_time[0]; echo("</small>
-                        <small id='panel-date-comment'>"); echo $divid_date_time[1]; echo("</small><br /><br />
+                        <small id='panel-date-comment'>"); echo $Functions->convert_db_format_for_gregorian_to_jalali($divid_date_time[1]); echo("</small><br /><br />
                     <div class='comment-panel-btns col-xs-12 col-sm-12 col-md-12 col-lg-12'>
                         <form action='../single_hotel.php' id='see-room' method='post'>
                             <input type='hidden' name='room_id' value='"); echo($Functions->encrypt_id($room_survey['room_id'])); echo("' />

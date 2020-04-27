@@ -157,5 +157,5 @@ function search(){
         }
     });
 }
-$('input.date-pick').MdPersianDateTimePicker({});
-$('input.date-pick').MdPersianDateTimePicker('getText');
+
+
