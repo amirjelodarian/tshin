@@ -165,6 +165,7 @@
                 return $value;
             }
         }
+        // pull a iranian site this function :)
         function gregorian_to_jalali($gy,$gm,$gd,$mod=''){
             $g_d_m=array(0,31,59,90,120,151,181,212,243,273,304,334);
             if($gy>1600){
@@ -188,6 +189,7 @@
             $jd=1+(($days < 186)?($days%31):(($days-186)%30));
             return($mod=='')?array($jy,$jm,$jd):$jy.$mod.$jm.$mod.$jd;
         }
+        ///////////////////////////////////////
         public function convert_db_format_for_gregorian_to_jalali($date){
             $date_array = explode("-",$date);
             $year = (int)$date_array[0];
@@ -195,6 +197,32 @@
             $day = (int)$date_array[2];
             $date = $this->gregorian_to_jalali($year,$month,$day,'<span style="color: crimson">/</span>');
             return $date;
+        }
+        public function EN_numTo_FA($str,$toPersian){
+            $en = array('0','1','2','3','4','5','6','7','8','9');
+            $fa = array('۰','۱','۲','۳','۴','۵','۶','۷','۸','۹');
+            if (isset($toPersian)){ return str_replace($en,$fa,$str); } else{ return str_replace($fa,$en,$str); }
+        }
+
+
+        public function insert_seperator($num) {
+            settype($num,"String");
+            $n = strlen($num);
+            $i = 0;
+            $help = $n % 3;
+            while ($help != 0) {
+                $num = '0'.$num;
+                $i++;
+                $n = strlen($num);
+                $help = $n % 3;
+            }
+            $arr = str_split($num,3);
+            $str = "";
+            foreach ($arr as $index) {
+                $str = $str.",".$index;
+            }
+            $i++;
+            return substr($str,$i);
         }
 
     }

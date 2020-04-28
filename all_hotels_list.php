@@ -139,7 +139,7 @@
         <div class="col-lg-9 col-md-9">
             <div id="tools">
                 <div class="row">
-                    <div class="col-md-3 col-sm-3 col-xs-6">
+                    <div class="col-md-3 col-sm-3 col-xs-12">
                         <div class="styled-select-filters">
                             <select name="sort_price" id="sort_price">
                                 <option value="" selected="">بر اساس قیمت</option>
@@ -148,7 +148,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-3 col-sm-3 col-xs-6">
+                    <div class="col-md-3 col-sm-3 col-xs-12">
                         <div class="styled-select-filters">
                             <select name="sort_rating" id="sort_rating">
                                 <option value="" selected="">بر اساس رتبه بندی</option>
@@ -157,14 +157,29 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-6 col-sm-6 hidden-xs text-right"> <a href="all_hotels_grid.php" class="bt_filters"><i class="icon-th"></i></a>  <a href="#" class="bt_filters"><i class=" icon-list"></i></a>
-                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-12"> <a href="all_hotels_grid.php" class="bt_filters"><i class="icon-th"></i></a>  <a href="#" class="bt_filters"><i class=" icon-list"></i></a></div>
+                    </form>
+                    <form method="post" action="<?php echo (htmlspecialchars($_SERVER['PHP_SELF'])); ?>">
+                        <div class="room_search_bar col-md-3 col-xs-12 col-sm-3 col-lg-3">
+                            <select name="ByWitch" id="ByWitch">
+                                <option>براساس</option>
+                                <option value="Address">آدرس</option>
+                                <option value="Title">عنوان</option>
+                                <option value="Descript">توضیحات</option>
+                                <option value="Price">قیمت</option>
+                            </select>
+                            <div class="col-xs-5 col-sm-8 col-md-8 col-lg-8"><span class="icon-search-5"></span><input type="text" id="keyword" name="keyword" /></div>
+                            <input type="submit" value="Search" id="submit_search" name="submit_search" />
+                        </div>
+                    </form>
                 </div>
             </div>
-      </form>
+
         <?php
         if(isset($_POST["show_by_all_hotels"])){
             $rooms->ShowAllRoomsBy();
+        }elseif (isset($_POST["submit_search"])){
+            $rooms->SerachRoom(true);
         }else{
             $rooms->AllRooms();
         }

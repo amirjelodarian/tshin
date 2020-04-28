@@ -56,7 +56,7 @@
                                         <h4 class='room_address'>{$database->escape_value($rooms_rows['room_address'])}</h4>
                                             <div class='score'>");
                                             echo(self::word_score($rooms_rows['room_score']));
-                                            echo("<span>{$database->escape_value($rooms_rows['room_score'])}</span>
+                                            echo("<span>{$database->escape_value($Functions->EN_numTo_FA($rooms_rows['room_score'],true))}</span>
                                             </div>
                                             <div class='rating' style='background: white'>
                                             ");
@@ -108,12 +108,12 @@
                                         </div>
                                     </div>
                                     <div class='col-lg-2 col-md-2 col-sm-2'>");
-                                    if($rooms_rows['room_person_count'] != 0){ echo("<div class='room_person_count_show'>{$rooms_rows['room_person_count']} نفره</div>"); }
+                                    if($rooms_rows['room_person_count'] != 0){ echo("<div class='room_person_count_show'>{$Functions->EN_numTo_FA($rooms_rows['room_person_count'],true)} نفره</div>"); }
                                         echo("
                                         <div class='price_list'>
                                             <div>
-                                            <sup>{$database->escape_value($rooms_rows['room_main_price'])} تومان</sup>
-                                            <span class='normal_price_list'>{$database->escape_value($rooms_rows['room_off_price'])} تومان</span>
+                                            <sup>{$Functions->EN_numTo_FA($Functions->insert_seperator($rooms_rows['room_main_price']),true)} تومان</sup>
+                                            <span class='normal_price_list'>{$Functions->EN_numTo_FA($Functions->insert_seperator($rooms_rows['room_off_price']),true)} تومان</span>
                                                                                        
                                             <small>روزانه / شبانه</small>
                                                 <form action='single_hotel.php' method='post'>
@@ -334,8 +334,8 @@
                     echo("
                                         <div class='price_list'>
                                             <div>
-                                            <sup>{$database->escape_value($rooms_rows['room_main_price'])} تومان</sup>
-                                            <span class='normal_price_list'>{$database->escape_value($rooms_rows['room_off_price'])} تومان</span>
+                                            <sup>{$Functions->EN_numTo_FA($database->escape_value($Functions->insert_seperator($rooms_rows['room_main_price'])),true)} تومان</sup>
+                                            <span class='normal_price_list'>{$Functions->EN_numTo_FA($database->escape_value($Functions->insert_seperator($rooms_rows['room_off_price'])),true)} تومان</span>
                                                                                        
                                             <small>روزانه / شبانه</small>
                                                 <form action='single_hotel.php' method='post'>
@@ -376,7 +376,7 @@
                                         <div class='tour_list_desc'>
                                             <div class='score'>");
                 echo(self::word_score($rooms_rows['room_score']));
-                echo("<span>{$database->escape_value($rooms_rows['room_score'])}</span>
+                echo("<span>{$database->escape_value($Functions->EN_numTo_FA($rooms_rows['room_score'],true))}</span>
                                             </div>
                                             <h3 class='room_address'>{$database->escape_value($rooms_rows['room_address'])}</h3>
                                             <div class='rating'>
@@ -424,16 +424,16 @@
                 echo("' data-placement='top' title='پارکینگ'><i class='icon_set_1_icon-27'></i></a>
                                                 </li>
                                             </ul><hr />
-                                            <div id='comment-info'><span style='"); if($this->CountRoomComments($Functions->encrypt_id($rooms_rows['room_id'])) == 0){ echo 'background:red'; } echo("'>{$this->CountRoomComments($Functions->encrypt_id($rooms_rows['room_id']))}</span> : Comment </div>
+                                            <div id='comment-info'><span style='"); if($this->CountRoomComments($Functions->encrypt_id($rooms_rows['room_id'])) == 0){ echo 'background:red'; } echo("'>{$Functions->EN_numTo_FA($this->CountRoomComments($Functions->encrypt_id($rooms_rows['room_id'])),true)}</span> : Comment </div>
                                         </div>
                                     </div>
                                     <div class='col-lg-2 col-md-2 col-sm-2'>");
-                                    if($rooms_rows['room_person_count'] != 0){ echo("<div class='room_person_count_show'>{$rooms_rows['room_person_count']} نفره</div>"); }
+                                    if($rooms_rows['room_person_count'] != 0){ echo("<div class='room_person_count_show'>{$Functions->EN_numTo_FA($rooms_rows['room_person_count'],true)} نفره</div>"); }
                                         echo("
                                         <div class='price_list'>
                                             <div>
-                                            <sup>{$database->escape_value($rooms_rows['room_main_price'])} تومان</sup>
-                                            <span class='normal_price_list'>{$database->escape_value($rooms_rows['room_off_price'])} تومان</span>
+                                            <sup>{$database->escape_value($Functions->EN_numTo_FA($rooms_rows['room_main_price'],true))} تومان</sup>
+                                            <span class='normal_price_list'>{$database->escape_value($Functions->EN_numTo_FA($rooms_rows['room_off_price'],true))} تومان</span>
                                             <small>روزانه / شبانه</small>
                                                 <form action='rooms_edit.php' method='post'>
                                                     <input type='submit' name='submit_edit_room' value='Edit Room' class='submit_edit' />
@@ -730,9 +730,8 @@
             return $result;
         }
 
-
-        // function for search
-        public function SerachRoom(){
+        // function for search panel
+        public function SerachRoom($home = false){
             global $database,$Functions,$users;
             if (isset($_POST["submit_search"]) && !(empty($_POST["keyword"]))) {
                 $keyword = $database->escape_value($_POST['keyword']);
@@ -760,7 +759,7 @@
                             $sql = "SELECT * FROM rooms WHERE room_person_count LIKE '{$keyword}'";
                             break;
                         default:
-                            $sql = "SELECT * FROM rooms WHERE room_title LIKE '{$keyword}%'";
+                            $sql = "SELECT * FROM rooms WHERE room_address LIKE '{$keyword}%'";
                             break;
                     }
                 }
@@ -769,13 +768,19 @@
                     while ($rooms_rows = $database->fetch_array($result)) {
                         echo ("
                 
-                                <div class='strip_all_tour_list wow fadeIn' id='rooms' data-wow-delay='0.1s'>
+                                <div class='strip_all_tour_list wow fadeIn' "); if (isset($home) && $home == false){ echo(" id='rooms' "); } echo(" data-wow-delay='0.1s'>
                                 <div class='row'>
                                     <div class='col-lg-4 col-md-4 col-sm-4'>
                                         <div class='img_list'>
                                             <a href='rooms_edit.php'>
-                                                    <div class='ribbon top_rated'></div>
-                                                    <img src='../"); self::select_room_image($rooms_rows['room_image']); echo("' alt=''>
+                                                    <div class='ribbon top_rated'></div>");
+                                                    if (isset($home) && $home == false){
+                                                        echo("<img src='../"); self::select_room_image($rooms_rows['room_image']); echo("' alt=''>");
+                                                    }
+                                                    if (isset($home) && $home == true){
+                                                        echo("<img src='"); self::select_room_image($rooms_rows['room_image']); echo("' alt=''>");
+                                                    }
+                                                    echo("
                                                     <div class='short_info'></div>
                                             </a>
                                         </div>
@@ -860,7 +865,7 @@
                 }else { echo "<h1 class='no-result'>No Result !</h1>"; }
 
             }else{
-                $users->redirect_to("rooms_show.php");
+                    $users->redirect_to($_SERVER["PHP_SELF"]);
             }
         }
 

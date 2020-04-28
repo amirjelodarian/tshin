@@ -79,11 +79,13 @@ if ((isset($_POST['submit']) && isset($_POST['room_id'])) || isset($_SESSION["ro
         echo ("
                     </span>
                     <p class='room_address_single_hotel'>{$database->escape_value($roomattribute['room_address'])}</p>
-                    <h4 class='room_title'>{$roomattribute['room_title']}</h4>  <span>"); if($roomattribute['room_person_count'] != 0){ echo"ظرفیت {$roomattribute['room_person_count']} نفر"; }echo("</span>
+                    <h4 class='room_title'>{$roomattribute['room_title']}</h4>  <span>"); if($roomattribute['room_person_count'] != 0){ echo"ظرفیت {$Functions->EN_numTo_FA($roomattribute['room_person_count'],true)} نفر"; }echo("</span>
                 </div>
                 <div class='col-md-4 col-sm-4'>
-                    <div id='price_single_main' class='hotel'>از / هر شب <span><sup>{$roomattribute['room_main_price']} تومان</sup></span>
+                    <div id='price_single_main' class='hotel'>از / هر شب <span><sup>{$Functions->EN_numTo_FA($Functions->insert_seperator($roomattribute['room_main_price']),true)} تومان</sup></span>
                     </div>
+                    <span class='normal_price_in'>{$Functions->EN_numTo_FA($Functions->insert_seperator($roomattribute['room_off_price']),true)} تومان</span>
+                   
                 </div>
             </div>
         </div>
@@ -257,8 +259,8 @@ if ((isset($_POST['submit']) && isset($_POST['room_id'])) || isset($_SESSION["ro
                         <a href='#' class='btn_1 add_bottom_30' data-toggle='modal' name='survey_submit' data-target='#myReview'>نظر شما</a>                </div>
                 <div class='col-md-9'>
                 <div class='review-result'>
-                    <div id='score_detail'><span>{$roomattribute['room_score']}</span>"); echo $rooms->word_score($roomattribute['room_score']);  echo(" 
-                    <small> بر اساس "); echo($rooms->CountPublishRoomComments($room_id)); echo(" نظر</small>
+                    <div id='score_detail'><span>{$Functions->EN_numTo_FA($roomattribute['room_score'],true)}</span>"); echo $rooms->word_score($roomattribute['room_score']);  echo(" 
+                    <small> بر اساس "); echo($Functions->EN_numTo_FA($rooms->CountPublishRoomComments($room_id),true)); echo(" نظر</small>
                     </div>
                     <div class='row' id='rating_summary'>
                         <div class='col-md-6'>
@@ -298,8 +300,8 @@ if ((isset($_POST['submit']) && isset($_POST['room_id'])) || isset($_SESSION["ro
                                                 <h4>{$users_row['username']}</h4>
                                                 <p>"); echo(nl2br($room_survey['survey'])); echo("</p>
                                                 <div class='rating'> {$rooms->smile_voted_by_price_quality_score_comfort($room_survey['room_price'],$room_survey['room_quality'],$room_survey['room_score'],$room_survey['room_comfort'])}</div>
-                                                <small class='icon-clock-8' style='float: left;margin-top: 18px' id='panel-time-comment'>&nbsp;"); echo $divid_date_time[0]; echo("</small>
-                                                <small id='panel-date-comment' style='float: left;margin-top: 18px'>"); echo $Functions->convert_db_format_for_gregorian_to_jalali($divid_date_time[1]); echo("</small><br /><br />
+                                                <small class='icon-clock-8' style='float: left;margin-top: 18px' id='panel-time-comment'>&nbsp;"); echo $Functions->EN_numTo_FA($divid_date_time[0],true); echo("</small>
+                                                <small id='panel-date-comment' style='float: left;margin-top: 18px'>"); echo $Functions->EN_numTo_FA($Functions->convert_db_format_for_gregorian_to_jalali($divid_date_time[1]),true); echo("</small><br /><br />
                                             </div>
                                         ");
                                     }

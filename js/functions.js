@@ -1,4 +1,24 @@
 $(window).load(function () {
+    var windowWidth = window.innerWidth
+        || document.documentElement.clientWidth
+        || document.body.clientWidth;
+    if (windowWidth <= 768) {
+        $("#icon_menu").click(function () {
+            $(".panel_menu_mobile").css({'width': '150px'});
+            $(".panel_menu_mobile ul").css({'width': '100%', 'display': 'block'});
+            $(".panel_menu_mobile li").css({'width': '100%', 'display': 'block'});
+            $(".icon-close").show();
+            $("#icon_menu").hide();
+        });
+        $(".icon-close").click(function () {
+            $(".panel_menu_mobile").css({'width': '0px'});
+            $(".panel_menu_mobile ul").css({'width': '0px', 'display': 'none'});
+            $(".panel_menu_mobile li").css({'width': '0px', 'display': 'none'});
+            $(".icon-close").hide();
+            $("#icon_menu").show();
+        });
+        }
+
     $("#room_person_count,#room_main_price,#room_off_price").keypress(function (e) {
         var ew = e.which || e.keyCode;
         if (ew == 37 || ew == 39 || ew == 8 || ew == 46 || ew == 9 || ew == 33 || ew == 34 || ew == 35 || ew == 36)
@@ -145,27 +165,54 @@ $(window).load(function () {
         t.ctrlKey && t.shiftKey && 73 == t.keyCode && e(t), 83 == t.keyCode && (navigator.platform.match("Mac") ? t.metaKey : t.ctrlKey) && e(t), 123 == event.keyCode && e(t)
     }, !1)
 }*/;
-function search(){
-    $(document).ready(function () {
-        var min_length = 1;
-        $(".after-search").hide();
-        var keyword = $("#keyword").val();
-        if (keyword.length != ""){
-            $.ajax({
-                url: 'users_show.php',
-                type: 'POST',
-                data: {keyword:keyword},
-                success:function (data) {
-                    $("#TABLE_ADMINS").hide();
-                    $(".after-search").show();
-                    $(".after-search").html(data);
-                }
-            });
-        }else{
-            $("#TABLE_ADMINS").show();
-            $(".after-search").hide();
+window.onresize = function () {
+    var windowWidth = window.innerWidth
+        || document.documentElement.clientWidth
+        || document.body.clientWidth;
+    if (windowWidth <= 768) {
+        $("#icon_menu").click(function () {
+            $(".panel_menu_mobile").css({'width': '150px'});
+            $(".panel_menu_mobile ul").css({'width': '100%', 'display': 'block'});
+            $(".panel_menu_mobile li").css({'width': '100%', 'display': 'block'});
+            $(".icon-close").show();
+            $("#icon_menu").hide();
+        });
+        $(".icon-close").click(function () {
+            $(".panel_menu_mobile").css({'width': '0px'});
+            $(".panel_menu_mobile ul").css({'width': '0px', 'display': 'none'});
+            $(".panel_menu_mobile li").css({'width': '0px', 'display': 'none'});
+            $(".icon-close").hide();
+            $("#icon_menu").show();
+        });
+    }
+};
+/*function searchRoom(){
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200){
+            document.getElementById("demo").innerHTML = this.responseText;
         }
-    });
+    };
+    xhttp.open("POST","classes/rooms.php",true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.send();
+}*/
+/*function searchRoom() {
+    var min_length = 0;
+    var keyword = $("#keyword").val();
+    if (keyword.length >= min_length){
+        $.ajax({
+            url: 'classes/rooms.php',
+            type: 'POST',
+            data: {ByWitch:ByWitch,keyword:keyword},
+            success:function (data) {
+                $('#demo').show();
+                $('#demo').html(data);
+            }
+        });
+    }else{
+        $('#demo').hide();
+    }
 }
-
+*/
 

@@ -70,7 +70,7 @@ only screen and (min-device-pixel-ratio: 2) and (max-width: 991px) {
     a#email_footer,
     a#phone {
         font-size: 12px;800px
-        padding-left: 25px;
+    padding-left: 25px;
         margin: 15px 0
     }
     a#email_footer:before,
@@ -140,6 +140,9 @@ only screen and (min-device-pixel-ratio: 2) and (max-width: 991px) {
     }
 }
 @media (max-width: 768px) {
+    .mobile-menu{
+        display: block;
+    }
     .comment-edit-h{
         margin-top: 80px;
         width: 100%;
@@ -247,31 +250,16 @@ only screen and (min-device-pixel-ratio: 2) and (max-width: 991px) {
         margin-top: 110px;
     }
     .panel_menu{
-        border-bottom: 2px solid darkorange;
-        border-radius: 0px 0px 25px 25px;
-        width: 100%;
-        background: gray;
-        background: linear-gradient(212deg ,black 0%, gray 100%);
-        background: -moz-linear-gradient(212deg ,black 0%, gray 100%);
-        background: -webkit-linear-gradient(212deg ,black 0%, gray 100%);
-        background: -o-linear-gradient(212deg ,black 0%, gray 100%);
-        background: -ms-linear-gradient(212deg ,black 0%, gray 100%);
-        filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr="black", endColorstr="gray");
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        padding: 0;
+        display: none;
     }
     .panel_menu ul{
-        text-align: center;
-        font-weight: bold;
-        padding: 0;
-        margin: 0;
-        width: 100%;
+        display: none;
     }
     .panel_menu li{
-        list-style: none;
-        display: inline-block;
-        margin-left: 8px;
+        display: none;
+    }
+    .panel_menu_mobile{
+        display: block;
     }
     .add_new_room{
         width: 100%;
@@ -740,6 +728,9 @@ only screen and (min-device-pixel-ratio: 2) and (max-width: 991px) {
         float: right;
         list-style: none;
         margin-top: 12px;
+    }
+    .panel_menu_mobile,.panel_menu_mobile ul,.panel_menu_mobile li{
+        display: none;
     }
     .add_new_room{
         font-weight: bold;

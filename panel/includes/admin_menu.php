@@ -26,7 +26,22 @@
 ?>
 <div class="container-fluid">
     <div class="row">
+        <div class="mobile-menu"><div class="icon-menu" id="icon_menu"></div><div class="icon-close">X</div></div>
         <div class="panel_menu col-lg-2 col-md-2 col-sm-2 col-xs-12">
+            <div class="home"><a href="../index.php"><span class="icon-home" id="icon-home"></span>Home</a></div>
+            <ul>
+                <li class="icon-tools"><a href="admin.php">Admin</a></li>
+                <li class="icon-doc-add"><a href="rooms_show.php">Rooms <span class="count">(<?php $rooms->CountRoom(); ?>)</span></a></li>
+                <li class="icon-food"><a href="foods_show.php">Foods <span class="count">(<?php $foods->CountFood(); ?>)</span></a></li>
+                <li class="icon-comment-alt-1"><a href="comments_show.php">Comment <span class="count">(<?php $rooms->CountAllRoomComments(); ?>)</span></a></li>
+                <li>
+                    <form action="<?php echo(htmlspecialchars($_SERVER['PHP_SELF'])); ?>" method="post">
+                        <span class="icon-logout"><input type="submit" name="logout_submit" class="logout-btn" value="LogOut" /></span>
+                    </form>
+                </li>
+            </ul>
+        </div>
+        <div class="panel_menu_mobile col-lg-2 col-md-2 col-sm-2 col-xs-12">
             <div class="home"><a href="../index.php"><span class="icon-home" id="icon-home"></span>Home</a></div>
             <ul>
                 <li class="icon-tools"><a href="admin.php">Admin</a></li>

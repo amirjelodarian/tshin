@@ -169,4 +169,102 @@ public function CommentsSearch(){
                                                                 </div>
                                                             ");
                                             }
-                                        }
+
+                                       }
+
+
+                                       if (windowWidth <= 768) {
+                                               $("#icon_menu").click(function () {
+                                                   $(".panel_menu_mobile").css({'width': '150px'});
+                                                   $(".panel_menu_mobile ul").css({'width': '100%', 'display': 'block'});
+                                                   $(".panel_menu_mobile li").css({'width': '100%', 'display': 'block'});
+                                                   $(".icon-close").show();
+                                                   $("#icon_menu").hide();
+                                               });
+                                               $(".icon-close").click(function () {
+                                                   $(".panel_menu_mobile").css({'width': '0px'});
+                                                   $(".panel_menu_mobile ul").css({'width': '0px', 'display': 'none'});
+                                                   $(".panel_menu_mobile li").css({'width': '0px', 'display': 'none'});
+                                                   $(".icon-close").hide();
+                                                   $("#icon_menu").show();
+                                               });
+                                               }
+                                               .panel_menu{
+                                                   width: 16.5%;
+                                                   position: fixed;
+                                                   left: 0;
+                                                   z-index: 99;
+                                                   color: white;
+                                                   background: gray;
+                                                   background: linear-gradient(45deg,black 0%, gray 100%);
+                                                   background: -moz-linear-gradient(45,black 0%, gray 100%);
+                                                   background: -webkit-linear-gradient(45,black 0%, gray 100%);
+                                                   background: -o-linear-gradient(45,black 0%, gray 100%);
+                                                   background: -ms-linear-gradient(45,black 0%, gray 100%);
+                                                   filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr="black", endColorstr="gray");
+                                                   background-repeat: no-repeat;
+                                                   background-attachment: fixed;
+                                                   float: left;
+                                               }
+                                               .panel_menu_mobile{
+                                                   position: fixed;
+                                                   left: 0;
+                                                   z-index: 99;
+                                                   color: white;
+                                                   background: gray;
+                                                   background: linear-gradient(45deg,black 0%, gray 100%);
+                                                   background: -moz-linear-gradient(45,black 0%, gray 100%);
+                                                   background: -webkit-linear-gradient(45,black 0%, gray 100%);
+                                                   background: -o-linear-gradient(45,black 0%, gray 100%);
+                                                   background: -ms-linear-gradient(45,black 0%, gray 100%);
+                                                   filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr="black", endColorstr="gray");
+                                                   background-repeat: no-repeat;
+                                                   background-attachment: fixed;
+                                                   float: left;
+                                                   transition: 1s;
+                                                   width: 0px;
+                                                   float: left;
+                                                   position: fixed;
+                                                   height: 100%;
+                                                   opacity: 0.9;
+                                                   padding: 0;
+                                               }
+                                               .panel_menu_mobile ul{
+                                                   display: none;
+                                                   width: 0;
+                                                   font-weight: bold;
+                                                   padding: 0;
+                                                   margin: 0;
+                                                   float: left;
+                                                   width: 0px;
+                                                   margin-top: 5px;
+                                               }
+                                               .panel_menu_mobile li{
+                                                   width: 0;
+                                                   transition: 1s;
+                                                   list-style: none;
+                                                   display: none;
+                                                   padding: 5px;
+                                                   border-bottom: 1px solid #fff;
+                                               }
+                                               panel_menu_mobile ul,li{
+                                                   display: none;
+                                                   width: 0;
+                                               }
+                                               .panel_menu_mobile ul{
+                                                   font-weight: bold;
+                                                   text-align: left;
+                                                   direction: ltr;
+                                                   right: 0;
+                                                   margin-top: 9px;
+                                                   padding: 0px;
+                                                   float: left;
+                                               }
+                                               .panel_menu ul{
+                                                   font-weight: bold;
+                                                   text-align: left;
+                                                   direction: ltr;
+                                                   right: 0;
+                                                   margin-top: 9px;
+                                                   padding: 0px;
+                                               }

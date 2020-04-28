@@ -4502,10 +4502,8 @@ a.btn_infobox:hover {
     border: none;
     padding: 0;
 }
-.panel_rooms{
-
-}
 .panel_menu{
+    width: 16.5%;
     position: fixed;
     left: 0;
     z-index: 99;
@@ -4521,6 +4519,56 @@ a.btn_infobox:hover {
     background-attachment: fixed;
     float: left;
 }
+.panel_menu_mobile{
+    position: fixed;
+    left: 0;
+    z-index: 99;
+    color: white;
+    background: gray;
+    background: linear-gradient(45deg,black 0%, gray 100%);
+    background: -moz-linear-gradient(45,black 0%, gray 100%);
+    background: -webkit-linear-gradient(45,black 0%, gray 100%);
+    background: -o-linear-gradient(45,black 0%, gray 100%);
+    background: -ms-linear-gradient(45,black 0%, gray 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr="black", endColorstr="gray");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    float: left;
+    transition: 1s;
+    width: 0px;
+    float: left;
+    position: fixed;
+    height: 100%;
+    opacity: 0.9;
+    padding: 0;
+}
+.panel_menu_mobile li{
+    display: none;
+    width: 0;
+    transition: 1s;
+    list-style: none;
+    display: block;
+    padding: 5px;
+    border-bottom: 1px solid #fff;
+}
+.panel_menu_mobile ul{
+    font-weight: bold;
+    padding: 0;
+    margin: 0;
+    display: none;
+    float: left;
+    width: 0px;
+    margin-top: 5px;
+    font-weight: bold;
+    text-align: left;
+    direction: ltr;
+    right: 0;
+    margin-top: 9px;
+    padding: 0px;
+    float: left;
+}
+
+
 .panel_menu ul{
     font-weight: bold;
     text-align: left;
@@ -4528,6 +4576,26 @@ a.btn_infobox:hover {
     right: 0;
     margin-top: 9px;
     padding: 0px;
+}
+.mobile-menu{
+    display: none;
+    position: fixed;
+    background-image: linear-gradient(to bottom,black 1%,#00A8FF 99%);
+    width: 100%;
+    z-index: 99;
+    opacity: 0.8;
+}
+#icon_menu,.icon-close{
+    transition: 1s;
+    padding: 5px;
+    color: white;
+    font-size: 30px;
+}
+.icon-close{
+    display: none;
+    padding: 8px;
+    margin-right: 7px;
+    margin-top: 5px;
 }
 #rooms{
     width: 83%;
