@@ -59,16 +59,21 @@ else if($_SESSION["user_mode"] == 1){
                             <li> <a href='javascript:void(0);' class='tooltip-1' 'data-placement='top' title='رستوران'><i class='icon_set_1_icon-58'></i></a>
                                 <input type='checkbox' class='rooms_checkbox' name='room_food' />
                             </li>
+                            <li> <a href='javascript:void(0);' class='tooltip-1' 'data-placement='top' title='رستوران'><i class='icon_set_1_icon-27'></i></a>
+                                <input type='checkbox' class='rooms_checkbox' name='room_parking' />
+                            </li>
                         </ul>
                     </div>
                 </div>
                 <div class='col-lg-2 col-md-2 col-sm-2'>
                     <div class='price_list'>
                         <div>
-                            <sup><input type='text' name='room_main_price' maxlength='10' class='insert_input' placeholder='100.000' required />  تومان</sup>
-                            <span class='normal_price_list'><input name='room_off_price'class='insert_input' placeholder='150.000' maxlength='200' required /> تومان</span>
+                            <sup>
+                                <input type='text' name='room_main_price' maxlength='9' id="room_main_price" class='insert_input' placeholder='100000' required />  تومان</sup>
+                            <span class='normal_price_list'>
+                                <input type='text' name='room_off_price' maxlength='9' id="room_off_price" class='insert_input' placeholder='150000'  required /> تومان</span>
                             <small>روزانه / شبانه</small>
-                            <span class="room_person_count">چند نفره<input name='room_person_count' minlength="1" id="tel" maxlength="2"  placeholder="5" /></span>
+                            <span class="room_person_count">چند نفره<input name='room_person_count' minlength="1" id="room_person_count" maxlength="2"  placeholder="5" /></span>
                             <p>
                                 <input type='submit' name='submit_create_room' class='submit_btn' value='Add Room' />
                             </p>

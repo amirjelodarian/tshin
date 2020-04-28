@@ -65,8 +65,9 @@
 </div>
 <div class="container margin_60">
     <div class="row">
+      <form method="post" action="<?php echo(htmlentities($_SERVER['PHP_SELF'])); ?>">
         <aside class="col-lg-3 col-md-3">
-            <p> <a class="btn_map" d href="" aria-expanded="false" aria-controls="collapseMap">دوباره سازی اطلاعات</a>
+            <p> <input class="btn_map" aria-expanded="false" type="submit" name="show_by_all_hotels" aria-controls="collapseMap" value="دوباره سازی اطلاعات" />
             </p>
             <div id="filters_col"> <a data-toggle="collapse" href="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters" id="filters_col_bt"><i class="icon_set_1_icon-65"></i>فیلترها <i class="icon-plus-1 pull-right"></i></a>
                 <div class="collapse" id="collapseFilters">
@@ -79,48 +80,23 @@
                         <ul>
                             <li>
                                 <label>
-                                    <input type="checkbox"><span class="rating"><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i></span>(۱۵)</label>
+                                    <input name="star_score_5" type="checkbox"><span class="rating"><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i></span>(۹-۱۰)</label>
                             </li>
                             <li>
                                 <label>
-                                    <input type="checkbox"><span class="rating"><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81"></i></span>(۴۵)</label>
+                                    <input name="star_score_4" type="checkbox"><span class="rating"><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81"></i></span>(۷-۸)</label>
                             </li>
                             <li>
                                 <label>
-                                    <input type="checkbox"><span class="rating"><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81"></i><i class="icon_set_1_icon-81"></i></span>(۳۵)</label>
+                                    <input name="star_score_3" type="checkbox"><span class="rating"><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81"></i><i class="icon_set_1_icon-81"></i></span>(۵-۶)</label>
                             </li>
                             <li>
                                 <label>
-                                    <input type="checkbox"><span class="rating"><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81"></i><i class="icon_set_1_icon-81"></i><i class="icon_set_1_icon-81"></i></span>(۲۵)</label>
+                                    <input name="star_score_2" type="checkbox"><span class="rating"><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81"></i><i class="icon_set_1_icon-81"></i><i class="icon_set_1_icon-81"></i></span>(۳-۴)</label>
                             </li>
                             <li>
                                 <label>
-                                    <input type="checkbox"><span class="rating"><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81"></i><i class="icon_set_1_icon-81"></i><i class="icon_set_1_icon-81"></i><i class="icon_set_1_icon-81"></i></span>(۱۵)</label>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="filter_type">
-                        <h6>نمایش بر اساس امتیاز</h6>
-                        <ul>
-                            <li>
-                                <label>
-                                    <input type="checkbox">فوق العاده: ۹+ (۷۷)</label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="checkbox">خیلی خوب: ۸+ (۵۵۲)</label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="checkbox">خوب: ۷+ (۹۰۹)</label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="checkbox">مورد پسند: ۶+ (۱۱۹۶)</label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="checkbox">بدون رتبه (۱۹۸)</label>
+                                    <input name="star_score_1" type="checkbox"><span class="rating"><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81"></i><i class="icon_set_1_icon-81"></i><i class="icon_set_1_icon-81"></i><i class="icon_set_1_icon-81"></i></span>(۱-۲)</label>
                             </li>
                         </ul>
                     </div>
@@ -129,55 +105,31 @@
                         <ul>
                             <li>
                                 <label>
-                                    <input type="checkbox">مجاز بودن حیوانات خانگی</label>
+                                    <input name="wifi" type="checkbox">وای فای</label>
                             </li>
                             <li>
                                 <label>
-                                    <input type="checkbox">وای فای</label>
+                                    <input name="television" type="checkbox">تلویزیون</label>
                             </li>
                             <li>
                                 <label>
-                                    <input type="checkbox">آبگرم</label>
+                                    <input name="food" type="checkbox">غذا یا رستوران</label>
                             </li>
                             <li>
                                 <label>
-                                    <input type="checkbox">رستوران</label>
+                                    <input name="pool" type="checkbox">استخر</label>
                             </li>
                             <li>
                                 <label>
-                                    <input type="checkbox">استخر</label>
+                                    <input name="parking" type="checkbox">پارکینگ</label>
                             </li>
                             <li>
                                 <label>
-                                    <input type="checkbox">پارکینگ</label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="checkbox">مرکز تناسب اندام</label>
+                                    <input name="gym" type="checkbox">باشگاه یا مرکز تناسب اندام</label>
                             </li>
                         </ul>
                     </div>
-                    <div class="filter_type">
-                        <h6>ناحیه</h6>
-                        <ul>
-                            <li>
-                                <label>
-                                    <input type="checkbox">مرکز</label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="checkbox">جنوب</label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="checkbox">شمال</label>
-                            </li>
-                            <li>
-                                <label>
-                                    <input type="checkbox">شرق/غرب</label>
-                            </li>
-                        </ul>
-                    </div>
+                    <p> <input class="btn_map" aria-expanded="false" type="submit" name="show_by_all_hotels" aria-controls="collapseMap" value="دوباره سازی اطلاعات" />
                 </div>
             </div>
             <div class="box_style_2"> <i class="icon_set_1_icon-57"></i>
@@ -191,8 +143,8 @@
                         <div class="styled-select-filters">
                             <select name="sort_price" id="sort_price">
                                 <option value="" selected="">بر اساس قیمت</option>
-                                <option value="lower">پایین ترین قیمت</option>
-                                <option value="higher">بالاترین قیمت</option>
+                                <option id="lower_price" class="icon-down" value="lower">پایین ترین قیمت</option>
+                                <option id="higher_price" class="icon-up" value="higher">بالاترین قیمت</option>
                             </select>
                         </div>
                     </div>
@@ -200,8 +152,8 @@
                         <div class="styled-select-filters">
                             <select name="sort_rating" id="sort_rating">
                                 <option value="" selected="">بر اساس رتبه بندی</option>
-                                <option value="lower">پایینترین رده</option>
-                                <option value="higher">بالاترین رتبه</option>
+                                <option id="lower_rate" class="icon-down" value="lower">پایین ترین رتبه</option>
+                                <option id="higher_rate" class="icon-up" value="higher">بالاترین رتبه</option>
                             </select>
                         </div>
                     </div>
@@ -209,10 +161,14 @@
                     </div>
                 </div>
             </div>
-            <?php
-                $rooms->AllRooms();
-            ?>
-
+      </form>
+        <?php
+        if(isset($_POST["show_by_all_hotels"])){
+            $rooms->ShowAllRoomsBy();
+        }else{
+            $rooms->AllRooms();
+        }
+        ?>
             <hr>
             <!--<div class="text-center">
                 <ul class="pagination">
@@ -233,7 +189,7 @@
                 </ul>
             </div>-->
         </div>
-    </div>
+     </div>
 </div>
 <?php include("includes/footer.php"); ?>
 <script src="js\jquery-1.11.2.min.js"></script>

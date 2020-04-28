@@ -280,7 +280,7 @@ a.bt_paypal {
     -moz-border-radius:5px;
     border-radius:5px;
 }
-a.btn_map {
+.btn_map{
     border:none;
     font-family:inherit;
     font-size:inherit;
@@ -301,8 +301,9 @@ a.btn_map {
     font-weight:700;
     display:block;
     text-align:center;
+    width: 100%;
 }
-a.btn_map:hover {
+.btn_map:hover {
     background:#333;
 }
 .btn_full,
@@ -4555,7 +4556,7 @@ a.btn_infobox:hover {
     width: 100%;
 }
 .rooms_edit_form input{
-    border-radius: 50px;
+    border-radius: 10.1px;
     padding: 3px;
     margin: 5px;
     width: 100%;

@@ -1,10 +1,20 @@
 $(window).load(function () {
-    $("#submit_publish").hide();
-    $(".publish select").change(function () {
-        $("#submit_publish").click();
+    $("#room_person_count,#room_main_price,#room_off_price").keypress(function (e) {
+        var ew = e.which || e.keyCode;
+        if (ew == 37 || ew == 39 || ew == 8 || ew == 46 || ew == 9 || ew == 33 || ew == 34 || ew == 35 || ew == 36)
+            return true;
+        if (ew >= 48 && ew <= 57)
+            return true;
+        if (e.ctrlKey || e.metaKey || e.altKey)
+            return true;
+        return false;
     });
-    $("#published,#unpublished").click(function () {
-        $("#submit_publish").click();
+    $("#submit_publish,.pic_food_details_submit").hide();
+    $(".publish select,#sort_rating,#sort_price").change(function () {
+        $("#submit_publish,.btn_map").click();
+    });
+    $("#published,#unpublished,#higher_rate,#lower_rate,#higher_price,#lower_price,#picture-himself").click(function () {
+        $("#submit_publish,.btn_map,.pic_food_details_submit").click();
     });
     if($(".publish select").val() == "published"){
         $(".publish select").css({"background-image":"linear-gradient(to bottom,#161616,green)"});

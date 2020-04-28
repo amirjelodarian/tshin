@@ -9,8 +9,14 @@
     <link rel='shortcut icon' href=''#' type='image/x-icon'>
     <!-- CSS -->
     <link href='css/base.css' rel='stylesheet'>
-    <link href="datepicker/dist/jquery.md.bootstrap.datetimepicker.style.css" rel="stylesheet"/>
-    <script src="datepicker/dist/jquery.md.bootstrap.datetimepicker.js"></script>
+    <link rel="stylesheet" href="pwt.datepicker/css/persian.datepicker.css"/>
+    <script src="pwt.datepicker/js/persian.date.js"></script>
+    <script src="pwt.datepicker/js/persian.datepicker.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(".date_booking").pDatepicker();
+        });
+    </script>
 </head>
 <body>
 <div id='preloader'>
@@ -103,10 +109,9 @@ if ((isset($_POST['submit']) && isset($_POST['room_id'])) || isset($_SESSION["ro
                     <li><i class='icon_set_2_icon-116 "); if($roomattribute["room_television"] == 1){ echo "rooms_checkbox'"; } echo("'></i>تلویزیون</li>
                     <li><i class='icon_set_1_icon-86  "); if($roomattribute["room_wifi"] == 1){ echo "rooms_checkbox'"; } echo("'></i>وای فای رایگان</li>
                     <li><i class='icon_set_2_icon-110  "); if($roomattribute["room_pool"] == 1){ echo "rooms_checkbox'"; } echo("'></i>استخر</li>
+                    <li><i class='icon_set_2_icon-117  "); if($roomattribute["room_gym"] == 1){ echo "rooms_checkbox'"; } echo("'></i>باشگاه یا لوازم ورزشی</li>
                     <li><i class='icon_set_1_icon-59  "); if($roomattribute["room_food"] == 1){ echo "rooms_checkbox'"; } echo("'></i>صبحانه</li>
-                    <li><i class='icon_set_1_icon-22'></i>حیوان خانگی مجاز</li>
-                    <li><i class='icon_set_1_icon-13'></i>دسترسی معلولین</li>
-                    <li><i class='icon_set_1_icon-27'></i>پارکینگ اختصاصی</li>
+                    <li><i class='icon_set_1_icon-27  "); if($roomattribute["room_parking"] == 1){ echo "rooms_checkbox'"; } echo("'></i>پارکینگ اختصاصی</li>
                 </ul>
             </div>
             <p class='visible-sm visible-xs'><a class='btn_map' data-toggle='collapse' href=''#collapseMap' aria-expanded='false' aria-controls='collapseMap'>مشاهده نقشه</a>
@@ -130,7 +135,10 @@ if ((isset($_POST['submit']) && isset($_POST['room_id'])) || isset($_SESSION["ro
         if ($roomattribute["room_television"] == 1)
             echo "<li>تلویزیون</li>";
         if ($roomattribute["room_wifi"] == 1)
-            echo "<li>وای فای</li><hr />";
+            echo "<li>وای فای</li>";
+        if ($roomattribute["room_parking"] == 1)
+            echo "<li>پارکینگ اختصاصی</li><hr />";
+
         echo("
                             </ul>
                         </div>
@@ -333,7 +341,7 @@ if ((isset($_POST['submit']) && isset($_POST['room_id'])) || isset($_SESSION["ro
                         <div class='col-md-6 col-sm-6'>
                             <div class='form-group'>
                                 <label><i class='icon-calendar-7'></i> تاریخ را انتخاب کنید</label>
-                                <input class='date-pick form-control required' type='text' data-mddatetimepicker='true' data-placement='right' name='date_booking' id='date_booking'>
+                                <input class='date-pick form-control required' type='text' data-mddatetimepicker='true' data-placement='right' name='date_booking' class='date_booking'>
                             </div>
                         </div>
                         <div class='col-md-6 col-sm-6'>
