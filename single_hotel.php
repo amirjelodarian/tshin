@@ -63,15 +63,15 @@ if ((isset($_POST['submit']) && isset($_POST['room_id'])) || isset($_SESSION["ro
                 <div class='col-md-8 col-sm-8'> 
                     <span class='rating'>
                     ");
-        if($database->escape_value($roomattribute['room_score']) == 1 || $database->escape_value($roomattribute['room_score']) == 2){
+        if($database->escape_value($roomattribute['room_score']) == 1){
             echo "<i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-        }else if($database->escape_value($roomattribute['room_score']) == 3 || $database->escape_value($roomattribute['room_score']) == 4){
+        }else if($database->escape_value($roomattribute['room_score']) == 2){
             echo "<i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-        }else if($database->escape_value($roomattribute['room_score']) == 5 || $database->escape_value($roomattribute['room_score']) == 6){
+        }else if($database->escape_value($roomattribute['room_score']) == 3){
             echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-        }else if($database->escape_value($roomattribute['room_score']) == 7 || ($roomattribute['room_score']) == 8){
+        }else if($database->escape_value($roomattribute['room_score']) == 4){
             echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i>";
-        }else if($database->escape_value($roomattribute['room_score']) == 9 || $database->escape_value($roomattribute['room_score']) == 10){
+        }else if($database->escape_value($roomattribute['room_score']) == 5){
             echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i>";
         }else{
             return null;
@@ -282,7 +282,7 @@ if ((isset($_POST['submit']) && isset($_POST['room_id'])) || isset($_SESSION["ro
                                     </div>
                                 </li>
                                 <li>امتیاز
-                                    <div class='rating'> "); echo $rooms->avg_room_score($room_id); echo("
+                                    <div class='rating'> "); echo $rooms->avg_room_attr($room_id,'room_score'); echo("
                                     </div>
                                 </li>
                             </ul>
@@ -413,7 +413,7 @@ if (isset($_POST["review_submit"])){
                                 <select class='form-control' name='room_score_review' id='cleanliness_review' required>
                                     <option value=''>لطفا انتخاب کنید</option>
                                     <?php
-                                    for($counter = 1;$counter <= 10;$counter++)
+                                    for($counter = 1;$counter <= 5;$counter++)
                                         echo "<option value='{$counter}'>{$counter}</option>";
                                     ?>
                                 </select>

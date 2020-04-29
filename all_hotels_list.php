@@ -65,7 +65,7 @@
 </div>
 <div class="container margin_60">
     <div class="row">
-      <form method="post" action="<?php echo(htmlentities($_SERVER['PHP_SELF'])); ?>">
+      <form method="post" action="<?php echo(htmlspecialchars($_SERVER['PHP_SELF'])); ?>">
         <aside class="col-lg-3 col-md-3">
             <p> <input class="btn_map" aria-expanded="false" type="submit" name="show_by_all_hotels" aria-controls="collapseMap" value="دوباره سازی اطلاعات" />
             </p>
@@ -80,23 +80,23 @@
                         <ul>
                             <li>
                                 <label>
-                                    <input name="star_score_5" type="checkbox"><span class="rating"><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i></span>(۹-۱۰)</label>
+                                    <input name="star_score_5" type="checkbox"><span class="rating"><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i></span>(۵)</label>
                             </li>
                             <li>
                                 <label>
-                                    <input name="star_score_4" type="checkbox"><span class="rating"><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81"></i></span>(۷-۸)</label>
+                                    <input name="star_score_4" type="checkbox"><span class="rating"><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81"></i></span>(۴)</label>
                             </li>
                             <li>
                                 <label>
-                                    <input name="star_score_3" type="checkbox"><span class="rating"><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81"></i><i class="icon_set_1_icon-81"></i></span>(۵-۶)</label>
+                                    <input name="star_score_3" type="checkbox"><span class="rating"><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81"></i><i class="icon_set_1_icon-81"></i></span>(۳)</label>
                             </li>
                             <li>
                                 <label>
-                                    <input name="star_score_2" type="checkbox"><span class="rating"><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81"></i><i class="icon_set_1_icon-81"></i><i class="icon_set_1_icon-81"></i></span>(۳-۴)</label>
+                                    <input name="star_score_2" type="checkbox"><span class="rating"><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81"></i><i class="icon_set_1_icon-81"></i><i class="icon_set_1_icon-81"></i></span>(۲)</label>
                             </li>
                             <li>
                                 <label>
-                                    <input name="star_score_1" type="checkbox"><span class="rating"><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81"></i><i class="icon_set_1_icon-81"></i><i class="icon_set_1_icon-81"></i><i class="icon_set_1_icon-81"></i></span>(۱-۲)</label>
+                                    <input name="star_score_1" type="checkbox"><span class="rating"><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81"></i><i class="icon_set_1_icon-81"></i><i class="icon_set_1_icon-81"></i><i class="icon_set_1_icon-81"></i></span>(۱)</label>
                             </li>
                         </ul>
                     </div>
@@ -179,7 +179,7 @@
         if(isset($_POST["show_by_all_hotels"])){
             $rooms->ShowAllRoomsBy();
         }elseif (isset($_POST["submit_search"])){
-            $rooms->SerachRoom(true);
+            $rooms->UserََSerachRoom();
         }else{
             $rooms->AllRooms();
         }

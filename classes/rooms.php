@@ -60,15 +60,15 @@
                                             </div>
                                             <div class='rating' style='background: white'>
                                             ");
-                                            if($database->escape_value($rooms_rows['room_score']) == 1 || $database->escape_value($rooms_rows['room_score']) == 2){
+                                            if($database->escape_value($rooms_rows['room_score']) == 1){
                                                 echo "<i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-                                            }else if($database->escape_value($rooms_rows['room_score']) == 3 || $database->escape_value($rooms_rows['room_score']) == 4){
+                                            }else if($database->escape_value($rooms_rows['room_score']) == 2){
                                                 echo "<i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-                                            }else if($database->escape_value($rooms_rows['room_score']) == 5 || $database->escape_value($rooms_rows['room_score']) == 6){
+                                            }else if($database->escape_value($rooms_rows['room_score']) == 3){
                                                 echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-                                            }else if($database->escape_value($rooms_rows['room_score']) == 7 || ($rooms_rows['room_score']) == 8){
+                                            }else if($database->escape_value($rooms_rows['room_score']) == 4){
                                                 echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i>";
-                                            }else if($database->escape_value($rooms_rows['room_score']) == 9 || $database->escape_value($rooms_rows['room_score']) == 10){
+                                            }else if($database->escape_value($rooms_rows['room_score']) == 5){
                                                 echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i>";
                                             }else{
                                                 return null;
@@ -136,56 +136,56 @@
                 if (isset($_POST["star_score_1"])){
                     if (preg_match("/WHERE/",$sql)){
                         if (preg_match("/room_score/",$sql)){
-                            $sql .= " OR room_score=1 OR room_score=2 ";
+                            $sql .= " OR room_score=1 ";
                         }else{
-                            $sql .= " && room_score=1 OR room_score=2 ";
+                            $sql .= " && room_score=1 ";
                         }
                     }else{
-                        $sql .= " WHERE room_score=1 OR room_score=2 ";
+                        $sql .= " WHERE room_score=1 ";
                     }
                 }
                 if (isset($_POST["star_score_2"])){
                     if (preg_match("/WHERE/",$sql)){
                         if (preg_match("/room_score/",$sql)){
-                            $sql .= " OR room_score=3 OR room_score=4 ";
+                            $sql .= " OR room_score=2 ";
                         }else{
-                            $sql .= " && room_score=3 OR room_score=4 ";
+                            $sql .= " && room_score=2 ";
                         }
                     }else{
-                        $sql .= " WHERE room_score=3 OR room_score=4 ";
+                        $sql .= " WHERE room_score=2 ";
                     }
                 }
                 if (isset($_POST["star_score_3"])){
                     if (preg_match("/WHERE/",$sql)){
                         if (preg_match("/room_score/",$sql)){
-                            $sql .= " OR room_score=5 OR room_score=6 ";
+                            $sql .= " OR room_score=3 ";
                         }else{
-                            $sql .= " && room_score=5 OR room_score=6 ";
+                            $sql .= " && room_score=3 ";
                         }
                     }else{
-                        $sql .= " WHERE room_score=5 OR room_score=6 ";
+                        $sql .= " WHERE room_score=3 ";
                     }
                 }
                 if (isset($_POST["star_score_4"])){
                     if (preg_match("/WHERE/",$sql)){
                         if (preg_match("/room_score/",$sql)){
-                            $sql .= " OR room_score=7 OR room_score=8 ";
+                            $sql .= " OR room_score=4 ";
                         }else{
-                            $sql .= " && room_score=7 OR room_score=8 ";
+                            $sql .= " && room_score=4 ";
                         }
                     }else{
-                        $sql .= " WHERE room_score=7 OR room_score=8 ";
+                        $sql .= " WHERE room_score=4 ";
                     }
                 }
                 if (isset($_POST["star_score_5"])){
                     if (preg_match("/WHERE/",$sql)){
                         if (preg_match("/room_score/",$sql)){
-                            $sql .= " OR room_score=9 OR room_score=10 ";
+                            $sql .= " OR room_score=5 ";
                         }else{
-                            $sql .= " && room_score=9 OR room_score=10 ";
+                            $sql .= " && room_score=5 ";
                         }
                     }else{
-                        $sql .= " WHERE room_score=9 OR room_score=10 ";
+                        $sql .= " WHERE room_score=5 ";
                     }
                 }
                 if(isset($_POST["wifi"])){
@@ -230,6 +230,17 @@
                         $sql .= " WHERE room_gym=1 ";
                     }
                 }
+                if (isset($_POST["range"])){
+                    $range = $database->escape_value($_POST["range"]);
+                    $range = explode(";",$range);
+                    $first_attr = $range[0]; $second_attr = $range[1];
+                    $first_attr = (int)$first_attr; $second_attr = (int)$second_attr;
+                    if (preg_match("/WHERE/",$sql)){
+                        $sql .= " && room_main_price BETWEEN {$first_attr} AND {$second_attr} ";
+                    }else{
+                        $sql .= " WHERE room_main_price BETWEEN {$first_attr} AND {$second_attr} ";
+                    }
+                }
                 $sql .= " ORDER BY room_id DESC";
                 if (isset($_POST["sort_rating"])){
                     switch ($_POST["sort_rating"]) {
@@ -257,6 +268,7 @@
                 }
                 $database->query("SET NAMES 'utf8'");
                 $result = $database->query($sql);
+                if($database->num_rows($result) == 0){ echo "<h1 class='no-result'>متاسفانه یافت نشد !</h1>"; }
                 while ($rooms_rows = $database->fetch_array($result)) {
                     echo ("
                                 <div class='strip_all_tour_list wow fadeIn' style='background-image: linear-gradient(to left,#e04f67 1%,#fff 35%);' data-wow-delay='0.1s'>
@@ -282,15 +294,15 @@
                                             </div>
                                             <div class='rating'>
                                             ");
-                    if($database->escape_value($rooms_rows['room_score']) == 1 || $database->escape_value($rooms_rows['room_score']) == 2){
+                    if($database->escape_value($rooms_rows['room_score']) == 1){
                         echo "<i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-                    }else if($database->escape_value($rooms_rows['room_score']) == 3 || $database->escape_value($rooms_rows['room_score']) == 4){
+                    }else if($database->escape_value($rooms_rows['room_score']) == 2){
                         echo "<i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-                    }else if($database->escape_value($rooms_rows['room_score']) == 5 || $database->escape_value($rooms_rows['room_score']) == 6){
+                    }else if($database->escape_value($rooms_rows['room_score']) == 3){
                         echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-                    }else if($database->escape_value($rooms_rows['room_score']) == 7 || ($rooms_rows['room_score']) == 8){
+                    }else if($database->escape_value($rooms_rows['room_score']) == 4){
                         echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i>";
-                    }else if($database->escape_value($rooms_rows['room_score']) == 9 || $database->escape_value($rooms_rows['room_score']) == 10){
+                    }else if($database->escape_value($rooms_rows['room_score']) == 5){
                         echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i>";
                     }else{
                         return null;
@@ -351,6 +363,129 @@
                 }
             }
         }
+        public function UserََSerachRoom(){
+            global $database,$Functions,$users;
+            if (isset($_POST["submit_search"]) && !(empty($_POST["keyword"]))) {
+                $keyword = $database->escape_value($_POST['keyword']);
+                if (isset($_POST["ByWitch"])){
+                    switch ($_POST["ByWitch"]){
+                        case 'Address':
+                            $sql = "SELECT * FROM rooms WHERE room_address LIKE '%{$keyword}%'";
+                            break;
+                        case 'Title':
+                            $sql = "SELECT * FROM rooms WHERE room_title LIKE '%{$keyword}%'";
+                            break;
+                        case 'Descript':
+                            $sql = "SELECT * FROM rooms WHERE room_description LIKE '%{$keyword}%'";
+                            break;
+                        case 'Price':
+                            $sql = "SELECT * FROM rooms WHERE room_main_price LIKE '{$keyword}%'";
+                            break;
+                        default:
+                            $sql = "SELECT * FROM rooms WHERE room_address LIKE '{$keyword}%'";
+                            break;
+                    }
+                }
+                $result = $database->query($sql);
+                if ($database->num_rows($result) > 0) {
+                    while ($rooms_rows = $database->fetch_array($result)) {
+                        echo ("
+                                <div class='strip_all_tour_list wow fadeIn' data-wow-delay='0.1s'>
+                                <div class='row'>
+                                    <div class='col-lg-4 col-md-4 col-sm-4'>
+                                        <div class='wishlist'> <a class='tooltip_flip tooltip-effect-1' href='javascript:void(0);'>+<span class='tooltip-content-flip'><span class='tooltip-back'>علاقمند شدم</span></span></a>
+                                        </div>
+                                        <div class='img_list'>
+                                            <a href='single_hotel.php'>
+                                                <div class='ribbon top_rated'></div>
+                                                <img src='"); self::select_room_image($rooms_rows['room_image']); echo("' alt='تی شین'>
+                                                <div class='short_info'></div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class='clearfix visible-xs-block'></div>
+                                    <div class='col-lg-6 col-md-6 col-sm-6'>
+                                        <div class='tour_list_desc'>
+                                        <h4 class='room_address'>{$database->escape_value($rooms_rows['room_address'])}</h4>
+                                            <div class='score'>");
+                        echo(self::word_score($rooms_rows['room_score']));
+                        echo("<span>{$database->escape_value($Functions->EN_numTo_FA($rooms_rows['room_score'],true))}</span>
+                                            </div>
+                                            <div class='rating' style='background: white'>
+                                            ");
+                        if($database->escape_value($rooms_rows['room_score']) == 1){
+                            echo "<i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
+                        }else if($database->escape_value($rooms_rows['room_score']) == 2){
+                            echo "<i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
+                        }else if($database->escape_value($rooms_rows['room_score']) == 3){
+                            echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
+                        }else if($database->escape_value($rooms_rows['room_score']) == 4){
+                            echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i>";
+                        }else if($database->escape_value($rooms_rows['room_score']) == 5){
+                            echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i>";
+                        }else{
+                            return null;
+                        }
+                        echo ("
+                                            </div>
+                                            <h3>{$database->escape_value($rooms_rows['room_title'])}</h3>
+                                            <p>");
+                        echo(substr(nl2br(htmlentities($rooms_rows['room_description'])),0,250)."...");
+                        echo("</p>
+                                            <ul class='add_info'>
+                                                <li> <a href='javascript:void(0);' class='tooltip-1 ");
+                        if($rooms_rows["room_wifi"] == 1){ echo 'rooms_checkbox';}
+                        echo("' data-placement='top' title='وای فای رایگان'><i class='icon_set_1_icon-86'></i></a>
+                                                </li>
+                                                <li> <a href='javascript:void(0);' class='tooltip-1 ");
+                        if($rooms_rows["room_television"] == 1){ echo 'rooms_checkbox';}
+                        echo("' data-placement='top' title='تلویزیون پلاسما با کانال های اچ دی'><i class='icon_set_2_icon-116'></i></a>
+                                                </li>
+                                                <li> <a href='javascript:void(0);' class='tooltip-1 ");
+                        if($rooms_rows["room_pool"] == 1){ echo 'rooms_checkbox';}
+                        echo("' data-placement='top' title='استخر شنا'><i class='icon_set_2_icon-110'></i></a>
+                                                </li>
+                                                <li> <a href='javascript:void(0);' class='tooltip-1 ");
+                        if($rooms_rows["room_gym"] == 1){ echo 'rooms_checkbox';}
+                        echo("' data-placement='top' title='مرکز تناسب اندام'><i class='icon_set_2_icon-117'></i></a>
+                                                </li>
+                                                <li> <a href='javascript:void(0);' class='tooltip-1 ");
+                        if($rooms_rows["room_food"] == 1){ echo 'rooms_checkbox';}
+                        echo("' data-placement='top' title='رستوران'><i class='icon_set_1_icon-58'></i></a>
+                                                </li>
+                                                <li> <a href='javascript:void(0);' class='tooltip-1 ");
+                        if($rooms_rows["room_parking"] == 1){ echo 'rooms_checkbox';}
+                        echo("' data-placement='top' title='پارکینگ'><i class='icon_set_1_icon-27'></i></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class='col-lg-2 col-md-2 col-sm-2'>");
+                        if($rooms_rows['room_person_count'] != 0){ echo("<div class='room_person_count_show'>{$Functions->EN_numTo_FA($rooms_rows['room_person_count'],true)} نفره</div>"); }
+                        echo("
+                                        <div class='price_list'>
+                                            <div>
+                                            <sup>{$Functions->EN_numTo_FA($Functions->insert_seperator($rooms_rows['room_main_price']),true)} تومان</sup>
+                                            <span class='normal_price_list'>{$Functions->EN_numTo_FA($Functions->insert_seperator($rooms_rows['room_off_price']),true)} تومان</span>
+                                                                                       
+                                            <small>روزانه / شبانه</small>
+                                                <form action='single_hotel.php' method='post'>
+                                                    <input name='room_id' type='hidden' value='"); echo($Functions->encrypt_id($rooms_rows['room_id'])); echo("' /> 
+                                                    <p><input name='submit' class='food_details_submit' value='جزئیات' type='submit' /></p>
+                                                </form> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            ");
+                    }
+                }else { echo "<h1 class='no-result'>متاسفانه یافت نشد !</h1>"; }
+
+            }else{
+                $users->redirect_to($_SERVER["PHP_SELF"]);
+            }
+        }
         // for panel display
         public function AllRooms_panel(){
             global $database,$Functions;
@@ -381,15 +516,15 @@
                                             <h3 class='room_address'>{$database->escape_value($rooms_rows['room_address'])}</h3>
                                             <div class='rating'>
                                             ");
-                if( $database->escape_value($rooms_rows['room_score']) == 1 || $database->escape_value($rooms_rows['room_score']) == 2){
+                if( $database->escape_value($rooms_rows['room_score']) == 1){
                     echo "<i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-                }else if($database->escape_value($rooms_rows['room_score']) == 3 || $database->escape_value($rooms_rows['room_score']) == 4){
+                }else if($database->escape_value($rooms_rows['room_score']) == 2){
                     echo "<i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-                }else if($database->escape_value($rooms_rows['room_score']) == 5 || $database->escape_value($rooms_rows['room_score']) == 6){
+                }else if($database->escape_value($rooms_rows['room_score']) == 3){
                     echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-                }else if($database->escape_value($rooms_rows['room_score']) == 7 || ($rooms_rows['room_score']) == 8){
+                }else if($database->escape_value($rooms_rows['room_score']) == 4){
                     echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i>";
-                }else if($database->escape_value($rooms_rows['room_score']) == 9 || $database->escape_value($rooms_rows['room_score']) == 10){
+                }else if($database->escape_value($rooms_rows['room_score']) == 5){
                     echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i>";
                 }else{
                     return null;
@@ -432,8 +567,8 @@
                                         echo("
                                         <div class='price_list'>
                                             <div>
-                                            <sup>{$database->escape_value($Functions->EN_numTo_FA($rooms_rows['room_main_price'],true))} تومان</sup>
-                                            <span class='normal_price_list'>{$database->escape_value($Functions->EN_numTo_FA($rooms_rows['room_off_price'],true))} تومان</span>
+                                            <sup>{$database->escape_value($Functions->EN_numTo_FA($Functions->insert_seperator($rooms_rows['room_main_price']),true))} تومان</sup>
+                                            <span class='normal_price_list'>{$database->escape_value($Functions->EN_numTo_FA($Functions->insert_seperator($rooms_rows['room_off_price']),true))} تومان</span>
                                             <small>روزانه / شبانه</small>
                                                 <form action='rooms_edit.php' method='post'>
                                                     <input type='submit' name='submit_edit_room' value='Edit Room' class='submit_edit' />
@@ -495,12 +630,7 @@
                                                 <option {$Functions->auto_select(2,$rooms_rows['room_score'])}>2</option>
                                                 <option {$Functions->auto_select(3,$rooms_rows['room_score'])}>3</option>
                                                 <option {$Functions->auto_select(4,$rooms_rows['room_score'])}>4</option>
-                                                <option {$Functions->auto_select(5,$rooms_rows['room_score'])}>5</option>
-                                                <option {$Functions->auto_select(6,$rooms_rows['room_score'])}>6</option>
-                                                <option {$Functions->auto_select(7,$rooms_rows['room_score'])}>7</option>
-                                                <option {$Functions->auto_select(8,$rooms_rows['room_score'])}>8</option>
-                                                <option {$Functions->auto_select(9,$rooms_rows['room_score'])}>9</option>
-                                                <option {$Functions->auto_select(10,$rooms_rows['room_score'])}>10</option>          
+                                                <option {$Functions->auto_select(5,$rooms_rows['room_score'])}>5</option>          
                                             </select>
                                             </div>
                                             <h2><input type='text' class='room_address' style='background: white;' value='{$database->escape_value($rooms_rows['room_address'])}' name='room_address' placeholder='گرگان - خیابان مرادی' maxlength='400' required/></h2>
@@ -593,7 +723,7 @@
                 }
                 $this->room_title = $database->escape_value($_POST["room_title"]);
                 $this->room_description = $database->escape_value($_POST["room_description"]);
-                if (empty($_POST["room_score"]) || $_POST["room_score"] == 0 || $_POST["room_score"] > 10) {
+                if (empty($_POST["room_score"]) || $_POST["room_score"] == 0 || $_POST["room_score"] > 5) {
                     $this->room_score = 1;
                 }else{
                     $this->room_score = $database->escape_value($_POST["room_score"]);
@@ -662,7 +792,7 @@
                 $Functions->photo_upload($_POST["submit_create_room"]);
                 $this->room_title = $database->escape_value($_POST["room_title"]);
                 $this->room_description = $database->escape_value($_POST["room_description"]);
-                if (empty($_POST["room_score"]) || $_POST["room_score"] == 0 || $_POST["room_score"] > 10) {
+                if (empty($_POST["room_score"]) || $_POST["room_score"] == 0 || $_POST["room_score"] > 5) {
                     $this->room_score = 1;
                 }else{
                     $this->room_score = $database->escape_value($_POST["room_score"]);
@@ -731,7 +861,7 @@
         }
 
         // function for search panel
-        public function SerachRoom($home = false){
+        public function PanelSerachRoom(){
             global $database,$Functions,$users;
             if (isset($_POST["submit_search"]) && !(empty($_POST["keyword"]))) {
                 $keyword = $database->escape_value($_POST['keyword']);
@@ -768,19 +898,13 @@
                     while ($rooms_rows = $database->fetch_array($result)) {
                         echo ("
                 
-                                <div class='strip_all_tour_list wow fadeIn' "); if (isset($home) && $home == false){ echo(" id='rooms' "); } echo(" data-wow-delay='0.1s'>
+                                <div class='strip_all_tour_list wow fadeIn' id='rooms' data-wow-delay='0.1s'>
                                 <div class='row'>
                                     <div class='col-lg-4 col-md-4 col-sm-4'>
                                         <div class='img_list'>
                                             <a href='rooms_edit.php'>
-                                                    <div class='ribbon top_rated'></div>");
-                                                    if (isset($home) && $home == false){
-                                                        echo("<img src='../"); self::select_room_image($rooms_rows['room_image']); echo("' alt=''>");
-                                                    }
-                                                    if (isset($home) && $home == true){
-                                                        echo("<img src='"); self::select_room_image($rooms_rows['room_image']); echo("' alt=''>");
-                                                    }
-                                                    echo("
+                                                    <div class='ribbon top_rated'></div>
+                                                        <img src='../"); self::select_room_image($rooms_rows['room_image']); echo("' alt=''>
                                                     <div class='short_info'></div>
                                             </a>
                                         </div>
@@ -791,19 +915,19 @@
                                         <h3 class='room_address'>{$database->escape_value($rooms_rows['room_address'])}</h3>
                                             <div class='score'>");
                         echo(self::word_score($rooms_rows['room_score']));
-                        echo("<span>{$database->escape_value($rooms_rows['room_score'])}</span>
+                        echo("<span>{$database->escape_value($Functions->EN_numTo_FA($rooms_rows['room_score'],true))}</span>
                                             </div>
                                             <div class='rating'>
                                             ");
-                        if( $database->escape_value($rooms_rows['room_score']) == 1 || $database->escape_value($rooms_rows['room_score']) == 2){
+                        if( $database->escape_value($rooms_rows['room_score']) == 1){
                             echo "<i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-                        }else if($database->escape_value($rooms_rows['room_score']) == 3 || $database->escape_value($rooms_rows['room_score']) == 4){
+                        }else if($database->escape_value($rooms_rows['room_score']) == 2){
                             echo "<i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-                        }else if($database->escape_value($rooms_rows['room_score']) == 5 || $database->escape_value($rooms_rows['room_score']) == 6){
+                        }else if($database->escape_value($rooms_rows['room_score']) == 3){
                             echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-                        }else if($database->escape_value($rooms_rows['room_score']) == 7 || ($rooms_rows['room_score']) == 8){
+                        }else if($database->escape_value($rooms_rows['room_score']) == 4){
                             echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i>";
-                        }else if($database->escape_value($rooms_rows['room_score']) == 9 || $database->escape_value($rooms_rows['room_score']) == 10){
+                        }else if($database->escape_value($rooms_rows['room_score']) == 5){
                             echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i>";
                         }else{
                             return null;
@@ -837,12 +961,12 @@
                                         </div>
                                     </div>
                                     <div class='col-lg-2 col-md-2 col-sm-2'>");
-                                    if($rooms_rows['room_person_count'] != 0){ echo("<div class='room_person_count_show'>{$rooms_rows['room_person_count']}</div>"); }
+                                    if($rooms_rows['room_person_count'] != 0){ echo("<div class='room_person_count_show'>{$Functions->EN_numTo_FA($rooms_rows['room_person_count'],true)}</div>"); }
                                         echo("
                                         <div class='price_list'>
                                             <div>
-                                            <sup>{$database->escape_value($rooms_rows['room_main_price'])} تومان</sup>
-                                            <span class='normal_price_list'>{$database->escape_value($rooms_rows['room_off_price'])} تومان</span>                                            <small>روزانه / شبانه</small>
+                                            <sup>{$database->escape_value($Functions->EN_numTo_FA($Functions->insert_seperator($rooms_rows['room_main_price']),true))} تومان</sup>
+                                            <span class='normal_price_list'>{$database->escape_value($Functions->EN_numTo_FA($Functions->insert_seperator($rooms_rows['room_off_price']),true))} تومان</span>                                            <small>روزانه / شبانه</small>
                                                 <form action='rooms_edit.php' method='post'>
                                                     <input type='submit' name='submit_edit_room' value='Edit Room' class='submit_edit' />
                                                     <input type='hidden' name='room_id' value='");
@@ -871,11 +995,13 @@
 
         // functions for rooms
         public function word_score($room_score){
-                if($room_score == 1 || $room_score == 2) { return 'قابل قبول'; }
-                else if ($room_score == 3 || $room_score == 4){ return 'متوسط'; }
-                else if ($room_score == 5 || $room_score == 6){ return 'خوب'; }
-                else if ($room_score == 7 || $room_score == 8){ return 'خیلی خوب'; }
-                else if ($room_score == 9 || $room_score == 10){ return 'عالی'; }
+            switch ($room_score){
+            case 1: return 'قابل قبول'; break;
+            case 2: return 'متوسط'; break;
+            case 3: return 'خوب'; break;
+            case 4: return 'خیلی خوب'; break;
+            case 5: return 'عالی'; break;
+            }
         }
 
         public static function RoomAttributeById($id){
@@ -1029,7 +1155,7 @@
             global $sessions,$Functions,$database,$users;
             if (isset($_POST["review_submit"])){
                 if ($sessions->login_state()) {
-                    if (isset($_POST["room_score_review"]) && !(empty($_POST["room_score_review"])) && isset($_POST["room_comfort_review"]) && !(empty($_POST["room_comfort_review"])) && isset($_POST["room_price_review"]) && !(empty($_POST["room_price_review"])) && isset($_POST["room_quality_review"]) && !(empty($_POST["room_quality_review"])) && isset($_POST["room_text_review"]) && !(empty($_POST["room_text_review"])) && isset($_POST["random_captcha_code"]) && !(empty($_POST["random_captcha_code"]))){
+                    if (isset($_POST["room_score_review"]) && !(empty($_POST["room_score_review"])) && $_POST["room_score_review"] <= 5 && isset($_POST["room_comfort_review"]) && !(empty($_POST["room_comfort_review"])) && isset($_POST["room_price_review"]) && !(empty($_POST["room_price_review"])) && isset($_POST["room_quality_review"]) && !(empty($_POST["room_quality_review"])) && isset($_POST["room_text_review"]) && !(empty($_POST["room_text_review"])) && isset($_POST["random_captcha_code"]) && !(empty($_POST["random_captcha_code"]))){
                         if($_POST["random_captcha_code"] != $_SESSION["random_captcha_code"]){
                             $_SESSION["errors_message"] .= "کد کپچا نادرست وارد شده .";
                             $users->redirect_to("single_hotel.php");
@@ -1040,11 +1166,6 @@
                                 case 3: $room_score_review = $_POST["room_score_review"]; break;
                                 case 4: $room_score_review = $_POST["room_score_review"]; break;
                                 case 5: $room_score_review = $_POST["room_score_review"]; break;
-                                case 6: $room_score_review = $_POST["room_score_review"]; break;
-                                case 7: $room_score_review = $_POST["room_score_review"]; break;
-                                case 8: $room_score_review = $_POST["room_score_review"]; break;
-                                case 9: $room_score_review = $_POST["room_score_review"]; break;
-                                case 10: $room_score_review = $_POST["room_score_review"]; break;
                                 default: $_SESSION["errors_message"] .= "مشکلی در نادرست وارد کردن فیلد ."; $users->redirect_to("single_hotel.php"); break;
                             }
 
@@ -1338,15 +1459,6 @@
                 echo $this->smile_voted_by_num(round($row[$room_attr]));
             }
         }
-        public function avg_room_score($room_id){
-            global $database,$Functions;
-            $room_id = $Functions->decrypt_id($room_id);
-            $sql = "SELECT AVG(room_score) AS room_score_avg FROM room_survey WHERE room_id={$room_id} AND publish=1";
-            $result = $database->query($sql);
-            if($row = $database->fetch_array($result)){
-                return $this->smile_voted_by_num(round($row['room_score_avg']/2));
-            }
-        }
         //for panel
         public function smile_voted_by_price_quality_score_comfort($price,$quality,$score,$comfort){
             global $database;
@@ -1355,7 +1467,6 @@
             $this->room_score = $database->escape_value($score);
             $this->room_comfort = $database->escape_value($comfort);
             // convert score from 10 to 5 or low then
-            $this->room_score = (round($this->room_score)/2);
             $room_spec_avg = round(($this->room_price+$this->room_quality+$this->room_score+$this->room_comfort)/4);
             switch ($room_spec_avg){
                 case 0: return "<i class='icon-star rotateIn'></i><i class='icon-star'></i><i class='icon-star'></i><i class='icon-star'></i><i class='icon-star'></i>"; break;

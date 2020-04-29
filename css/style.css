@@ -4597,6 +4597,9 @@ a.btn_infobox:hover {
     margin-right: 7px;
     margin-top: 5px;
 }
+.irs{
+    direction: ltr;
+}
 #rooms{
     width: 83%;
     float: right;

@@ -4,14 +4,10 @@
     <list default="true" id="c424756b-6ee7-4545-9854-ec57cf6aba41" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/all_hotels_list.php" beforeDir="false" afterPath="$PROJECT_DIR$/all_hotels_list.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/functions.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/rooms.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/rooms.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/s" beforeDir="false" afterPath="$PROJECT_DIR$/classes/s" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/responsive.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/responsive.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/rooms/IMG_20190709_011043_494.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/js/functions.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/functions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/includes/admin_menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/panel/includes/admin_menu.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/includes/administrator_menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/panel/includes/administrator_menu.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/panel/rooms_show.php" beforeDir="false" afterPath="$PROJECT_DIR$/panel/rooms_show.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/single_hotel.php" beforeDir="false" afterPath="$PROJECT_DIR$/single_hotel.php" afterDir="false" />
     </list>
@@ -141,7 +137,7 @@
       <workItem from="1587855971403" duration="14386000" />
       <workItem from="1587934408331" duration="32423000" />
       <workItem from="1588064481733" duration="14510000" />
-      <workItem from="1588099132247" duration="14191000" />
+      <workItem from="1588099132247" duration="24482000" />
     </task>
     <servers />
   </component>
@@ -189,10 +185,10 @@
       <screen x="0" y="27" width="1366" height="707" />
     </state>
     <state x="100" y="127" width="1166" height="507" key="dock-window-2/0.27.1366.707@0.27.1366.707" timestamp="1584235101445" />
-    <state x="347" y="165" width="672" height="677" key="run.anything.popup" timestamp="1588059426624">
+    <state x="347" y="165" width="672" height="677" key="run.anything.popup" timestamp="1588116824106">
       <screen x="0" y="27" width="1366" height="707" />
     </state>
-    <state x="347" y="165" width="672" height="677" key="run.anything.popup/0.27.1366.707@0.27.1366.707" timestamp="1588059426624" />
+    <state x="347" y="165" width="672" height="677" key="run.anything.popup/0.27.1366.707@0.27.1366.707" timestamp="1588116824106" />
     <state x="346" y="55" width="672" height="678" key="search.everywhere.popup" timestamp="1588115069720">
       <screen x="0" y="27" width="1366" height="707" />
     </state>

@@ -18,7 +18,7 @@ else if($_SESSION["user_mode"] == 1){
                 <div id="errors" class="errors-panel" style="margin-top: 70px;"><?php echo $users->Errors(); ?></div>
                 <?php
                 if (isset($_POST["submit_search"])){
-                    $rooms->SerachRoom(false);
+                    $rooms->PanelSerachRoom();
                 }else{
                     $rooms->AllRooms_panel();
                 }

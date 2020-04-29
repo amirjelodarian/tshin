@@ -145,13 +145,13 @@ $(window).load(function () {
     $("#range").ionRangeSlider({
         hide_min_max: !0,
         keyboard: !0,
-        min: 0,
-        max: 150,
-        from: 30,
-        to: 100,
-        type: "double",
-        step: 1,
-        prefix: "Rial",
+        min: 50000,
+        max: 800000,
+        from: 50000,
+        to: 800000,
+        type: "int",
+        step: 5000,
+        prefix: "",
         grid: !0
     })
 })/*, window.onload = function () {
