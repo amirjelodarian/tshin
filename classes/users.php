@@ -899,10 +899,10 @@ require_once("functions.php");
         // This Function For Search Box And By Tel Or Username
         public function SerachUserByTelOrUsername(){
             global $database,$Functions;
-            if (isset($_POST["submit_search"]) && !(empty($_POST["keyword"]))) {
-                $keyword = $database->escape_value($_POST['keyword']);
-                if (isset($_POST["ByWitch"])){
-                    switch ($_POST["ByWitch"]){
+            if (isset($_POST["panel_submit_search_user"]) && !(empty($_POST["panel_keyword_user"]))) {
+                $keyword = $database->escape_value($_POST['panel_keyword_user']);
+                if (isset($_POST["panel_ByWitch_user"])){
+                    switch ($_POST["panel_ByWitch_user"]){
                         case 'Tel':
                             $sql = "SELECT * FROM users WHERE tel LIKE '{$keyword}%'";
                             break;
@@ -930,7 +930,7 @@ require_once("functions.php");
                         }
                         echo("src='");
                         self::select_user_image($users_row['user_image']);
-                        switch ($_POST["ByWitch"]){
+                        switch ($_POST["panel_ByWitch_user"]){
                             case 'Tel':
                                 echo("' alt='تی شین'></td>
                                 <td class='admins_username'>{$users_row['username']}</td>
@@ -997,10 +997,10 @@ require_once("functions.php");
         }
         public function SerachAdminByTelOrUsername(){
             global $database,$Functions;
-            if (isset($_POST["submit_search"]) && !(empty($_POST["keyword"]))) {
-                $keyword = $database->escape_value($_POST['keyword']);
-                if (isset($_POST["ByWitch"])){
-                    switch ($_POST["ByWitch"]){
+            if (isset($_POST["panel_submit_search_admin"]) && !(empty($_POST["panel_keyword_admin"]))) {
+                $keyword = $database->escape_value($_POST['panel_keyword_admin']);
+                if (isset($_POST["panel_ByWitch_admin"])){
+                    switch ($_POST["panel_ByWitch_admin"]){
                         case 'Tel':
                             $sql = "SELECT * FROM users WHERE user_mode=1 AND tel LIKE '{$keyword}%'";
                             break;

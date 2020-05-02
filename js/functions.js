@@ -1,4 +1,14 @@
 $(window).load(function () {
+    $("#date_booking").persianDatepicker({
+        altField: '#mydate',
+        altFormat: "YYYY/MM/DD",
+        observer: true,
+        format: 'YYYY/MM/DD',
+        initialValue: false,
+        initialValueType: 'persian',
+        autoClose: true,
+        maxDate: 'today',
+    });
     var windowWidth = window.innerWidth
         || document.documentElement.clientWidth
         || document.body.clientWidth;
@@ -153,6 +163,30 @@ $(window).load(function () {
         to: 800000,
         type: "int",
         step: 5000,
+        prefix: "",
+        grid: !0
+    })
+    $("#range_person_count").ionRangeSlider({
+        hide_min_max: !0,
+        keyboard: !0,
+        min: 1,
+        max: 30,
+        from: 1,
+        to: 30,
+        type: "int",
+        step: 1,
+        prefix: "",
+        grid: !0
+    })
+    $("#price_range_food").ionRangeSlider({
+        hide_min_max: !0,
+        keyboard: !0,
+        min: 10000,
+        max: 100000,
+        from: 10000,
+        to: 100000,
+        type: "int",
+        step: 1000,
         prefix: "",
         grid: !0
     })

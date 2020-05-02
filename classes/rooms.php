@@ -29,13 +29,6 @@
         private $username;
         private $user_id;
 
-
-        public function __construct(){
-            if(isset($_POST["keyword"])){
-                $this->UserََSerachRoom();
-            }
-        }
-
         // functions for display rooms
         public static function AllRooms($grid = ""){
             global $database,$Functions;
@@ -51,8 +44,9 @@
                                         <a>
                                             <img src='"); self::select_room_image($rooms_rows['room_image']); echo("' width='800' height='533' class='img-responsive' alt='تی شین'>
                                             <div class='ribbon top_rated'></div>
-                                        </a>
-                                            <div class='score'>");
+                                        </a>");
+                    if($rooms_rows['room_person_count'] != 0){ echo("<div class='room_person_count_show' id='room_person_count_grid_show'>{$rooms_rows['room_person_count']} نفره</div>"); }
+                                            echo("<div class='score'>");
                     echo(self::word_score($rooms_rows['room_score']));
                     echo("<span>{$database->escape_value($Functions->EN_numTo_FA($rooms_rows['room_score'], true))}</span>
                                             </div>
@@ -62,19 +56,7 @@
                                         <h3>{$database->escape_value($rooms_rows['room_title'])}</h3>
                                         <div class='rating'>
                                         ");
-                    if($database->escape_value($rooms_rows['room_score']) == 1){
-                        echo "<i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-                    }else if($database->escape_value($rooms_rows['room_score']) == 2){
-                        echo "<i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-                    }else if($database->escape_value($rooms_rows['room_score']) == 3){
-                        echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-                    }else if($database->escape_value($rooms_rows['room_score']) == 4){
-                        echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i>";
-                    }else if($database->escape_value($rooms_rows['room_score']) == 5){
-                        echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i>";
-                    }else{
-                        return null;
-                    }
+                    echo($Functions->give_start_by_number($rooms_rows['room_score']));
                     echo ("
                                         </div>
                                         <div class='wishlist'> <a class='tooltip_flip tooltip-effect-1' href='#'>+<span class='tooltip-content-flip'><span class='tooltip-back'>علاقمند شدم</span></span></a>
@@ -112,19 +94,7 @@
                                             </div>
                                             <div class='rating' style='background: white'>
                                             ");
-                    if($database->escape_value($rooms_rows['room_score']) == 1){
-                        echo "<i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-                    }else if($database->escape_value($rooms_rows['room_score']) == 2){
-                        echo "<i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-                    }else if($database->escape_value($rooms_rows['room_score']) == 3){
-                        echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-                    }else if($database->escape_value($rooms_rows['room_score']) == 4){
-                        echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i>";
-                    }else if($database->escape_value($rooms_rows['room_score']) == 5){
-                        echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i>";
-                    }else{
-                        return null;
-                    }
+                    echo($Functions->give_start_by_number($rooms_rows['room_score']));
                     echo ("
                                             </div>
                                             <h3>{$database->escape_value($rooms_rows['room_title'])}</h3>
@@ -184,61 +154,61 @@
         public function ShowAllRoomsBy($grid = ""){
             global $database, $Functions;
             $sql = "SELECT * FROM rooms ";
-            if (isset($_POST["show_by_all_hotels"])) {
-                if (isset($_POST["star_score"])){
-                    $this->room_score = $database->escape_value($_POST["star_score"]);
+            if (isset($_POST["user_show_by_all_hotels_room"])) {
+                if (isset($_POST["user_star_score_room"])){
+                    $this->room_score = $database->escape_value($_POST["user_star_score_room"]);
                     if (preg_match("/WHERE/",$sql)){
-                            $sql .= " && room_score={$_POST["star_score"]} ";
+                            $sql .= " && room_score={$this->room_score} ";
                     }else{
-                        $sql .= " WHERE room_score={$_POST["star_score"]} ";
+                        $sql .= " WHERE room_score={$this->room_score} ";
                     }
                 }
-                if(isset($_POST["wifi"])){
+                if(isset($_POST["user_wifi_room"])){
                     if (preg_match("/WHERE/",$sql)){
                         $sql .= " && room_wifi=1 ";
                     }else{
                         $sql .= " WHERE room_wifi=1 ";
                     }
                 }
-                if(isset($_POST["television"])){
+                if(isset($_POST["user_television_room"])){
                     if (preg_match("/WHERE/",$sql)){
                         $sql .= " && room_television=1 ";
                     }else{
                         $sql .= " WHERE room_television=1 ";
                     }
                 }
-                if(isset($_POST["food"])){
+                if(isset($_POST["user_food_room"])){
                     if (preg_match("/WHERE/",$sql)){
                         $sql .= " && room_food=1 ";
                     }else{
                         $sql .= " WHERE room_food=1 ";
                     }
                 }
-                if(isset($_POST["pool"])){
+                if(isset($_POST["user_pool_room"])){
                     if (preg_match("/WHERE/",$sql)){
                         $sql .= " && room_pool=1 ";
                     }else{
                         $sql .= " WHERE room_pool=1 ";
                     }
                 }
-                if(isset($_POST["parking"])){
+                if(isset($_POST["user_parking_room"])){
                     if (preg_match("/WHERE/",$sql)){
                         $sql .= " && room_parking=1 ";
                     }else{
                         $sql .= " WHERE room_parking=1 ";
                     }
                 }
-                if(isset($_POST["gym"])){
+                if(isset($_POST["user_gym_room"])){
                     if (preg_match("/WHERE/",$sql)){
                         $sql .= " && room_gym=1 ";
                     }else{
                         $sql .= " WHERE room_gym=1 ";
                     }
                 }
-                if (isset($_POST["range"]) && !(empty($_POST["range"]))){
-                    $range = $database->escape_value($_POST["range"]);
-                    $range = explode(";",$range);
-                    $first_attr = $range[0]; $second_attr = $range[1];
+                if (isset($_POST["user_price_range_room"]) && !(empty($_POST["user_price_range_room"]))){
+                    $price_range = $database->escape_value($_POST["user_price_range_room"]);
+                    $price_range = explode(";",$price_range);
+                    $first_attr = $price_range[0]; $second_attr = $price_range[1];
                     $first_attr = (int)$first_attr; $second_attr = (int)$second_attr;
                     if (preg_match("/WHERE/",$sql)){
                         $sql .= " && room_main_price BETWEEN {$first_attr} AND {$second_attr} ";
@@ -246,9 +216,20 @@
                         $sql .= " WHERE room_main_price BETWEEN {$first_attr} AND {$second_attr} ";
                     }
                 }
+                if (isset($_POST["user_person_count_range_room"]) && !(empty($_POST["user_person_count_range_room"]))){
+                    $person_count_range = $database->escape_value($_POST["user_person_count_range_room"]);
+                    $person_count_range = explode(";",$person_count_range);
+                    $first_attr = $person_count_range[0]; $second_attr = $person_count_range[1];
+                    $first_attr = (int)$first_attr; $second_attr = (int)$second_attr;
+                    if (preg_match("/WHERE/",$sql)){
+                        $sql .= " && room_person_count BETWEEN {$first_attr} AND {$second_attr} ";
+                    }else{
+                        $sql .= " WHERE room_person_count BETWEEN {$first_attr} AND {$second_attr} ";
+                    }
+                }
                 $sql .= " ORDER BY room_id DESC";
-                if (isset($_POST["sort_rating"])){
-                    switch ($_POST["sort_rating"]) {
+                if (isset($_POST["user_sort_rating_room"])){
+                    switch ($_POST["user_sort_rating_room"]) {
                         case "lower":
                             $sql = "SELECT * FROM rooms ORDER BY room_score ASC";
                             break;
@@ -259,8 +240,8 @@
                             break;
                     }
                 }
-                if (isset($_POST["sort_price"])){
-                    switch ($_POST["sort_price"]) {
+                if (isset($_POST["user_sort_price_room"])){
+                    switch ($_POST["user_sort_price_room"]) {
                         case "lower":
                             $sql = "SELECT * FROM rooms ORDER BY room_main_price ASC";
                             break;
@@ -283,8 +264,9 @@
                                         <a>
                                             <img src='"); self::select_room_image($rooms_rows['room_image']); echo("' width='800' height='533' class='img-responsive' alt='تی شین'>
                                             <div class='ribbon top_rated'></div>
-                                        </a>
-                                            <div class='score'>");
+                                        </a>");
+                        if($rooms_rows['room_person_count'] != 0){ echo("<div class='room_person_count_show' id='room_person_count_grid_show'>{$rooms_rows['room_person_count']} نفره</div>"); }
+                                            echo("<div class='score'>");
                         echo(self::word_score($rooms_rows['room_score']));
                         echo("<span>{$database->escape_value($Functions->EN_numTo_FA($rooms_rows['room_score'], true))}</span>
                                             </div>
@@ -294,19 +276,7 @@
                                         <h3>{$database->escape_value($rooms_rows['room_title'])}</h3>
                                         <div class='rating'>
                                         ");
-                        if($database->escape_value($rooms_rows['room_score']) == 1){
-                            echo "<i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-                        }else if($database->escape_value($rooms_rows['room_score']) == 2){
-                            echo "<i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-                        }else if($database->escape_value($rooms_rows['room_score']) == 3){
-                            echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-                        }else if($database->escape_value($rooms_rows['room_score']) == 4){
-                            echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i>";
-                        }else if($database->escape_value($rooms_rows['room_score']) == 5){
-                            echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i>";
-                        }else{
-                            return null;
-                        }
+                        echo($Functions->give_start_by_number($rooms_rows['room_score']));
                         echo ("
                                         </div>
                                         <div class='wishlist'> <a class='tooltip_flip tooltip-effect-1' href='#'>+<span class='tooltip-content-flip'><span class='tooltip-back'>علاقمند شدم</span></span></a>
@@ -344,19 +314,7 @@
                                             </div>
                                             <div class='rating'>
                                             ");
-                        if($database->escape_value($rooms_rows['room_score']) == 1){
-                            echo "<i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-                        }else if($database->escape_value($rooms_rows['room_score']) == 2){
-                            echo "<i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-                        }else if($database->escape_value($rooms_rows['room_score']) == 3){
-                            echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-                        }else if($database->escape_value($rooms_rows['room_score']) == 4){
-                            echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i>";
-                        }else if($database->escape_value($rooms_rows['room_score']) == 5){
-                            echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i>";
-                        }else{
-                            return null;
-                        }
+                        echo($Functions->give_start_by_number($rooms_rows['room_score']));
                         echo ("
                                             </div>
                                             <h3>{$database->escape_value($rooms_rows['room_title'])}</h3>
@@ -416,10 +374,10 @@
         }
         public function UserََSerachRoom($grid = ""){
             global $database,$Functions,$users;
-            if (isset($_POST["submit_search_users"]) && !(empty($_POST["users_keyword"]))) {
-                $keyword = $database->escape_value($_POST['users_keyword']);
-                if (isset($_POST["ByWitch"])){
-                    switch ($_POST["ByWitch"]){
+            if (isset($_POST["user_submit_search_room"]) && !(empty($_POST["user_keyword_room"]))) {
+                $keyword = $database->escape_value($_POST['user_keyword_room']);
+                if (isset($_POST["user_ByWitch_room"])){
+                    switch ($_POST["user_ByWitch_room"]){
                         case 'Address':
                             $sql = "SELECT * FROM rooms WHERE room_address LIKE '%{$keyword}%'";
                             break;
@@ -433,7 +391,7 @@
                             $sql = "SELECT * FROM rooms WHERE room_main_price LIKE '{$keyword}%'";
                             break;
                         default:
-                            $sql = "SELECT * FROM rooms WHERE room_address LIKE '{$keyword}%'";
+                            $sql = "SELECT * FROM rooms WHERE room_address LIKE '%{$keyword}%'";
                             break;
                     }
                 }
@@ -448,7 +406,9 @@
                                         <a>
                                             <img src='"); self::select_room_image($rooms_rows['room_image']); echo("' width='800' height='533' class='img-responsive' alt='تی شین'>
                                             <div class='ribbon top_rated'></div>
-                                        </a>
+                                        </a>");
+                            if($rooms_rows['room_person_count'] != 0){ echo("<div class='room_person_count_show' id='room_person_count_grid_show'>{$rooms_rows['room_person_count']} نفره</div>"); }
+                                            echo("
                                             <div class='score'>");
                             echo(self::word_score($rooms_rows['room_score']));
                             echo("<span>{$database->escape_value($Functions->EN_numTo_FA($rooms_rows['room_score'], true))}</span>
@@ -459,19 +419,7 @@
                                         <h3>{$database->escape_value($rooms_rows['room_title'])}</h3>
                                         <div class='rating'>
                                         ");
-                            if($database->escape_value($rooms_rows['room_score']) == 1){
-                                echo "<i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-                            }else if($database->escape_value($rooms_rows['room_score']) == 2){
-                                echo "<i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-                            }else if($database->escape_value($rooms_rows['room_score']) == 3){
-                                echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-                            }else if($database->escape_value($rooms_rows['room_score']) == 4){
-                                echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i>";
-                            }else if($database->escape_value($rooms_rows['room_score']) == 5){
-                                echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i>";
-                            }else{
-                                return null;
-                            }
+                            echo($Functions->give_start_by_number($rooms_rows['room_score']));
                             echo ("
                                         </div>
                                         <div class='wishlist'> <a class='tooltip_flip tooltip-effect-1' href='#'>+<span class='tooltip-content-flip'><span class='tooltip-back'>علاقمند شدم</span></span></a>
@@ -509,19 +457,7 @@
                                             </div>
                                             <div class='rating' style='background: white'>
                                             ");
-                            if($database->escape_value($rooms_rows['room_score']) == 1){
-                                echo "<i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-                            }else if($database->escape_value($rooms_rows['room_score']) == 2){
-                                echo "<i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-                            }else if($database->escape_value($rooms_rows['room_score']) == 3){
-                                echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-                            }else if($database->escape_value($rooms_rows['room_score']) == 4){
-                                echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i>";
-                            }else if($database->escape_value($rooms_rows['room_score']) == 5){
-                                echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i>";
-                            }else{
-                                return null;
-                            }
+                            echo($Functions->give_start_by_number($rooms_rows['room_score']));
                             echo ("
                                             </div>
                                             <h3>{$database->escape_value($rooms_rows['room_title'])}</h3>
@@ -613,19 +549,7 @@
                                             <h3 class='room_address'>{$database->escape_value($rooms_rows['room_address'])}</h3>
                                             <div class='rating'>
                                             ");
-                if( $database->escape_value($rooms_rows['room_score']) == 1){
-                    echo "<i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-                }else if($database->escape_value($rooms_rows['room_score']) == 2){
-                    echo "<i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-                }else if($database->escape_value($rooms_rows['room_score']) == 3){
-                    echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-                }else if($database->escape_value($rooms_rows['room_score']) == 4){
-                    echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i>";
-                }else if($database->escape_value($rooms_rows['room_score']) == 5){
-                    echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i>";
-                }else{
-                    return null;
-                }
+                echo($Functions->give_start_by_number($rooms_rows['room_score']));
                 echo ("
                                             </div>
                                             <h3>{$database->escape_value($rooms_rows['room_title'])}</h3>
@@ -960,10 +884,10 @@
         // function for search panel
         public function PanelSerachRoom(){
             global $database,$Functions,$users;
-            if (isset($_POST["submit_search"]) && !(empty($_POST["keyword"]))) {
-                $keyword = $database->escape_value($_POST['keyword']);
-                if (isset($_POST["ByWitch"])){
-                    switch ($_POST["ByWitch"]){
+            if (isset($_POST["panel_submit_search_room"]) && !(empty($_POST["panel_keyword_room"]))) {
+                $keyword = $database->escape_value($_POST['panel_keyword_room']);
+                if (isset($_POST["panel_ByWitch_room"])){
+                    switch ($_POST["panel_ByWitch_room"]){
                         case 'Address':
                             $sql = "SELECT * FROM rooms WHERE room_address LIKE '%{$keyword}%'";
                             break;
@@ -986,7 +910,7 @@
                             $sql = "SELECT * FROM rooms WHERE room_person_count LIKE '{$keyword}'";
                             break;
                         default:
-                            $sql = "SELECT * FROM rooms WHERE room_address LIKE '{$keyword}%'";
+                            $sql = "SELECT * FROM rooms WHERE room_address LIKE '%{$keyword}%'";
                             break;
                     }
                 }
@@ -1016,19 +940,7 @@
                                             </div>
                                             <div class='rating'>
                                             ");
-                        if( $database->escape_value($rooms_rows['room_score']) == 1){
-                            echo "<i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-                        }else if($database->escape_value($rooms_rows['room_score']) == 2){
-                            echo "<i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-                        }else if($database->escape_value($rooms_rows['room_score']) == 3){
-                            echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-                        }else if($database->escape_value($rooms_rows['room_score']) == 4){
-                            echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i>";
-                        }else if($database->escape_value($rooms_rows['room_score']) == 5){
-                            echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i>";
-                        }else{
-                            return null;
-                        }
+                        echo($Functions->give_start_by_number($rooms_rows['room_score']));
                         echo ("
                                             </div>
                                             <h3>{$database->escape_value($rooms_rows['room_title'])}</h3>

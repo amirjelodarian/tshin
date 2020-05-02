@@ -1,9 +1,9 @@
 ﻿<?php include("includes/search_slider_all_rooms.php"); ?>
 
         <?php
-        if(isset($_POST["show_by_all_hotels"])){
+        if(isset($_POST["user_show_by_all_hotels_room"])){
             $rooms->ShowAllRoomsBy();
-        }elseif (isset($_POST["submit_search_users"]) && isset($_POST["users_keyword"]) && !(empty($_POST["users_keyword"]))){
+        }elseif (isset($_POST["user_submit_search_room"]) && isset($_POST["user_keyword_room"]) && !(empty($_POST["user_keyword_room"]))){
             $rooms->UserََSerachRoom();
         }else{
             $rooms->AllRooms();

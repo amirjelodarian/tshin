@@ -33,7 +33,6 @@ if ($sessions->login_state()){
 }else{
     include("includes/header.php");
 }
-$sessions->null_room_id_while_comment();
 ?>
 <div class="room_error_message">
     <span id="room_error_message_inside">
@@ -67,73 +66,40 @@ $sessions->null_room_id_while_comment();
     <div class="row">
         <form method="post" action="<?php echo(htmlspecialchars($_SERVER['PHP_SELF'])); ?>">
             <aside class="col-lg-3 col-md-3">
-                <p> <input class="btn_map" aria-expanded="false" type="submit" name="user_show_by_all_hotels_room" aria-controls="collapseMap" value="اعمال فیلتر" />
+                <p> <input class="btn_map" aria-expanded="false" type="submit" name="user_show_by_all_hotels_food" aria-controls="collapseMap" value="اعمال فیلتر" />
                 </p>
                 <div id="filters_col"> <a data-toggle="collapse" href="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters" id="filters_col_bt"><i class="icon_set_1_icon-65"></i>فیلترها <i class="icon-plus-1 pull-right"></i></a>
                     <div class="collapse" id="collapseFilters">
                         <div class="filter_type">
                             <h6>قیمت</h6>
-                            <input type="text" id="range" name="user_price_range_room" value="">
+                            <input type="text" id="price_range_food" name="user_price_range_food" value="">
                         </div>
                         <div class="filter_type">
                             <h6>نمایش بر اساس رتبه</h6>
                             <ul>
                                 <li>
                                     <label>
-                                        <input name="user_star_score_room" value="5" type="radio" /><span class="rating"><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i></span>(۵)</label>
+                                        <input name="user_star_score_food" value="5" type="radio" /><span class="rating"><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i></span>(۵)</label>
                                 </li>
                                 <li>
                                     <label>
-                                        <input name="user_star_score_room" value="4" type="radio" /><span class="rating"><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81"></i></span>(۴)</label>
+                                        <input name="user_star_score_food" value="4" type="radio" /><span class="rating"><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81"></i></span>(۴)</label>
                                 </li>
                                 <li>
                                     <label>
-                                        <input name="user_star_score_room" value="3" type="radio" /><span class="rating"><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81"></i><i class="icon_set_1_icon-81"></i></span>(۳)</label>
+                                        <input name="user_star_score_food" value="3" type="radio" /><span class="rating"><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81"></i><i class="icon_set_1_icon-81"></i></span>(۳)</label>
                                 </li>
                                 <li>
                                     <label>
-                                        <input name="user_star_score_room" value="2" type="radio" /><span class="rating"><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81"></i><i class="icon_set_1_icon-81"></i><i class="icon_set_1_icon-81"></i></span>(۲)</label>
+                                        <input name="user_star_score_food" value="2" type="radio" /><span class="rating"><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81"></i><i class="icon_set_1_icon-81"></i><i class="icon_set_1_icon-81"></i></span>(۲)</label>
                                 </li>
                                 <li>
                                     <label>
-                                        <input name="user_star_score_room" value="1" type="radio" /><span class="rating"><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81"></i><i class="icon_set_1_icon-81"></i><i class="icon_set_1_icon-81"></i><i class="icon_set_1_icon-81"></i></span>(۱)</label>
+                                        <input name="user_star_score_food" value="1" type="radio" /><span class="rating"><i class="icon_set_1_icon-81 voted"></i><i class="icon_set_1_icon-81"></i><i class="icon_set_1_icon-81"></i><i class="icon_set_1_icon-81"></i><i class="icon_set_1_icon-81"></i></span>(۱)</label>
                                 </li>
                             </ul>
                         </div>
-                        <div class="filter_type">
-                            <h6>چند نفره</h6>
-                            <input type="text" id="range_person_count" name="user_person_count_range_room" value="">
-                        </div>
-                        <div class="filter_type">
-                            <h6>امکان</h6>
-                            <ul>
-                                <li>
-                                    <label>
-                                        <input name="user_wifi_room" type="checkbox">وای فای</label>
-                                </li>
-                                <li>
-                                    <label>
-                                        <input name="user_television_room" type="checkbox">تلویزیون</label>
-                                </li>
-                                <li>
-                                    <label>
-                                        <input name="user_food_room" type="checkbox">غذا یا رستوران</label>
-                                </li>
-                                <li>
-                                    <label>
-                                        <input name="user_pool_room" type="checkbox">استخر</label>
-                                </li>
-                                <li>
-                                    <label>
-                                        <input name="user_parking_room" type="checkbox">پارکینگ</label>
-                                </li>
-                                <li>
-                                    <label>
-                                        <input name="user_gym_room" type="checkbox">باشگاه یا مرکز تناسب اندام</label>
-                                </li>
-                            </ul>
-                        </div>
-                        <p> <input class="btn_map" aria-expanded="false" type="submit" name="user_show_by_all_hotels_room" aria-controls="collapseMap" value="اعمال فیلتر" />
+                        <p> <input class="btn_map" aria-expanded="false" type="submit" name="user_show_by_all_hotels_food" aria-controls="collapseMap" value="اعمال فیلتر" />
                     </div>
                 </div>
                 <div class="box_style_2"> <i class="icon_set_1_icon-57"></i>
@@ -145,7 +111,7 @@ $sessions->null_room_id_while_comment();
                     <div class="row">
                         <div class="col-md-3 col-sm-3 col-xs-12">
                             <div class="styled-select-filters">
-                                <select name="user_sort_price_room" id="sort_price">
+                                <select name="user_sort_price_food" id="sort_price">
                                     <option value="" selected="">بر اساس قیمت</option>
                                     <option id="lower_price" class="icon-down" value="lower">پایین ترین قیمت</option>
                                     <option id="higher_price" class="icon-up" value="higher">بالاترین قیمت</option>
@@ -154,27 +120,25 @@ $sessions->null_room_id_while_comment();
                         </div>
                         <div class="col-md-3 col-sm-3 col-xs-12">
                             <div class="styled-select-filters">
-                                <select name="user_sort_rating_room" id="sort_rating">
+                                <select name="user_sort_rating_food" id="sort_rating">
                                     <option value="" selected="">بر اساس رتبه بندی</option>
                                     <option id="lower_rate" class="icon-down" value="lower">پایین ترین رتبه</option>
                                     <option id="higher_rate" class="icon-up" value="higher">بالاترین رتبه</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-2 col-sm-2 col-xs-12 text-center"> <a href="all_hotels_grid.php" class="bt_filters"><i class="icon-th"></i></a>  <a href="all_hotels_list.php" class="bt_filters"><i class=" icon-list"></i></a></div>
+                        <div class="col-md-2 col-sm-2 col-xs-12 text-center"> <a href="foods_grid.php" class="bt_filters"><i class="icon-th"></i></a>  <a href="foods_list.php" class="bt_filters"><i class=" icon-list"></i></a></div>
         </form>
         <form method="post" action="<?php echo (htmlspecialchars($_SERVER['PHP_SELF'])); ?>">
             <div class="room_search_bar col-md-4 col-xs-12 col-sm-4 col-lg-4">
-                <select name="user_ByWitch_room" id="search-by-witch-users" class="search-by-witch">
+                <select name="user_ByWitch_food" id="search-by-witch-users" class="search-by-witch">
                     <option>بر اساس</option>
-                    <option value="Address">آدرس</option>
-                    <option value="Title">عنوان</option>
+                    <option value="Title">نام غذا</option>
                     <option value="Descript">توضیحات</option>
-                    <option value="Price">قیمت</option>
                 </select>
-                <input type="text" class="users-keyword" name="user_keyword_room" />
+                <input type="text" class="users-keyword" name="user_keyword_food" />
                 <span id="users-search-icon" class="icon-search-5"></span>
-                <input type="submit"  value="Search" class="users-submit-search" id="submit_search" name="user_submit_search_room" />
+                <input type="submit"  value="Search" class="users-submit-search" id="submit_search" name="user_submit_search_food" />
             </div>
         </form>
     </div>

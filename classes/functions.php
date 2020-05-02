@@ -224,7 +224,30 @@
             $i++;
             return substr($str,$i);
         }
-
+        public function give_start_by_number($score_row){
+            global $database;
+            $score_row = $database->escape_value($score_row);
+            switch ($score_row){
+                case 1:
+                    return "<i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
+                    break;
+                case 2:
+                    return "<i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
+                    break;
+                case 3:
+                    return "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
+                    break;
+                case 4:
+                    return "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i>";
+                    break;
+                case 5:
+                    return "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i>";
+                    break;
+                default:
+                    return null;
+                    break;
+            }
+        }
     }
     $Functions = new Functions();
 ?>

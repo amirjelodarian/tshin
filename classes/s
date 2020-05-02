@@ -1,45 +1,23 @@
-if (isset($grid) && $grid == true){
-                    echo("
-                            <div class='col-md-6 col-sm-6 wow zoomIn' data-wow-delay='0.1s'>
-                                <div class='hotel_container'>
-                                    <div class='img_container'>
-                                        <a>
-                                            <img src='"); self::select_room_image($rooms_rows['room_image']); echo("' width='800' height='533' class='img-responsive' alt='تی شین'>
-                                            <div class='ribbon top_rated'></div>
-                                        </a>
-                                            <div class='score'>");
-                    echo(self::word_score($rooms_rows['room_score']));
-                    echo("<span>{$database->escape_value($Functions->EN_numTo_FA($rooms_rows['room_score'], true))}</span>
-                                            </div>
-                                            <div class='short_info hotel'>{$database->escape_value($rooms_rows['room_address'])}<span class='price'><sup>{$Functions->EN_numTo_FA($Functions->insert_seperator($rooms_rows['room_main_price']),true)} تومان</sup></span></div>
-                                    </div>
-                                    <div class='hotel_title'>
-                                        <h3>{$database->escape_value($rooms_rows['room_title'])}</h3>
-                                        <div class='rating'>
-                                        ");
-                    if($database->escape_value($rooms_rows['room_score']) == 1){
-                        echo "<i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-                    }else if($database->escape_value($rooms_rows['room_score']) == 2){
-                        echo "<i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-                    }else if($database->escape_value($rooms_rows['room_score']) == 3){
-                        echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-                    }else if($database->escape_value($rooms_rows['room_score']) == 4){
-                        echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i>";
-                    }else if($database->escape_value($rooms_rows['room_score']) == 5){
-                        echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i>";
-                    }else{
-                        return null;
-                    }
-                    echo ("
-                                        </div>
-                                        <div class='wishlist'> <a class='tooltip_flip tooltip-effect-1' href='#'>+<span class='tooltip-content-flip'><span class='tooltip-back'>علاقمند شدم</span></span></a>
-                                        </div>
-                                        <form action='single_hotel.php' method='post'>
-                                                    <input name='room_id' type='hidden' value='"); echo($Functions->encrypt_id($rooms_rows['room_id'])); echo("' />
-                                                    <p><input name='submit' class='food_details_submit' value='جزئیات' type='submit' /></p>
-                                        </form>
-                                    </div>
+                <div class='col-md-6 col-sm-6 wow zoomIn' data-wow-delay='0.7s'>
+                    <div class='hotel_container'>
+                        <div class='img_container'>
+                            <a href='#'>
+                                <img src='img\gemej.jpg' width='800' height='533' class='img-responsive' alt='>
+                                <div class='score'><span>۷.۵</span>خوب</div>
+                                <div class='short_info hotel'>غذای محلی <span class='price'><sup>۸۰.۰۰۰ تومان</sup></span>
                                 </div>
+                            </a>
+                        </div>
+                        <div class='hotel_title'>
+                            <h3><strong> گمج کباب </strong></h3>
+                            <div class='rating'> <i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star-empty'></i>
                             </div>
-                    ");
-                }
+                            <ul class='add_info'>
+                                <li data-toggle='modal' data-target='#myModal'> <a href='javascript:void(0);' class='tooltip-1' data-placement='top' title='طرز تهیه'><i class='icon-question'></i></a>
+                                </li>
+                            </ul>
+                            <div class='wishlist'> <a class='tooltip_flip tooltip-effect-1' href='#'>+<span class='tooltip-content-flip'><span class='tooltip-back'>علاقمند شدم</span></span></a>
+                            </div>
+                        </div>
+                    </div>
+             </div>

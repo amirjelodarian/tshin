@@ -4682,6 +4682,10 @@ a.btn_infobox:hover {
     border-radius: 3px 10px 3px 3px;
 
 }
+.panel-icon a{
+    color: #fff;
+    font-weight: bold;
+}
 .panel-icon:hover{
     background: #00A8FF;
     color: white;
@@ -5378,6 +5382,12 @@ a.btn_infobox:hover {
 }
 .users-submit-search{
     display: none;
+}
+#room_person_count_grid_show{
+    width: auto;
+    position: absolute;
+    top: 0;
+    margin: 10px;
 }
 @keyframes room_error_message{
     from{

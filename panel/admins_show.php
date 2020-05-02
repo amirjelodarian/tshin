@@ -13,12 +13,12 @@ $sessions->login_administrator("../index.php");
         <table class="table_admins">
             <div id="keyword-style" style="margin-bottom: 8px">
                 <form action="<?php echo($_SERVER['PHP_SELF']); ?>" method="post">
-                    <input type="text" id="keyword" name="keyword" placeholder="Search" />
-                    <select class="search-by-witch" name="ByWitch">
-                        <option>Tel</option>
-                        <option>Username</option>
+                    <input type="text" id="keyword" name="panel_keyword_admin" placeholder="Search" />
+                    <select class="search-by-witch" name="panel_ByWitch_admin">
+                        <option value="Tel">Tel</option>
+                        <option value="Username">Username</option>
                     </select>
-                    <input type="submit" value="Search" id="submit_search" name="submit_search" />
+                    <input type="submit" value="Search" id="submit_search" name="panel_submit_search_admin" />
                 </form>
             </div>
             <tbody>
@@ -30,7 +30,7 @@ $sessions->login_administrator("../index.php");
                 <th>Delete</th>
             </tr>
             <?php
-            if (isset($_POST["submit_search"])){
+            if (isset($_POST["panel_submit_search_admin"])){
                 $users->SerachAdminByTelOrUsername();
             }else{
                 $users->AllAdmins();
