@@ -9,14 +9,7 @@
     <link rel='shortcut icon' href=''#' type='image/x-icon'>
     <!-- CSS -->
     <link href='css/base.css' rel='stylesheet'>
-    <link rel="stylesheet" href="pwt.datepicker/css/persian.datepicker.css"/>
-    <script src="pwt.datepicker/js/persian.date.js"></script>
-    <script src="pwt.datepicker/js/persian.datepicker.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $(".date_booking").pDatepicker();
-        });
-    </script>
+
 </head>
 <body>
 <div id='preloader'>
@@ -78,10 +71,10 @@ if ((isset($_POST['submit']) && isset($_POST['room_id'])) || isset($_SESSION["ro
         }
         echo ("
                     </span>
-                    <p class='room_address_single_hotel'>{$database->escape_value($roomattribute['room_address'])}</p>
                     <h4 class='room_title'>{$roomattribute['room_title']}</h4>  <span>"); if($roomattribute['room_person_count'] != 0){ echo"ظرفیت {$Functions->EN_numTo_FA($roomattribute['room_person_count'],true)} نفر"; }echo("</span>
                 </div>
                 <div class='col-md-4 col-sm-4'>
+                <p class='room_address_single_hotel'>{$database->escape_value($roomattribute['room_address'])}</p>
                     <div id='price_single_main' class='hotel'>از / هر شب <span><sup>{$Functions->EN_numTo_FA($Functions->insert_seperator($roomattribute['room_main_price']),true)} تومان</sup></span>
                     </div>
                     <span class='normal_price_in'>{$Functions->EN_numTo_FA($Functions->insert_seperator($roomattribute['room_off_price']),true)} تومان</span>
@@ -343,7 +336,7 @@ if ((isset($_POST['submit']) && isset($_POST['room_id'])) || isset($_SESSION["ro
                         <div class='col-md-6 col-sm-6'>
                             <div class='form-group'>
                                 <label><i class='icon-calendar-7'></i> تاریخ را انتخاب کنید</label>
-                                <input class='date-pick form-control required' type='text' data-mddatetimepicker='true' data-placement='right' name='date_booking' class='date_booking'>
+                                <input class='form-control required' type='text' name='date_booking' id='date_booking' class='date_booking'>
                             </div>
                         </div>
                         <div class='col-md-6 col-sm-6'>
@@ -492,11 +485,5 @@ if (isset($_POST["review_submit"])){
 <script src="js/functions.js"></script>
 <script src="js/signUp.js"></script>
 <script src="js/pw_strenght.js"></script>
-<script type='text/javascript'>
-    $(document).ready(function ($){$('#Img_carousel').sliderPro({width: 960, height: 500, fade: true, arrows: true, buttons: false, fullScreen: false, smallSize: 500, startSlide: 0, mediumSize: 1000, largeSize: 3000, thumbnailArrows: true, autoplay: false});});
-</script>
-<script>
-    $('.scrollTo').click(function (){$('html, body').animate({scrollTop: $($(this).attr('href')).offset().top}, 500); return false;});    $('input.date-pick').MdPersianDateTimePicker({});$('input.date-pick').MdPersianDateTimePicker('getText');
-</script>
 </body>
 </html>

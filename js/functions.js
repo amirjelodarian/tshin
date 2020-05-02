@@ -18,7 +18,9 @@ $(window).load(function () {
             $("#icon_menu").show();
         });
         }
-
+    $("#users-search-icon").click(function () {
+        $(".users-submit-search").click();
+    });
     $("#room_person_count,#room_main_price,#room_off_price").keypress(function (e) {
         var ew = e.which || e.keyCode;
         if (ew == 37 || ew == 39 || ew == 8 || ew == 46 || ew == 9 || ew == 33 || ew == 34 || ew == 35 || ew == 36)
@@ -154,7 +156,7 @@ $(window).load(function () {
         prefix: "",
         grid: !0
     })
-})/*, window.onload = function () {
+});/*, window.onload = function () {
     function e(e) {
         return e.stopPropagation ? e.stopPropagation() : window.event && (window.event.cancelBubble = !0), e.preventDefault(), !1
     }
@@ -164,7 +166,7 @@ $(window).load(function () {
     }, !1), document.addEventListener("keydown", function (t) {
         t.ctrlKey && t.shiftKey && 73 == t.keyCode && e(t), 83 == t.keyCode && (navigator.platform.match("Mac") ? t.metaKey : t.ctrlKey) && e(t), 123 == event.keyCode && e(t)
     }, !1)
-}*/;
+}*/
 window.onresize = function () {
     var windowWidth = window.innerWidth
         || document.documentElement.clientWidth
@@ -206,12 +208,12 @@ window.onresize = function () {
             type: 'POST',
             data: {ByWitch:ByWitch,keyword:keyword},
             success:function (data) {
-                $('#demo').show();
-                $('#demo').html(data);
+                $('.row').show();
+                $('.row').html(data);
             }
         });
     }else{
-        $('#demo').hide();
+
     }
 }
 */

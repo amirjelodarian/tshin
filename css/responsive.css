@@ -762,4 +762,14 @@ only screen and (min-device-pixel-ratio: 2) and (max-width: 991px) {
     #room_error_message_inside{
         font-size: 13px;
     }
+    .img_container{
+        height: 181px;
+        max-height: 181px;
+    }
+}
+@media screen and (max-width: 420px){
+    .img_list a img{
+        height: 195px;
+        max-height: 195px;
+    }
 }

@@ -1,270 +1,45 @@
-public function CommentsSearch(){
-            global $database,$users,$Functions;
-            if (isset($_POST['submit_search']) && !(empty($_POST['keyword']))) {
-                $keyword = $database->escape_value($_POST['keyword']);
-                if (isset($_POST['ByWitch'])) {
-                    switch ($_POST['ByWitch']) {
-                        case 'username':
-                            $sql = 'SELECT * FROM users WHERE username LIKE '%{$keyword}%'';
-                            $SelcetPublishMode = $this->SelectRoomComments();
-                            echo(''
-                            <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
-                            <div id='errors' class='errors-panel' style='margin-top: 70px'>'');<?php echo $users->Errors(); ?></div>
-                            <form method='post' action='<?php echo($_SERVER['PHP_SELF']); ?>'>
-                                <div class='publish'>
-                                    <select name='select_publish'>
-                                        <option value='unpublished'
-                                                id='unpublished' <?php if ($SelcetPublishMode[1] == 'unpublished') echo 'selected'; ?>><?php echo(''({$this->CountPublishAndUnPublishRoomCommentsPanel(0)})''); ?>
-                                            &nbsp;Un Published
-                                        </option>
-                                        <option value='published'
-                                                id='published' <?php if ($SelcetPublishMode[1] == 'published') echo 'selected'; ?>><?php echo(''({$this->CountPublishAndUnPublishRoomCommentsPanel(1)})''); ?>
-                                            &nbsp;Published
-                                        </option>
-                                        <input type='submit' name='submit_publish' id='submit_publish' hidden/>
-                                    </select>
-                                </div>
-                            </form>
-                            <hr/>
-                            <?php
-                            $all_room_survey_result = $this->SelectRoomComments();
-                            $all_room_survey_result = $all_room_survey_result[0];
-                            while ($room_survey = $database->fetch_array($all_room_survey_result)) {
-
-                                echo(''
-                    <div class='comment-panel' '');
-                                if ($SelcetPublishMode[1] == 'published') {
-                                    echo('style='border: 2px solid green'');
-                                } else {
-                                    echo('style='border: 2px solid red'');
-                                }
-                                echo(''>
-                        '');
-                                if ($users_row = $database->fetch_array($users->SelectById($room_survey[$_POST['ByWitch']]))) {
-                                    echo(''<img class='finger-img' '');
-                                    if ($SelcetPublishMode[1] == 'published') {
-                                        echo('style='border: 4px solid green;'');
-                                    } else {
-                                        echo('style='border: 4px solid red;'');
-                                    }
-                                    echo(''  id='finger-img-panel-comment' src='');
-                                    Users::select_user_image($users_row['user_image']);
-                                    echo(' alt='' class='img-circle'>'');
-                                }
-                                $divid_date_time = $Functions->divid_date_time_database($room_survey['survey_date']);
-                                echo(''
-                        <h4 id='username-panel-comment'>{$room_survey['username']}</h4><br />'');
-                                echo(''<blockquote style='float: left;'>ID : (<span style='color: #00A8FF;font-weight: bold;'>{$users_row['id']}</span>)</blockquote>'');
-                                echo(''<blockquote style='float: left;'>Tel : (<span style='color: #00A8FF;font-weight: bold;'>{$users_row['tel']}</span>)</blockquote>'');
-                                if ($rooms_rows = $database->fetch_array($this->SelectWithId($room_survey['room_id']))) {
-                                    echo(''<h4 style='display: inline-block' class='room_address'>{$database->escape_value($rooms_rows['room_address'])}</h4><h3 style='display: inline-block'>&nbsp;|&nbsp;</h3>
-                                            <h5 style='display: inline-block'>{$database->escape_value($rooms_rows['room_title'])}</h5>'');
-                                }
-                                echo(''<p>'');
-                                echo(nl2br($room_survey['survey']));
-                                echo(''</p>
-                        <div id='panel-rating-comment' class='rating'> {$this->smile_voted_by_price_quality_score_comfort($room_survey['room_price'],$room_survey['room_quality'],$room_survey['room_score'],$room_survey['room_comfort'])}
-                        </div>
-                        <br />
-                        <small class='icon-clock-8' id='panel-time-comment'>&nbsp;');
-                                echo $divid_date_time[0];
-                                echo(''</small>
-                        <small id='panel-date-comment'>'');
-                                echo $divid_date_time[1];
-                                echo(''</small><br /><br />
-                        <form action='../single_hotel.php' method='post'>
-                            <input type='hidden' name='room_id' value='');
-                                echo(base64_encode($room_survey['room_id']));
-                                echo(' />
-                            <input type='submit' name='submit' id='see-room' class='submit_edit' value='See Room' />
-                        </form>
-                        <form action='{$_SERVER['PHP_SELF']}' id='submit-checkbox-form' method='post'>
-                            <input type='hidden' name='survey_id' value='');
-                                echo(base64_encode($room_survey['id']));
-                                echo(' />
-                            <div class='publish-area'>'');
-                                if ($room_survey['publish'] == 0) {
-                                    echo(''<input type='submit' name='publish_submit' id='publish_checkbox_submit' class='submit_edit' value='Publish' />'');
-                                }
-                                if ($room_survey['publish'] == 1) {
-                                    echo(''<input type='submit' name='unpublish_submit' id='unpublish_checkbox_submit' class='submit_edit' value='X  Un Publish' />'');
-                                }
-                                echo(''
-                            </div>
-                            <input type='submit' name='delete_user_comment' value='Delete' class='input_delete_admins delete_room_btn' />
-                        </form>
-                        <div class='line'></div>
-
-
-            '');
-                            }
-                                break;
-                            case
-                                'user_id':
-                            $sql = 'SELECT * FROM room_survey WHERE user_id LIKE '{$keyword}'';
-                            break;
-                        case 'tel':
-                            $sql = 'SELECT * FROM users WHERE tel LIKE '{$keyword}'';
-                            break;
-                        case 'address':
-                            $sql = 'SELECT * FROM rooms WHERE room_address LIKE '%{$keyword}%'';
-                            break;
-                        case 'title':
-                            $sql = 'SELECT * FROM rooms WHERE room_title LIKE '%{$keyword}%'';
-                            break;
-                        case 'survey':
-                            $sql = 'SELECT * FROM room_survey WHERE survey LIKE '%{$keyword}%'';
-                            break;
-                        case 'score':
-                            $sql = 'SELECT * FROM rooms WHERE room_score LIKE '{$keyword}'';
-                            break;
-                        case 'date':
-                            $sql = 'SELECT * FROM room_survey WHERE survey_date LIKE '{$keyword}%'';
-                            break;
-                        default:
-                            $users->redirect_to($_SERVER['PHP_SELF']);
-                            break;
-                    }
-                    }
-                }
-        }
-
-
-
-
-
-
-
-        ");
-                                while($room_survey = $database->fetch_array($rooms->SelectUserRoomComments($room_id))){
-                                    if ($users_row = $database->fetch_array($users->SelectById($room_survey['user_id']))) {
-                                        echo("
-                                            <div class='review_strip_single'>
-                                                <img src='panel/"); Users::select_user_image($users_row['user_image']); echo(" alt='' class='img-circle'> <small> - ۴ اردیبهشت ۱۳۹۶ -</small>
-                                                <h4>{$users_row['username']}</h4>
-                                                <p>"); echo(nl2br($room_survey['survey'])); echo("</p>
-                                                <div class='rating'> {$rooms->smile_voted_by_price_quality_score_comfort($room_survey['room_price'],$room_survey['room_quality'],$room_survey['room_score'],$room_survey['room_comfort'])}
-                                                </div>
+if (isset($grid) && $grid == true){
+                    echo("
+                            <div class='col-md-6 col-sm-6 wow zoomIn' data-wow-delay='0.1s'>
+                                <div class='hotel_container'>
+                                    <div class='img_container'>
+                                        <a>
+                                            <img src='"); self::select_room_image($rooms_rows['room_image']); echo("' width='800' height='533' class='img-responsive' alt='تی شین'>
+                                            <div class='ribbon top_rated'></div>
+                                        </a>
+                                            <div class='score'>");
+                    echo(self::word_score($rooms_rows['room_score']));
+                    echo("<span>{$database->escape_value($Functions->EN_numTo_FA($rooms_rows['room_score'], true))}</span>
                                             </div>
+                                            <div class='short_info hotel'>{$database->escape_value($rooms_rows['room_address'])}<span class='price'><sup>{$Functions->EN_numTo_FA($Functions->insert_seperator($rooms_rows['room_main_price']),true)} تومان</sup></span></div>
+                                    </div>
+                                    <div class='hotel_title'>
+                                        <h3>{$database->escape_value($rooms_rows['room_title'])}</h3>
+                                        <div class='rating'>
                                         ");
-                                    }
-                                }
-                            echo("
-
-                            <iframe src='https://www.google.com/maps/embed?pb=!4v1575385685178!6m8!1m7!1sCAoSLEFGMVFpcE5nNWFmQ09XOFVFbFlmSlJmRnUxSldNTzlCSXpCUWtDcHpHMmo4!2m2!1d37.42878231576422!2d49.71355649999998!3f352.28!4f-0.6099999999999994!5f0.7820865974627469' width='600' height='450' frameborder='0' style='border:0;' allowfullscreen=''></iframe>
-
-
-
-                            while ($rooms_survey = $database->fetch_array($rooms->SelectUserRoomComments($room_id))) {
-                                            if ($users_rows = $database->fetch_array($users->SelectById($rooms_survey['user_id']))) {
-                                                echo("
-                                                                <div class='review_strip_single'>
-
-                                                                    <h4>{$users_rows['username']}</h4>
-                                                                    <p>");
-                                                echo(nl2br($rooms_survey['survey']));
-                                                echo("</p>
-                                                                    <div class='rating'> {$rooms->smile_voted_by_price_quality_score_comfort($rooms_survey['room_price'],$rooms_survey['room_quality'],$rooms_survey['room_score'],$rooms_survey['room_comfort'])}
-                                                                    </div>
-                                                                </div>
-                                                            ");
-                                            }
-
-                                       }
-
-
-                                       if (windowWidth <= 768) {
-                                               $("#icon_menu").click(function () {
-                                                   $(".panel_menu_mobile").css({'width': '150px'});
-                                                   $(".panel_menu_mobile ul").css({'width': '100%', 'display': 'block'});
-                                                   $(".panel_menu_mobile li").css({'width': '100%', 'display': 'block'});
-                                                   $(".icon-close").show();
-                                                   $("#icon_menu").hide();
-                                               });
-                                               $(".icon-close").click(function () {
-                                                   $(".panel_menu_mobile").css({'width': '0px'});
-                                                   $(".panel_menu_mobile ul").css({'width': '0px', 'display': 'none'});
-                                                   $(".panel_menu_mobile li").css({'width': '0px', 'display': 'none'});
-                                                   $(".icon-close").hide();
-                                                   $("#icon_menu").show();
-                                               });
-                                               }
-                                               .panel_menu{
-                                                   width: 16.5%;
-                                                   position: fixed;
-                                                   left: 0;
-                                                   z-index: 99;
-                                                   color: white;
-                                                   background: gray;
-                                                   background: linear-gradient(45deg,black 0%, gray 100%);
-                                                   background: -moz-linear-gradient(45,black 0%, gray 100%);
-                                                   background: -webkit-linear-gradient(45,black 0%, gray 100%);
-                                                   background: -o-linear-gradient(45,black 0%, gray 100%);
-                                                   background: -ms-linear-gradient(45,black 0%, gray 100%);
-                                                   filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr="black", endColorstr="gray");
-                                                   background-repeat: no-repeat;
-                                                   background-attachment: fixed;
-                                                   float: left;
-                                               }
-                                               .panel_menu_mobile{
-                                                   position: fixed;
-                                                   left: 0;
-                                                   z-index: 99;
-                                                   color: white;
-                                                   background: gray;
-                                                   background: linear-gradient(45deg,black 0%, gray 100%);
-                                                   background: -moz-linear-gradient(45,black 0%, gray 100%);
-                                                   background: -webkit-linear-gradient(45,black 0%, gray 100%);
-                                                   background: -o-linear-gradient(45,black 0%, gray 100%);
-                                                   background: -ms-linear-gradient(45,black 0%, gray 100%);
-                                                   filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr="black", endColorstr="gray");
-                                                   background-repeat: no-repeat;
-                                                   background-attachment: fixed;
-                                                   float: left;
-                                                   transition: 1s;
-                                                   width: 0px;
-                                                   float: left;
-                                                   position: fixed;
-                                                   height: 100%;
-                                                   opacity: 0.9;
-                                                   padding: 0;
-                                               }
-                                               .panel_menu_mobile ul{
-                                                   display: none;
-                                                   width: 0;
-                                                   font-weight: bold;
-                                                   padding: 0;
-                                                   margin: 0;
-                                                   float: left;
-                                                   width: 0px;
-                                                   margin-top: 5px;
-                                               }
-                                               .panel_menu_mobile li{
-                                                   width: 0;
-                                                   transition: 1s;
-                                                   list-style: none;
-                                                   display: none;
-                                                   padding: 5px;
-                                                   border-bottom: 1px solid #fff;
-                                               }
-                                               panel_menu_mobile ul,li{
-                                                   display: none;
-                                                   width: 0;
-                                               }
-                                               .panel_menu_mobile ul{
-                                                   font-weight: bold;
-                                                   text-align: left;
-                                                   direction: ltr;
-                                                   right: 0;
-                                                   margin-top: 9px;
-                                                   padding: 0px;
-                                                   float: left;
-                                               }
-                                               .panel_menu ul{
-                                                   font-weight: bold;
-                                                   text-align: left;
-                                                   direction: ltr;
-                                                   right: 0;
-                                                   margin-top: 9px;
-                                                   padding: 0px;
-                                               }
+                    if($database->escape_value($rooms_rows['room_score']) == 1){
+                        echo "<i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
+                    }else if($database->escape_value($rooms_rows['room_score']) == 2){
+                        echo "<i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
+                    }else if($database->escape_value($rooms_rows['room_score']) == 3){
+                        echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
+                    }else if($database->escape_value($rooms_rows['room_score']) == 4){
+                        echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i>";
+                    }else if($database->escape_value($rooms_rows['room_score']) == 5){
+                        echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i>";
+                    }else{
+                        return null;
+                    }
+                    echo ("
+                                        </div>
+                                        <div class='wishlist'> <a class='tooltip_flip tooltip-effect-1' href='#'>+<span class='tooltip-content-flip'><span class='tooltip-back'>علاقمند شدم</span></span></a>
+                                        </div>
+                                        <form action='single_hotel.php' method='post'>
+                                                    <input name='room_id' type='hidden' value='"); echo($Functions->encrypt_id($rooms_rows['room_id'])); echo("' />
+                                                    <p><input name='submit' class='food_details_submit' value='جزئیات' type='submit' /></p>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                    ");
+                }

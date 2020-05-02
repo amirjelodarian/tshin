@@ -1675,7 +1675,7 @@ a#filters_col_bt .icon_set_1_icon-65 {
     text-align:center
 }
 #hero_2.restaurant_bg {
-    background:#4d536d url(../img/restaurant_top_in.jpg) no-repeat center center;
+
     background-size:cover
 }
 #hero_2 .intro_title h1 {
@@ -2060,7 +2060,7 @@ ul#contact-info {
     top:-20px;
     height:45px;
     width:100%;
-    background:url(../img/tape.png) no-repeat center top;
+
     display:block
 }
 .loader {
@@ -2250,7 +2250,9 @@ a.btn_collapse {
     0,
     0,
     .1);
-    margin-bottom:30px
+    margin-bottom:30px;
+    height: 355px;
+    max-height: 355px;
 }
 .hotel_container .hotel_title {
     padding:15px;
@@ -2825,7 +2827,9 @@ ul.list_order li span {
 .img_container {
     position:relative;
     overflow:hidden;
-    border:1px solid #fff
+    border:1px solid #fff;
+    height: 240px;
+    max-height: 240px;
 }
 .tour_container .tour_title {
     padding:15px;
@@ -3966,7 +3970,7 @@ ul.plan-features {
     color:#fff;
     text-align:center;
     text-transform:uppercase;
-    background:url(../img/badge_save.png);
+
     font-size:11px;
     line-height:12px;
     padding-top:32px
@@ -4177,7 +4181,7 @@ footer #logo {
 }
 ul.tweet_list li {
     padding-left:30px;
-    background:url(../img/twitter_icon.svg) no-repeat 0 5px
+
 }
 .tweets-next,
 .tweets-prev {
@@ -5322,6 +5326,58 @@ a.btn_infobox:hover {
 }
 .comment-panel-edit{
     width: 83%;
+}
+.room_search_bar{
+    text-align: center;
+    display: inline-block;
+    margin-top: 6px;
+}
+#search-by-witch-users{
+    display: inline-block;
+    transition: 1s;
+    border-radius: 4.1px;
+    color: #00A8FF;
+    background: #fff;
+    border: 1px solid #00A8FF;
+    cursor: pointer;
+}
+#users-search-icon{
+    transition: 0.1s;
+    display: inline-block;
+    background: #00A8FF;
+    color: #fff;
+    width: 27px;
+    height: 26px;
+    border: none;
+    padding-top: 2px;
+    text-align: center;
+    border-radius: 4.1px;
+    position: absolute;
+    margin-right: -20px;
+    cursor: pointer;
+
+}
+#users-search-icon:hover{
+    transition: 0.1s;
+    border-radius: 0px;
+    background: white;
+    color:black;
+    border: 2px solid #00A8FF;
+    border-right: none;
+}
+.users-keyword{
+    transition: 1s;
+    width: 62%;
+    border: 2px solid #00A8FF;
+    border-radius: 4.1px;
+    display: inline-block;
+}
+.users-keyword:hover{
+    background: rgba(0,168,255,0.25);
+    color:black;
+}
+.users-submit-search{
+    display: none;
 }
 @keyframes room_error_message{
     from{
