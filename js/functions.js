@@ -1,14 +1,4 @@
 $(window).load(function () {
-    $("#date_booking").persianDatepicker({
-        altField: '#mydate',
-        altFormat: "YYYY/MM/DD",
-        observer: true,
-        format: 'YYYY/MM/DD',
-        initialValue: false,
-        initialValueType: 'persian',
-        autoClose: true,
-        maxDate: 'today',
-    });
     var windowWidth = window.innerWidth
         || document.documentElement.clientWidth
         || document.body.clientWidth;

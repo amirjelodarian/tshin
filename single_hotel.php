@@ -6,10 +6,10 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <title>تی شین</title>
 
-    <link rel='shortcut icon' href=''#' type='image/x-icon'>
+    <link rel='shortcut icon' href='#' type='image/x-icon'>
     <!-- CSS -->
     <link href='css/base.css' rel='stylesheet'>
-
+    <link rel="stylesheet" href="datapicker/src/jquery.md.bootstrap.datetimepicker.style.css" />
 </head>
 <body>
 <div id='preloader'>
@@ -333,17 +333,13 @@ if ((isset($_POST['submit']) && isset($_POST['room_id'])) || isset($_SESSION["ro
                     </div>
                     <hr>
                     <div class='row'>
-                        <div class='col-md-6 col-sm-6'>
-                            <div class='form-group'>
-                                <label><i class='icon-calendar-7'></i> تاریخ را انتخاب کنید</label>
-                                <input class='form-control required' type='text' name='date_booking' id='date_booking' class='date_booking'>
-                            </div>
-                        </div>
-                        <div class='col-md-6 col-sm-6'>
-                            <div class='form-group'>
-                                <label><i class='' icon-clock'></i> زمان</label>
-                                <input class='time-pick form-control required' type='text' name='time_booking' id='time_booking'>
-                            </div>
+                        <div class='col-lg-12 col-xs-12 col-md-12 col-sm-12' id='data-picker-range'>
+                           <div class='input-group' id='data-picker-range'>
+                                <div class='input-group-prepend'>
+                                    <span class='input-group-text cursor-pointer icon-calendar' id='date3-1'>زمان ورود و خروج</span>
+                                </div>
+                                <input type='text' readonly id='inputDate3-1' class='form-control' placeholder='DateTimePicker Range Selector With Multiple Months' aria-label='date3-1' aria-describedby='date3-1' required />
+                           </div>
                         </div>
                     </div>
                     <div class='row'>
@@ -479,11 +475,19 @@ if (isset($_POST["review_submit"])){
             ?>
     </span>
 </div>
-<?php include('includes/footer.php'); ?>
 <script src="js/jquery-1.11.2.min.js"></script>
 <script src="js/common_scripts_min.js"></script>
 <script src="js/functions.js"></script>
 <script src="js/signUp.js"></script>
-<script src="js/pw_strenght.js"></script>
+<script src="datapicker/src/jquery.md.bootstrap.datetimepicker.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $('#date3-1').MdPersianDateTimePicker({
+        targetTextSelector: '#inputDate3-1',
+        disableBeforeToday: true,
+        monthsToShow: [0, 2],
+        rangeSelector: true
+    });
+</script>
+<?php include('includes/footer.php'); ?>
 </body>
 </html>

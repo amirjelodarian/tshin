@@ -773,3 +773,22 @@ only screen and (min-device-pixel-ratio: 2) and (max-width: 991px) {
         max-height: 195px;
     }
 }
+@media screen and (min-width: 769px){
+    .room_address_single_hotel{
+        position: absolute;
+        left: 71%;
+        bottom: 60%;
+    }
+}
+@media screen and (max-width: 1200px){
+    .border-0-mobile{
+        display: block;
+        width: 100%;
+    }
+    .popover-header{
+        max-width: 294px;
+    }
+    .mds-bootstrap-persian-datetime-picker-popover{
+        margin-left: -200px;
+    }
+}

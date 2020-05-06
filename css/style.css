@@ -5389,6 +5389,27 @@ a.btn_infobox:hover {
     top: 0;
     margin: 10px;
 }
+#date3-1{
+    background: #00A8FF;
+    opacity: 0.8;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 3px;
+    font-weight: bold;
+    padding-bottom: 7px;
+    border-radius: 3.9px;
+    transition: 1s;
+    color: #fff;
+}
+#date3-1:hover{
+    background: gray;
+    transition: 1s;
+    opacity: 0.9;
+}
+#data-picker-range{
+    width: 100%;
+    text-align: center;
+}
 @keyframes room_error_message{
     from{
         background: #ffafc2;
