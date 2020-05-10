@@ -149,7 +149,7 @@
         }
         function encrypt_id($value){
             if (isset($value)){
-                $value = $value*13.5;
+                $value = $value*4;
                 for($i = 1;$i <= 4;$i++){
                     $value = base64_encode($value);
                 }
@@ -157,12 +157,17 @@
             }
         }
         function decrypt_id($value){
+            global $users;
             if (isset($value)){
                 for($i = 1;$i <= 4;$i++){
                     $value = base64_decode($value);
                 }
-                $value = $value/13.5;
-                return $value;
+                if((preg_match('/^[0-9]*$/', $value)) && is_numeric($value)){
+                    $value = $value/4;
+                    return $value;
+                }else{
+                    $users->redirect_to("all_hotels_list.php");
+                }
             }
         }
         // pull a iranian site this function :)

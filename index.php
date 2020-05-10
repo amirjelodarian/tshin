@@ -43,7 +43,7 @@
                 <div class="tp-caption customin tp-resizeme rs-parallaxlevel-0 text-center" data-x="center" data-y="center" data-hoffset="0" data-voffset="15" data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;" data-speed="500" data-start="2600" data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0.05" data-endelementdelay="0.1" style="z-index: 9; max-width: auto; max-height: auto; white-space: nowrap;">
                     <div style="color:#ffffff; font-size:16px; text-transform:uppercase">شهرهای گردشگری / تور / راهنمای تور</div>
                 </div>
-                <div class="tp-caption customin tp-resizeme rs-parallaxlevel-0" data-x="center" data-y="center" data-hoffset="0" data-voffset="70" data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;" data-speed="500" data-start="2900" data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-linktoslide="next" style="z-index: 12;"><a href='all_tour_list.php' class="button_intro">نمایش </a>  <a href='single_hotel.php' class=" button_intro outline">ادامه مطلب</a>
+                <div class="tp-caption customin tp-resizeme rs-parallaxlevel-0" data-x="center" data-y="center" data-hoffset="0" data-voffset="70" data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;" data-speed="500" data-start="2900" data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-linktoslide="next" style="z-index: 12;"><a href='all_tour_list.php' class="button_intro">نمایش </a>  <a href='Room.php' class=" button_intro outline">ادامه مطلب</a>
                 </div>
             </li>
             <li data-transition="fade" data-slotamount="7" data-masterspeed="500" data-saveperformance="on" data-title="Intro Slide">
@@ -54,7 +54,7 @@
                 <div class="tp-caption customin tp-resizeme rs-parallaxlevel-0 text-center" data-x="center" data-y="center" data-hoffset="0" data-voffset="15" data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;" data-speed="500" data-start="2600" data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0.05" data-endelementdelay="0.1" style="z-index: 9; max-width: auto; max-height: auto; white-space: nowrap;">
                     <div style="color:#ffffff; font-size:16px; text-transform:uppercase">ابنیه تاریخی / تور گردی / راهنمای موزه ها</div>
                 </div>
-                <div class="tp-caption customin tp-resizeme rs-parallaxlevel-0" data-x="center" data-y="center" data-hoffset="0" data-voffset="70" data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;" data-speed="500" data-start="2900" data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-linktoslide="next" style="z-index: 12;"><a href='all_tour_list.php' class="button_intro">نمایش </a>  <a href='single_hotel.php' class=" button_intro outline">ادامه مطلب</a>
+                <div class="tp-caption customin tp-resizeme rs-parallaxlevel-0" data-x="center" data-y="center" data-hoffset="0" data-voffset="70" data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;" data-speed="500" data-start="2900" data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-linktoslide="next" style="z-index: 12;"><a href='all_tour_list.php' class="button_intro">نمایش </a>  <a href='Room.php' class=" button_intro outline">ادامه مطلب</a>
                 </div>
             </li>
             <li data-transition="fade" data-slotamount="7" data-masterspeed="500" data-saveperformance="on" data-title="Intro Slide">
@@ -65,7 +65,7 @@
                 <div class="tp-caption customin tp-resizeme rs-parallaxlevel-0 text-center" data-x="center" data-y="center" data-hoffset="0" data-voffset="15" data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;" data-speed="500" data-start="2600" data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0.05" data-endelementdelay="0.1" style="z-index: 9; max-width: auto; max-height: auto; white-space: nowrap;">
                     <div style="color:#ffffff; font-size:16px; text-transform:uppercase">ارائه انواع خدمات</div>
                 </div>
-                <div class="tp-caption customin tp-resizeme rs-parallaxlevel-0" data-x="center" data-y="center" data-hoffset="0" data-voffset="70" data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;" data-speed="500" data-start="2900" data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-linktoslide="next" style="z-index: 12;"><a href='all_tour_list.php' class="button_intro">نمایش تورها</a>  <a href='single_hotel.php' class=" button_intro outline">ادامه مطلب</a>
+                <div class="tp-caption customin tp-resizeme rs-parallaxlevel-0" data-x="center" data-y="center" data-hoffset="0" data-voffset="70" data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;" data-speed="500" data-start="2900" data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-linktoslide="next" style="z-index: 12;"><a href='all_tour_list.php' class="button_intro">نمایش تورها</a>  <a href='Room.php' class=" button_intro outline">ادامه مطلب</a>
                 </div>
             </li>
         </ul>
@@ -81,7 +81,7 @@
         <div class="col-md-4 col-sm-6 wow zoomIn" data-wow-delay="0.1s">
             <div class="tour_container">
                 <div class="img_container">
-                    <a href="single_hotel.php">
+                    <a href="Room.php">
                         <img src="img\tour_box_1.jpg" class="img-responsive" alt="">
                         <div class="ribbon top_rated"></div>
                         <div class="short_info"> <i class="icon_set_1_icon-44"></i>اقامتگاه <span class="price"><sup>۶۰.۰۰۰ تومان</sup></span>
@@ -100,7 +100,7 @@
         <div class="col-md-4 col-sm-6 wow zoomIn" data-wow-delay="0.2s">
             <div class="tour_container">
                 <div class="img_container">
-                    <a href="single_hotel.php">
+                    <a href="Room.php">
                         <img src="img\tour_box_1.jpg" width="800" height="533" class="img-responsive" alt="">
                         <div class="ribbon top_rated"></div>
                         <div class="short_info"> <i class="icon_set_1_icon-44"></i>اقامتگاه <span class="price"><sup>۶۰.۰۰۰ تومان</sup></span>
@@ -119,7 +119,7 @@
         <div class="col-md-4 col-sm-6 wow zoomIn" data-wow-delay="0.3s">
             <div class="tour_container">
                 <div class="img_container">
-                    <a href="single_hotel.php">
+                    <a href="Room.php">
                         <img src="img\tour_box_1.jpg" width="800" height="533" class="img-responsive" alt="">
                         <div class="ribbon top_rated"></div>
                         <div class="short_info"> <i class="icon_set_1_icon-44"></i>اقامتگاه <span class="price"><sup>۶۰.۰۰۰ تومان</sup></span>
@@ -138,7 +138,7 @@
         <div class="col-md-4 col-sm-6 wow zoomIn" data-wow-delay="0.4s">
             <div class="tour_container">
                 <div class="img_container">
-                    <a href="single_hotel.php">
+                    <a href="Room.php">
                         <img src="img\tour_box_1.jpg" width="800" height="533" class="img-responsive" alt="">
                         <div class="ribbon top_rated"></div>
                         <div class="short_info"> <i class="icon_set_1_icon-44"></i>اقامتگاه <span class="price"><sup>۶۰.۰۰۰ تومان</sup></span>
@@ -157,7 +157,7 @@
         <div class="col-md-4 col-sm-6 wow zoomIn" data-wow-delay="0.5s">
             <div class="tour_container">
                 <div class="img_container">
-                    <a href="single_hotel.php">
+                    <a href="Room.php">
                         <img src="img\tour_box_1.jpg" width="800" height="533" class="img-responsive" alt="">
                         <div class="ribbon top_rated"></div>
                         <div class="short_info"> <i class="icon_set_1_icon-44"></i>اقامتگاه <span class="price"><sup>۶۰.۰۰۰ تومان</sup></span>
@@ -176,7 +176,7 @@
         <div class="col-md-4 col-sm-6 wow zoomIn" data-wow-delay="0.6s">
             <div class="tour_container">
                 <div class="img_container">
-                    <a href="single_hotel.php">
+                    <a href="Room.php">
                         <img src="img\tour_box_1.jpg" width="800" height="533" class="img-responsive" alt="">
                         <div class="ribbon top_rated"></div>
                         <div class="short_info"> <i class="icon_set_1_icon-44"></i>اقامتگاه <span class="price"><sup>۶۰.۰۰۰ تومان</sup></span>
@@ -204,7 +204,7 @@
         <div class="col-md-4 col-sm-6 wow zoomIn" data-wow-delay="0.1s">
             <div class="hotel_container">
                 <div class="img_container">
-                    <a href="single_hotel.php">
+                    <a href="Room.php">
                         <img src="img\hotel_1.jpg" width="800" height="533" class="img-responsive" alt="">
                         <div class="ribbon top_rated"></div>
                         <div class="score"><span>4.۵</span>خوب</div>
@@ -224,7 +224,7 @@
         <div class="col-md-4 col-sm-6 wow zoomIn" data-wow-delay="0.2s">
             <div class="hotel_container">
                 <div class="img_container">
-                    <a href="single_hotel.php">
+                    <a href="Room.php">
                         <img src="img\hotel_1.jpg" width="800" height="533" class="img-responsive" alt="">
                         <div class="ribbon top_rated"></div>
                         <div class="score"><span>4.۵</span>خوب</div>
@@ -244,7 +244,7 @@
         <div class="col-md-4 col-sm-6 wow zoomIn" data-wow-delay="0.3s">
             <div class="hotel_container">
                 <div class="img_container">
-                    <a href="single_hotel.php">
+                    <a href="Room.php">
                         <img src="img\hotel_1.jpg" width="800" height="533" class="img-responsive" alt="">
                         <div class="ribbon top_rated"></div>
                         <div class="score"><span>4.۵</span>خوب</div>
@@ -264,7 +264,7 @@
         <div class="col-md-4 col-sm-6 wow zoomIn" data-wow-delay="0.4s">
             <div class="hotel_container">
                 <div class="img_container">
-                    <a href="single_hotel.php">
+                    <a href="Room.php">
                         <img src="img\hotel_1.jpg" width="800" height="533" class="img-responsive" alt="">
                         <div class="ribbon top_rated"></div>
                         <div class="score"><span>4.۵</span>خوب</div>
@@ -284,7 +284,7 @@
         <div class="col-md-4 col-sm-6 wow zoomIn" data-wow-delay="0.5s">
             <div class="hotel_container">
                 <div class="img_container">
-                    <a href="single_hotel.php">
+                    <a href="Room.php">
                         <img src="img\hotel_1.jpg" width="800" height="533" class="img-responsive" alt="">
                         <div class="ribbon top_rated"></div>
                         <div class="score"><span>4.۵</span>خوب</div>
@@ -304,7 +304,7 @@
         <div class="col-md-4 col-sm-6 wow zoomIn" data-wow-delay="0.6s">
             <div class="hotel_container">
                 <div class="img_container">
-                    <a href="single_hotel.php">
+                    <a href="Room.php">
                         <img src="img\hotel_1.jpg" width="800" height="533" class="img-responsive" alt="">
                         <div class="ribbon top_rated"></div>
                         <div class="score"><span>4.۵</span>خوب</div>
@@ -383,7 +383,7 @@
         </div>
         <div class="banner colored">
             <h4>دیدن اقامتگا های ما <span></span></h4>
-            <p>در آلاچیق‌های چوبی تی شین، آماده پذیرایی از مهمانان گرامی اقامتگاه با انواع مخلفات و غذاهای محلی گیلان هستیم.</p><a href="single_hotel.php" class="btn_1 white">مشاهده همه</a>
+            <p>در آلاچیق‌های چوبی تی شین، آماده پذیرایی از مهمانان گرامی اقامتگاه با انواع مخلفات و غذاهای محلی گیلان هستیم.</p><a href="Room.php" class="btn_1 white">مشاهده همه</a>
         </div>
     </div>
 </div>

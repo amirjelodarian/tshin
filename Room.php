@@ -34,19 +34,24 @@ if ($sessions->login_state()){
 }
 
 //this is for show room details
-if ((isset($_POST['submit']) && isset($_POST['room_id'])) || isset($_SESSION["room_id_while_comment"])) {
+if (isset($_GET['roomId']) || isset($_SESSION["room_id_while_comment"])) {
 
     //////////////////////////////////////////
     if (isset($_SESSION["room_id_while_comment"]) && !(empty($_SESSION["room_id_while_comment"]))){
         $room_id = $_SESSION["room_id_while_comment"];
     }
     else{
-        $room_id = $_POST['room_id'];
+        $room_id = $database->escape_value($_GET['roomId']);
         $_SESSION["room_id_while_comment"] = $room_id;
     }
     /////////////////////////////////////////
 
-    $roomattribute = Rooms::RoomAttributeById($room_id);
+    $room_result = Rooms::RoomAttributeById($room_id);
+    if ($database->num_rows($room_result) == 0){
+        die();
+        echo '<script>window.replace("all_hotels_list.php");</script>';
+    }
+    $roomattribute = $database->fetch_array($room_result);
     if ($roomattribute) {
         echo("
                 <section class='parallax-window' data-parallax='scroll' data-image-src='"); $rooms->select_single_hotel_image($roomattribute['room_image']); echo("' data-natural-width='1400' data-natural-height='470'>
@@ -252,7 +257,9 @@ if ((isset($_POST['submit']) && isset($_POST['room_id'])) || isset($_SESSION["ro
                         <a href='#' class='btn_1 add_bottom_30' data-toggle='modal' name='survey_submit' data-target='#myReview'>نظر شما</a>                </div>
                 <div class='col-md-9'>
                 <div class='review-result'>
-                    <div id='score_detail'><span>{$Functions->EN_numTo_FA($roomattribute['room_score'],true)}</span>"); echo $rooms->word_score($roomattribute['room_score']);  echo(" 
+                    <div id='score_detail'>
+                    <span>{$Functions->EN_numTo_FA($rooms->score_by_comments($room_id),true)}</span>"); echo $rooms->word_score($rooms->score_by_comments($room_id));
+                    echo(" 
                     <small> بر اساس "); echo($Functions->EN_numTo_FA($rooms->CountPublishRoomComments($room_id),true)); echo(" نظر</small>
                     </div>
                     <div class='row' id='rating_summary'>

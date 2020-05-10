@@ -47,7 +47,7 @@ if (isset($_POST['submit_search'])){
             echo("
                 <div id='rooms' class='published'>({$rooms->CountPublishAndUnPublishRoomCommentsPanel(1)})&nbsp;Published</div><hr/>
                 <form id='unpublish_all_btn' action='{$_SERVER['PHP_SELF']}' method='post'>
-                    <input type='submit' name='unpublish_all_submit' id='unpublish_all_submit' class='submit_edit'  value='Un Publish All' />
+                    <input type='submit' name='unpublish_all_submit' id='unpublish_all_submit' class='submit_edit delete_room_btn'  value='Un Publish All' />
                     <input type='submit' name='delete_all_comment_published_submit'  class='delete_all_comments delete_room_btn'  value='X Delete All Published' />
                 </form>
             ");
@@ -55,7 +55,7 @@ if (isset($_POST['submit_search'])){
             echo("
                     <div id='rooms' class='unpublished'>({$rooms->CountPublishAndUnPublishRoomCommentsPanel(0)})&nbsp;Un Published</div><hr/>
                     <form id='publish_all_btn' action='{$_SERVER['PHP_SELF']}' method='post'>
-                        <input type='submit' name='publish_all_submit'  class='submit_edit'  value='Publish All' />
+                        <input type='submit' name='publish_all_submit'  class='submit_edit delete_room_btn'  value='Publish All' />
                         <input type='submit' name='delete_all_comment_unpublished_submit'  class='delete_all_comments delete_room_btn'  value='X Delete All UnPublished' />
                     </form>
                 ");
@@ -88,7 +88,7 @@ $all_room_survey_result = $all_room_survey_result[0];
                         $divid_date_time = $Functions->divid_date_time_database($room_survey['survey_date']);
                         echo("
                         <h4 id='username-panel-comment'>{$room_survey['username']}</h4>");
-                        echo("<blockquote style='float: left;'>ID : (<span style='color: #00A8FF;font-weight: bold;'>{$users_row['id']}</span>)</blockquote>");
+                        echo("<blockquote style='float: left;'>Comment Id : (<span style='color: #00A8FF;font-weight: bold;'>{$room_survey['id']}</span>)</blockquote>");
                         echo("<blockquote style='float: left;'>Tel : (<span style='color: #00A8FF;font-weight: bold;'>{$users_row['tel']}</span>)</blockquote>");
                         if ($rooms_rows = $database->fetch_array($rooms->SelectWithId($room_survey['room_id']))){
                             echo("<br /><h4 style='display: inline-block' class='room_address'>{$database->escape_value($rooms_rows['room_address'])}</h4><h3 style='display: inline-block'>&nbsp;|&nbsp;</h3> 
@@ -101,10 +101,9 @@ $all_room_survey_result = $all_room_survey_result[0];
                         <small class='icon-clock-8' id='panel-time-comment'>&nbsp;"); echo $Functions->EN_numTo_FA($divid_date_time[0],true); echo("</small>
                         <small id='panel-date-comment'>"); echo $Functions->EN_numTo_FA($Functions->convert_db_format_for_gregorian_to_jalali($divid_date_time[1]),true); echo("</small><br />
                     <div class='comment-panel-btns col-xs-12 col-sm-12 col-md-12 col-lg-12'>
-                        <form action='../single_hotel.php' id='see-room' method='post'>
-                            <input type='hidden' name='room_id' value='"); echo($Functions->encrypt_id($room_survey['room_id'])); echo("' />
-                            <input type='submit' name='submit' id='see-room-btn' class='submit_edit' value='See Room' />
-                        </form>
+                         <a href='../Room.php?roomId={$Functions->encrypt_id($rooms_rows['room_id'])}'>
+                            <p id='see-room-btn' class='submit_edit'>See Room</p>
+                         </a>
                         <form action='{$_SERVER['PHP_SELF']}' id='submit-checkbox-form' method='post'>
                             <input type='hidden' name='survey_id' value='"); echo($Functions->encrypt_id($room_survey['id'])); echo("' />
                             <div class='publish-area'>");                                if($room_survey["publish"] == 0) {

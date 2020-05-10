@@ -41,7 +41,7 @@
                             <div class='col-md-6 col-sm-6 wow zoomIn' data-wow-delay='0.1s'>
                                 <div class='hotel_container'>
                                     <div class='img_container'>
-                                        <a>
+                                        <a href='Room.php?roomId={$Functions->encrypt_id($rooms_rows['room_id'])}'>
                                             <img src='"); self::select_room_image($rooms_rows['room_image']); echo("' width='800' height='533' class='img-responsive' alt='تی شین'>
                                             <div class='ribbon top_rated'></div>
                                         </a>");
@@ -61,10 +61,9 @@
                                         </div>
                                         <div class='wishlist'> <a class='tooltip_flip tooltip-effect-1' href='#'>+<span class='tooltip-content-flip'><span class='tooltip-back'>علاقمند شدم</span></span></a>
                                         </div>
-                                        <form action='single_hotel.php' method='post'>
-                                                    <input name='room_id' type='hidden' value='"); echo($Functions->encrypt_id($rooms_rows['room_id'])); echo("' /> 
-                                                    <p><input name='submit' class='food_details_submit' value='جزئیات' type='submit' /></p>
-                                        </form> 
+                                        <a href='Room.php?roomId={$Functions->encrypt_id($rooms_rows['room_id'])}'> 
+                                            <p class='food_details_submit text-center'>جزئیات</p>
+                                        </a> 
                                     </div>
                                 </div>
                             </div>
@@ -77,7 +76,7 @@
                                         <div class='wishlist'> <a class='tooltip_flip tooltip-effect-1' href='javascript:void(0);'>+<span class='tooltip-content-flip'><span class='tooltip-back'>علاقمند شدم</span></span></a>
                                         </div>
                                         <div class='img_list'>
-                                            <a href='single_hotel.php'>
+                                            <a href='Room.php?roomId={$Functions->encrypt_id($rooms_rows['room_id'])}'>
                                                 <div class='ribbon top_rated'></div>
                                                 <img src='"); self::select_room_image($rooms_rows['room_image']); echo("' alt='تی شین'>
                                                 <div class='short_info'></div>
@@ -138,10 +137,9 @@
                                             <span class='normal_price_list'>{$Functions->EN_numTo_FA($Functions->insert_seperator($rooms_rows['room_off_price']),true)} تومان</span>
                                                                                        
                                             <small>روزانه / شبانه</small>
-                                                <form action='single_hotel.php' method='post'>
-                                                    <input name='room_id' type='hidden' value='"); echo($Functions->encrypt_id($rooms_rows['room_id'])); echo("' /> 
-                                                    <p><input name='submit' class='food_details_submit' value='جزئیات' type='submit' /></p>
-                                                </form> 
+                                                <a href='Room.php?roomId={$Functions->encrypt_id($rooms_rows['room_id'])}'> 
+                                                    <p class='food_details_submit text-center' style='padding: 8px'>جزئیات</p>
+                                                </a> 
                                             </div>
                                         </div>
                                     </div>
@@ -261,7 +259,7 @@
                             <div class='col-md-6 col-sm-6 wow zoomIn' data-wow-delay='0.1s'>
                                 <div class='hotel_container'>
                                     <div class='img_container'>
-                                        <a>
+                                        <a href='Room.php?roomId={$Functions->encrypt_id($rooms_rows['room_id'])}'>
                                             <img src='"); self::select_room_image($rooms_rows['room_image']); echo("' width='800' height='533' class='img-responsive' alt='تی شین'>
                                             <div class='ribbon top_rated'></div>
                                         </a>");
@@ -281,10 +279,9 @@
                                         </div>
                                         <div class='wishlist'> <a class='tooltip_flip tooltip-effect-1' href='#'>+<span class='tooltip-content-flip'><span class='tooltip-back'>علاقمند شدم</span></span></a>
                                         </div>
-                                        <form action='single_hotel.php' method='post'>
-                                                    <input name='room_id' type='hidden' value='"); echo($Functions->encrypt_id($rooms_rows['room_id'])); echo("' /> 
-                                                    <p><input name='submit' class='food_details_submit' value='جزئیات' type='submit' /></p>
-                                        </form> 
+                                        <a href='Room.php?roomId={$Functions->encrypt_id($rooms_rows['room_id'])}'> 
+                                            <p class='food_details_submit text-center'>جزئیات</p>
+                                        </a> 
                                     </div>
                                 </div>
                             </div>
@@ -297,7 +294,7 @@
                                         <div class='wishlist'> <a class='tooltip_flip tooltip-effect-1' href='javascript:void(0);'>+<span class='tooltip-content-flip'><span class='tooltip-back'>علاقمند شدم</span></span></a>
                                         </div>
                                         <div class='img_list'>
-                                            <a href='single_hotel.php?room_id={$database->escape_value($rooms_rows['room_id'])}'>
+                                            <a href='Room.php?room_id={$database->escape_value($rooms_rows['room_id'])}'>
                                                 <div class='ribbon top_rated'></div>
                                                 <img src='"); self::select_room_image($rooms_rows['room_image']); echo("' alt='تی شین'>
                                                 <div class='short_info'></div>
@@ -358,10 +355,9 @@
                                             <span class='normal_price_list'>{$Functions->EN_numTo_FA($database->escape_value($Functions->insert_seperator($rooms_rows['room_off_price'])),true)} تومان</span>
                                                                                        
                                             <small>روزانه / شبانه</small>
-                                                <form action='single_hotel.php' method='post'>
-                                                    <input name='room_id' type='hidden' value='"); echo($Functions->encrypt_id($rooms_rows['room_id'])); echo("' /> 
-                                                    <p><input name='submit' class='food_details_submit' value='جزئیات' type='submit' /></p>
-                                                </form> 
+                                                <a href='Room.php?roomId={$Functions->encrypt_id($rooms_rows['room_id'])}'> 
+                                                    <p class='food_details_submit text-center' style='padding: 8px'>جزئیات</p>
+                                                </a> 
                                             </div>
                                         </div>
                                     </div>
@@ -403,7 +399,7 @@
                             <div class='col-md-6 col-sm-6 wow zoomIn' data-wow-delay='0.1s'>
                                 <div class='hotel_container'>
                                     <div class='img_container'>
-                                        <a>
+                                        <a href='Room.php?roomId={$Functions->encrypt_id($rooms_rows['room_id'])}'>
                                             <img src='"); self::select_room_image($rooms_rows['room_image']); echo("' width='800' height='533' class='img-responsive' alt='تی شین'>
                                             <div class='ribbon top_rated'></div>
                                         </a>");
@@ -424,10 +420,9 @@
                                         </div>
                                         <div class='wishlist'> <a class='tooltip_flip tooltip-effect-1' href='#'>+<span class='tooltip-content-flip'><span class='tooltip-back'>علاقمند شدم</span></span></a>
                                         </div>
-                                        <form action='single_hotel.php' method='post'>
-                                                    <input name='room_id' type='hidden' value='"); echo($Functions->encrypt_id($rooms_rows['room_id'])); echo("' /> 
-                                                    <p><input name='submit' class='food_details_submit' value='جزئیات' type='submit' /></p>
-                                        </form> 
+                                        <a href='Room.php?roomId={$Functions->encrypt_id($rooms_rows['room_id'])}'> 
+                                            <p class='food_details_submit text-center'>جزئیات</p>
+                                        </a> 
                                     </div>
                                 </div>
                             </div>
@@ -440,7 +435,7 @@
                                         <div class='wishlist'> <a class='tooltip_flip tooltip-effect-1' href='javascript:void(0);'>+<span class='tooltip-content-flip'><span class='tooltip-back'>علاقمند شدم</span></span></a>
                                         </div>
                                         <div class='img_list'>
-                                            <a href='single_hotel.php'>
+                                            <a href='Room.php?roomId={$Functions->encrypt_id($rooms_rows['room_id'])}'> 
                                                 <div class='ribbon top_rated'></div>
                                                 <img src='"); self::select_room_image($rooms_rows['room_image']); echo("' alt='تی شین'>
                                                 <div class='short_info'></div>
@@ -501,10 +496,9 @@
                                             <span class='normal_price_list'>{$Functions->EN_numTo_FA($Functions->insert_seperator($rooms_rows['room_off_price']),true)} تومان</span>
                                                                                        
                                             <small>روزانه / شبانه</small>
-                                                <form action='single_hotel.php' method='post'>
-                                                    <input name='room_id' type='hidden' value='"); echo($Functions->encrypt_id($rooms_rows['room_id'])); echo("' /> 
-                                                    <p><input name='submit' class='food_details_submit' value='جزئیات' type='submit' /></p>
-                                                </form> 
+                                                <a href='Room.php?roomId={$Functions->encrypt_id($rooms_rows['room_id'])}'> 
+                                                    <p class='food_details_submit text-center' style='padding: 8px'>جزئیات</p>
+                                                </a> 
                                             </div>
                                         </div>
                                     </div>
@@ -1020,8 +1014,7 @@
             $sql = "SELECT * FROM rooms WHERE room_id={$id} ";
             $database->query("SET NAMES 'utf8'");
             $result = $database->query($sql);
-
-            return $rooms_row = $database->fetch_array($result);
+            return $result;
         }
         public function select_room_image($rooms_rows){
             global $database,$Functions;
@@ -1031,7 +1024,7 @@
                 echo 'img/rooms/default_room.jpg';
             }
         }
-        // for single_hotel.php
+        // for Room.php
         public function select_single_hotel_image($rooms_rows){
             global $database;
             if(!(empty($rooms_rows))){
@@ -1113,7 +1106,7 @@
                         <small class='icon-clock-8' id='panel-time-comment'>&nbsp;"); echo $divid_date_time[0]; echo("</small>
                         <small id='panel-date-comment'>"); echo $Functions->convert_db_format_for_gregorian_to_jalali($divid_date_time[1]); echo("</small><br /><br />
                     <div class='comment-panel-btns col-xs-12 col-sm-12 col-md-12 col-lg-12'>
-                        <form action='../single_hotel.php' id='see-room' method='post'>
+                        <form action='../Room.php' id='see-room' method='post'>
                             <input type='hidden' name='room_id' value='"); echo($Functions->encrypt_id($room_survey['room_id'])); echo("' />
                             <input type='submit' name='submit' id='see-room-btn' class='submit_edit' value='See Room' />
                         </form>
@@ -1167,7 +1160,7 @@
                     if (isset($_POST["room_score_review"]) && !(empty($_POST["room_score_review"])) && $_POST["room_score_review"] <= 5 && isset($_POST["room_comfort_review"]) && !(empty($_POST["room_comfort_review"])) && isset($_POST["room_price_review"]) && !(empty($_POST["room_price_review"])) && isset($_POST["room_quality_review"]) && !(empty($_POST["room_quality_review"])) && isset($_POST["room_text_review"]) && !(empty($_POST["room_text_review"])) && isset($_POST["random_captcha_code"]) && !(empty($_POST["random_captcha_code"]))){
                         if($_POST["random_captcha_code"] != $_SESSION["random_captcha_code"]){
                             $_SESSION["errors_message"] .= "کد کپچا نادرست وارد شده .";
-                            $users->redirect_to("single_hotel.php");
+                            $users->redirect_to("Room.php?roomId={$room_id}");
                         }else{
                             switch ($_POST["room_score_review"]){
                                 case 1: $room_score_review = $_POST["room_score_review"]; break;
@@ -1175,7 +1168,7 @@
                                 case 3: $room_score_review = $_POST["room_score_review"]; break;
                                 case 4: $room_score_review = $_POST["room_score_review"]; break;
                                 case 5: $room_score_review = $_POST["room_score_review"]; break;
-                                default: $_SESSION["errors_message"] .= "مشکلی در نادرست وارد کردن فیلد ."; $users->redirect_to("single_hotel.php"); break;
+                                default: $_SESSION["errors_message"] .= "مشکلی در نادرست وارد کردن فیلد ."; $users->redirect_to("Room.php?roomId={$room_id}"); break;
                             }
 
                             switch ($_POST["room_comfort_review"]){
@@ -1185,7 +1178,7 @@
                                 case 3: $room_comfort_review = $_POST["room_comfort_review"]; break;
                                 case 4: $room_comfort_review = $_POST["room_comfort_review"]; break;
                                 case 5: $room_comfort_review = $_POST["room_comfort_review"]; break;
-                                default: $_SESSION["errors_message"] .= "مشکلی در نادرست وارد کردن فیلد ."; $users->redirect_to("single_hotel.php"); break;
+                                default: $_SESSION["errors_message"] .= "مشکلی در نادرست وارد کردن فیلد ."; $users->redirect_to("Room.php?roomId={$room_id}"); break;
                             }
                             switch ($_POST["room_price_review"]){
                                 case 13: $room_price_review = 0; break;
@@ -1194,7 +1187,7 @@
                                 case 3: $room_price_review = $_POST["room_price_review"]; break;
                                 case 4: $room_price_review = $_POST["room_price_review"]; break;
                                 case 5: $room_price_review = $_POST["room_price_review"]; break;
-                                default: $_SESSION["errors_message"] .= "مشکلی در نادرست وارد کردن فیلد ."; $users->redirect_to("single_hotel.php"); break;
+                                default: $_SESSION["errors_message"] .= "مشکلی در نادرست وارد کردن فیلد ."; $users->redirect_to("Room.php?roomId={$room_id}"); break;
                             }
                             switch ($_POST["room_quality_review"]){
                                 case 13: $room_quality_review = 0; break;
@@ -1203,7 +1196,7 @@
                                 case 3: $room_quality_review = $_POST["room_quality_review"]; break;
                                 case 4: $room_quality_review = $_POST["room_quality_review"]; break;
                                 case 5: $room_quality_review = $_POST["room_quality_review"]; break;
-                                default: $_SESSION["errors_message"] .= "مشکلی در نادرست وارد کردن فیلد ."; $users->redirect_to("single_hotel.php"); break;
+                                default: $_SESSION["errors_message"] .= "مشکلی در نادرست وارد کردن فیلد ."; $users->redirect_to("Room.php?roomId={$room_id}"); break;
                             }
                             $room_score_review = $database->escape_value($room_score_review);
                             $room_comfort_review = $database->escape_value($room_comfort_review);
@@ -1237,7 +1230,7 @@
                             $result = $database->query($sql);
                             if ($result){
                                 $_SESSION["errors_message"] .= "نظر شما با موفقیت در صف انتظار است .";
-                                $users->redirect_to("single_hotel.php");
+                                $users->redirect_to("Room.php?roomId={$room_id}");
                             }else{
                                 $_SESSION["errors_message"] .= "خطایی رخ داد .";
                             }
@@ -1467,6 +1460,20 @@
             if($row = $database->fetch_array($result)){
                 echo $this->smile_voted_by_num(round($row[$room_attr]));
             }
+        }
+        public function score_by_comments($room_id){
+            global $database,$users,$Functions;
+            $room_id = $Functions->decrypt_id($room_id);
+            $room_survey_col = array('room_score','room_comfort','room_quality','room_price');
+            $sum = 0;
+            foreach ($room_survey_col as $room_attr){
+                $sql = "SELECT AVG({$room_attr}) AS {$room_attr} FROM room_survey WHERE room_id={$room_id} AND publish=1";
+                $result = $database->query($sql);
+                if($row = $database->fetch_array($result)) {
+                    $sum = $sum+($row[$room_attr]);
+                }
+            }
+            return round($sum/4);
         }
         //for panel
         public function smile_voted_by_price_quality_score_comfort($price,$quality,$score,$comfort){
