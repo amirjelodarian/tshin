@@ -378,8 +378,7 @@ if (isset($_POST["review_submit"])){
                         <div class='col-md-6'>
                             <div class='form-group'>
                                 <label>امتیاز</label>
-                                <input name='room_id' type='hidden' value="<?php echo $room_id; ?>" />
-                                <select class='form-control' name='room_score_review' id='cleanliness_review' required>
+                                <select class='form-control' name='room_score_review' id='room_score_review' required>
                                     <option value=''>لطفا انتخاب کنید</option>
                                     <?php
                                     for($counter = 1;$counter <= 5;$counter++)
@@ -440,7 +439,7 @@ if (isset($_POST["review_submit"])){
                         <img src="classes/captcha.php" class="captcha_code" title="کد را در کادر وارد کنید" />
                         <input type='text' id="tel" name="random_captcha_code" class='verify_review' minlength="4" title="کد را در کادر وارد کنید" maxlength="4" placeholder='1234' required />
                     </div><hr />
-                    <input type='submit' value='Submit' name="review_submit" class='btn_1' id='submit-review'>
+                    <input type='submit' value='Submit' onclick="return ckk()" name="review_submit" class='btn_1' id='submit-review'>
                 </form>
             </div>
         </div>
