@@ -1,7 +1,7 @@
 <?php
     session_start();
     header('Content-type: image/jpeg');
-    $captcha_num = rand(1000,9999);
+    $captcha_num = mt_rand(1000,9999);
     $_SESSION["random_captcha_code"] = $captcha_num;
     $font_size = 26;
     $img_width = 114;

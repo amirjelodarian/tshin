@@ -35,7 +35,7 @@ if ($sessions->login_state()){
 
 //this is for show room details
 if (isset($_GET['roomId']) || isset($_SESSION["room_id_while_comment"])) {
-
+    global $users;
     //////////////////////////////////////////
     if (isset($_SESSION["room_id_while_comment"]) && !(empty($_SESSION["room_id_while_comment"]))){
         $room_id = $_SESSION["room_id_while_comment"];
@@ -48,8 +48,8 @@ if (isset($_GET['roomId']) || isset($_SESSION["room_id_while_comment"])) {
 
     $room_result = Rooms::RoomAttributeById($room_id);
     if ($database->num_rows($room_result) == 0){
-        die();
-        echo '<script>window.replace("all_hotels_list.php");</script>';
+        $users->redirect_to("all_hotels_list.php");
+        exit();
     }
     $roomattribute = $database->fetch_array($room_result);
     if ($roomattribute) {
@@ -61,19 +61,7 @@ if (isset($_GET['roomId']) || isset($_SESSION["room_id_while_comment"])) {
                 <div class='col-md-8 col-sm-8'> 
                     <span class='rating'>
                     ");
-        if($database->escape_value($roomattribute['room_score']) == 1){
-            echo "<i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-        }else if($database->escape_value($roomattribute['room_score']) == 2){
-            echo "<i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-        }else if($database->escape_value($roomattribute['room_score']) == 3){
-            echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i></i><i class='icon-star-empty'></i>";
-        }else if($database->escape_value($roomattribute['room_score']) == 4){
-            echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i></i><i class='icon-star-empty'></i>";
-        }else if($database->escape_value($roomattribute['room_score']) == 5){
-            echo "<i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i><i class='icon-star voted'></i>";
-        }else{
-            return null;
-        }
+        echo($Functions->give_start_by_number($roomattribute['room_score']));
         echo ("
                     </span>
                     <h4 class='room_title'>{$roomattribute['room_title']}</h4>  <span>"); if($roomattribute['room_person_count'] != 0){ echo"ظرفیت {$Functions->EN_numTo_FA($roomattribute['room_person_count'],true)} نفر"; }echo("</span>
@@ -106,12 +94,12 @@ if (isset($_GET['roomId']) || isset($_SESSION["room_id_while_comment"])) {
         <div class='col-md-8' id='single_tour_desc'>
             <div id='single_tour_feat'>
                 <ul>
-                    <li><i class='icon_set_2_icon-116 "); if($roomattribute["room_television"] == 1){ echo "rooms_checkbox'"; } echo("'></i>تلویزیون</li>
-                    <li><i class='icon_set_1_icon-86  "); if($roomattribute["room_wifi"] == 1){ echo "rooms_checkbox'"; } echo("'></i>وای فای رایگان</li>
-                    <li><i class='icon_set_2_icon-110  "); if($roomattribute["room_pool"] == 1){ echo "rooms_checkbox'"; } echo("'></i>استخر</li>
-                    <li><i class='icon_set_2_icon-117  "); if($roomattribute["room_gym"] == 1){ echo "rooms_checkbox'"; } echo("'></i>باشگاه یا لوازم ورزشی</li>
-                    <li><i class='icon_set_1_icon-59  "); if($roomattribute["room_food"] == 1){ echo "rooms_checkbox'"; } echo("'></i>صبحانه</li>
-                    <li><i class='icon_set_1_icon-27  "); if($roomattribute["room_parking"] == 1){ echo "rooms_checkbox'"; } echo("'></i>پارکینگ اختصاصی</li>
+                    <li><i id='in_room_checkbox' class='icon_set_2_icon-116 "); if($roomattribute["room_television"] == 1){ echo "rooms_checkbox'"; } echo("'></i>تلویزیون</li>
+                    <li><i id='in_room_checkbox' class='icon_set_1_icon-86  "); if($roomattribute["room_wifi"] == 1){ echo "rooms_checkbox'"; } echo("'></i>وای فای رایگان</li>
+                    <li><i id='in_room_checkbox' class='icon_set_2_icon-110  "); if($roomattribute["room_pool"] == 1){ echo "rooms_checkbox'"; } echo("'></i>استخر</li>
+                    <li><i id='in_room_checkbox' class='icon_set_2_icon-117  "); if($roomattribute["room_gym"] == 1){ echo "rooms_checkbox'"; } echo("'></i>باشگاه یا لوازم ورزشی</li>
+                    <li><i id='in_room_checkbox' class='icon_set_1_icon-59  "); if($roomattribute["room_food"] == 1){ echo "rooms_checkbox'"; } echo("'></i>صبحانه</li>
+                    <li><i id='in_room_checkbox' class='icon_set_1_icon-27  "); if($roomattribute["room_parking"] == 1){ echo "rooms_checkbox'"; } echo("'></i>پارکینگ اختصاصی</li>
                 </ul>
             </div>
             <p class='visible-sm visible-xs'><a class='btn_map' data-toggle='collapse' href=''#collapseMap' aria-expanded='false' aria-controls='collapseMap'>مشاهده نقشه</a>
@@ -315,7 +303,7 @@ if (isset($_GET['roomId']) || isset($_SESSION["room_id_while_comment"])) {
             </p>
             <div class='box_style_1 expose'>
                 <form id='booking' action='' method='post'>
-                    <h3 class='inner'>رزرو</h3>
+                    <h3 class='inner' id='reservation'>رزرو</h3>
                     <div class='row'>
                         <div class='col-md-6 col-sm-6'>
                             <div class='form-group'>
@@ -330,39 +318,25 @@ if (isset($_GET['roomId']) || isset($_SESSION["room_id_while_comment"])) {
                             </div>
                         </div>
                     </div>
-                    <div class='form-group'>
-                        <label>ایمیل</label>
-                        <input class='form-control required' type='email' name='email_booking' id='email_booking'>
-                    </div>
-                    <div class='form-group'>
-                        <label>تلفن</label>
-                        <input class='form-control required' type='text' name='phone_booking' id='phone_booking'>
-                    </div>
                     <hr>
                     <div class='row'>
                         <div class='col-lg-12 col-xs-12 col-md-12 col-sm-12' id='data-picker-range'>
                            <div class='input-group' id='data-picker-range'>
-                                <div class='input-group-prepend'>
-                                    <span class='input-group-text cursor-pointer icon-calendar' id='date3-1'>زمان ورود و خروج</span>
+                                <div class='input-group-prepend calender-btn'>
+                                    <span class='input-group-text cursor-pointer icon-calendar' id='date3-1'>انتخاب زمان ورود و خروج</span>
                                 </div>
-                                <input type='text' readonly id='inputDate3-1' class='form-control' placeholder='DateTimePicker Range Selector With Multiple Months' aria-label='date3-1' aria-describedby='date3-1' required />
+                                <input type='text' readonly id='inputDate3-1' class='calender-self' placeholder='۱۳۹۹/۰۴/۰۳ - ۱۳۹۹/۰۴/۱۲' aria-label='date3-1' aria-describedby='date3-1' required />
                            </div>
                         </div>
-                    </div>
+                    </div><hr />
                     <div class='row'>
-                        <div class='col-md-6 col-sm-6'>
+                        <div class='col-md-12 col-sm-12 person-count'>
                             <div class='form-group'>
-                                <label>بزرگسالان</label>
-                                <div class='numbers-row'>
-                                    <input type='text' value='1' id='adults' class='qty2 form-control' name='adults'>
-                                </div>
-                            </div>
-                        </div>
-                        <div class='col-md-6 col-sm-6'>
-                            <div class='form-group'>
-                                <label>کودکان</label>
-                                <div class='numbers-row'>
-                                    <input type='text' value='0' id='children' class='qty2 form-control ' name='children'>
+                                <label class='person-count-text'>تعداد نفرات</label>
+                                <div class='person-count-inside'>
+                                    <div class='numbers-row'>
+                                        <input type='text' value='1' maxlength='{$roomattribute['room_person_count']}' id='adults' class='qty2 form-control' name='adults' min='1' max='{$roomattribute['room_person_count']}'>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -399,13 +373,12 @@ if (isset($_POST["review_submit"])){
             </div>
             <div class='modal-body'>
                 <div id='message-review'></div>
-                <form action='<?php echo($_SERVER["PHP_SELF"]); ?>' method='post'>
+                <form action='<?php echo(htmlspecialchars($_SERVER["PHP_SELF"])); ?>' method='post'>
                     <div class='row'>
                         <div class='col-md-6'>
                             <div class='form-group'>
                                 <label>امتیاز</label>
                                 <input name='room_id' type='hidden' value="<?php echo $room_id; ?>" />
-                                <?php $_SESSION["room_id_while_comment"] = $room_id; ?>
                                 <select class='form-control' name='room_score_review' id='cleanliness_review' required>
                                     <option value=''>لطفا انتخاب کنید</option>
                                     <?php
@@ -473,15 +446,30 @@ if (isset($_POST["review_submit"])){
         </div>
     </div>
 </div>
+<div class="now-reserve-btn">
+    <a href="#reservation">
+        <div class="now-reserve-inside">
+            <p>همین حالا رزرو کنید</p>
+        </div>
+    </a>
+</div>
 <div class="room_error_message">
     <span id="room_error_message_inside">
             <?php
-            if (!empty($_SESSION["errors_message"]) && isset($_SESSION["errors_message"])){
-                echo $users->Errors();
-            }
+                if (!empty($_SESSION["errors_message"]) && isset($_SESSION["errors_message"])){
+                    echo $users->Errors();
+                }
             ?>
     </span>
 </div>
+<?php
+    $room_json_data = array(
+        "room_person_count"=>$roomattribute['room_person_count']
+    );
+?>
+<script type="text/javascript">
+    var room_json_data = <?php echo json_encode($room_json_data,JSON_PRETTY_PRINT); ?>;
+</script>
 <script src="js/jquery-1.11.2.min.js"></script>
 <script src="js/common_scripts_min.js"></script>
 <script src="js/functions.js"></script>

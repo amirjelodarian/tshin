@@ -194,22 +194,27 @@
             $jd=1+(($days < 186)?($days%31):(($days-186)%30));
             return($mod=='')?array($jy,$jm,$jd):$jy.$mod.$jm.$mod.$jd;
         }
-        ///////////////////////////////////////
-        public function convert_db_format_for_gregorian_to_jalali($date){
-            $date_array = explode("-",$date);
-            $year = (int)$date_array[0];
-            $month = (int)$date_array[1];
-            $day = (int)$date_array[2];
-            $date = $this->gregorian_to_jalali($year,$month,$day,'<span style="color: crimson">/</span>');
-            return $date;
+        function jalali_to_gregorian($jy, $jm, $jd) {
+            $jy += 1595;
+            $days = -355668 + (365 * $jy) + (((int)($jy / 33)) * 8) + ((int)((($jy % 33) + 3) / 4)) + $jd + (($jm < 7)? ($jm - 1) * 31 : (($jm - 7) * 30) + 186);
+            $gy = 400 * ((int)($days / 146097));
+            $days %= 146097;
+            if ($days > 36524) {
+                $gy += 100 * ((int)(--$days / 36524));
+                $days %= 36524;
+                if ($days >= 365) $days++;
+            }
+            $gy += 4 * ((int)($days / 1461));
+            $days %= 1461;
+            if ($days > 365) {
+                $gy += (int)(($days - 1) / 365);
+                $days = ($days - 1) % 365;
+            }
+            $gd = $days + 1;
+            $sal_a = array(0, 31, (($gy % 4 == 0 and $gy % 100 != 0) or ($gy % 400 == 0))?29:28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
+            for ($gm = 0; $gm < 13 and $gd > $sal_a[$gm]; $gm++) $gd -= $sal_a[$gm];
+            return array($gy, $gm, $gd);
         }
-        public function EN_numTo_FA($str,$toPersian){
-            $en = array('0','1','2','3','4','5','6','7','8','9');
-            $fa = array('۰','۱','۲','۳','۴','۵','۶','۷','۸','۹');
-            if (isset($toPersian)){ return str_replace($en,$fa,$str); } else{ return str_replace($fa,$en,$str); }
-        }
-
-
         public function insert_seperator($num) {
             settype($num,"String");
             $n = strlen($num);
@@ -228,6 +233,20 @@
             }
             $i++;
             return substr($str,$i);
+        }
+        ///////////////////////////////////////
+        public function convert_db_format_for_gregorian_to_jalali($date){
+            $date_array = explode("-",$date);
+            $year = (int)$date_array[0];
+            $month = (int)$date_array[1];
+            $day = (int)$date_array[2];
+            $date = $this->gregorian_to_jalali($year,$month,$day,'<span style="color: crimson">/</span>');
+            return $date;
+        }
+        public function EN_numTo_FA($str,$toPersian){
+            $en = array('0','1','2','3','4','5','6','7','8','9');
+            $fa = array('۰','۱','۲','۳','۴','۵','۶','۷','۸','۹');
+            if (isset($toPersian)){ return str_replace($en,$fa,$str); } else{ return str_replace($fa,$en,$str); }
         }
         public function give_start_by_number($score_row){
             global $database;

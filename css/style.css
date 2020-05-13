@@ -1514,6 +1514,7 @@ a#filters_col_bt .icon_set_1_icon-65 {
     list-style:none;
     padding:0;
     margin:0;
+    text-align: center;
     display:table;
     border-bottom:2px solid #555;
     margin-bottom:30px
@@ -1847,15 +1848,71 @@ a#filters_col_bt .icon_set_1_icon-65 {
     margin-bottom:5px;
     margin-top:15px
 }
+.person-count{
+    width: 100%;
+    text-align: center;
+    margin-bottom: 15px;
+}
+.person-count-inside{
+    text-align: center;
+    margin-left: 43px;
+    float: left;
+}
+.person-count-text{
+    margin-top: 10px;
+    margin-right: 46px;
+    float: right;
+    display: inline-block;
+    font-size: 16px;
+}
+.now-reserve-btn{
+    display: none;
+    z-index: 99999999;
+    bottom: 0;
+    float: left;
+    left: 0;
+    margin-bottom: 11px;
+    margin-left: 11px;
+    position: fixed;
+    opacity: 0.6;
+    text-align: center;
+}
+#reservation{
+    transition: 1s;
+}
+html{
+    scroll-behavior: smooth;
+}
+.now-reserve-inside{
+    transition: 1s;
+    background: #00A8FF;
+    border-radius: 3.9px;
+    height: 35px;
+    max-height: 35px;
+    width: 120px;
+    color: white;
+    position: relative;
+}
+.now-reserve-inside:hover{
+    transition: 1s;
+    cursor: pointer;
+    background: #333;
+}
+.now-reserve-inside p{
+    padding: 6px;
+    font-weight: bold;
+}
 input.qty2 {
     position:relative;
     width:35px;
     height:40px;
-    border-radius:none;
     text-align:center;
     right:31px;
     font-size:12px;
     padding:5px
+}
+#inputDate3-1{
+    background: white;
 }
 .button_inc {
     text-indent:-9999px;
@@ -5383,6 +5440,9 @@ a.btn_infobox:hover {
 .users-submit-search{
     display: none;
 }
+#in_room_checkbox{
+    padding: 10px;
+}
 #room_person_count_grid_show{
     width: auto;
     position: absolute;
@@ -5391,15 +5451,29 @@ a.btn_infobox:hover {
 }
 #date3-1{
     background: #00A8FF;
+    cursor: pointer;
     opacity: 0.8;
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-top: 3px;
+    padding-left: 11px;
+    padding-right: 11px;
+    padding-top: 8px;
     font-weight: bold;
     padding-bottom: 7px;
     border-radius: 3.9px;
     transition: 1s;
     color: #fff;
+}
+.calender-btn{
+    padding: 5px;
+}
+.calender-self{
+    text-align: center;
+    background: white;
+    border-radius: 1.9px;
+    margin-top: 14px;
+    border-bottom: 2px solid #00A8FF;
+    border-left: 2px solid #00A8FF;
+    border-right: 2px solid #00A8FF;
+    border-top: none;
 }
 #date3-1:hover{
     background: gray;

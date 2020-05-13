@@ -17,7 +17,7 @@ $(window).load(function () {
             $(".icon-close").hide();
             $("#icon_menu").show();
         });
-        }
+    }
     $("#users-search-icon").click(function () {
         $(".users-submit-search").click();
     });
@@ -92,6 +92,18 @@ $(window).load(function () {
     $("#status").fadeOut(), $("#preloader").delay(350).fadeOut("slow"), $("body").delay(350).css({overflow: "visible"}), $(window).scroll()
 }), $(window).scroll(function () {
     "use strict";
+    var windowScrollTop = document.documentElement.scrollTop
+        || document.body.scrollTop;
+    var windowWidth = window.innerWidth
+        || document.documentElement.clientWidth
+        || document.body.clientWidth;
+    if (windowScrollTop  > 200){
+        if (windowWidth <= 991){
+            $(".now-reserve-btn").fadeIn(300);
+        }
+    }else{
+        $(".now-reserve-btn").fadeOut(300);
+    }
     $(this).scrollTop() > 1 ? $("header").addClass("sticky") : $("header").removeClass("sticky")
 }), $("a.open_close").on("click", function () {
     $(".main-menu").toggleClass("show"), $(".layer").toggleClass("layer-is-visible")
@@ -133,17 +145,27 @@ $(window).load(function () {
         0 != $(this).scrollTop() ? $("#toTop").fadeIn() : $("#toTop").fadeOut()
     }), $("#toTop").on("click", function () {
         $("body,html").animate({scrollTop: 0}, 500)
-    }), $(".numbers-row").append('<div class="inc button_inc">+</div><div class="dec button_inc">-</div>'), $(".button_inc").on("click", function () {
-        var e = $(this), t = e.parent().find("input").val();
-        if ("+" == e.text()) var o = parseFloat(t) + 1; else o = t > 1 ? parseFloat(t) - 1 : 0;
-        e.parent().find("input").val(o)
+    }),
+        $(".numbers-row").append('<div class="inc button_inc">+</div><div class="dec button_inc">-</div>'), $(".button_inc").on("click", function () {
+            var e = $(this), t = e.parent().find("input").val();
+            if ("+" == e.text()){
+                if($("#adults").val() < room_json_data.room_person_count) {
+                    var o = parseFloat(t) + 1;
+                }else{
+                    var o = room_json_data.room_person_count;
+                }
+            }
+            else {
+                o = t > 1 ? parseFloat(t) - 1 : 1;
+            }
+            e.parent().find("input").val(o)
     })
-}), $("ul#cat_nav li a").on("click", function () {
-    $("ul#cat_nav li a.active").removeClass("active"), $(this).addClass("active")
-}), $("#map_filter ul li a").on("click", function () {
-    $("#map_filter ul li a.active").removeClass("active"), $(this).addClass("active")
-}), $(function () {
-    "use strict";
+    }), $("ul#cat_nav li a").on("click", function () {
+        $("ul#cat_nav li a.active").removeClass("active"), $(this).addClass("active")
+    }), $("#map_filter ul li a").on("click", function () {
+        $("#map_filter ul li a.active").removeClass("active"), $(this).addClass("active")
+    }), $(function () {
+        "use strict";
     $("#range").ionRangeSlider({
         hide_min_max: !0,
         keyboard: !0,

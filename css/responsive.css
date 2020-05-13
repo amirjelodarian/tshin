@@ -39,6 +39,9 @@ only screen and (min-device-pixel-ratio: 2) and (max-width: 991px) {
     ul#top_tools {
         margin: 3px 0 0 45px
     }
+    .now-reserve-btn{
+        display: block;
+    }
     .sticky nav {
         margin-top: 3px
     }
