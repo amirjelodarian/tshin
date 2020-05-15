@@ -308,13 +308,13 @@ if (isset($_GET['roomId']) || isset($_SESSION["room_id_while_comment"])) {
                         <div class='col-md-6 col-sm-6'>
                             <div class='form-group'>
                                 <label>نام</label>
-                                <input class='form-control required' name='name_booking' id='name_booking' type='text'>
+                                <input class='form-control required' name='reserve_firstname' id='name_booking' type='text'>
                             </div>
                         </div>
                         <div class='col-md-6 col-sm-6'>
                             <div class='form-group'>
                                 <label>نام خانوادگی</label>
-                                <input class='form-control required' name='last_name_booking' id='last_name_booking' type='text'>
+                                <input class='form-control required' name='reserve_lastname' id='last_name_booking' type='text'>
                             </div>
                         </div>
                     </div>
@@ -325,17 +325,18 @@ if (isset($_GET['roomId']) || isset($_SESSION["room_id_while_comment"])) {
                                 <div class='input-group-prepend calender-btn'>
                                     <span class='input-group-text cursor-pointer icon-calendar' id='date3-1'>انتخاب زمان ورود و خروج</span>
                                 </div>
-                                <input type='text' readonly id='inputDate3-1' class='calender-self' placeholder='۱۳۹۹/۰۴/۰۳ - ۱۳۹۹/۰۴/۱۲' aria-label='date3-1' aria-describedby='date3-1' required />
+                                <input type='text' readonly id='inputDate3-1' class='calender-self' name='reserve_date' placeholder='۱۳۹۹/۰۴/۰۳ - ۱۳۹۹/۰۴/۱۲' aria-label='date3-1' aria-describedby='date3-1' required />
                            </div>
                         </div>
                     </div><hr />
                     <div class='row'>
+                    <label class='text-center'>ظرفیت <span style='color: #00A8FF;'>{$roomattribute['room_person_count']}</span> نفر</label>
                         <div class='col-md-12 col-sm-12 person-count'>
                             <div class='form-group'>
                                 <label class='person-count-text'>تعداد نفرات</label>
                                 <div class='person-count-inside'>
                                     <div class='numbers-row'>
-                                        <input type='text' value='1' maxlength='{$roomattribute['room_person_count']}' id='adults' class='qty2 form-control' name='adults' min='1' max='{$roomattribute['room_person_count']}'>
+                                        <input type='text' value='1' maxlength='{$roomattribute['room_person_count']}' id='adults' class='qty2 form-control' name='reserve_person_count' min='1' max='{$roomattribute['room_person_count']}'>
                                     </div>
                                 </div>
                             </div>
@@ -475,6 +476,7 @@ if (isset($_POST["review_submit"])){
 <script src="js/signUp.js"></script>
 <script src="datapicker/src/jquery.md.bootstrap.datetimepicker.js" type="text/javascript"></script>
 <script type="text/javascript">
+    $('#inputDate3-1').attr("disabled", true);
     $('#date3-1').MdPersianDateTimePicker({
         targetTextSelector: '#inputDate3-1',
         disableBeforeToday: true,

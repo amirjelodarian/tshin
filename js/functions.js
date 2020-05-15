@@ -1,4 +1,5 @@
 $(window).load(function () {
+    $('#inputDate3-1').attr("disabled", true);
     var windowWidth = window.innerWidth
         || document.documentElement.clientWidth
         || document.body.clientWidth;

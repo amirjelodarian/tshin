@@ -1160,7 +1160,7 @@
                     if (isset($_POST["room_score_review"]) && !(empty($_POST["room_score_review"])) && $_POST["room_score_review"] <= 5 && isset($_POST["room_comfort_review"]) && !(empty($_POST["room_comfort_review"])) && isset($_POST["room_price_review"]) && !(empty($_POST["room_price_review"])) && isset($_POST["room_quality_review"]) && !(empty($_POST["room_quality_review"])) && isset($_POST["room_text_review"]) && !(empty($_POST["room_text_review"])) && isset($_POST["random_captcha_code"]) && !(empty($_POST["random_captcha_code"]))){
                         if($_POST["random_captcha_code"] != $_SESSION["random_captcha_code"]){
                             $_SESSION["errors_message"] .= "کد کپچا نادرست وارد شده .";
-                            $users->redirect_to("Room.php?roomId={$_SESSION["room_id_while_comment"]}");
+                            $users->redirect_to("Room.php?roomId={$room_id}");
                         }else{
                             switch ($_POST["room_score_review"]){
                                 case 1: $room_score_review = $_POST["room_score_review"]; break;
@@ -1168,7 +1168,7 @@
                                 case 3: $room_score_review = $_POST["room_score_review"]; break;
                                 case 4: $room_score_review = $_POST["room_score_review"]; break;
                                 case 5: $room_score_review = $_POST["room_score_review"]; break;
-                                default: $_SESSION["errors_message"] .= "مشکلی در نادرست وارد کردن فیلد ."; $users->redirect_to("Room.php?roomId={$_SESSION["room_id_while_comment"]}"); break;
+                                default: $_SESSION["errors_message"] .= "مشکلی در نادرست وارد کردن فیلد ."; $users->redirect_to("Room.php?roomId={$room_id}"); break;
                             }
 
                             switch ($_POST["room_comfort_review"]){
@@ -1178,7 +1178,7 @@
                                 case 3: $room_comfort_review = $_POST["room_comfort_review"]; break;
                                 case 4: $room_comfort_review = $_POST["room_comfort_review"]; break;
                                 case 5: $room_comfort_review = $_POST["room_comfort_review"]; break;
-                                default: $_SESSION["errors_message"] .= "مشکلی در نادرست وارد کردن فیلد ."; $users->redirect_to("Room.php?roomId={$_SESSION["room_id_while_comment"]}"); break;
+                                default: $_SESSION["errors_message"] .= "مشکلی در نادرست وارد کردن فیلد ."; $users->redirect_to("Room.php?roomId={$room_id}"); break;
                             }
                             switch ($_POST["room_price_review"]){
                                 case 13: $room_price_review = 0; break;
@@ -1187,7 +1187,7 @@
                                 case 3: $room_price_review = $_POST["room_price_review"]; break;
                                 case 4: $room_price_review = $_POST["room_price_review"]; break;
                                 case 5: $room_price_review = $_POST["room_price_review"]; break;
-                                default: $_SESSION["errors_message"] .= "مشکلی در نادرست وارد کردن فیلد ."; $users->redirect_to("Room.php?roomId={$_SESSION["room_id_while_comment"]}"); break;
+                                default: $_SESSION["errors_message"] .= "مشکلی در نادرست وارد کردن فیلد ."; $users->redirect_to("Room.php?roomId={$room_id}"); break;
                             }
                             switch ($_POST["room_quality_review"]){
                                 case 13: $room_quality_review = 0; break;
@@ -1196,7 +1196,7 @@
                                 case 3: $room_quality_review = $_POST["room_quality_review"]; break;
                                 case 4: $room_quality_review = $_POST["room_quality_review"]; break;
                                 case 5: $room_quality_review = $_POST["room_quality_review"]; break;
-                                default: $_SESSION["errors_message"] .= "مشکلی در نادرست وارد کردن فیلد ."; $users->redirect_to("Room.php?roomId={$_SESSION["room_id_while_comment"]}"); break;
+                                default: $_SESSION["errors_message"] .= "مشکلی در نادرست وارد کردن فیلد ."; $users->redirect_to("Room.php?roomId={$room_id}"); break;
                             }
                             $room_score_review = $database->escape_value($room_score_review);
                             $room_comfort_review = $database->escape_value($room_comfort_review);
@@ -1230,20 +1230,23 @@
                             $result = $database->query($sql);
                             if ($result){
                                 $_SESSION["errors_message"] .= "نظر شما با موفقیت در صف انتظار است .";
-                                $users->redirect_to("Room.php?roomId={$_SESSION["room_id_while_comment"]}");
+                                $users->redirect_to("Room.php?roomId={$room_id}");
                             }else{
                                 $_SESSION["errors_message"] .= "خطایی رخ داد .";
+                                $users->redirect_to("Room.php?roomId={$room_id}");
                             }
 
                         }
                     }else{
                         $_SESSION["errors_message"] .= "برخی از فیلد ها خالیست یا انتخاب نشده .";
+                        $users->redirect_to("Room.php?roomId={$room_id}");
                     }
                 }else{
                     $_SESSION["errors_message"] .= "برای درج نظر بایستی به حساب کاربری خود وارد شوید یا حسابی بسازید .";
+                    $users->redirect_to("Room.php?roomId={$room_id}");
                 }
             }else{
-                $users->redirect_to("Room.php?roomId={$_SESSION["room_id_while_comment"]}");
+                $users->redirect_to("Room.php?roomId={$room_id}");
             }
         }
         public function CountAllRoomComments(){
