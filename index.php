@@ -1,6 +1,5 @@
 ﻿<!DOCTYPE html>
 <html dir="rtl">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,7 +24,7 @@
 <div class="layer"></div>
 <?php
     require_once("classes/initialize.php");
-    global $sessions;
+    global $sessions,$Functions;
     if ($sessions->login_state()){
         include("includes/logged_in_header.php");
     }else{

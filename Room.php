@@ -32,29 +32,29 @@ if ($sessions->login_state()){
 }else{
     include('includes/header.php');
 }
-
 //this is for show room details
-if (isset($_GET['roomId']) || isset($_SESSION["room_id_while_comment"])) {
+if (isset($_GET['roomId']) && !(empty($_GET["roomId"])) || isset($_POST['room_id']) && !(empty($_POST['room_id']))) {
     global $users;
     //////////////////////////////////////////
-    if (isset($_SESSION["room_id_while_comment"]) && !(empty($_SESSION["room_id_while_comment"]))){
-        $room_id = $_SESSION["room_id_while_comment"];
+    if (isset($_POST['room_id']) && !(empty($_POST['room_id']))){
+        $room_id = $database->escape_value($_POST['room_id']);
     }
-    else{
+    if (isset($_GET['roomId']) && !(empty($_GET["roomId"]))){
         $room_id = $database->escape_value($_GET['roomId']);
-        $_SESSION["room_id_while_comment"] = $room_id;
     }
     /////////////////////////////////////////
 
-    $room_result = Rooms::RoomAttributeById($room_id);
+    $room_result = Rooms::RoomAttributeById($room_id,true);
     if ($database->num_rows($room_result) == 0){
         $users->redirect_to("all_hotels_list.php");
         exit();
-    }
+    }else{
     $roomattribute = $database->fetch_array($room_result);
     if ($roomattribute) {
         echo("
-                <section class='parallax-window' data-parallax='scroll' data-image-src='"); $rooms->select_single_hotel_image($roomattribute['room_image']); echo("' data-natural-width='1400' data-natural-height='470'>
+                <section class='parallax-window' data-parallax='scroll' data-image-src='");
+        $rooms->select_single_hotel_image($roomattribute['room_image']);
+        echo("' data-natural-width='1400' data-natural-height='470'>
     <div class='parallax-content-2'>
         <div class='container'>
             <div class='row'>
@@ -62,9 +62,13 @@ if (isset($_GET['roomId']) || isset($_SESSION["room_id_while_comment"])) {
                     <span class='rating'>
                     ");
         echo($Functions->give_start_by_number($roomattribute['room_score']));
-        echo ("
+        echo("
                     </span>
-                    <h4 class='room_title'>{$roomattribute['room_title']}</h4>  <span>"); if($roomattribute['room_person_count'] != 0){ echo"ظرفیت {$Functions->EN_numTo_FA($roomattribute['room_person_count'],true)} نفر"; }echo("</span>
+                    <h4 class='room_title'>{$roomattribute['room_title']}</h4>  <span>");
+        if ($roomattribute['room_person_count'] != 0) {
+            echo "ظرفیت {$Functions->EN_numTo_FA($roomattribute['room_person_count'],true)} نفر";
+        }
+        echo("</span>
                 </div>
                 <div class='col-md-4 col-sm-4'>
                 <p class='room_address_single_hotel'>{$database->escape_value($roomattribute['room_address'])}</p>
@@ -94,12 +98,36 @@ if (isset($_GET['roomId']) || isset($_SESSION["room_id_while_comment"])) {
         <div class='col-md-8' id='single_tour_desc'>
             <div id='single_tour_feat'>
                 <ul>
-                    <li><i id='in_room_checkbox' class='icon_set_2_icon-116 "); if($roomattribute["room_television"] == 1){ echo "rooms_checkbox'"; } echo("'></i>تلویزیون</li>
-                    <li><i id='in_room_checkbox' class='icon_set_1_icon-86  "); if($roomattribute["room_wifi"] == 1){ echo "rooms_checkbox'"; } echo("'></i>وای فای رایگان</li>
-                    <li><i id='in_room_checkbox' class='icon_set_2_icon-110  "); if($roomattribute["room_pool"] == 1){ echo "rooms_checkbox'"; } echo("'></i>استخر</li>
-                    <li><i id='in_room_checkbox' class='icon_set_2_icon-117  "); if($roomattribute["room_gym"] == 1){ echo "rooms_checkbox'"; } echo("'></i>باشگاه یا لوازم ورزشی</li>
-                    <li><i id='in_room_checkbox' class='icon_set_1_icon-59  "); if($roomattribute["room_food"] == 1){ echo "rooms_checkbox'"; } echo("'></i>صبحانه</li>
-                    <li><i id='in_room_checkbox' class='icon_set_1_icon-27  "); if($roomattribute["room_parking"] == 1){ echo "rooms_checkbox'"; } echo("'></i>پارکینگ اختصاصی</li>
+                    <li><i id='in_room_checkbox' class='icon_set_2_icon-116 ");
+        if ($roomattribute["room_television"] == 1) {
+            echo "rooms_checkbox'";
+        }
+        echo("'></i>تلویزیون</li>
+                    <li><i id='in_room_checkbox' class='icon_set_1_icon-86  ");
+        if ($roomattribute["room_wifi"] == 1) {
+            echo "rooms_checkbox'";
+        }
+        echo("'></i>وای فای رایگان</li>
+                    <li><i id='in_room_checkbox' class='icon_set_2_icon-110  ");
+        if ($roomattribute["room_pool"] == 1) {
+            echo "rooms_checkbox'";
+        }
+        echo("'></i>استخر</li>
+                    <li><i id='in_room_checkbox' class='icon_set_2_icon-117  ");
+        if ($roomattribute["room_gym"] == 1) {
+            echo "rooms_checkbox'";
+        }
+        echo("'></i>باشگاه یا لوازم ورزشی</li>
+                    <li><i id='in_room_checkbox' class='icon_set_1_icon-59  ");
+        if ($roomattribute["room_food"] == 1) {
+            echo "rooms_checkbox'";
+        }
+        echo("'></i>صبحانه</li>
+                    <li><i id='in_room_checkbox' class='icon_set_1_icon-27  ");
+        if ($roomattribute["room_parking"] == 1) {
+            echo "rooms_checkbox'";
+        }
+        echo("'></i>پارکینگ اختصاصی</li>
                 </ul>
             </div>
             <p class='visible-sm visible-xs'><a class='btn_map' data-toggle='collapse' href=''#collapseMap' aria-expanded='false' aria-controls='collapseMap'>مشاهده نقشه</a>
@@ -246,19 +274,26 @@ if (isset($_GET['roomId']) || isset($_SESSION["room_id_while_comment"])) {
                 <div class='col-md-9'>
                 <div class='review-result'>
                     <div id='score_detail'>
-                    <span>{$Functions->EN_numTo_FA($rooms->score_by_comments($room_id),true)}</span>"); echo $rooms->word_score($rooms->score_by_comments($room_id));
-                    echo(" 
-                    <small> بر اساس "); echo($Functions->EN_numTo_FA($rooms->CountPublishRoomComments($room_id),true)); echo(" نظر</small>
+                    <span>{$Functions->EN_numTo_FA($rooms->score_by_comments($room_id),true)}</span>");
+        echo $rooms->word_score($rooms->score_by_comments($room_id));
+        echo(" 
+                    <small> بر اساس ");
+        echo($Functions->EN_numTo_FA($rooms->CountPublishRoomComments($room_id), true));
+        echo(" نظر</small>
                     </div>
                     <div class='row' id='rating_summary'>
                         <div class='col-md-6'>
                             <ul>
                                 <li>قیمت
-                                    <div class='rating'>"); $rooms->avg_room_attr($room_id,'room_price'); echo("
+                                    <div class='rating'>");
+        $rooms->avg_room_attr($room_id, 'room_price');
+        echo("
                                     </div>
                                 </li>
                                 <li>آسایش
-                                    <div class='rating'> "); $rooms->avg_room_attr($room_id,'room_comfort'); echo("
+                                    <div class='rating'> ");
+        $rooms->avg_room_attr($room_id, 'room_comfort');
+        echo("
                                     </div>
                                 </li>
                             </ul>
@@ -266,11 +301,15 @@ if (isset($_GET['roomId']) || isset($_SESSION["room_id_while_comment"])) {
                         <div class='col-md-6'>
                             <ul>
                                 <li>کیفیت
-                                    <div class='rating'> "); $rooms->avg_room_attr($room_id,'room_quality'); echo("
+                                    <div class='rating'> ");
+        $rooms->avg_room_attr($room_id, 'room_quality');
+        echo("
                                     </div>
                                 </li>
                                 <li>امتیاز
-                                    <div class='rating'> "); echo $rooms->avg_room_attr($room_id,'room_score'); echo("
+                                    <div class='rating'> ");
+        echo $rooms->avg_room_attr($room_id, 'room_score');
+        echo("
                                     </div>
                                 </li>
                             </ul>
@@ -278,23 +317,31 @@ if (isset($_GET['roomId']) || isset($_SESSION["room_id_while_comment"])) {
                     </div>
                 </div>
                     <hr>");
-                        $result = $rooms->SelectUserRoomComments($room_id);
-                                while($room_survey = $database->fetch_array($result)){
-                                    if ($users_row = $database->fetch_array($users->SelectById($room_survey['user_id']))) {
-                                        $divid_date_time = $Functions->divid_date_time_database($room_survey['survey_date']);
-                                        echo("
+        $result = $rooms->SelectUserRoomComments($room_id);
+        while ($room_survey = $database->fetch_array($result)) {
+            if ($users_row = $database->fetch_array($users->SelectById($room_survey['user_id']))) {
+                $divid_date_time = $Functions->divid_date_time_database($room_survey['survey_date']);
+                echo("
                                             <div id='single-hotel-comment' class='review_strip_single'>
-                                                <img id='finger-img-panel-comment' src='"); Users::select_user_image_for_comment($users_row["user_image"]); echo("' alt='تی شین' class='img-circle'>
+                                                <img id='finger-img-panel-comment' src='");
+                Users::select_user_image_for_comment($users_row["user_image"]);
+                echo("' alt='تی شین' class='img-circle'>
                                                 <h4>{$users_row['username']}</h4>
-                                                <p>"); echo(nl2br($room_survey['survey'])); echo("</p>
+                                                <p>");
+                echo(nl2br($room_survey['survey']));
+                echo("</p>
                                                 <div class='rating'> {$rooms->smile_voted_by_price_quality_score_comfort($room_survey['room_price'],$room_survey['room_quality'],$room_survey['room_score'],$room_survey['room_comfort'])}</div>
-                                                <small class='icon-clock-8' style='float: left;margin-top: 18px' id='panel-time-comment'>&nbsp;"); echo $Functions->EN_numTo_FA($divid_date_time[0],true); echo("</small>
-                                                <small id='panel-date-comment' style='float: left;margin-top: 18px'>"); echo $Functions->EN_numTo_FA($Functions->convert_db_format_for_gregorian_to_jalali($divid_date_time[1]),true); echo("</small><br /><br />
+                                                <small class='icon-clock-8' style='float: left;margin-top: 18px' id='panel-time-comment'>&nbsp;");
+                echo $Functions->EN_numTo_FA($divid_date_time[0], true);
+                echo("</small>
+                                                <small id='panel-date-comment' style='float: left;margin-top: 18px'>");
+                echo $Functions->EN_numTo_FA($Functions->convert_db_format_for_gregorian_to_jalali($divid_date_time[1]), true);
+                echo("</small><br /><br />
                                             </div>
                                         ");
-                                    }
-                                }
-                                echo("
+            }
+        }
+        echo("
                 </div>
             </div>
         </div>
@@ -352,100 +399,113 @@ if (isset($_GET['roomId']) || isset($_SESSION["room_id_while_comment"])) {
     </div>
 </div>
             ");
+        // this is for check if is set review submit
+        if (isset($_POST["review_submit"])) {
+            $rooms->InsertComment($room_id);
+        }
+        ?>
+        <div id='overlay'></div>
+        <div class='modal fade' id='myReview' tabindex='-1' role='dialog' aria-labelledby='myReviewLabel'
+             aria-hidden='true'>
+            <div class='modal-dialog'>
+                <div class='modal-content'>
+                    <div class='modal-header'>
+                        <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span
+                                aria-hidden='true'>&times;</span>
+                        </button>
+                        <h4 class='modal-title' id='myReviewLabel'>نظرات شما</h4>
+                    </div>
+                    <div class='modal-body'>
+                        <div id='message-review'></div>
+                        <form action='<?php echo(htmlspecialchars($_SERVER["PHP_SELF"])); ?>' method='post'>
+                            <div class='row'>
+                                <div class='col-md-6'>
+                                    <div class='form-group'>
+                                        <label>امتیاز</label>
+                                        <select class='form-control' name='room_score_review' id='room_score_review'
+                                                required>
+                                            <option value=''>لطفا انتخاب کنید</option>
+                                            <?php
+                                            for ($counter = 1; $counter <= 5; $counter++)
+                                                echo "<option value='{$counter}'>{$counter}</option>";
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class='col-md-6'>
+                                    <div class='form-group'>
+                                        <label>آسایش</label>
+                                        <select class='form-control' name='room_comfort_review' id='comfort_review'
+                                                required>
+                                            <option value=''>لطفا انتخاب کنید</option>
+                                            <option value='13'>من نمی دانم</option>
+                                            <option value='1'>کم</option>
+                                            <option value='2'>کافی</option>
+                                            <option value='3'>خوب</option>
+                                            <option value='4'>عالی</option>
+                                            <option value='5'>بسیار عالی</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class='row'>
+                                <div class='col-md-6'>
+                                    <div class='form-group'>
+                                        <label>قیمت</label>
+                                        <select class='form-control' name='room_price_review' id='price_review'
+                                                required>
+                                            <option value=''>لطفا انتخاب کنید</option>
+                                            <option value='13'>خیلی زیاد</option>
+                                            <option value='1'>زیاد</option>
+                                            <option value='2'>متوسط</option>
+                                            <option value='3'>خوب</option>
+                                            <option value='4'>عالی</option>
+                                            <option value='5'>بسیار مناسب و به صرفه</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class='col-md-6'>
+                                    <div class='form-group'>
+                                        <label>کیفیت</label>
+                                        <select class='form-control' name='room_quality_review' id='quality_review'
+                                                required>
+                                            <option value=''>لطفا انتخاب کنید</option>
+                                            <option value='13'>من نمی دانم</option>
+                                            <option value='1'>کم</option>
+                                            <option value='2'>کافی</option>
+                                            <option value='3'>خوب</option>
+                                            <option value='4'>عالی</option>
+                                            <option value='5'>بسیار عالی</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class='form-group'>
+                                <textarea name='room_text_review' id='review_text_textarea' class='form-control'
+                                          style='height:100px' placeholder='متن خود را بنویسید' required></textarea>
+                            </div>
+                            <div class='form-group'>
+                                <img src="classes/captcha.php" class="captcha_code" title="کد را در کادر وارد کنید"/>
+                                <input type='text' id="tel" name="random_captcha_code" class='verify_review'
+                                       minlength="4" title="کد را در کادر وارد کنید" maxlength="4" placeholder='1234'
+                                       required/>
+                            </div>
+                            <hr/>
+                            <input type='hidden' hidden value='<?php echo $room_id; ?>' name="room_id"/>
+                            <input type='submit' value='Submit' name="review_submit" class='btn_1' id='submit-review'>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php
+        }
     }
 }else{
     $users->redirect_to("all_hotels_list.php");
 }
 ?>
-<?php
-// this is for check if is set review submit
-if (isset($_POST["review_submit"])){
-    $rooms->InsertComment($room_id);
-}
-?>
-<div id='overlay'></div>
-<div class='modal fade' id='myReview' tabindex='-1' role='dialog' aria-labelledby='myReviewLabel' aria-hidden='true'>
-    <div class='modal-dialog'>
-        <div class='modal-content'>
-            <div class='modal-header'>
-                <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span>
-                </button>
-                <h4 class='modal-title' id='myReviewLabel'>نظرات شما</h4>
-            </div>
-            <div class='modal-body'>
-                <div id='message-review'></div>
-                <form action='<?php echo(htmlspecialchars($_SERVER["PHP_SELF"])); ?>' method='post'>
-                    <div class='row'>
-                        <div class='col-md-6'>
-                            <div class='form-group'>
-                                <label>امتیاز</label>
-                                <select class='form-control' name='room_score_review' id='room_score_review' required>
-                                    <option value=''>لطفا انتخاب کنید</option>
-                                    <?php
-                                    for($counter = 1;$counter <= 5;$counter++)
-                                        echo "<option value='{$counter}'>{$counter}</option>";
-                                    ?>
-                                </select>
-                            </div>
-                        </div>
-                        <div class='col-md-6'>
-                            <div class='form-group'>
-                                <label>آسایش</label>
-                                <select class='form-control' name='room_comfort_review' id='comfort_review' required>
-                                    <option value=''>لطفا انتخاب کنید</option>
-                                    <option value='13'>من نمی دانم</option>
-                                    <option value='1'>کم</option>
-                                    <option value='2'>کافی</option>
-                                    <option value='3'>خوب</option>
-                                    <option value='4'>عالی</option>
-                                    <option value='5'>بسیار عالی</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class='row'>
-                        <div class='col-md-6'>
-                            <div class='form-group'>
-                                <label>قیمت</label>
-                                <select class='form-control' name='room_price_review' id='price_review' required>
-                                    <option value=''>لطفا انتخاب کنید</option>
-                                    <option value='13'>خیلی زیاد</option>
-                                    <option value='1'>زیاد</option>
-                                    <option value='2'>متوسط</option>
-                                    <option value='3'>خوب</option>
-                                    <option value='4'>عالی</option>
-                                    <option value='5'>بسیار مناسب و به صرفه</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class='col-md-6'>
-                            <div class='form-group'>
-                                <label>کیفیت</label>
-                                <select class='form-control' name='room_quality_review' id='quality_review' required>
-                                    <option value=''>لطفا انتخاب کنید</option>
-                                    <option value='13'>من نمی دانم</option>
-                                    <option value='1'>کم</option>
-                                    <option value='2'>کافی</option>
-                                    <option value='3'>خوب</option>
-                                    <option value='4'>عالی</option>
-                                    <option value='5'>بسیار عالی</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class='form-group'>
-                        <textarea name='room_text_review' id='review_text_textarea' class='form-control' style='height:100px' placeholder='متن خود را بنویسید' required></textarea>
-                    </div>
-                    <div class='form-group'>
-                        <img src="classes/captcha.php" class="captcha_code" title="کد را در کادر وارد کنید" />
-                        <input type='text' id="tel" name="random_captcha_code" class='verify_review' minlength="4" title="کد را در کادر وارد کنید" maxlength="4" placeholder='1234' required />
-                    </div><hr />
-                    <input type='submit' value='Submit' onclick="return ckk()" name="review_submit" class='btn_1' id='submit-review'>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+
 <div class="now-reserve-btn">
     <a href="#reservation">
         <div class="now-reserve-inside">

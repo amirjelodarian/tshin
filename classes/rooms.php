@@ -526,7 +526,7 @@
                                 <div class='row'>
                                     <div class='col-lg-4 col-md-4 col-sm-4'>
                                         <div class='img_list'>
-                                            <a href='rooms_edit.php'>
+                                             <a href='../Room.php?roomId={$Functions->encrypt_id($rooms_rows['room_id'])}'>
                                                     <div class='ribbon top_rated'></div>
                                                     <img src='../"); self::select_room_image($rooms_rows['room_image']); echo("' alt=''>
                                                     <div class='short_info'></div>
@@ -1007,11 +1007,15 @@
             }
         }
 
-        public static function RoomAttributeById($id){
+        public static function RoomAttributeById($id,$users_room = ""){
             global $database,$Functions;
             $id = $Functions->decrypt_id($id);
             $id = $database->escape_value($id);
-            $sql = "SELECT * FROM rooms WHERE room_id={$id} ";
+            if ($users_room == true){
+                $sql = "SELECT * FROM rooms WHERE room_id={$id} LIMIT 1";
+            }else{
+                $sql = "SELECT * FROM rooms WHERE room_id={$id}";
+            }
             $database->query("SET NAMES 'utf8'");
             $result = $database->query($sql);
             return $result;

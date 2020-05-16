@@ -149,21 +149,20 @@
         }
         function encrypt_id($value){
             if (isset($value)){
-                $value = $value*4;
-                for($i = 1;$i <= 4;$i++){
-                    $value = base64_encode($value);
-                }
+                for($i = 1;$i <= 5;$i++)
+                    $value = $value * 1.6;
+                $value = base64_encode($value);
                 return $value;
             }
         }
         function decrypt_id($value){
-            global $users;
+            global $users,$database;
             if (isset($value)){
-                for($i = 1;$i <= 4;$i++){
-                    $value = base64_decode($value);
-                }
+                $value = $database->escape_value($value);
+                $value = base64_decode($value);
+                for($i = 1;$i <= 5;$i++)
+                    $value = $value / 1.6;
                 if((preg_match('/^[0-9]*$/', $value)) && is_numeric($value)){
-                    $value = $value/4;
                     return $value;
                 }else{
                     $users->redirect_to("all_hotels_list.php");
@@ -271,6 +270,13 @@
                     return null;
                     break;
             }
+        }
+        public function redirect_with_get($url){
+            $ch = curl_init($url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_HEADER, 0);
+            $data = curl_exec($ch);
+            curl_close($ch);
         }
     }
     $Functions = new Functions();
