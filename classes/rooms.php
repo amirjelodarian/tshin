@@ -1415,7 +1415,36 @@
                 }
             }
         }
-        // for single_hotel page
+
+        // for Room page
+        public function ReserveRoom($room_id,$max_person_room){
+            global $users,$Functions,$database,$sessions;
+            if (isset($_POST["reserve_submit"]) && isset($room_id) && !(empty($room_id))){
+                if ($sessions->login_state()) {
+
+
+                    // main code after main conditions
+                    if (isset($_POST["reserve_firstname"]) && !(empty($_POST["reserve_firstname"])) && isset($_POST["reserve_lastname"]) && !(empty($_POST["reserve_lastname"])) && isset($_POST["reserve_date"]) && !(empty($_POST["reserve_date"]))){
+                        $max_person_room = (int)$max_person_room;
+
+                        // this conditions is for check room person count
+                        if (isset($_POST["reserve_person_count"]) && !(empty($_POST["reserve_person_count"]))){
+                            $this->room_person_count = $_POST["reserve_person_count"];
+                            $this->room_person_count = (int)$this->room_person_count;
+                            if($this->room_person_count >= 1 && $this->room_person_count <= $max_person_room){
+                                $this->room_person_count = $database->escape_value($_POST["reserve_person_count"]);
+                            }else{ $_SESSION["errors_message"] .= "خطایی در ظرفیت افراد رخ داد ."; $users->redirect_to("Room.php?roomId={$room_id}"); }
+                        }else{ $this->room_person_count = 1; }
+                        /////////////////////////////////////////////////
+
+                    }else{ $_SESSION["errors_message"] .= "برخی از فیلد ها خالیست یا انتخاب نشده ."; $users->redirect_to("Room.php?roomId={$room_id}"); }
+                    //////////////////////////////////
+
+
+
+                }else{ $_SESSION["errors_message"] .= "برای درج نظر بایستی به حساب کاربری خود وارد شوید یا حسابی بسازید ."; $users->redirect_to("Room.php?roomId={$room_id}"); }
+            }else{ $users->redirect_to("Room.php?roomId={$room_id}"); }
+        }
         public function SelectUserRoomComments($room_id){
             global $database,$Functions;
             $this->room_id = $Functions->decrypt_id($room_id);
@@ -1482,6 +1511,15 @@
             }
             return round($sum/4);
         }
+        public function check_reserve_fields(){
+            global $users;
+            $reserve_field_arr = array('reserve_firstname','reserve_lastname','reserve_date');
+            foreach ($reserve_field_arr as $reserve_field){
+                if (!(empty($_POST[$reserve_field])) && isset($_POST[$reserve_field])){  continue; return true; }
+                else{ return false; }
+            }
+        }
+
         //for panel
         public function smile_voted_by_price_quality_score_comfort($price,$quality,$score,$comfort){
             global $database;

@@ -12,7 +12,7 @@
       <change beforePath="$PROJECT_DIR$/datapicker/dist/jquery.md.bootstrap.datetimepicker.style.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/datapicker/dist/jquery.md.bootstrap.datetimepicker.style.css.map" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/datapicker/src/jquery.md.bootstrap.datetimepicker.js" beforeDir="false" afterPath="$PROJECT_DIR$/datapicker/src/jquery.md.bootstrap.datetimepicker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/functions.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/functions.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,6 +152,9 @@
       <workItem from="1589297131363" duration="24682000" />
       <workItem from="1589502502394" duration="5441000" />
       <workItem from="1589585142294" duration="11319000" />
+      <workItem from="1589640607188" duration="139000" />
+      <workItem from="1589760753080" duration="9743000" />
+      <workItem from="1589842778849" duration="12891000" />
     </task>
     <servers />
   </component>
@@ -183,10 +186,10 @@
       <screen x="0" y="26" width="1366" height="708" />
     </state>
     <state x="338" y="26" width="679" height="708" key="CommitChangelistDialog2/0.26.1366.708@0.26.1366.708" timestamp="1589516898472" />
-    <state x="456" y="140" width="424" height="491" key="FileChooserDialogImpl" timestamp="1589516928121">
+    <state x="456" y="140" width="424" height="491" key="FileChooserDialogImpl" timestamp="1589640744216">
       <screen x="0" y="26" width="1366" height="708" />
     </state>
-    <state x="456" y="140" width="424" height="491" key="FileChooserDialogImpl/0.26.1366.708@0.26.1366.708" timestamp="1589516928121" />
+    <state x="456" y="140" width="424" height="491" key="FileChooserDialogImpl/0.26.1366.708@0.26.1366.708" timestamp="1589640744216" />
     <state x="456" y="141" width="424" height="491" key="FileChooserDialogImpl/0.27.1366.707@0.27.1366.707" timestamp="1582757075061" />
     <state x="523" y="307" width="310" height="154" key="NewPhpFileDialog" timestamp="1588436758898">
       <screen x="0" y="27" width="1366" height="707" />
@@ -196,28 +199,29 @@
       <screen x="0" y="27" width="1366" height="707" />
     </state>
     <state width="498" height="445" key="SwitcherDM/0.27.1366.707@0.27.1366.707" timestamp="1587767136684" />
-    <state x="392" y="207" key="com.intellij.ide.util.TipDialog" timestamp="1589502500740">
+    <state x="392" y="207" key="com.intellij.ide.util.TipDialog" timestamp="1589842777449">
       <screen x="0" y="26" width="1366" height="708" />
     </state>
-    <state x="392" y="207" key="com.intellij.ide.util.TipDialog/0.26.1366.708@0.26.1366.708" timestamp="1589502500740" />
+    <state x="392" y="207" key="com.intellij.ide.util.TipDialog/0.26.1366.708@0.26.1366.708" timestamp="1589842777449" />
     <state x="392" y="208" key="com.intellij.ide.util.TipDialog/0.27.1366.707@0.27.1366.707" timestamp="1588723909265" />
     <state x="336" y="26" width="683" height="708" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1589586228740">
       <screen x="0" y="26" width="1366" height="708" />
     </state>
     <state x="336" y="26" width="683" height="708" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.26.1366.708@0.26.1366.708" timestamp="1589586228740" />
     <state x="336" y="27" width="683" height="707" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.27.1366.707@0.27.1366.707" timestamp="1588110468108" />
-    <state x="0" y="227" width="1166" height="507" key="dock-window-1" timestamp="1588380582130">
-      <screen x="0" y="27" width="1366" height="707" />
+    <state x="0" y="226" width="1166" height="508" key="dock-window-1" timestamp="1589765296847">
+      <screen x="0" y="26" width="1366" height="708" />
     </state>
+    <state x="0" y="226" width="1166" height="508" key="dock-window-1/0.26.1366.708@0.26.1366.708" timestamp="1589765296847" />
     <state x="0" y="227" width="1166" height="507" key="dock-window-1/0.27.1366.707@0.27.1366.707" timestamp="1588380582130" />
     <state x="100" y="127" width="1166" height="507" key="dock-window-2" timestamp="1588380588114">
       <screen x="0" y="27" width="1366" height="707" />
     </state>
     <state x="100" y="127" width="1166" height="507" key="dock-window-2/0.27.1366.707@0.27.1366.707" timestamp="1588380588114" />
-    <state x="347" y="164" width="672" height="678" key="run.anything.popup" timestamp="1589596288874">
+    <state x="347" y="164" width="672" height="678" key="run.anything.popup" timestamp="1589849009152">
       <screen x="0" y="26" width="1366" height="708" />
     </state>
-    <state x="347" y="164" width="672" height="678" key="run.anything.popup/0.26.1366.708@0.26.1366.708" timestamp="1589596288874" />
+    <state x="347" y="164" width="672" height="678" key="run.anything.popup/0.26.1366.708@0.26.1366.708" timestamp="1589849009152" />
     <state x="347" y="165" width="672" height="677" key="run.anything.popup/0.27.1366.707@0.27.1366.707" timestamp="1588556686287" />
     <state x="346" y="54" width="672" height="679" key="search.everywhere.popup" timestamp="1589331715119">
       <screen x="0" y="26" width="1366" height="708" />

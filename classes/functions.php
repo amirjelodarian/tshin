@@ -149,9 +149,9 @@
         }
         function encrypt_id($value){
             if (isset($value)){
-                for($i = 1;$i <= 5;$i++)
+                /*for($i = 1;$i <= 5;$i++)
                     $value = $value * 1.6;
-                $value = base64_encode($value);
+                $value = base64_encode($value);*/
                 return $value;
             }
         }
@@ -159,9 +159,9 @@
             global $users,$database;
             if (isset($value)){
                 $value = $database->escape_value($value);
-                $value = base64_decode($value);
+                /*$value = base64_decode($value);
                 for($i = 1;$i <= 5;$i++)
-                    $value = $value / 1.6;
+                    $value = $value / 1.6;*/
                 if((preg_match('/^[0-9]*$/', $value)) && is_numeric($value)){
                     return $value;
                 }else{

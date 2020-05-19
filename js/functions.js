@@ -1,5 +1,5 @@
 $(window).load(function () {
-    $('#inputDate3-1').attr("disabled", true);
+    $('#inputDate3-1,#adults').prop("readonly", true);
     var windowWidth = window.innerWidth
         || document.documentElement.clientWidth
         || document.body.clientWidth;

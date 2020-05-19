@@ -47,10 +47,22 @@ if (isset($_GET['roomId']) && !(empty($_GET["roomId"])) || isset($_POST['room_id
     $room_result = Rooms::RoomAttributeById($room_id,true);
     if ($database->num_rows($room_result) == 0){
         $users->redirect_to("all_hotels_list.php");
-        exit();
     }else{
     $roomattribute = $database->fetch_array($room_result);
     if ($roomattribute) {
+        ?>
+        <script type="text/javascript">
+            var room_objects = {
+                "room_person_count": <?php echo $roomattribute['room_person_count']; ?>,
+                "reservation_date" : function () {
+                    $('#inputDate3-1').change(function () {
+                        return $("#inputDate3-1").val();
+                    });
+                }
+            };
+            var room_json_data =  room_objects/*JSON.stringify(room_objects)*/;
+        </script>
+        <?php
         echo("
                 <section class='parallax-window' data-parallax='scroll' data-image-src='");
         $rooms->select_single_hotel_image($roomattribute['room_image']);
@@ -275,25 +287,25 @@ if (isset($_GET['roomId']) && !(empty($_GET["roomId"])) || isset($_POST['room_id
                 <div class='review-result'>
                     <div id='score_detail'>
                     <span>{$Functions->EN_numTo_FA($rooms->score_by_comments($room_id),true)}</span>");
-        echo $rooms->word_score($rooms->score_by_comments($room_id));
-        echo(" 
+                     echo $rooms->word_score($rooms->score_by_comments($room_id));
+                    echo(" 
                     <small> بر اساس ");
-        echo($Functions->EN_numTo_FA($rooms->CountPublishRoomComments($room_id), true));
-        echo(" نظر</small>
+                    echo($Functions->EN_numTo_FA($rooms->CountPublishRoomComments($room_id), true));
+                echo(" نظر</small>
                     </div>
                     <div class='row' id='rating_summary'>
                         <div class='col-md-6'>
                             <ul>
                                 <li>قیمت
                                     <div class='rating'>");
-        $rooms->avg_room_attr($room_id, 'room_price');
-        echo("
+                                        $rooms->avg_room_attr($room_id, 'room_price');
+                                        echo("
                                     </div>
                                 </li>
                                 <li>آسایش
                                     <div class='rating'> ");
-        $rooms->avg_room_attr($room_id, 'room_comfort');
-        echo("
+                                        $rooms->avg_room_attr($room_id, 'room_comfort');
+                                    echo("
                                     </div>
                                 </li>
                             </ul>
@@ -302,14 +314,14 @@ if (isset($_GET['roomId']) && !(empty($_GET["roomId"])) || isset($_POST['room_id
                             <ul>
                                 <li>کیفیت
                                     <div class='rating'> ");
-        $rooms->avg_room_attr($room_id, 'room_quality');
-        echo("
+                                        $rooms->avg_room_attr($room_id, 'room_quality');
+                                    echo("
                                     </div>
                                 </li>
                                 <li>امتیاز
                                     <div class='rating'> ");
-        echo $rooms->avg_room_attr($room_id, 'room_score');
-        echo("
+                                        echo $rooms->avg_room_attr($room_id, 'room_score');
+                                    echo("
                                     </div>
                                 </li>
                             </ul>
@@ -317,30 +329,33 @@ if (isset($_GET['roomId']) && !(empty($_GET["roomId"])) || isset($_POST['room_id
                     </div>
                 </div>
                     <hr>");
-        $result = $rooms->SelectUserRoomComments($room_id);
-        while ($room_survey = $database->fetch_array($result)) {
-            if ($users_row = $database->fetch_array($users->SelectById($room_survey['user_id']))) {
-                $divid_date_time = $Functions->divid_date_time_database($room_survey['survey_date']);
-                echo("
-                                            <div id='single-hotel-comment' class='review_strip_single'>
-                                                <img id='finger-img-panel-comment' src='");
-                Users::select_user_image_for_comment($users_row["user_image"]);
-                echo("' alt='تی شین' class='img-circle'>
-                                                <h4>{$users_row['username']}</h4>
-                                                <p>");
-                echo(nl2br($room_survey['survey']));
-                echo("</p>
-                                                <div class='rating'> {$rooms->smile_voted_by_price_quality_score_comfort($room_survey['room_price'],$room_survey['room_quality'],$room_survey['room_score'],$room_survey['room_comfort'])}</div>
-                                                <small class='icon-clock-8' style='float: left;margin-top: 18px' id='panel-time-comment'>&nbsp;");
-                echo $Functions->EN_numTo_FA($divid_date_time[0], true);
-                echo("</small>
-                                                <small id='panel-date-comment' style='float: left;margin-top: 18px'>");
-                echo $Functions->EN_numTo_FA($Functions->convert_db_format_for_gregorian_to_jalali($divid_date_time[1]), true);
-                echo("</small><br /><br />
-                                            </div>
-                                        ");
-            }
-        }
+                        $result = $rooms->SelectUserRoomComments($room_id);
+                        while ($room_survey = $database->fetch_array($result)) {
+                            if ($users_row = $database->fetch_array($users->SelectById($room_survey['user_id']))) {
+                                $divid_date_time = $Functions->divid_date_time_database($room_survey['survey_date']);
+                                echo("
+                                                            <div id='single-hotel-comment' class='review_strip_single'>
+                                                                <img id='finger-img-panel-comment' src='");
+                                Users::select_user_image_for_comment($users_row["user_image"]);
+                                echo("' alt='تی شین' class='img-circle'>
+                                                                <h4>{$users_row['username']}</h4>
+                                                                <p>");
+                                echo(nl2br($room_survey['survey']));
+                                echo("</p>
+                                                                <div class='rating'> {$rooms->smile_voted_by_price_quality_score_comfort($room_survey['room_price'],$room_survey['room_quality'],$room_survey['room_score'],$room_survey['room_comfort'])}</div>
+                                                                <small class='icon-clock-8' style='float: left;margin-top: 18px' id='panel-time-comment'>&nbsp;");
+                                echo $Functions->EN_numTo_FA($divid_date_time[0], true);
+                                echo("</small>
+                                                                <small id='panel-date-comment' style='float: left;margin-top: 18px'>");
+                                echo $Functions->EN_numTo_FA($Functions->convert_db_format_for_gregorian_to_jalali($divid_date_time[1]), true);
+                                echo("</small><br /><br />
+                                                            </div>
+                                                        ");
+                            }
+                        }
+                                            if (isset($_POST["reserve_submit"])) {
+                                                $rooms->ReserveRoom($room_id,$roomattribute['room_person_count']);
+                                            }
         echo("
                 </div>
             </div>
@@ -349,19 +364,20 @@ if (isset($_GET['roomId']) && !(empty($_GET["roomId"])) || isset($_POST['room_id
             <p class='hidden-sm hidden-xs'> <a class='btn_map scrollTo' href=''#map'>نمایش بر روی نقشه</a>
             </p>
             <div class='box_style_1 expose'>
-                <form id='booking' action='' method='post'>
+                <form  method='post' action='"); echo(htmlspecialchars($_SERVER['PHP_SELF'])); echo("'>
+                    <input type='hidden' value='{$room_id}' name='room_id' hidden />
                     <h3 class='inner' id='reservation'>رزرو</h3>
                     <div class='row'>
                         <div class='col-md-6 col-sm-6'>
                             <div class='form-group'>
                                 <label>نام</label>
-                                <input class='form-control required' name='reserve_firstname' id='name_booking' type='text'>
+                                <input class='form-control' name='reserve_firstname' id='name_booking' type='text' required />
                             </div>
                         </div>
                         <div class='col-md-6 col-sm-6'>
                             <div class='form-group'>
                                 <label>نام خانوادگی</label>
-                                <input class='form-control required' name='reserve_lastname' id='last_name_booking' type='text'>
+                                <input class='form-control' name='reserve_lastname' id='last_name_booking' type='text' required />
                             </div>
                         </div>
                     </div>
@@ -383,13 +399,13 @@ if (isset($_GET['roomId']) && !(empty($_GET["roomId"])) || isset($_POST['room_id
                                 <label class='person-count-text'>تعداد نفرات</label>
                                 <div class='person-count-inside'>
                                     <div class='numbers-row'>
-                                        <input type='text' value='1' maxlength='{$roomattribute['room_person_count']}' id='adults' class='qty2 form-control' name='reserve_person_count' min='1' max='{$roomattribute['room_person_count']}'>
+                                        <input type='text' value='1' maxlength='{$roomattribute['room_person_count']}' id='adults' class='qty2 form-control' name='reserve_person_count' min='1' max='{$roomattribute['room_person_count']}' />
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <button type='submit' class='btn_full'>الان رزرو کنید</button>
+                    <input type='submit' name='reserve_submit' value='الان رزرو کنید' class='btn_full' />
                 </form>
             </div>
             <div class='box_style_4'> <i class='icon_set_1_icon-90'></i>
@@ -505,7 +521,6 @@ if (isset($_GET['roomId']) && !(empty($_GET["roomId"])) || isset($_POST['room_id
     $users->redirect_to("all_hotels_list.php");
 }
 ?>
-
 <div class="now-reserve-btn">
     <a href="#reservation">
         <div class="now-reserve-inside">
@@ -518,25 +533,19 @@ if (isset($_GET['roomId']) && !(empty($_GET["roomId"])) || isset($_POST['room_id
             <?php
                 if (!empty($_SESSION["errors_message"]) && isset($_SESSION["errors_message"])){
                     echo $users->Errors();
+                    $_SESSION["errors_message"] = "";
+                    unset($_SESSION["errors_message"]);
                 }
             ?>
     </span>
 </div>
-<?php
-    $room_json_data = array(
-        "room_person_count"=>$roomattribute['room_person_count']
-    );
-?>
-<script type="text/javascript">
-    var room_json_data = <?php echo json_encode($room_json_data,JSON_PRETTY_PRINT); ?>;
-</script>
 <script src="js/jquery-1.11.2.min.js"></script>
 <script src="js/common_scripts_min.js"></script>
 <script src="js/functions.js"></script>
 <script src="js/signUp.js"></script>
 <script src="datapicker/src/jquery.md.bootstrap.datetimepicker.js" type="text/javascript"></script>
 <script type="text/javascript">
-    $('#inputDate3-1').attr("disabled", true);
+    $('#inputDate3-1').prop("readonly", true);
     $('#date3-1').MdPersianDateTimePicker({
         targetTextSelector: '#inputDate3-1',
         disableBeforeToday: true,
