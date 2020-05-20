@@ -5484,6 +5484,18 @@ a.btn_infobox:hover {
     width: 100%;
     text-align: center;
 }
+.sended-code-text,.sended-code-tel{
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+}
+.reset-pass-tel{
+    display: inline-block;
+    font-size:14px;
+    font-weight: bold;
+
+
+}
 @keyframes room_error_message{
     from{
         background: #ffafc2;

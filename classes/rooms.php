@@ -294,7 +294,7 @@
                                         <div class='wishlist'> <a class='tooltip_flip tooltip-effect-1' href='javascript:void(0);'>+<span class='tooltip-content-flip'><span class='tooltip-back'>علاقمند شدم</span></span></a>
                                         </div>
                                         <div class='img_list'>
-                                            <a href='Room.php?room_id={$database->escape_value($rooms_rows['room_id'])}'>
+                                            <a href='Room.php?roomId={$Functions->encrypt_id($rooms_rows['room_id'])}'>
                                                 <div class='ribbon top_rated'></div>
                                                 <img src='"); self::select_room_image($rooms_rows['room_image']); echo("' alt='تی شین'>
                                                 <div class='short_info'></div>
@@ -1422,11 +1422,9 @@
             if (isset($_POST["reserve_submit"]) && isset($room_id) && !(empty($room_id))){
                 if ($sessions->login_state()) {
 
-
                     // main code after main conditions
                     if (isset($_POST["reserve_firstname"]) && !(empty($_POST["reserve_firstname"])) && isset($_POST["reserve_lastname"]) && !(empty($_POST["reserve_lastname"])) && isset($_POST["reserve_date"]) && !(empty($_POST["reserve_date"]))){
                         $max_person_room = (int)$max_person_room;
-
                         // this conditions is for check room person count
                         if (isset($_POST["reserve_person_count"]) && !(empty($_POST["reserve_person_count"]))){
                             $this->room_person_count = $_POST["reserve_person_count"];
@@ -1436,6 +1434,26 @@
                             }else{ $_SESSION["errors_message"] .= "خطایی در ظرفیت افراد رخ داد ."; $users->redirect_to("Room.php?roomId={$room_id}"); }
                         }else{ $this->room_person_count = 1; }
                         /////////////////////////////////////////////////
+
+                        $reserve_firstname = $database->escape_value($_POST["reserve_firstname"]);
+                        $reserve_lastname = $database->escape_value($_POST["reserve_lastname"]);
+                        if (strlen($reserve_firstname) > 150 || strlen($reserve_lastname) > 150){
+                            $_SESSION["errors_message"] .= "نام یا نام خانوادگی کمتر از 150 کارکتر باشد ."; $users->redirect_to("Room.php?roomId={$room_id}");
+                        }
+                        $reserve_date = $database->escape_value($_POST["reserve_date"]);
+                        $reserve_date = $this->convert_date_to_gregorian($reserve_date,$room_id);
+                        $now_time = strftime("%Y-%m-%d %H:%M:%S",time());
+                        $this->room_id = $database->escape_value($Functions->decrypt_id($room_id));
+                        $this->user_id = $_SESSION["user_id"];
+                        $sql = "INSERT INTO room_reservation(room_id,user_id,firstname,lastname,date_range,reserve_room_person_count,reserve_time)VALUES({$this->room_id},{$this->user_id},'{$reserve_firstname}','{$reserve_lastname}','{$reserve_date}',{$this->room_person_count},'{$now_time}')";
+                        $database->query("SET NAMES 'utf8'");
+                        $result = $database->query($sql);
+                        if ($result){
+                            $_SESSION["errors_message"] .= "با موفقیت رزرو شد ."; $users->redirect_to("Room.php?roomId={$room_id}");
+                        }else{
+                            $_SESSION["errors_message"] .= "خطایی در رزرو پیش آمده ."; $users->redirect_to("Room.php?roomId={$room_id}");
+                        }
+
 
                     }else{ $_SESSION["errors_message"] .= "برخی از فیلد ها خالیست یا انتخاب نشده ."; $users->redirect_to("Room.php?roomId={$room_id}"); }
                     //////////////////////////////////
@@ -1511,15 +1529,35 @@
             }
             return round($sum/4);
         }
-        public function check_reserve_fields(){
-            global $users;
-            $reserve_field_arr = array('reserve_firstname','reserve_lastname','reserve_date');
-            foreach ($reserve_field_arr as $reserve_field){
-                if (!(empty($_POST[$reserve_field])) && isset($_POST[$reserve_field])){  continue; return true; }
-                else{ return false; }
-            }
-        }
+        public function convert_date_to_gregorian($date,$room_id){
+            global $Functions,$users;
+            $reserve_date = $users->mytrim($Functions->EN_numTo_FA($date,false));
+            $reserve_date_del_nbsp = str_replace("/","",$reserve_date);
+            $reserve_date_from = substr($reserve_date_del_nbsp,0,8);
+            $reserve_date_to = substr($reserve_date_del_nbsp,-8);
 
+            $reserve_date_from_year = (int)substr($reserve_date_from,0,4);
+            $reserve_date_from_mounth = (int)substr($reserve_date_from,4,2);
+            $reserve_date_from_day = (int)substr($reserve_date_from,6,2);
+
+            $reserve_date_to_year = (int)substr($reserve_date_to,0,4);
+            $reserve_date_to_mounth = (int)substr($reserve_date_to,4,2);
+            $reserve_date_to_day = (int)substr($reserve_date_to,6,2);
+
+            $reserve_date_from_last = $Functions->jalali_to_gregorian($reserve_date_from_year,$reserve_date_from_mounth,$reserve_date_from_day);
+            $reserve_date_to_last = $Functions->jalali_to_gregorian($reserve_date_to_year,$reserve_date_to_mounth,$reserve_date_to_day);
+
+            $reserve_date_from_last = $reserve_date_from_last[0]."-".$reserve_date_from_last[1]."-".$reserve_date_from_last[2];
+            $reserve_date_to_last = $reserve_date_to_last[0]."-".$reserve_date_to_last[1]."-".$reserve_date_to_last[2];
+
+            /*$reserve_date_from_validation = checkdate($reserve_date_from_mounth, $reserve_date_from_day, $reserve_date_from_year);
+            $reserve_date_to_validation = checkdate($reserve_date_to_mounth, $reserve_date_to_day, $reserve_date_to_year);
+            if($reserve_date_from_validation && $reserve_date_to_validation){
+                */return $reserve_date = $reserve_date_from_last."|".$reserve_date_to_last;
+            /*}else{
+                $_SESSION["errors_message"] .= "تاریخ وارد شده نامعتبر است ."; $users->redirect_to("Room.php?roomId={$room_id}");
+            }*/
+        }
         //for panel
         public function smile_voted_by_price_quality_score_comfort($price,$quality,$score,$comfort){
             global $database;

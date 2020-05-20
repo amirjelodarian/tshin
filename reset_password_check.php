@@ -48,7 +48,8 @@ echo $_SESSION["reset_tel"];
                     <hr>
                     <form method="post" action="<?php echo($_SERVER['PHP_SELF']); ?>">
                         <div class="form-group">
-                            <label>کد ارسال شده را وارد کنید</label>
+                            <div class="sended-code-text"><label>کد ارسال شده را وارد کنید : </label></div>
+                            <div class="sended-code-tel"><lable class="reset-pass-tel"><?php echo $_SESSION["reset_tel"]; ?></lable></div>
                             <input type="text" name="code" minlength="5" maxlength="5" class=" form-control" id="code" onkeypress="return event.ctrlKey || event.metaKey || event.altKey || event.charCode >= 45 && event.charCode <= 57 && event.charCode!=47" placeholder="کد 5 رقمی" require />
                         </div>
                         <div id="errors">

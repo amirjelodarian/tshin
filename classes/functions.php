@@ -149,9 +149,9 @@
         }
         function encrypt_id($value){
             if (isset($value)){
-                /*for($i = 1;$i <= 5;$i++)
+                for($i = 1;$i <= 5;$i++)
                     $value = $value * 1.6;
-                $value = base64_encode($value);*/
+                $value = base64_encode($value);
                 return $value;
             }
         }
@@ -159,9 +159,9 @@
             global $users,$database;
             if (isset($value)){
                 $value = $database->escape_value($value);
-                /*$value = base64_decode($value);
+                $value = base64_decode($value);
                 for($i = 1;$i <= 5;$i++)
-                    $value = $value / 1.6;*/
+                    $value = $value / 1.6;
                 if((preg_match('/^[0-9]*$/', $value)) && is_numeric($value)){
                     return $value;
                 }else{
@@ -245,7 +245,7 @@
         public function EN_numTo_FA($str,$toPersian){
             $en = array('0','1','2','3','4','5','6','7','8','9');
             $fa = array('۰','۱','۲','۳','۴','۵','۶','۷','۸','۹');
-            if (isset($toPersian)){ return str_replace($en,$fa,$str); } else{ return str_replace($fa,$en,$str); }
+            if ($toPersian == true){ return str_replace($en,$fa,$str); } elseif($toPersian == false){ return str_replace($fa,$en,$str); }
         }
         public function give_start_by_number($score_row){
             global $database;

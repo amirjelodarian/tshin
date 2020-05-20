@@ -371,13 +371,13 @@ if (isset($_GET['roomId']) && !(empty($_GET["roomId"])) || isset($_POST['room_id
                         <div class='col-md-6 col-sm-6'>
                             <div class='form-group'>
                                 <label>نام</label>
-                                <input class='form-control' name='reserve_firstname' id='name_booking' type='text' required />
+                                <input class='form-control' name='reserve_firstname' maxlength='50' id='name_booking' type='text' required />
                             </div>
                         </div>
                         <div class='col-md-6 col-sm-6'>
                             <div class='form-group'>
                                 <label>نام خانوادگی</label>
-                                <input class='form-control' name='reserve_lastname' id='last_name_booking' type='text' required />
+                                <input class='form-control' name='reserve_lastname' maxlength='100' id='last_name_booking' type='text' required />
                             </div>
                         </div>
                     </div>
