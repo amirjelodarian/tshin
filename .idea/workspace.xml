@@ -3,17 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="c424756b-6ee7-4545-9854-ec57cf6aba41" name="Default Changelist" comment=" noth">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Room.php" beforeDir="false" afterPath="$PROJECT_DIR$/Room.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/functions.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/rooms.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/rooms.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/datapicker" beforeDir="false" afterPath="$PROJECT_DIR$/datapicker" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/datapicker/demo/Samples1.html" beforeDir="false" afterPath="$PROJECT_DIR$/datapicker/demo/Samples1.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/datapicker/dist/jquery.md.bootstrap.datetimepicker.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/datapicker/dist/jquery.md.bootstrap.datetimepicker.style.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/datapicker/dist/jquery.md.bootstrap.datetimepicker.style.css.map" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/datapicker/src/jquery.md.bootstrap.datetimepicker.js" beforeDir="false" afterPath="$PROJECT_DIR$/datapicker/src/jquery.md.bootstrap.datetimepicker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reset_password_check.php" beforeDir="false" afterPath="$PROJECT_DIR$/reset_password_check.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -156,7 +152,7 @@
       <workItem from="1589640607188" duration="139000" />
       <workItem from="1589760753080" duration="9743000" />
       <workItem from="1589842778849" duration="20732000" />
-      <workItem from="1589930209269" duration="7219000" />
+      <workItem from="1589930209269" duration="7762000" />
     </task>
     <servers />
   </component>

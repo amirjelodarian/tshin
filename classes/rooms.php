@@ -917,7 +917,7 @@
                                 <div class='row'>
                                     <div class='col-lg-4 col-md-4 col-sm-4'>
                                         <div class='img_list'>
-                                            <a href='rooms_edit.php'>
+                                            <a href='../Room.php?roomId={$Functions->encrypt_id($rooms_rows['room_id'])}'>
                                                     <div class='ribbon top_rated'></div>
                                                         <img src='../"); self::select_room_image($rooms_rows['room_image']); echo("' alt=''>
                                                     <div class='short_info'></div>
