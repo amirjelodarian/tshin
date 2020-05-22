@@ -513,6 +513,19 @@
                 $users->redirect_to($_SERVER["PHP_SELF"]);
             }
         }
+
+        public function DatesRoomReservedAttr($room_id){
+            global $Functions,$database,$users;
+            $this->room_id = (int)$database->escape_value($Functions->decrypt_id($room_id));
+            if(preg_match("/^[0-9]*$/",$this->room_id)){
+                $database->query("SET NAMES 'utf8'");
+                $sql = "SELECT date_range FROM room_reservation WHERE room_id={$this->room_id}";
+                $date_reserved_room_result = $database->query($sql);
+                return $date_reserved_room_result;
+            }else{
+                $users->redirect_to("all_hotels_list.php");
+            }
+        }
         // for panel display
         public function AllRooms_panel(){
             global $database,$Functions;

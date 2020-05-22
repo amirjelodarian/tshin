@@ -10,6 +10,10 @@
     <!-- CSS -->
     <link href='css/base.css' rel='stylesheet'>
     <link rel="stylesheet" href="datapicker/src/jquery.md.bootstrap.datetimepicker.style.css" />
+    <script src="js/jquery-1.11.2.min.js"></script>
+    <script src="js/common_scripts_min.js"></script>
+    <script src="js/functions.js"></script>
+    <script src="js/signUp.js"></script>
 </head>
 <body>
 <div id='preloader'>
@@ -41,6 +45,11 @@ if (isset($_GET['roomId']) && !(empty($_GET["roomId"])) || isset($_POST['room_id
     }
     if (isset($_GET['roomId']) && !(empty($_GET["roomId"]))){
         $room_id = $database->escape_value($_GET['roomId']);
+    }
+    settype($room_id,"integer");
+    // This condition for while id is just number
+    if(!(preg_match("/^[0-9]*$/",$Functions->decrypt_id($room_id)))){
+        $users->redirect_to("all_hotels_list.php");
     }
     /////////////////////////////////////////
 
@@ -415,6 +424,7 @@ if (isset($_GET['roomId']) && !(empty($_GET["roomId"])) || isset($_POST['room_id
     </div>
 </div>
             ");
+
         // this is for check if is set review submit
         if (isset($_POST["review_submit"])) {
             $rooms->InsertComment($room_id);
@@ -514,13 +524,35 @@ if (isset($_GET['roomId']) && !(empty($_GET["roomId"])) || isset($_POST['room_id
                 </div>
             </div>
         </div>
+        <script src="datapicker/src/jquery.md.bootstrap.datetimepicker.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            $('#inputDate3-1').prop("readonly", true);
+            $('#date3-1').MdPersianDateTimePicker({
+                targetTextSelector: '#inputDate3-1',
+                disableBeforeToday: true,
+                disabledDates: [
+                    <?php
+                        $date_reserved_room_result = $rooms->DatesRoomReservedAttr($room_id);
+                        while($dates_room_reserved = $database->fetch_array($date_reserved_room_result)) {
+                            $range_date_room = explode("|",$dates_room_reserved["date_range"]); $start_day = $range_date_room[0]; $end_day = $range_date_room[1];
+                            echo $Functions->ShowBetweenTwoDateRange($start_day,$end_day);
+                        }
+                    ?>
+                ],
+                monthsToShow: [0, 2],
+                rangeSelector: true
+            });
+        </script>
         <?php
+        }else{
+            $users->redirect_to("all_hotels_list.php");
         }
     }
 }else{
     $users->redirect_to("all_hotels_list.php");
 }
 ?>
+
 <div class="now-reserve-btn">
     <a href="#reservation">
         <div class="now-reserve-inside">
@@ -539,20 +571,6 @@ if (isset($_GET['roomId']) && !(empty($_GET["roomId"])) || isset($_POST['room_id
             ?>
     </span>
 </div>
-<script src="js/jquery-1.11.2.min.js"></script>
-<script src="js/common_scripts_min.js"></script>
-<script src="js/functions.js"></script>
-<script src="js/signUp.js"></script>
-<script src="datapicker/src/jquery.md.bootstrap.datetimepicker.js" type="text/javascript"></script>
-<script type="text/javascript">
-    $('#inputDate3-1').prop("readonly", true);
-    $('#date3-1').MdPersianDateTimePicker({
-        targetTextSelector: '#inputDate3-1',
-        disableBeforeToday: true,
-        monthsToShow: [0, 2],
-        rangeSelector: true
-    });
-</script>
 <?php include('includes/footer.php'); ?>
 </body>
 </html>

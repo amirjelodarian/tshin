@@ -148,10 +148,12 @@
             return array($time,$date);
         }
         function encrypt_id($value){
+            global $database;
             if (isset($value)){
-                for($i = 1;$i <= 5;$i++)
+                /*for($i = 1;$i <= 5;$i++)
                     $value = $value * 1.6;
-                $value = base64_encode($value);
+                $value = base64_encode($value);*/
+                $value = $database->escape_value($value);
                 return $value;
             }
         }
@@ -159,14 +161,15 @@
             global $users,$database;
             if (isset($value)){
                 $value = $database->escape_value($value);
-                $value = base64_decode($value);
+                settype($value,"integer");
+                /*$value = base64_decode($value);
                 for($i = 1;$i <= 5;$i++)
                     $value = $value / 1.6;
                 if((preg_match('/^[0-9]*$/', $value)) && is_numeric($value)){
-                    return $value;
-                }else{
+                    */return $value;
+                /*}else{
                     $users->redirect_to("all_hotels_list.php");
-                }
+                }*/
             }
         }
         // pull a iranian site this function :)
@@ -232,6 +235,19 @@
             }
             $i++;
             return substr($str,$i);
+        }
+        public function ShowBetweenTwoDateRange($start_day,$end_day){
+            $new_date = new DateTime($end_day);
+            $new_date->add(new DateInterval('P1D'));
+            $end_day = $new_date->format('Y-m-d');
+            $period = new DatePeriod(
+                new DateTime($start_day),
+                new DateInterval('P1D'),
+                new DateTime($end_day)
+            );
+            foreach ($period as $key => $value) {
+                echo "new Date(".$value->format('Y,m-1,d') . "),";
+            }
         }
         ///////////////////////////////////////
         public function convert_db_format_for_gregorian_to_jalali($date){
