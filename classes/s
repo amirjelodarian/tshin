@@ -1,84 +1,327 @@
-<div id='overlay'></div>
-<div class='modal fade' id='myReview' tabindex='-1' role='dialog' aria-labelledby='myReviewLabel' aria-hidden='true'>
-    <div class='modal-dialog'>
-        <div class='modal-content'>
-            <div class='modal-header'>
-                <button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span>
-                </button>
-                <h4 class='modal-title' id='myReviewLabel'>نظرات شما</h4>
-            </div>
-            <div class='modal-body'>
-                <div id='message-review'></div>
-                <form action='<?php echo(htmlspecialchars($_SERVER['PHP_SELF'])); ?>' method='post'>
-                    <div class='row'>
-                        <div class='col-md-6'>
-                            <div class='form-group'>
-                                <label>امتیاز</label>
-                                <input name='room_id' type='hidden' value='<?php echo $room_id; ?>'' />
-                                <select class='form-control' name='room_score_review' id='cleanliness_review' required>
-                                    <option value=''>لطفا انتخاب کنید</option>
-                                    <?php
-                                    for($counter = 1;$counter <= 5;$counter++)
-                                        echo ''<option value='{$counter}'>{$counter}</option>'';
-                                    ?>
-                                </select>
-                            </div>
-                        </div>
-                        <div class='col-md-6'>
-                            <div class='form-group'>
-                                <label>آسایش</label>
-                                <select class='form-control' name='room_comfort_review' id='comfort_review' required>
-                                    <option value=''>لطفا انتخاب کنید</option>
-                                    <option value='13'>من نمی دانم</option>
-                                    <option value='1'>کم</option>
-                                    <option value='2'>کافی</option>
-                                    <option value='3'>خوب</option>
-                                    <option value='4'>عالی</option>
-                                    <option value='5'>بسیار عالی</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class='row'>
-                        <div class='col-md-6'>
-                            <div class='form-group'>
-                                <label>قیمت</label>
-                                <select class='form-control' name='room_price_review' id='price_review' required>
-                                    <option value=''>لطفا انتخاب کنید</option>
-                                    <option value='13'>خیلی زیاد</option>
-                                    <option value='1'>زیاد</option>
-                                    <option value='2'>متوسط</option>
-                                    <option value='3'>خوب</option>
-                                    <option value='4'>عالی</option>
-                                    <option value='5'>بسیار مناسب و به صرفه</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class='col-md-6'>
-                            <div class='form-group'>
-                                <label>کیفیت</label>
-                                <select class='form-control' name='room_quality_review' id='quality_review' required>
-                                    <option value=''>لطفا انتخاب کنید</option>
-                                    <option value='13'>من نمی دانم</option>
-                                    <option value='1'>کم</option>
-                                    <option value='2'>کافی</option>
-                                    <option value='3'>خوب</option>
-                                    <option value='4'>عالی</option>
-                                    <option value='5'>بسیار عالی</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class='form-group'>
-                        <textarea name='room_text_review' id='review_text_textarea' class='form-control' style='height:100px' placeholder='متن خود را بنویسید' required></textarea>
-                    </div>
-                    <div class='form-group'>
-                        <img src='classes/captcha.php' class='captcha_code' title='کد را در کادر وارد کنید' />
-                        <input type='text' id='tel' name='random_captcha_code' class='verify_review' minlength='4' title='کد را در کادر وارد کنید' maxlength='4' placeholder='1234' required />
-                    </div><hr />
-                    <input type='submit' value='Submit' name='review_submit' class='btn_1' id='submit-review'>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+function nsource() {
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200){
+            document.getElementById("nsource").innerHTML = this.responseText;
+        }
+    };
+
+    xhttp.open("GET", "http://www.programmingcenter.ir/des/php/source.php", true);
+    xhttp.send();
+}
+
+function ndawnlode() {
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200){
+            document.getElementById("ndownlode").innerHTML = this.responseText;
+        }
+    };
+
+    xhttp.open("GET", "http://www.programmingcenter.ir/des/php/download.php", true);
+    xhttp.send();
+}
+
+function ncource() {
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200){
+            document.getElementById("ncource").innerHTML = this.responseText;
+        }
+    };
+
+    xhttp.open("GET", "http://www.programmingcenter.ir/des/php/courses.php", true);
+    xhttp.send();
+}
+
+function narticle() {
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200){
+            document.getElementById("narticle").innerHTML = this.responseText;
+        }
+    };
+
+    xhttp.open("GET", "http://www.programmingcenter.ir/des/php/article.php", true);
+    xhttp.send();
+}
+
+function ntoolse() {
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200){
+            document.getElementById("ntoolse").innerHTML = this.responseText;
+        }
+    };
+
+    xhttp.open("GET", "http://www.programmingcenter.ir/des/php/toolse.php", true);
+    xhttp.send();
+}
+
+function nmember() {
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200){
+            document.getElementById("nmember").innerHTML = this.responseText;
+        }
+    };
+
+    xhttp.open("GET", "http://www.programmingcenter.ir/des/php/member.php", true);
+    xhttp.send();
+}
+
+function adsone() {
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200){
+            document.getElementById("ads1").innerHTML = this.response;
+        }
+    };
+
+    xhttp.open("GET", "http://www.programmingcenter.ir/des/php/ads/ads1.php", true);
+    xhttp.send();
+}
+
+function adstwo() {
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200){
+            document.getElementById("ads2").innerHTML = this.response;
+        }
+    };
+
+    xhttp.open("GET", "http://www.programmingcenter.ir/des/php/ads/ads2.php", true);
+    xhttp.send();
+}
+
+function adsthree() {
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200){
+            document.getElementById("ads3").innerHTML = this.response;
+        }
+    };
+
+    xhttp.open("GET", "http://www.programmingcenter.ir/des/php/ads/ads3.php", true);
+    xhttp.send();
+}
+
+function adsfour() {
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200){
+            document.getElementById("ads4").innerHTML = this.response;
+        }
+    };
+
+    xhttp.open("GET", "http://www.programmingcenter.ir/des/php/ads/ads4.php", true);
+    xhttp.send();
+}
+
+function adsfive() {
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200){
+            document.getElementById("ads5").innerHTML = this.response;
+        }
+    };
+
+    xhttp.open("GET", "http://www.programmingcenter.ir/des/php/ads/ads5.php", true);
+    xhttp.send();
+}
+
+function adssix() {
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200){
+            document.getElementById("ads6").innerHTML = this.response;
+        }
+    };
+
+    xhttp.open("GET", "http://www.programmingcenter.ir/des/php/ads/ads6.php", true);
+    xhttp.send();
+}
+
+function flogo() {
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200){
+            document.getElementById("logo").innerHTML = this.response;
+        }
+    };
+
+    xhttp.open("GET", "http://www.programmingcenter.ir/des/php/footer/logo.php", true);
+    xhttp.send();
+}
+
+function flink() {
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200){
+            document.getElementById("link").innerHTML = this.response;
+        }
+    };
+
+    xhttp.open("GET", "http://www.programmingcenter.ir/des/php/footer/link.php", true);
+    xhttp.send();
+}
+
+function fabout() {
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200){
+            document.getElementById("about").innerHTML = this.response;
+        }
+    };
+
+    xhttp.open("GET", "http://www.programmingcenter.ir/des/php/footer/about.php", true);
+    xhttp.send();
+}
+
+function ficonsocial() {
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200){
+            document.getElementById("icon-social").innerHTML = this.response;
+        }
+    };
+
+    xhttp.open("GET", "http://www.programmingcenter.ir/des/php/footer/icon-social.php", true);
+    xhttp.send();
+}
+
+function fbtnsocial() {
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200){
+            document.getElementById("btn-social").innerHTML = this.response;
+        }
+    };
+
+    xhttp.open("GET", "http://www.programmingcenter.ir/des/php/footer/btn-social.php", true);
+    xhttp.send();
+}
+
+function jostojo() {
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200){
+            document.getElementById("jostojo").innerHTML = this.responseText;
+        }
+    };
+
+    xhttp.open("GET", "http://www.programmingcenter.ir/des/php/jostojo.php", true);
+    xhttp.send();
+}
+
+nsource()
+ndawnlode()
+ncource()
+narticle()
+ntoolse()
+nmember()
+jostojo()
+    //ads function
+adsone()
+adstwo()
+adsthree()
+adsfour()
+adsfive()
+adssix()
+    //footer
+flogo()
+flink()
+fabout()
+ficonsocial()
+fbtnsocial()
+$(document).ready(function() { $("#btn-close-ads").click(function() { $('#wallads').fadeOut(400); }); });
+
+$(document).ready(function() {
+    $("#smlsearch").hide();
+
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 300) {
+                $('#smlsearch').fadeIn();
+            } else {
+                $('#smlsearch').fadeOut();
+            }
+        });
+
+        $('#smlsearch b').click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+
+            return false;
+        });
+    });
+});
+$(document).ready(function() {
+    $(function() {
+        $('#topweb b').click(function() {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 2100);
+
+            return false;
+        });
+    });
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+
+    آ آ آ آ آ آ آ 
+    Typed.new("#typed", {آ آ آ آ آ آ آ آ آ آ آ 
+        stringsElement: document.getElementById('typed-strings'),
+        آ آ آ آ آ آ آ آ آ آ آ typeSpeed: 30,
+        آ آ آ آ آ آ آ آ آ آ آ backDelay: 500,
+        آ آ آ آ آ آ آ آ آ آ آ loop: false,
+        آ آ آ آ آ آ آ آ آ آ آ contentType: 'html', // or text
+        آ آ آ آ آ آ آ آ آ آ آ  // defaults to null for infinite loop
+        آ آ آ آ آ آ آ آ آ آ آ loopCount: null,
+        آ آ آ آ آ آ آ آ آ آ آ callback: function() {
+            foo();
+        },
+        آ آ آ آ آ آ آ آ آ آ آ resetCallback: function() {
+            newTyped();
+        }آ آ آ آ آ آ آ 
+    });
+
+    آ آ آ آ آ آ آ 
+    var resetElement = document.querySelector('.reset');آ آ آ آ آ آ آ 
+    if (resetElement) {آ آ آ آ آ آ آ آ آ آ آ 
+        resetElement.addEventListener('click', function() {آ آ آ آ آ آ آ آ آ آ آ آ آ آ آ 
+            document.getElementById('typed')._typed.reset();آ آ آ آ آ آ آ آ آ آ آ 
+        });آ آ آ آ آ آ آ 
+    }
+
+    آ آ آ 
+});
+
+آ آ آ 
+function newTyped() { /* A new typed object */ }
+
+آ آ آ 
+function foo() {
+    console.log("Callback");
+}

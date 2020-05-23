@@ -5493,8 +5493,27 @@ a.btn_infobox:hover {
     display: inline-block;
     font-size:14px;
     font-weight: bold;
-
-
+}
+.change-password-outside{
+    background: darkorange;
+    transition: 1s;
+    padding: 1px;
+}
+.change-password-outside:hover{
+    transition: 1s;
+    background: #333;
+    cursor: pointer;
+}
+.change-password-outside h5{
+    font-weight: bold;
+    color: #fff;
+}
+.change-password-inside{
+    /*background-image: linear-gradient(to bottom,#161616,#00A8FF);*/
+    background: #333;
+    padding: 10px;
+    opacity: 0.8;
+    border-radius: 2.5px 2.5px 30.5px 30.5px;
 }
 @keyframes room_error_message{
     from{

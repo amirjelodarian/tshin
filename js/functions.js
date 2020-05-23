@@ -1,4 +1,8 @@
 $(window).load(function () {
+    $(".change-password-inside").hide();
+    $(".change-password-outside").click(function () {
+        $(".change-password-inside").animate({'height':'toggle'});
+    });
     $('#inputDate3-1,#adults').prop("readonly", true);
     var windowWidth = window.innerWidth
         || document.documentElement.clientWidth

@@ -598,12 +598,9 @@
                                             <sup>{$database->escape_value($Functions->EN_numTo_FA($Functions->insert_seperator($rooms_rows['room_main_price']),true))} تومان</sup>
                                             <span class='normal_price_list'>{$database->escape_value($Functions->EN_numTo_FA($Functions->insert_seperator($rooms_rows['room_off_price']),true))} تومان</span>
                                             <small>روزانه / شبانه</small>
-                                                <form action='rooms_edit.php' method='post'>
-                                                    <input type='submit' name='submit_edit_room' value='Edit Room' class='submit_edit' />
-                                                    <input type='hidden' name='room_id' value='");
-                                                    echo($Functions->encrypt_id($rooms_rows['room_id']));
-                                                    echo("' /> 
-                                                </form>
+                                           
+                                                <a href='rooms_edit.php?roomId={$Functions->encrypt_id($rooms_rows['room_id'])}'><div class='submit_edit'>Edit Room</div></a>
+                                          
                                                 <form method='post' action='rooms_delete.php'>
                                                     <input type='submit' name='submit_delete_room' value='Delete' class='delete_room_btn' />
                                                     <input type='hidden' name='room_id' value='");
@@ -620,25 +617,27 @@
         }
         public function EditRoom_panel(){
             global $database,$Functions,$users;
-            if (isset($_POST["submit_edit_room"]) && isset($_POST["room_id"])){
-                if(preg_match("/^[0-9]*$/",$database->escape_value($Functions->decrypt_id($_POST["room_id"])))){
-                    $this->room_id = $database->escape_value($Functions->decrypt_id($_POST["room_id"]));
-                }else{
-                    $users->redirect_to("rooms_show.php");
-                }
-            }
+            if (!(empty($_GET["roomId"])) && isset($_GET["roomId"])){
+                $this->room_id = $database->escape_value($Functions->decrypt_id($_GET["roomId"]));
             $sql = "SELECT * FROM rooms WHERE room_id={$this->room_id}";
             $database->query("SET NAMES 'utf8'");
             $result = $database->query($sql);
-            while ($rooms_rows = $database->fetch_array($result)){
-                echo ("
+                if(!(preg_match("/^[0-9]*$/",$this->room_id))){
+                    $users->redirect_to("rooms_show.php");
+                }
+                if($database->num_rows($result) == 0){
+                    $users->redirect_to("rooms_show.php");
+                }
+            while ($rooms_rows = $database->fetch_array($result)) {
+                echo("
                 
                                 <div id='rooms' class='strip_all_tour_list wow fadeIn' data-wow-delay='0.1s'>
                                 <div class='row'>
                                     <div class='col-lg-4 col-md-4 col-sm-4'>
                                         <div class='img_list'>
                                                 <div class='ribbon top_rated'></div>
-                                                <img src='../"); self::select_room_image($rooms_rows['room_image']);
+                                                <img src='../");
+                self::select_room_image($rooms_rows['room_image']);
                 $_SESSION["image_name"] = $rooms_rows["room_image"];
                 echo("' alt=''>
                                                 <div class='short_info'></div>
@@ -663,43 +662,75 @@
                                             </div>
                                             <h2><input type='text' class='room_address' style='background: white;' value='{$database->escape_value($rooms_rows['room_address'])}' name='room_address' placeholder='گرگان - خیابان مرادی' maxlength='400' required/></h2>
                                             <h3><input type='text' style='background: white;' value='{$database->escape_value($rooms_rows['room_title'])}' name='room_title' maxlength='200' required/></h3>
-                                            <p><textarea name='room_description' maxlength='1500' required>"); echo($rooms_rows['room_description']); echo("</textarea></p>
+                                            <p><textarea name='room_description' maxlength='1500' required>");
+                echo($rooms_rows['room_description']);
+                echo("</textarea></p>
                                             <ul class='add_info'>
                                                 <li> <a href='javascript:void(0);' class='tooltip-1 ");
-                if($rooms_rows['room_wifi'] == 1){ echo('rooms_checkbox'); }
-                echo ("' data-placement='top' title='وای فای رایگان'><i class='icon_set_1_icon-86'></i></a>
+                if ($rooms_rows['room_wifi'] == 1) {
+                    echo('rooms_checkbox');
+                }
+                echo("' data-placement='top' title='وای فای رایگان'><i class='icon_set_1_icon-86'></i></a>
                                                 <input type='checkbox' class='rooms_checkbox' name='room_wifi' ");
-                if($rooms_rows['room_wifi'] == 1){ echo('checked'); } echo(" />
+                if ($rooms_rows['room_wifi'] == 1) {
+                    echo('checked');
+                }
+                echo(" />
                                                 </li>
                                                 <li> <a href='javascript:void(0);' class='tooltip-1 ");
-                if($rooms_rows['room_television'] == 1){ echo('rooms_checkbox'); }
+                if ($rooms_rows['room_television'] == 1) {
+                    echo('rooms_checkbox');
+                }
                 echo("' data-placement='top' title='تلویزیون پلاسما با کانال های اچ دی'><i class='icon_set_2_icon-116'></i></a>
                                                 <input type='checkbox' class='rooms_checkbox' name='room_television' ");
-                if($rooms_rows['room_television'] == 1){ echo('checked'); } echo(" />
+                if ($rooms_rows['room_television'] == 1) {
+                    echo('checked');
+                }
+                echo(" />
                                                 </li>
                                                 <li> <a href='javascript:void(0);' class='tooltip-1 ");
-                if($rooms_rows['room_pool'] == 1){ echo('rooms_checkbox'); }
+                if ($rooms_rows['room_pool'] == 1) {
+                    echo('rooms_checkbox');
+                }
                 echo("' data-placement='top' title='استخر شنا'><i class='icon_set_2_icon-110'></i></a>
                                                 <input type='checkbox' class='rooms_checkbox' name='room_pool' ");
-                if($rooms_rows['room_pool'] == 1){ echo('checked'); } echo(" />
+                if ($rooms_rows['room_pool'] == 1) {
+                    echo('checked');
+                }
+                echo(" />
                                                 </li>
                                                 <li> <a href='javascript:void(0);' class='tooltip-1 ");
-                if($rooms_rows['room_gym'] == 1){ echo('rooms_checkbox'); }
+                if ($rooms_rows['room_gym'] == 1) {
+                    echo('rooms_checkbox');
+                }
                 echo("'data-placement='top' title='مرکز تناسب اندام'><i class='icon_set_2_icon-117'></i></a>
                                                 <input type='checkbox' class='rooms_checkbox' name='room_gym' ");
-                if($rooms_rows['room_gym'] == 1){ echo('checked'); } echo(" />
+                if ($rooms_rows['room_gym'] == 1) {
+                    echo('checked');
+                }
+                echo(" />
                                                 </li>
                                                 <li> <a href='javascript:void(0);' class='tooltip-1 ");
-                if($rooms_rows['room_food'] == 1){ echo('rooms_checkbox'); }
+                if ($rooms_rows['room_food'] == 1) {
+                    echo('rooms_checkbox');
+                }
                 echo("' data-placement='top' title='رستوران'><i class='icon_set_1_icon-58'></i></a>
                                                 <input type='checkbox' class='rooms_checkbox' name='room_food' ");
-                if($rooms_rows['room_food'] == 1){ echo('checked'); } echo(" />
+                if ($rooms_rows['room_food'] == 1) {
+                    echo('checked');
+                }
+                echo(" />
                                                 </li>
                                                 <li> <a href='javascript:void(0);' class='tooltip-1 ");
-                if($rooms_rows['room_parking'] == 1){ echo('rooms_checkbox'); }
+                if ($rooms_rows['room_parking'] == 1) {
+                    echo('rooms_checkbox');
+                }
                 echo("' data-placement='top' title='پارکینگ'><i class='icon_set_1_icon-27'></i></a>
                                                 <input type='checkbox' class='rooms_checkbox' name='room_parking' ");
-                if($rooms_rows['room_parking'] == 1){ echo('checked'); } echo(" />
+                if ($rooms_rows['room_parking'] == 1) {
+                    echo('checked');
+                }
+                echo(" />
                                                 </li>
                                             </ul>
                                         </div>
@@ -713,8 +744,8 @@
                                             <small>روزانه / شبانه</small>
                                                 <p>
                                                     <input type='hidden' name='room_id' value='");
-                                                    echo($Functions->encrypt_id($this->room_id));
-                                                    echo("' />
+                echo($Functions->encrypt_id($this->room_id));
+                echo("' />
                                                     <input type='submit' name='submit_last_edit_room' class='submit_btn' value='Submit Edit' />
                                                 </p>
                                             </div>
@@ -723,6 +754,7 @@
                                 </div>
                             </div>
                             ");
+                }
             }
         }
         public function UpdateRoom(){

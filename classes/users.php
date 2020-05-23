@@ -812,8 +812,11 @@ require_once("functions.php");
                                         <div class='admin_info col-xs-12'>
                                             <span id='admin_label'>UserName&nbsp;:</span>&nbsp;<input class='edit_admin_username' value='{$user_row['username']}' name='user_username' required /><hr />
                                             <span id='admin_label'>Tel:</span>&nbsp;<span class='edit_user_tel'>{$user_row['tel']}</span><hr />
-                                            <span id='admin_label'>New Password:</span>&nbsp;<input class='edit_admin_username' name='new_password' type='password' placeholder='New Password' /><hr />
-                                            <span id='admin_label'>New Password:</span>&nbsp;<input class='edit_admin_username' name='repeat_password' type='password' placeholder='Repeat Password' /><hr />
+                                            <div class='change-password-outside'><h5>* Change Password *</h5></div><br />
+                                            <div class='change-password-inside'>
+                                                <span id='admin_label'>New Password:</span>&nbsp;<input class='edit_admin_username' name='new_password' type='password' placeholder='New Password' /><hr />
+                                                <span id='admin_label'>Repeat Password:</span>&nbsp;<input class='edit_admin_username' name='repeat_password' type='password' placeholder='Repeat Password' /><hr />
+                                            </div><br />
                                             <input type='submit'  name='submit_last_edit_panel' class='edit_admin_input' value='Edit' /> 
                                        
                                     </form>

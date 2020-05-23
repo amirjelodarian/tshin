@@ -17,7 +17,7 @@ else if($_SESSION["user_mode"] == 1){
                 <div class="panel_rooms col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <form class="rooms_edit_form" action="<?php echo(htmlspecialchars($_SERVER['PHP_SELF'])); ?>" method="post" enctype="multipart/form-data">
                         <?php
-                            if (isset($_POST["submit_edit_room"])){
+                            if (isset($_GET["roomId"])){
                                 $rooms->EditRoom_panel();
                             }else{
                                 $users->redirect_to("rooms_show.php");
