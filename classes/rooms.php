@@ -1053,13 +1053,13 @@
 
 
         /////////////////////////////////////////////////////////////////////////////////////////
-        // functions for Rooms Survay////////////////////////////////////////////////////////////
+        // functions for Rooms Survey////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////////////
         // this function is for Insert Comment for Room Review
         public function SelectRoomComments(){
             global $database,$Functions;
-            if(isset($_POST["submit_publish"]) && isset($_POST["select_publish"]) && !(empty($_POST["select_publish"]))){
-                switch($_POST["select_publish"]){
+            if(isset($_GET["submit_publish"]) && isset($_GET["select_publish"]) && !(empty($_GET["select_publish"]))){
+                switch($_GET["select_publish"]){
                     case "unpublished":
                         $sql = "SELECT * FROM room_survey WHERE publish = 0 ORDER BY id DESC";
                         $result = $database->query($sql);
@@ -1089,10 +1089,16 @@
 
         public function EditCommentPanel(){
             global $users,$Functions,$database;
-            if (isset($_POST["survey_id"]) && !empty($_POST["survey_id"])){
-                $this->survey_id = $Functions->decrypt_id($_POST["survey_id"]);
+            if (isset($_GET["commentId"]) && !empty($_GET["commentId"])){
+                $this->survey_id = $Functions->decrypt_id($_GET["commentId"]);
                 $sql = "SELECT * FROM room_survey WHERE id = {$this->survey_id}";
                 $result = $database->query($sql);
+                if ($database->num_rows($result) == 0){
+                    $users->redirect_to("comments_show.php");
+                }
+                if(!(preg_match("/^[0-9]*$/",$this->survey_id))){
+                    $users->redirect_to("comments_show.php");
+                }
                 if ($room_survey = $database->fetch_array($result)){
                     echo("
                     <h1 class='comment-edit-h'>Comment Edit</h1>

@@ -23,7 +23,7 @@ if (isset($_POST["edit_user_comment_submit"])){
 }
 ?>
     <?php
-        if (isset($_POST["edit_user_comment"]) && isset($_POST["survey_id"]) && !empty($_POST["survey_id"])){
+        if (isset($_GET["commentId"]) && !empty($_GET["commentId"])){
             $rooms->EditCommentPanel();
         }else{
             $users->redirect_to("comments_show.php");

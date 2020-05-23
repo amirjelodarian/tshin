@@ -64,7 +64,7 @@ if (isset($_POST['submit_search'])){
 </h2>
 <div class='container-comment-panel col-xs-12 col-sm-12 col-md-12 col-lg-12'>
     <div id="errors" class="errors-panel " style="margin-top: 70px;"><?php echo $users->Errors(); ?></div>
-    <form method="post" action="<?php echo($_SERVER['PHP_SELF']); ?>">
+    <form method="get" action="<?php echo($_SERVER['PHP_SELF']); ?>">
         <div class="publish">
             <select name="select_publish">
                 <option value="unpublished" id="unpublished" <?php if($SelcetPublishMode[1] == "unpublished") echo "selected"; ?>><?php echo("({$rooms->CountPublishAndUnPublishRoomCommentsPanel(0)})"); ?>&nbsp;Un Published</option>
@@ -117,10 +117,7 @@ $all_room_survey_result = $all_room_survey_result[0];
                             </div>
                             <input type='submit' name='delete_user_comment' value='Delete' class='comments_delete_btn delete_room_btn' />
                         </form>
-                        <form action='comments_edit.php' id='submit-checkbox-form' method='post'>
-                                <input type='hidden' name='survey_id' value='"); echo($Functions->encrypt_id($room_survey['id'])); echo("' />
-                                <input type='submit' name='edit_user_comment' value='Edit' class='edit-comment-panel-btn' />
-                        </form>
+                        <a class='edit-comment-panel-btn' href='comments_edit.php?commentId={$Functions->decrypt_id($room_survey['id'])}'>Edit</a>
                     </div>
                         <div class='line'></div>
                     </div>
