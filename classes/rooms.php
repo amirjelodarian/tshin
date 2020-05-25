@@ -10,6 +10,9 @@
         private $survey_date; // DATE
         private $publish;
         //////////////////
+        // this is for table room_reservation
+        private $reserve_id;
+        /////////////////////////////////////
         // this is for table rooms
         public $room_id;
         public $room_address;
@@ -1331,7 +1334,9 @@
                 return $row['comments_count'];
             }
         }
-        // for panel
+        // for panel /////////////////////////////////////////////////////////////////////
+            // Comment
+
         public function CountPublishAndUnPublishRoomCommentsPanel($publish_mode){
             global $database;
             $sql = "SELECT COUNT(*) AS comments_count FROM room_survey WHERE publish={$publish_mode}";
@@ -1340,7 +1345,6 @@
                 return $row['comments_count'];
             }
         }
-
         public function PublishComment(){
             global $database,$Functions;
             if(isset($_POST["publish_submit"]) && isset($_POST["survey_id"]) && !(empty($_POST["survey_id"]))) {
@@ -1391,7 +1395,6 @@
                 }
             }
         }
-
         public function DeleteUserComment(){
             global $database,$users,$Functions;
             if (isset($_POST["delete_user_comment"]) && isset($_POST["survey_id"]) && !(empty($_POST["survey_id"]))){
@@ -1427,8 +1430,6 @@
                     }
                 }
         }
-
-
         public function CommentsSearch(){
             global $database,$users,$Functions;
             if (isset($_POST['submit_search']) && !(empty($_POST['keyword']))) {
@@ -1467,6 +1468,131 @@
             }
         }
 
+
+            // Reservation
+        public function SelectRoomReservation(){
+            global $database,$Functions;
+            if(isset($_GET["submit_booking"]) && isset($_GET["select_booking"]) && !(empty($_GET["select_booking"]))){
+                switch($_GET["select_booking"]){
+                    case "notbooked":
+                        $sql = "SELECT * FROM room_reservation WHERE reserved_mode = 0 ORDER BY reserve_id DESC";
+                        $result = $database->query($sql);
+                        $booking_mode = "notbooked";
+                        return array($result,$booking_mode);
+                        break;
+                    case "booked":
+                        $sql = "SELECT * FROM room_reservation WHERE reserved_mode = 1 ORDER BY reserve_id DESC";
+                        $result = $database->query($sql);
+                        $booking_mode = "booked";
+                        return array($result,$booking_mode);
+                        break;
+                    default:
+                        $sql = "SELECT * FROM room_reservation WHERE reserved_mode = 0 ORDER BY reserve_id DESC";
+                        $result = $database->query($sql);
+                        $booking_mode = "notbooked";
+                        return array($result,$booking_mode);
+                        break;
+                }
+            }else{
+                $sql = "SELECT * FROM room_reservation WHERE reserved_mode = 0 ORDER BY reserve_id DESC";
+                $result = $database->query($sql);
+                $booking_mode = "notbooked";
+                return array($result,$booking_mode);
+            }
+        }
+        public function CountAllRoomReservation(){
+            global $database;
+            $sql = "SELECT COUNT(*) AS all_reservation_count FROM room_reservation";
+            $result = $database->query($sql);
+            if($row = $database->fetch_array($result)){
+                echo $row['all_reservation_count'];
+            }
+        }
+        public function CountBookedAndNotBookedRoomReservationPanel($publish_mode){
+            global $database;
+            $sql = "SELECT COUNT(*) AS reservation_count FROM room_reservation WHERE reserved_mode={$publish_mode}";
+            $result = $database->query($sql);
+            if($row = $database->fetch_array($result)){
+                return $row['reservation_count'];
+            }
+        }
+        public function BookedPublish(){
+            global $database,$Functions;
+            if(isset($_POST["booking_submit"]) && isset($_POST["reserve_id"]) && !(empty($_POST["reserve_id"]))) {
+                $this->reserve_id = $Functions->decrypt_id($_POST["reserve_id"]);
+                $sql = "UPDATE room_reservation SET reserved_mode=1 WHERE reserve_id = {$this->reserve_id}";
+                $result = $database->query($sql);
+                if (!$result){
+                    $_SESSION["errors_message"] .= "مشکلی در تایید رزرو رخ داد .";
+                    $this->error_state = 1;
+                    return $this->error_state;
+                }
+            }
+        }
+        public function NotBookedPublish(){
+            global $database,$Functions;
+            if(isset($_POST["notbooked_submit"]) && isset($_POST["reserve_id"]) && !(empty($_POST["reserve_id"]))) {
+                $this->reserve_id = $Functions->decrypt_id($_POST["reserve_id"]);
+                $sql = "UPDATE room_reservation SET reserved_mode=0 WHERE reserve_id = {$this->reserve_id}";
+                $result = $database->query($sql);
+                if (!$result){
+                    $_SESSION["errors_message"] .= "مشکلی در عدم تایید رزرو رخ داد .";
+                    $this->error_state = 1;
+                    return $this->error_state;
+                }
+            }
+        }
+        public function NotBookedAllBooked(){
+            global $database;
+            if(isset($_POST["notbooked_all_booked"])) {
+                $sql = "UPDATE room_reservation SET reserved_mode=0";
+                $result = $database->query($sql);
+                if (!$result){
+                    $_SESSION["errors_message"] .= "مشکلی در عدم تایید رزرو ها رخ داد .";
+                    $this->error_state = 1;
+                    return $this->error_state;
+                }
+            }
+        }
+        public function BookedAllNotBooked(){
+            global $database;
+            if(isset($_POST["booked_all_notbooked"])) {
+                $sql = "UPDATE room_reservation SET reserved_mode=1";
+                $result = $database->query($sql);
+                if (!$result){
+                    $_SESSION["errors_message"] .= "مشکلی در انتشار همه ی کامنتها رخ داد .";
+                    $this->error_state = 1;
+                    return $this->error_state;
+                }
+            }
+        }
+        public function DeleteAllBookedReservation(){
+            global $database,$users;
+            if (isset($_POST["delete_all_booked_reservation"])){
+                $sql = "DELETE FROM room_reservation WHERE reserved_mode=1";
+                $result = $database->query($sql);
+                if(!$result){
+                    $_SESSION["errors_message"] .= "مشکلی در حذف رزرو های تایید شده به وجود آمده .";
+                    $this->error_state = 1;
+                    return $this->error_state;
+                }
+            }
+        }
+        public function DeleteAllNotBookedReservation(){
+            global $database,$users;
+            if (isset($_POST["delete_all_notbooked_reservation"])){
+                $sql = "DELETE FROM room_reservation WHERE reserved_mode=0";
+                $result = $database->query($sql);
+                if(!$result){
+                    $_SESSION["errors_message"] .= "مشکلی در حذف رزروهای تایید نشده به وجود آمده .";
+                    $this->error_state = 1;
+                    return $this->error_state;
+                }
+            }
+        }
+
+        //////////////////////////////////////////////////////////////////////////////////
+
         // for Room page
         public function ReserveRoom($room_id,$max_person_room){
             global $users,$Functions,$database,$sessions;
@@ -1496,7 +1622,7 @@
                         $now_time = strftime("%Y-%m-%d %H:%M:%S",time());
                         $this->room_id = $database->escape_value($Functions->decrypt_id($room_id));
                         $this->user_id = $_SESSION["user_id"];
-                        $sql = "INSERT INTO room_reservation(room_id,user_id,firstname,lastname,date_range,reserve_room_person_count,reserve_time)VALUES({$this->room_id},{$this->user_id},'{$reserve_firstname}','{$reserve_lastname}','{$reserve_date}',{$this->room_person_count},'{$now_time}')";
+                        $sql = "INSERT INTO room_reservation(room_id,user_id,firstname,lastname,date_range,reserve_room_person_count,reserve_time,reserved_mode)VALUES({$this->room_id},{$this->user_id},'{$reserve_firstname}','{$reserve_lastname}','{$reserve_date}',{$this->room_person_count},'{$now_time}',0)";
                         $database->query("SET NAMES 'utf8'");
                         $result = $database->query($sql);
                         if ($result){

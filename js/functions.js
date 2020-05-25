@@ -43,10 +43,10 @@ $(window).load(function () {
     $("#published,#unpublished,#higher_rate,#lower_rate,#higher_price,#lower_price,#picture-himself").click(function () {
         $("#submit_publish,.btn_map,.pic_food_details_submit").click();
     });
-    if($(".publish select").val() == "published"){
+    if($(".publish select").val() == "published" || $(".publish select").val() == "booked"){
         $(".publish select").css({"background-image":"linear-gradient(to bottom,#161616,green)"});
     }
-    if($(".publish select").val() == "unpublished"){
+    if($(".publish select").val() == "unpublished" || $(".publish select").val() == "notbooked"){
         $(".publish select").css({"background-image":"linear-gradient(to bottom,#161616,red)"});
     }
     $("#published").click(function () {

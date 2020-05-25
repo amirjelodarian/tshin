@@ -34,6 +34,7 @@ if(isset($_POST["logout_submit"])) {
                 <li class="icon-user-male"><a href="admins_show.php">Admins <span class="count">(<?php $users->CountAdmins(); ?>)</span> </a></li>
                 <li class="icon-users-1"><a href="users_show.php">Users <span class="count">(<?php $users->CountUsers(); ?>)</span></a></li>
                 <li class="icon-comment-alt-1"><a href="comments_show.php">Comment <span class="count">(<?php $rooms->CountAllRoomComments(); ?>)</span></a></li>
+                <li class="icon-comment-alt-1"><a href="reservation_show.php">Reservation <span class="count">(<?php $rooms->CountAllRoomReservation(); ?>)</span></a></li>
                 <li>
                     <form action="<?php echo(htmlspecialchars($_SERVER['PHP_SELF'])); ?>" method="post">
                         <span class="icon-logout"><input type="submit" name="logout_submit" class="logout-btn" value="LogOut" /></span>
@@ -50,6 +51,7 @@ if(isset($_POST["logout_submit"])) {
                 <li class="icon-user-male"><a href="admins_show.php">Admins <span class="count">(<?php $users->CountAdmins(); ?>)</span> </a></li>
                 <li class="icon-users-1"><a href="users_show.php">Users <span class="count">(<?php $users->CountUsers(); ?>)</span></a></li>
                 <li class="icon-comment-alt-1"><a href="comments_show.php">Comment <span class="count">(<?php $rooms->CountAllRoomComments(); ?>)</span></a></li>
+                <li class="icon-comment-alt-1"><a href="reservation_show.php">Reservation <span class="count">(<?php $rooms->CountAllRoomReservation(); ?>)</span></a></li>
                 <li>
                     <form action="<?php echo(htmlspecialchars($_SERVER['PHP_SELF'])); ?>" method="post">
                         <span class="icon-logout"><input type="submit" name="logout_submit" class="logout-btn" value="LogOut" /></span>

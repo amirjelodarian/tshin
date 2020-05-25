@@ -249,6 +249,12 @@
                 echo "new Date(".$value->format('Y,m-1,d') . "),";
             }
         }
+        public function DividedStartAndEndDate($date,$sep){
+            $date = explode($sep,$date);
+            $start_date = $date[0];
+            $end_date = $date[1];
+            return array($start_date,$end_date);
+        }
         ///////////////////////////////////////
         public function convert_db_format_for_gregorian_to_jalali($date){
             $date_array = explode("-",$date);

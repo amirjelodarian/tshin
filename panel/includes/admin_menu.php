@@ -34,6 +34,7 @@
                 <li class="icon-doc-add"><a href="rooms_show.php">Rooms <span class="count">(<?php $rooms->CountRoom(); ?>)</span></a></li>
                 <li class="icon-food"><a href="foods_show.php">Foods <span class="count">(<?php $foods->CountFood(); ?>)</span></a></li>
                 <li class="icon-comment-alt-1"><a href="comments_show.php">Comment <span class="count">(<?php $rooms->CountAllRoomComments(); ?>)</span></a></li>
+                <li class="icon-comment-alt-1"><a href="reservation_show.php">Reservation <span class="count">(<?php $rooms->CountAllRoomReservation(); ?>)</span></a></li>
                 <li>
                     <form action="<?php echo(htmlspecialchars($_SERVER['PHP_SELF'])); ?>" method="post">
                         <span class="icon-logout"><input type="submit" name="logout_submit" class="logout-btn" value="LogOut" /></span>
@@ -48,6 +49,7 @@
                 <li class="icon-doc-add"><a href="rooms_show.php">Rooms <span class="count">(<?php $rooms->CountRoom(); ?>)</span></a></li>
                 <li class="icon-food"><a href="foods_show.php">Foods <span class="count">(<?php $foods->CountFood(); ?>)</span></a></li>
                 <li class="icon-comment-alt-1"><a href="comments_show.php">Comment <span class="count">(<?php $rooms->CountAllRoomComments(); ?>)</span></a></li>
+                <li class="icon-comment-alt-1"><a href="reservation_show.php">Reservation <span class="count">(<?php $rooms->CountAllRoomReservation(); ?>)</span></a></li>
                 <li>
                     <form action="<?php echo(htmlspecialchars($_SERVER['PHP_SELF'])); ?>" method="post">
                         <span class="icon-logout"><input type="submit" name="logout_submit" class="logout-btn" value="LogOut" /></span>

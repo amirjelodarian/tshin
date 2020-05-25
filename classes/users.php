@@ -745,13 +745,19 @@ require_once("functions.php");
                 if ($this->user_image != "default_user.png"){
                     unlink("userimg/".$this->user_image);
                 }
+                $reservation_sql = "DELETE FROM room_reservation WHERE room_reservation.user_id={$this->user_id}";
+                $survey_sql = "DELETE FROM room_survey WHERE room_survey.user_id={$this->user_id}";
                 $sql = "DELETE FROM users WHERE users.id={$this->user_id} AND user_mode=0 LIMIT 1";
                 $database->query("SET NAMES 'utf8'");
-                $result = $database->query($sql);
-                if ($result) {
-                    $this->user_id = null;
-                    unset($this->user_id);
-                    $this->redirect_to("users_show.php");
+                $reservation_query = $database->query($reservation_sql);
+                $survey_query = $database->query($survey_sql);
+                if ($reservation_sql && $survey_query){
+                    $result = $database->query($sql);
+                    if ($result) {
+                        $this->user_id = null;
+                        unset($this->user_id);
+                        $this->redirect_to("users_show.php");
+                    }
                 }
             }else{
                 $this->redirect_to("users_show.php");
