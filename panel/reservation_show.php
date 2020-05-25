@@ -40,7 +40,7 @@ if (isset($_POST["delete_user_comment"])){
     $rooms->DeleteUserComment();
 }
 ?>
-<h1 id='rooms' align="center">Comments</h1>
+<h1 id='rooms' align="center">Reservation</h1>
 <h2>
     <?php
     if ($SelectReservedMode[1] == "booked"){
