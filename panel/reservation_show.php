@@ -36,8 +36,8 @@ if (isset($_POST['submit_search'])){
     $rooms->CommentsSearch();
 }
 
-if (isset($_POST["delete_user_comment"])){
-    $rooms->DeleteUserComment();
+if (isset($_POST["delete_single_reservation"])){
+    $rooms->DeleteSingleReservation();
 }
 ?>
 <h1 id='rooms' align="center">Reservation</h1>
@@ -53,7 +53,7 @@ if (isset($_POST["delete_user_comment"])){
             ");
     }elseif ($SelectReservedMode[1] == "notbooked"){
         echo("
-                    <div id='rooms' class='unpublished'>({$rooms->CountBookedAndNotBookedRoomReservationPanel(0)})&nbsp;Not Booked</div><hr/>
+                    <div id='rooms' class='unpublished'>({$rooms->CountBookedAndNotBookedRoomReservationPanel(0)})&nbsp;Booking</div><hr/>
                     <form id='publish_all_btn' action='{$_SERVER['PHP_SELF']}' method='post'>
                         <input type='submit' name='booked_all_notbooked'  class='submit_edit delete_room_btn'  value='Booked All' />
                         <input type='submit' name='delete_all_notbooked_reservation'  class='delete_all_comments delete_room_btn'  value='X Delete All Not Booked' />
@@ -80,7 +80,7 @@ if (isset($_POST["delete_user_comment"])){
     while($room_reservation = $database->fetch_array($all_room_reservation_result)){
         if ($rooms_rows = $database->fetch_array($rooms->SelectWithId($room_reservation['room_id']))){
         echo("
-                    <div class='comment-panel col-xs-12 col-sm-12 col-md-6 col-lg-6' "); if($SelectReservedMode[1] == "published"){ echo("style='border: 2px solid green'"); }else{ echo("style='border: 2px solid red'"); }  echo(">
+                    <div class='comment-panel col-xs-12 col-sm-12 col-md-6 col-lg-6' "); if($SelectReservedMode[1] == "booked"){ echo("style='border: 2px solid green'"); }else{ echo("style='border: 2px solid red'"); }  echo(">
                     <span class='reservation-bg-outside'>
                         <img id='reservation-bg' src='../"); Rooms::select_room_image($rooms_rows['room_image']); echo("' alt='تی شین' />
                     </span>
@@ -94,10 +94,12 @@ if (isset($_POST["delete_user_comment"])){
         echo("<blockquote style='float: left;'>Reservation Id : (<span style='color: #00A8FF;font-weight: bold;'>{$room_reservation['reserve_id']}</span>)</blockquote>");
         echo("<blockquote style='float: left;'>Tel : (<span style='color: #00A8FF;font-weight: bold;'>{$users_row['tel']}</span>)</blockquote>");
         echo("<h6>{$users_row['username']}</h6>");
+            if($room_reservation["reserved_mode"] == 1) { echo "<div class='tick'><img src='../img/verify-tick.png' alt='تی شین' /></div>"; }else { echo "<div class='tick'><img src='../img/un-verify.png' alt='تی شین' /></div>"; }
             echo("<br /><h4 style='display: inline-block' class='room_address'>{$database->escape_value($rooms_rows['room_address'])}</h4><h3 style='display: inline-block'>&nbsp;|&nbsp;</h3> 
                                             <h5 style='display: inline-block'>{$database->escape_value($rooms_rows['room_title'])}</h5>");
         }
-        echo("<div class='survey'>
+        echo("
+        <div class='survey' id='reservation-content'>
               <h5 class='date-range'>");
         $date_reservation = $Functions->DividedStartAndEndDate($room_reservation['date_range'],"|");
         echo(" از " . $Functions->EN_numTo_FA($Functions->convert_db_format_for_gregorian_to_jalali($date_reservation[0]),true));
@@ -122,7 +124,7 @@ if (isset($_POST["delete_user_comment"])){
         echo("
                                 
                             </div>
-                            <input type='submit' name='delete_user_comment' value='Delete' class='comments_delete_btn delete_room_btn' />
+                            <input type='submit' name='delete_single_reservation' value='Delete' class='comments_delete_btn delete_room_btn' />
                         </form>
                         <a class='edit-comment-panel-btn' href='comments_edit.php?commentId={$Functions->decrypt_id($room_reservation['reserve_id'])}'>Edit</a>
                     </div>

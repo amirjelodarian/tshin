@@ -5221,6 +5221,17 @@ a.btn_infobox:hover {
     padding: 7px;
     font-weight: bold;
 }
+.tick{
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin-top: 55px;
+    margin-right: 27px;
+}
+.tick img{
+    width: 20px;
+    height: 20px;
+}
 .room-person-count-reservation span{
     color: #00A8FF;
     background: white;

@@ -32,6 +32,11 @@
         private $username;
         private $user_id;
 
+        public function __construct()
+        {
+            $this->AutoBookedReservations();
+        }
+
         // functions for display rooms
         public static function AllRooms($grid = ""){
             global $database,$Functions;
@@ -522,7 +527,7 @@
             $this->room_id = (int)$database->escape_value($Functions->decrypt_id($room_id));
             if(preg_match("/^[0-9]*$/",$this->room_id)){
                 $database->query("SET NAMES 'utf8'");
-                $sql = "SELECT date_range FROM room_reservation WHERE room_id={$this->room_id}";
+                $sql = "SELECT date_range FROM room_reservation WHERE room_id={$this->room_id} AND reserved_mode=0";
                 $date_reserved_room_result = $database->query($sql);
                 return $date_reserved_room_result;
             }else{
@@ -1395,11 +1400,11 @@
                 }
             }
         }
-        public function DeleteUserComment(){
+        public function DeleteSingleReservation(){
             global $database,$users,$Functions;
-            if (isset($_POST["delete_user_comment"]) && isset($_POST["survey_id"]) && !(empty($_POST["survey_id"]))){
-                $this->survey_id = $Functions->decrypt_id($_POST["survey_id"]);
-                $sql = "DELETE FROM room_survey WHERE room_survey.id = {$this->survey_id} LIMIT 1";
+            if (isset($_POST["delete_single_reservation"]) && isset($_POST["reserve_id"]) && !(empty($_POST["reserve_id"]))){
+                $this->reserve_id = $Functions->decrypt_id($_POST["reserve_id"]);
+                $sql = "DELETE FROM room_reservation WHERE room_reservation.reserve_id = {$this->reserve_id} LIMIT 1";
                 $result = $database->query($sql);
                 if($result){
                     $users->redirect_to($_SERVER['PHP_SELF']);
@@ -1591,6 +1596,23 @@
             }
         }
 
+        public function AutoBookedReservations(){
+            global $database,$Functions;
+            $now_date = time();
+            $sql = "SELECT * FROM room_reservation WHERE reserved_mode=0";
+            $database->query("SET NAMES 'utf8'");
+            $result = $database->query($sql);
+            while ($row = $database->fetch_array($result)){
+                $room_date_arr = $Functions->DividedStartAndEndDate($row['date_range'],"|");
+                $room_date = strftime($room_date_arr[1]." 23:59:59",time());
+                $room_date_stamp = strtotime($room_date);
+                if ($room_date_stamp < $now_date){
+
+                    $booked_sql = "UPDATE room_reservation SET reserved_mode=1 WHERE reserve_id = {$row['reserve_id']}";
+                    $database->query($booked_sql);
+                }
+            }
+        }
         //////////////////////////////////////////////////////////////////////////////////
 
         // for Room page
