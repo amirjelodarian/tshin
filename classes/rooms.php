@@ -1598,19 +1598,30 @@
 
         public function AutoBookedReservations(){
             global $database,$Functions;
-            $now_date = time();
+
+            // 86400 is one day (24 Hours)
+            // 43200 is half day (12 Hours)
+            // this is now time as asia tehran ///////////////////////////////////////////
+            $date = new DateTime("now", new DateTimeZone('Asia/Tehran') );
+            $now_date = strtotime($date->format('Y-m-d H:i:s'));
+            //////////////////////////////////////////////////////////////////////////////
+
             $sql = "SELECT * FROM room_reservation WHERE reserved_mode=0";
             $database->query("SET NAMES 'utf8'");
             $result = $database->query($sql);
             while ($row = $database->fetch_array($result)){
                 $room_date_arr = $Functions->DividedStartAndEndDate($row['date_range'],"|");
-                $room_date = strftime($room_date_arr[1]." 23:59:59",time());
-                $room_date_stamp = strtotime($room_date);
-                if ($room_date_stamp < $now_date){
 
+                // 43200 is 12 Hours to mean tomorrow clock 12 AM////////////////////////////////
+                $room_date = strftime($room_date_arr[1]." 24:00:00",$now_date);
+                $room_date_stamp = strtotime($room_date)+43200;
+                /////////////////////////////////////////////////////////////////////////////////
+
+                if ($room_date_stamp < $now_date){
                     $booked_sql = "UPDATE room_reservation SET reserved_mode=1 WHERE reserve_id = {$row['reserve_id']}";
                     $database->query($booked_sql);
                 }
+
             }
         }
         //////////////////////////////////////////////////////////////////////////////////
