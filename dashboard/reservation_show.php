@@ -126,6 +126,7 @@ if (isset($_POST["delete_single_reservation"])){
                             </div>
                             <input type='submit' name='delete_single_reservation' value='Delete' class='comments_delete_btn delete_room_btn' />
                         </form>
+                        <a class='edit-comment-panel-btn' href='comments_edit.php?commentId={$Functions->decrypt_id($room_reservation['reserve_id'])}'>Edit</a>
                     </div>
                         <div class='line'></div>
                     </div>

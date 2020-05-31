@@ -571,6 +571,10 @@ if (isset($_GET['roomId']) && !(empty($_GET["roomId"])) || isset($_POST['room_id
             ?>
     </span>
 </div>
+<script src="js/jquery-1.11.2.min.js"></script>
+<script src="js/common_scripts_min.js"></script>
+<script src="js/functions.js"></script>
+<script src="js/signUp.js"></script>
 <?php include('includes/footer.php'); ?>
 </body>
 </html>

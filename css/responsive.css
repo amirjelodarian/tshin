@@ -35,6 +35,11 @@ only screen and (min-device-pixel-ratio: 2) and (max-width: 991px) {
     }
 }
 @media (max-width: 991px) {
+    .panel-icon{
+        height: 43px;
+        max-height: 43px;
+        border-radius: 0;
+    }
     .sticky ul#top_tools,
     ul#top_tools {
         margin: 3px 0 0 45px

@@ -11,31 +11,55 @@
                 if (isset($files["tmp_name"]) && !(empty($files["tmp_name"]))){
                     $check = getimagesize($files["tmp_name"]);
                     if ($check == false){
-                        $_SESSION["errors_message"] .= "فایل شما عکس نیست !! .";
+                        if (isset($_SESSION["errors_message"])) {
+                            $_SESSION["errors_message"] .= "فایل شما عکس نیست !! .";
+                        }else{
+                            $_SESSION["errors_message"] = "فایل شما عکس نیست !! .";
+                        }
                         $uploadOk = 0;
                     }
                 }
                     if (file_exists($target_file)){
                         $_SESSION["image_exists_name"] = $files["name"];
-                        $_SESSION["errors_message"] .= "متاسفانه این فایل یا عکس وجود دارد !! .";
+                        if (isset($_SESSION["errors_message"])) {
+                            $_SESSION["errors_message"] .= "متاسفانه این فایل یا عکس وجود دارد !! .";
+                        }else{
+                            $_SESSION["errors_message"] = "متاسفانه این فایل یا عکس وجود دارد !! .";
+                        }
                         $uploadOk = 0;
                     }
                     if ($files["size"] > 5242880){
-                        $_SESSION["errors_message"] .= "متاسفانه عکس بیشتر از 5 مگابایت است .";
+                        if (isset($_SESSION["errors_message"])) {
+                            $_SESSION["errors_message"] .= "متاسفانه عکس بیشتر از 5 مگابایت است .";
+                        }else{
+                            $_SESSION["errors_message"] = "متاسفانه عکس بیشتر از 5 مگابایت است .";
+                        }
                         $uploadOk = 0;
                     }
                     if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif"){
-                        $_SESSION["errors_message"] .= "پسوند عکس ها نامعتبر است !! .";
+                        if (isset($_SESSION["errors_message"])) {
+                            $_SESSION["errors_message"] .= "پسوند عکس ها نامعتبر است !! .";
+                        }else{
+                            $_SESSION["errors_message"] = "پسوند عکس ها نامعتبر است !! .";
+                        }
                         $uploadOk = 0;
                     }
                     if ($uploadOk == 0){
-                        $_SESSION["errors_message"] .= "مشکل در آپلود عکس !! .";
+                        if (isset($_SESSION["errors_message"])) {
+                            $_SESSION["errors_message"] .= "مشکل در آپلود عکس !! .";
+                        }else{
+                            $_SESSION["errors_message"] = "مشکل در آپلود عکس !! .";
+                        }
                     }else{
                         if (move_uploaded_file($files["tmp_name"],$target_file)){
                             self::$image_name = $files["name"];
                             echo "فایل آپلود شد ." . $files["name"];
                         }else{
-                            $_SESSION["errors_message"] .= "مشکل در آپلود عکس !! .";
+                            if (isset($_SESSION["errors_message"])) {
+                                $_SESSION["errors_message"] .= "مشکل در آپلود عکس !! .";
+                            }else{
+                                $_SESSION["errors_message"] = "مشکل در آپلود عکس !! .";
+                            }
                         }
                     }
             }
@@ -48,68 +72,120 @@
                 if (isset($files["tmp_name"]) && !(empty($files["tmp_name"]))){
                     $check = getimagesize($files["tmp_name"]);
                     if ($check == false){
-                        $_SESSION["errors_message"] .= "فایل شما عکس نیست !! .";
+                        if (isset($_SESSION["errors_message"])) {
+                            $_SESSION["errors_message"] .= "فایل شما عکس نیست !! .";
+                        }else{
+                            $_SESSION["errors_message"] = "فایل شما عکس نیست !! .";
+                        }
                         $uploadOk = 0;
                     }
                 }
                 if (file_exists($target_file)){
                     $_SESSION["image_exists_name"] = $files["name"];
-                    $_SESSION["errors_message"] .= "متاسفانه این فایل یا عکس وجود دارد !! .";
+                    if (isset($_SESSION["errors_message"])) {
+                        $_SESSION["errors_message"] .= "متاسفانه این فایل یا عکس وجود دارد !! .";
+                    }else{
+                        $_SESSION["errors_message"] = "متاسفانه این فایل یا عکس وجود دارد !! .";
+                    }
                     $uploadOk = 0;
                 }
                 if ($files["size"] > 5242880){
-                    $_SESSION["errors_message"] .= "متاسفانه عکس بیشتر از 5 مگابایت است .";
+                    if (isset($_SESSION["errors_message"])) {
+                        $_SESSION["errors_message"] .= "متاسفانه عکس بیشتر از 5 مگابایت است .";
+                    }else{
+                        $_SESSION["errors_message"] = "متاسفانه عکس بیشتر از 5 مگابایت است .";
+                    }
                     $uploadOk = 0;
                 }
                 if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif"){
-                    $_SESSION["errors_message"] .= "پسوند عکس ها نامعتبر است !! .";
+                    if (isset($_SESSION["errors_message"])) {
+                        $_SESSION["errors_message"] .= "پسوند عکس ها نامعتبر است !! .";
+                    }else{
+                        $_SESSION["errors_message"] = "پسوند عکس ها نامعتبر است !! .";
+                    }
                     $uploadOk = 0;
                 }
                 if ($uploadOk == 0){
-                    $_SESSION["errors_message"] .= "مشکل در آپلود عکس !! .";
+                    if (isset($_SESSION["errors_message"])) {
+                        $_SESSION["errors_message"] .= "مشکل در آپلود عکس !! .";
+                    }else{
+                        $_SESSION["errors_message"] = "مشکل در آپلود عکس !! .";
+                    }
                 }else{
                     if (move_uploaded_file($files["tmp_name"],$target_file)){
                         self::$image_name = $files["name"];
                         echo "فایل آپلود شد ." . $files["name"];
                     }else{
-                        $_SESSION["errors_message"] .= "مشکل در آپلود عکس !! .";
+                        if (isset($_SESSION["errors_message"])) {
+                            $_SESSION["errors_message"] .= "مشکل در آپلود عکس !! .";
+                        }else{
+                            $_SESSION["errors_message"] = "مشکل در آپلود عکس !! .";
+                        }
                     }
                 }
             }
             if (isset($submit) && isset($_FILES["userImage"])){
                 $files = $_FILES["userImage"];
-                $target_dir = "userimg/";
+                if (isset($_SESSION["user_mode"]) && $_SESSION["user_mode"] == 0){
+                    $target_dir = "../panel/userimg/";
+                }else{
+                    $target_dir = "userimg/";
+                }
                 $target_file = $target_dir . basename($files["name"]);
                 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
                 $uploadOk = 1;
                 if (isset($files["tmp_name"]) && !(empty($files["tmp_name"]))){
                     $check = getimagesize($files["tmp_name"]);
                     if ($check == false){
-                        $_SESSION["errors_message"] .= "فایل شما عکس نیست !! .";
+                        if (isset($_SESSION["errors_message"])) {
+                            $_SESSION["errors_message"] .= "فایل شما عکس نیست !! .";
+                        }else{
+                            $_SESSION["errors_message"] = "فایل شما عکس نیست !! .";
+                        }
                         $uploadOk = 0;
                     }
                 }
                 if (file_exists($target_file)){
                     $_SESSION["image_exists_name"] = $files["name"];
-                    $_SESSION["errors_message"] .= "متاسفانه این فایل یا عکس وجود دارد !! .";
+                    if (isset($_SESSION["errors_message"])) {
+                        $_SESSION["errors_message"] .= "متاسفانه این فایل یا عکس وجود دارد !! .";
+                    }else{
+                        $_SESSION["errors_message"] = "متاسفانه این فایل یا عکس وجود دارد !! .";
+                    }
                     $uploadOk = 0;
                 }
                 if ($files["size"] > 3145728){
-                    $_SESSION["errors_message"] .= "متاسفانه عکس بیشتر از 3 مگابایت است .";
+                    if (isset($_SESSION["errors_message"])) {
+                        $_SESSION["errors_message"] .= "متاسفانه عکس بیشتر از 3 مگابایت است .";
+                    }else{
+                        $_SESSION["errors_message"] = "متاسفانه عکس بیشتر از 3 مگابایت است .";
+                    }
                     $uploadOk = 0;
                 }
                 if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif"){
-                    $_SESSION["errors_message"] .= "پسوند عکس ها نامعتبر است !! .";
+                    if (isset($_SESSION["errors_message"])){
+                        $_SESSION["errors_message"] .= "پسوند عکس ها نامعتبر است !! .";
+                    }else{
+                        $_SESSION["errors_message"] = "پسوند عکس ها نامعتبر است !! .";
+                    }
                     $uploadOk = 0;
                 }
                 if ($uploadOk == 0){
-                    echo "مشکل در آپلود عکس !! .";
+                    if (isset($_SESSION["errors_message"])){
+                        $_SESSION["errors_message"] .= "مشکل در آپلود عکس !! .";
+                    }else{
+                        $_SESSION["errors_message"] = "مشکل در آپلود عکس !! .";
+                    }
                 }else{
                     if (move_uploaded_file($files["tmp_name"],$target_file)){
                         self::$image_name = $files["name"];
                         echo "فایل آپلود شد ." . $files["name"];
                     }else{
-                        $_SESSION["errors_message"] .= "مشکل در آپلود عکس !! .";
+                        if (isset($_SESSION["errors_message"])){
+                            $_SESSION["errors_message"] .= "مشکل در آپلود عکس !! .";
+                        }else{
+                            $_SESSION["errors_message"] = "مشکل در آپلود عکس !! .";
+                        }
                     }
                 }
             }else{

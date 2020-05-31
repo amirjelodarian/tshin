@@ -80,7 +80,7 @@ require_once("functions.php");
                             switch($users_row["user_mode"]) {
                                 case 0:
                                     $_SESSION["user_mode"] = 0;
-                                    $this->redirect_to("index.php");
+                                    $this->redirect_to("dashboard/user.php");
                                     break;
                                 case 1:
                                     $_SESSION["user_mode"] = 1;
@@ -284,7 +284,7 @@ require_once("functions.php");
                                     $_SESSION["user_mode"] = 0;
                                     $_SESSION["errors_message"] = " ";
                                     $_SESSION["errors_message"] = "رمز با موفقیت تغییر کرد";
-                                    $this->redirect_to("index.php");
+                                    $this->redirect_to("dashboard/user.php");
                                     break;
                                 case 1:
                                     $_SESSION["user_mode"] = 1;
@@ -808,7 +808,7 @@ require_once("functions.php");
                                                 <option value='browse-file' name='browseFileOption' id='browse-file'>Browse File...</option>
                                                 <option value='url-image' name='urlImageOption' id='url-image'>Link Or Url Image</option> 
                                             </select>  
-                                            <div class='add_photo_user'>Add Photo +<input type='file' id='browse-file-input' class='edit_input_image' name='userImage' /><input type='url' id='url-image-input' placeholder='www.image.com' class='edit_input_image' name='userImageUrl' /></div>
+                                            <div class='add_photo_user'>عکس پروفایل +<input type='file' id='browse-file-input' class='edit_input_image' name='userImage' /><input type='url' id='url-image-input' placeholder='www.image.com' class='edit_input_image' name='userImageUrl' /></div>
                                             
                                         </div>
                                         <input type='hidden' name='MAX_FILE_SIZE' value='3145728' />
@@ -818,12 +818,12 @@ require_once("functions.php");
                                         <div class='admin_info col-xs-12'>
                                             <span id='admin_label'>UserName&nbsp;:</span>&nbsp;<input class='edit_admin_username' value='{$user_row['username']}' name='user_username' required /><hr />
                                             <span id='admin_label'>Tel:</span>&nbsp;<span class='edit_user_tel'>{$user_row['tel']}</span><hr />
-                                            <div class='change-password-outside'><h5>* Change Password *</h5></div><br />
+                                            <div class='change-password-outside'><h5>* تغییر رمز *</h5></div><br />
                                             <div class='change-password-inside'>
-                                                <span id='admin_label'>New Password:</span>&nbsp;<input class='edit_admin_username' name='new_password' type='password' placeholder='New Password' /><hr />
-                                                <span id='admin_label'>Repeat Password:</span>&nbsp;<input class='edit_admin_username' name='repeat_password' type='password' placeholder='Repeat Password' /><hr />
+                                                <span id='admin_label'>رمز جدید:</span>&nbsp;<input class='edit_admin_username' name='new_password' type='password' placeholder='New Password' /><hr />
+                                                <span id='admin_label'>تکرار رمز جدید:</span>&nbsp;<input class='edit_admin_username' name='repeat_password' type='password' placeholder='Repeat Password' /><hr />
                                             </div><br />
-                                            <input type='submit'  name='submit_last_edit_panel' class='edit_admin_input' value='Edit' /> 
+                                            <input type='submit'  name='submit_last_edit_panel' class='edit_admin_input' value='ویرایش' /> 
                                        
                                     </form>
                                     </div>
