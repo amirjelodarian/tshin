@@ -29,7 +29,7 @@ if(isset($_POST["logout_submit"])) {
             <div class="home"><a href="../index.php"><span class="icon-home" id="icon-home"></span>Home</a></div>
             <ul>
                 <li class="icon-tools"><a href="user.php">پروفایل</a></li>
-
+                <li class="icon-doc-add"><a href="reservedRooms.php">رزرو ها</a></li>
                 <li>
                     <form action="<?php echo(htmlspecialchars($_SERVER['PHP_SELF'])); ?>" method="post">
                         <span class="icon-logout"><input type="submit" name="logout_submit" class="logout-btn" value="LogOut" /></span>
@@ -41,6 +41,7 @@ if(isset($_POST["logout_submit"])) {
             <div class="home"><a href="../index.php"><span class="icon-home" id="icon-home"></span>Home</a></div>
             <ul>
                 <li class="icon-tools"><a href="user.php">پروفایل</a></li>
+                <li class="icon-doc-add"><a href="reservedRooms.php">رزرو ها</a></li>
                 <li>
                     <form action="<?php echo(htmlspecialchars($_SERVER['PHP_SELF'])); ?>" method="post">
                         <span class="icon-logout"><input type="submit" name="logout_submit" class="logout-btn" value="LogOut" /></span>
