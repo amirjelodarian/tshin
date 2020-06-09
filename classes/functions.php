@@ -244,7 +244,7 @@
                 if((preg_match('/^[0-9]*$/', $value)) && is_numeric($value)){
                     */return $value;
                 /*}else{
-                    $users->redirect_to("all_hotels_list.php");
+                    $users->redirect_to("RoomsList.php");
                 }*/
             }
         }

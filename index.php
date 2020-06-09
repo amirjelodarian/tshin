@@ -192,7 +192,7 @@
             </div>
         </div>
     </div>
-    <p class="text-center add_bottom_30"> <a href="all_hotels_list.php" class="btn_1 medium"><i class="icon-eye-7"></i>مشاهده همه اقامتگاه ها</a>
+    <p class="text-center add_bottom_30"> <a href="RoomsList.php" class="btn_1 medium"><i class="icon-eye-7"></i>مشاهده همه اقامتگاه ها</a>
     </p>
     <hr>
     <div class="main_title">
@@ -321,7 +321,7 @@
             </div>
         </div>
     </div>
-    <p class="text-center nopadding"> <a href="all_hotels_list.php" class="btn_1 medium"><i class="icon-eye-7"></i>مشاهده همه هتل ها</a>
+    <p class="text-center nopadding"> <a href="RoomsList.php" class="btn_1 medium"><i class="icon-eye-7"></i>مشاهده همه هتل ها</a>
     </p>
 </div>
 <div class="white_bg">

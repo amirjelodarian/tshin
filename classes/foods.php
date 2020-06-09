@@ -14,7 +14,7 @@ class Foods{
 
     // functions for display FOODS in FrontEnd For USERS
 
-    // food_details.php
+    // foodDetails.php
     public static function FoodDetailsPage(){
         global $users,$Functions;
         if (isset($_POST['submit']) && isset($_POST['food_id'])) {
@@ -50,10 +50,10 @@ class Foods{
         </div>");
             }
         }else{
-            $users->redirect_to("foods_list.php");
+            $users->redirect_to("FoodsList.php");
         }
     }
-    // foods_list.php And foods_grid.php
+    // FoodsList.php And FoodsGrid.php
     public static function AllFoods($grid = ""){
         global $database,$Functions;
         $sql = "SELECT * FROM foods ORDER BY food_id DESC";
@@ -75,7 +75,7 @@ class Foods{
                                         <div class='hotel_title'>
                                             <h3><strong>{$database->escape_value($foods_rows['food_title'])}</strong></h3>
                                             <div class='rating'>"); echo $Functions->give_start_by_number($foods_rows['food_score']); echo("</div>
-                                            <form action='food_details.php' method='post'>
+                                            <form action='foodDetails.php' method='post'>
                                                 <input name='food_id' type='hidden' value='"); echo($Functions->encrypt_id($foods_rows['food_id'])); echo("' /> 
                                                 <p><input name='submit' class='food_details_submit' value='طرز تهیه' type='submit' /></p>
                                             </form>
@@ -131,7 +131,7 @@ class Foods{
                             <sup>{$Functions->EN_numTo_FA($Functions->insert_seperator($database->escape_value($foods_rows['food_main_price'])),true)} تومان</sup>
                             <span class='normal_price_list'>{$Functions->EN_numTo_FA($Functions->insert_seperator($database->escape_value($foods_rows['food_off_price'])),true)} تومان</span>
                             <small>روزانه / شبانه</small>
-                            <form action='food_details.php' method='post'>
+                            <form action='foodDetails.php' method='post'>
                                 <input name='food_id' type='hidden' value='"); echo($Functions->encrypt_id($foods_rows['food_id'])); echo("' /> 
                                 <p><input name='submit' class='food_details_submit' value='طرز تهیه' type='submit' /></p>
                             </form>                   
@@ -211,7 +211,7 @@ class Foods{
                                         <div class='hotel_title'>
                                             <h3><strong>{$database->escape_value($foods_rows['food_title'])}</strong></h3>
                                             <div class='rating'>"); echo $Functions->give_start_by_number($foods_rows['food_score']); echo("</div>
-                                            <form action='food_details.php' method='post'>
+                                            <form action='foodDetails.php' method='post'>
                                                 <input name='food_id' type='hidden' value='"); echo($Functions->encrypt_id($foods_rows['food_id'])); echo("' /> 
                                                 <p><input name='submit' class='food_details_submit' value='طرز تهیه' type='submit' /></p>
                                             </form>
@@ -267,7 +267,7 @@ class Foods{
                             <sup>{$Functions->EN_numTo_FA($Functions->insert_seperator($database->escape_value($foods_rows['food_main_price'])),true)} تومان</sup>
                             <span class='normal_price_list'>{$Functions->EN_numTo_FA($Functions->insert_seperator($database->escape_value($foods_rows['food_off_price'])),true)} تومان</span>
                             <small>روزانه / شبانه</small>
-                            <form action='food_details.php' method='post'>
+                            <form action='foodDetails.php' method='post'>
                                 <input name='food_id' type='hidden' value='"); echo($Functions->encrypt_id($foods_rows['food_id'])); echo("' /> 
                                 <p><input name='submit' class='food_details_submit' value='طرز تهیه' type='submit' /></p>
                             </form>                   
@@ -316,7 +316,7 @@ class Foods{
                                         <div class='hotel_title'>
                                             <h3><strong>{$database->escape_value($foods_rows['food_title'])}</strong></h3>
                                             <div class='rating'>"); echo $Functions->give_start_by_number($foods_rows['food_score']); echo("</div>
-                                            <form action='food_details.php' method='post'>
+                                            <form action='foodDetails.php' method='post'>
                                                 <input name='food_id' type='hidden' value='"); echo($Functions->encrypt_id($foods_rows['food_id'])); echo("' /> 
                                                 <p><input name='submit' class='food_details_submit' value='طرز تهیه' type='submit' /></p>
                                             </form>
@@ -372,7 +372,7 @@ class Foods{
                             <sup>{$Functions->EN_numTo_FA($Functions->insert_seperator($database->escape_value($foods_rows['food_main_price'])),true)} تومان</sup>
                             <span class='normal_price_list'>{$Functions->EN_numTo_FA($Functions->insert_seperator($database->escape_value($foods_rows['food_off_price'])),true)} تومان</span>
                             <small>روزانه / شبانه</small>
-                            <form action='food_details.php' method='post'>
+                            <form action='foodDetails.php' method='post'>
                                 <input name='food_id' type='hidden' value='"); echo($Functions->encrypt_id($foods_rows['food_id'])); echo("' /> 
                                 <p><input name='submit' class='food_details_submit' value='طرز تهیه' type='submit' /></p>
                             </form>                   

@@ -49,13 +49,13 @@ if (isset($_GET['roomId']) && !(empty($_GET["roomId"])) || isset($_POST['room_id
     settype($room_id,"integer");
     // This condition for while id is just number
     if(!(preg_match("/^[0-9]*$/",$Functions->decrypt_id($room_id)))){
-        $users->redirect_to("all_hotels_list.php");
+        $users->redirect_to("RoomsList.php");
     }
     /////////////////////////////////////////
 
     $room_result = Rooms::RoomAttributeById($room_id,true);
     if ($database->num_rows($room_result) == 0){
-        $users->redirect_to("all_hotels_list.php");
+        $users->redirect_to("RoomsList.php");
     }else{
     $roomattribute = $database->fetch_array($room_result);
     if ($roomattribute) {
@@ -545,11 +545,11 @@ if (isset($_GET['roomId']) && !(empty($_GET["roomId"])) || isset($_POST['room_id
         </script>
         <?php
         }else{
-            $users->redirect_to("all_hotels_list.php");
+            $users->redirect_to("RoomsList.php");
         }
     }
 }else{
-    $users->redirect_to("all_hotels_list.php");
+    $users->redirect_to("RoomsList.php");
 }
 ?>
 

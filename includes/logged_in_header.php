@@ -59,9 +59,9 @@
                         </li>
                         <li class="submenu"> <a href="javascript:void(0);" class="show-submenu">جاذبه های تی شین <i class="icon-tree"></i></a>
                             <ul>
-                                <li><a href="all_hotels_list.php">لیست همه اقامتگاه ها</a>
+                                <li><a href="RoomsList.php">لیست همه اقامتگاه ها</a>
                                 </li>
-                                <li><a href="foods_list.php">لیست همه غذا ها</a>
+                                <li><a href="FoodsList.php">لیست همه غذا ها</a>
                                 </li>
                             </ul>
                         </li>

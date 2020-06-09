@@ -531,7 +531,7 @@
                 $date_reserved_room_result = $database->query($sql);
                 return $date_reserved_room_result;
             }else{
-                $users->redirect_to("all_hotels_list.php");
+                $users->redirect_to("RoomsList.php");
             }
         }
         // for panel display
