@@ -340,6 +340,14 @@
             $date = $this->gregorian_to_jalali($year,$month,$day,'<span style="color: crimson">/</span>');
             return $date;
         }
+        public function convert_format_for_jalali_to_gregorian($date){
+            $date_array = explode("-",$date);
+            $year = (int)$date_array[0];
+            $month = (int)$date_array[1];
+            $day = (int)$date_array[2];
+            $GregorianDate = $this->jalali_to_gregorian($year,$month,$day);
+            return $GregorianDate;
+        }
         public function EN_numTo_FA($str,$toPersian){
             $en = array('0','1','2','3','4','5','6','7','8','9');
             $fa = array('۰','۱','۲','۳','۴','۵','۶','۷','۸','۹');

@@ -27,6 +27,7 @@
 <div class="layer"></div>
 <?php
 require_once("classes/initialize.php");
+header('Cache-Control: max-age=900');
 global $sessions;
 if ($sessions->login_state()){
     include("includes/logged_in_header.php");
@@ -161,7 +162,7 @@ $sessions->null_room_id_while_comment();
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-2 col-sm-2 col-xs-12 text-center"> <a href="all_hotels_grid.php" class="bt_filters"><i class="icon-th"></i></a>  <a href="all_hotels_list.php" class="bt_filters"><i class=" icon-list"></i></a></div>
+                        <div class="col-md-2 col-sm-2 col-xs-12 text-center"> <a href="RoomsGrid.php" class="bt_filters"><i class="icon-th"></i></a>  <a href="RoomsList.php" class="bt_filters"><i class=" icon-list"></i></a></div>
         </form>
         <form method="post" action="<?php echo (htmlspecialchars($_SERVER['PHP_SELF'])); ?>">
             <div class="room_search_bar col-md-4 col-xs-12 col-sm-4 col-lg-4">

@@ -16,12 +16,17 @@ class Foods{
 
     // foodDetails.php
     public static function FoodDetailsPage(){
-        global $users,$Functions;
-        if (isset($_POST['submit']) && isset($_POST['food_id'])) {
-            $food_id = $_POST['food_id'];
+        global $users,$Functions,$database;
+        if (isset($_GET['foodId']) && !(empty($_GET["foodId"]))) {
+            //////////////////////////////////////////
+            $food_id = $database->escape_value($_GET['foodId']);
+            $ResultAttributeFoods = Foods::FoodResultAttributeById($_GET['foodId']);
             $foodattribute = Foods::FoodAttributeById($food_id);
-            if ($foodattribute) {
-                echo("
+            if ($database->num_rows($ResultAttributeFoods) == 0){
+                $users->redirect_to("FoodsList.php");
+            }else{
+                if ($foodattribute) {
+                    echo("
         <section class='parallax-window' data-parallax='scroll' data-image-src='img/foods.jpg' data-natural-width='1400'
                  data-natural-height='470'>
             <div class='parallax-content-1'>
@@ -48,6 +53,7 @@ class Foods{
                 <p class='food_details'>"); echo(nl2br(htmlentities($foodattribute['food_details']))); echo("</p>
             </div>
         </div>");
+                }
             }
         }else{
             $users->redirect_to("FoodsList.php");
@@ -65,7 +71,7 @@ class Foods{
                             <div class='col-md-6 col-sm-6 wow zoomIn' data-wow-delay='0.7s'>
                                     <div class='hotel_container'>
                                         <div class='img_container'>
-                                            <a href='#'>
+                                            <a href='foodDetails.php?foodId={$Functions->encrypt_id($foods_rows['food_id'])}'>
                                                 <img src='"); self::select_food_image($foods_rows['food_image']); echo("' width='800' height='533' class='img-responsive' alt='تی شین'>
                                                 <div class='score'><span>{$Functions->EN_numTo_FA($database->escape_value($foods_rows['food_score']),true)}</span>"); echo(self::word_score($foods_rows['food_score'])); echo("</div>
                                                 <div class='short_info hotel'>"); echo(substr(nl2br(htmlentities($foods_rows['food_description'])),0,150)."..."); echo("<span class='price'><sup>{$Functions->EN_numTo_FA($Functions->insert_seperator($database->escape_value($foods_rows['food_main_price'])),true)} تومان</sup></span>
@@ -75,10 +81,9 @@ class Foods{
                                         <div class='hotel_title'>
                                             <h3><strong>{$database->escape_value($foods_rows['food_title'])}</strong></h3>
                                             <div class='rating'>"); echo $Functions->give_start_by_number($foods_rows['food_score']); echo("</div>
-                                            <form action='foodDetails.php' method='post'>
-                                                <input name='food_id' type='hidden' value='"); echo($Functions->encrypt_id($foods_rows['food_id'])); echo("' /> 
-                                                <p><input name='submit' class='food_details_submit' value='طرز تهیه' type='submit' /></p>
-                                            </form>
+                                            <a href='foodDetails.php?foodId={$Functions->encrypt_id($foods_rows['food_id'])}'> 
+                                                <p class='food_details_submit text-center'>طرز تهیه</p>
+                                            </a>
                                             <div class='wishlist'> <a class='tooltip_flip tooltip-effect-1' href='#'>+<span class='tooltip-content-flip'><span class='tooltip-back'>علاقمند شدم</span></span></a>
                                             </div>
                                         </div>
@@ -93,7 +98,7 @@ class Foods{
                         <div class='wishlist'> <a class='tooltip_flip tooltip-effect-1' href='javascript:void(0);'>+<span class='tooltip-content-flip'><span class='tooltip-back'>علاقمند شدم</span></span></a>
                         </div>
                         <div class='img_list'>
-                            <a href='#'>
+                            <a href='foodDetails.php?foodId={$Functions->encrypt_id($foods_rows['food_id'])}'>
                                 <div class='ribbon top_rated'></div>
                                 <img src='"); self::select_food_image($foods_rows['food_image']); echo("' alt=''>
                                 <div class='short_info'></div>
@@ -131,10 +136,9 @@ class Foods{
                             <sup>{$Functions->EN_numTo_FA($Functions->insert_seperator($database->escape_value($foods_rows['food_main_price'])),true)} تومان</sup>
                             <span class='normal_price_list'>{$Functions->EN_numTo_FA($Functions->insert_seperator($database->escape_value($foods_rows['food_off_price'])),true)} تومان</span>
                             <small>روزانه / شبانه</small>
-                            <form action='foodDetails.php' method='post'>
-                                <input name='food_id' type='hidden' value='"); echo($Functions->encrypt_id($foods_rows['food_id'])); echo("' /> 
-                                <p><input name='submit' class='food_details_submit' value='طرز تهیه' type='submit' /></p>
-                            </form>                   
+                            <a href='foodDetails.php?foodId={$Functions->encrypt_id($foods_rows['food_id'])}'> 
+                                <p class='food_details_submit'>طرز تهیه</p>
+                            </a>         
                             </div>
                         </div>
                     </div>
@@ -201,7 +205,7 @@ class Foods{
                             <div class='col-md-6 col-sm-6 wow zoomIn' data-wow-delay='0.7s'>
                                     <div class='hotel_container'>
                                         <div class='img_container'>
-                                            <a href='#'>
+                                            <a href='foodDetails.php?foodId={$Functions->encrypt_id($foods_rows['food_id'])}'>
                                                 <img src='"); self::select_food_image($foods_rows['food_image']); echo("' width='800' height='533' class='img-responsive' alt='تی شین'>
                                                 <div class='score'><span>{$Functions->EN_numTo_FA($database->escape_value($foods_rows['food_score']),true)}</span>"); echo(self::word_score($foods_rows['food_score'])); echo("</div>
                                                 <div class='short_info hotel'>"); echo(substr(nl2br(htmlentities($foods_rows['food_description'])),0,150)."..."); echo("<span class='price'><sup>{$Functions->EN_numTo_FA($Functions->insert_seperator($database->escape_value($foods_rows['food_main_price'])),true)} تومان</sup></span>
@@ -211,10 +215,9 @@ class Foods{
                                         <div class='hotel_title'>
                                             <h3><strong>{$database->escape_value($foods_rows['food_title'])}</strong></h3>
                                             <div class='rating'>"); echo $Functions->give_start_by_number($foods_rows['food_score']); echo("</div>
-                                            <form action='foodDetails.php' method='post'>
-                                                <input name='food_id' type='hidden' value='"); echo($Functions->encrypt_id($foods_rows['food_id'])); echo("' /> 
-                                                <p><input name='submit' class='food_details_submit' value='طرز تهیه' type='submit' /></p>
-                                            </form>
+                                            <a href='foodDetails.php?foodId={$Functions->encrypt_id($foods_rows['food_id'])}'> 
+                                                <p class='food_details_submit text-center'>طرز تهیه</p>
+                                            </a>
                                             <div class='wishlist'> <a class='tooltip_flip tooltip-effect-1' href='#'>+<span class='tooltip-content-flip'><span class='tooltip-back'>علاقمند شدم</span></span></a>
                                             </div>
                                         </div>
@@ -229,7 +232,7 @@ class Foods{
                         <div class='wishlist'> <a class='tooltip_flip tooltip-effect-1' href='javascript:void(0);'>+<span class='tooltip-content-flip'><span class='tooltip-back'>علاقمند شدم</span></span></a>
                         </div>
                         <div class='img_list'>
-                            <a href='#'>
+                            <a href='foodDetails.php?foodId={$Functions->encrypt_id($foods_rows['food_id'])}'>
                                 <div class='ribbon top_rated'></div>
                                 <img src='"); self::select_food_image($foods_rows['food_image']); echo("' alt=''>
                                 <div class='short_info'></div>
@@ -267,10 +270,9 @@ class Foods{
                             <sup>{$Functions->EN_numTo_FA($Functions->insert_seperator($database->escape_value($foods_rows['food_main_price'])),true)} تومان</sup>
                             <span class='normal_price_list'>{$Functions->EN_numTo_FA($Functions->insert_seperator($database->escape_value($foods_rows['food_off_price'])),true)} تومان</span>
                             <small>روزانه / شبانه</small>
-                            <form action='foodDetails.php' method='post'>
-                                <input name='food_id' type='hidden' value='"); echo($Functions->encrypt_id($foods_rows['food_id'])); echo("' /> 
-                                <p><input name='submit' class='food_details_submit' value='طرز تهیه' type='submit' /></p>
-                            </form>                   
+                            <a href='foodDetails.php?foodId={$Functions->encrypt_id($foods_rows['food_id'])}'> 
+                                                <p class='food_details_submit text-center'>طرز تهیه</p>
+                            </a>               
                             </div>
                         </div>
                     </div>
@@ -306,7 +308,7 @@ class Foods{
                             <div class='col-md-6 col-sm-6 wow zoomIn' data-wow-delay='0.7s'>
                                     <div class='hotel_container'>
                                         <div class='img_container'>
-                                            <a href='#'>
+                                            <a href='foodDetails.php?foodId={$Functions->encrypt_id($foods_rows['food_id'])}'>
                                                 <img src='"); self::select_food_image($foods_rows['food_image']); echo("' width='800' height='533' class='img-responsive' alt='تی شین'>
                                                 <div class='score'><span>{$Functions->EN_numTo_FA($database->escape_value($foods_rows['food_score']),true)}</span>"); echo(self::word_score($foods_rows['food_score'])); echo("</div>
                                                 <div class='short_info hotel'>"); echo(substr(nl2br(htmlentities($foods_rows['food_description'])),0,150)."..."); echo("<span class='price'><sup>{$Functions->EN_numTo_FA($Functions->insert_seperator($database->escape_value($foods_rows['food_main_price'])),true)} تومان</sup></span>
@@ -316,10 +318,9 @@ class Foods{
                                         <div class='hotel_title'>
                                             <h3><strong>{$database->escape_value($foods_rows['food_title'])}</strong></h3>
                                             <div class='rating'>"); echo $Functions->give_start_by_number($foods_rows['food_score']); echo("</div>
-                                            <form action='foodDetails.php' method='post'>
-                                                <input name='food_id' type='hidden' value='"); echo($Functions->encrypt_id($foods_rows['food_id'])); echo("' /> 
-                                                <p><input name='submit' class='food_details_submit' value='طرز تهیه' type='submit' /></p>
-                                            </form>
+                                            <a href='foodDetails.php?foodId={$Functions->encrypt_id($foods_rows['food_id'])}'> 
+                                                <p class='food_details_submit text-center'>طرز تهیه</p>
+                                            </a>
                                             <div class='wishlist'> <a class='tooltip_flip tooltip-effect-1' href='#'>+<span class='tooltip-content-flip'><span class='tooltip-back'>علاقمند شدم</span></span></a>
                                             </div>
                                         </div>
@@ -334,7 +335,7 @@ class Foods{
                         <div class='wishlist'> <a class='tooltip_flip tooltip-effect-1' href='javascript:void(0);'>+<span class='tooltip-content-flip'><span class='tooltip-back'>علاقمند شدم</span></span></a>
                         </div>
                         <div class='img_list'>
-                            <a href='#'>
+                            <a href='foodDetails.php?foodId={$Functions->encrypt_id($foods_rows['food_id'])}'>
                                 <div class='ribbon top_rated'></div>
                                 <img src='"); self::select_food_image($foods_rows['food_image']); echo("' alt='تی شین'>
                                 <div class='short_info'></div>
@@ -372,10 +373,9 @@ class Foods{
                             <sup>{$Functions->EN_numTo_FA($Functions->insert_seperator($database->escape_value($foods_rows['food_main_price'])),true)} تومان</sup>
                             <span class='normal_price_list'>{$Functions->EN_numTo_FA($Functions->insert_seperator($database->escape_value($foods_rows['food_off_price'])),true)} تومان</span>
                             <small>روزانه / شبانه</small>
-                            <form action='foodDetails.php' method='post'>
-                                <input name='food_id' type='hidden' value='"); echo($Functions->encrypt_id($foods_rows['food_id'])); echo("' /> 
-                                <p><input name='submit' class='food_details_submit' value='طرز تهیه' type='submit' /></p>
-                            </form>                   
+                            <a href='foodDetails.php?foodId={$Functions->encrypt_id($foods_rows['food_id'])}'> 
+                                <p class='food_details_submit text-center'>طرز تهیه</p>
+                            </a>           
                             </div>
                         </div>
                     </div>
@@ -661,6 +661,15 @@ class Foods{
         $database->query("SET NAMES 'utf8'");
         $result = $database->query($sql);
         return $foods_rows = $database->fetch_array($result);
+    }
+    public static function FoodResultAttributeById($id){
+        global $database,$Functions;
+        $id = $Functions->decrypt_id($id);
+        $id = $database->escape_value($id);
+        $sql = "SELECT * FROM foods WHERE food_id={$id} ";
+        $database->query("SET NAMES 'utf8'");
+        $result = $database->query($sql);
+        return $result;
     }
     public function word_score($food_score){
         if($food_score == 1) { return 'قابل قبول'; }

@@ -158,11 +158,12 @@
             }
         }
         public function ShowAllRoomsBy($grid = ""){
-            global $database, $Functions;
+            global $database, $Functions,$users;
             $sql = "SELECT * FROM rooms ";
             if (isset($_POST["user_show_by_all_hotels_room"])) {
                 if (isset($_POST["user_star_score_room"])){
                     $this->room_score = $database->escape_value($_POST["user_star_score_room"]);
+                    settype($this->room_score,"integer");
                     if (preg_match("/WHERE/",$sql)){
                             $sql .= " && room_score={$this->room_score} ";
                     }else{
@@ -216,10 +217,16 @@
                     $price_range = explode(";",$price_range);
                     $first_attr = $price_range[0]; $second_attr = $price_range[1];
                     $first_attr = (int)$first_attr; $second_attr = (int)$second_attr;
-                    if (preg_match("/WHERE/",$sql)){
-                        $sql .= " && room_main_price BETWEEN {$first_attr} AND {$second_attr} ";
+                    settype($first_attr,"integer");
+                    settype($second_attr,"integer");
+                    if (!(empty($first_attr)) && !(empty($second_attr))) {
+                        if (preg_match("/WHERE/", $sql)) {
+                            $sql .= " && room_main_price BETWEEN {$first_attr} AND {$second_attr} ";
+                        } else {
+                            $sql .= " WHERE room_main_price BETWEEN {$first_attr} AND {$second_attr} ";
+                        }
                     }else{
-                        $sql .= " WHERE room_main_price BETWEEN {$first_attr} AND {$second_attr} ";
+                        $users->redirect_to("RoomsList.php");
                     }
                 }
                 if (isset($_POST["user_person_count_range_room"]) && !(empty($_POST["user_person_count_range_room"]))){
@@ -227,6 +234,8 @@
                     $person_count_range = explode(";",$person_count_range);
                     $first_attr = $person_count_range[0]; $second_attr = $person_count_range[1];
                     $first_attr = (int)$first_attr; $second_attr = (int)$second_attr;
+                    settype($first_attr,"integer");
+                    settype($second_attr,"integer");
                     if (preg_match("/WHERE/",$sql)){
                         $sql .= " && room_person_count BETWEEN {$first_attr} AND {$second_attr} ";
                     }else{
@@ -898,6 +907,7 @@
                 unlink("../img/rooms/".$this->room_image);
             }
             $this->DeleteRoomComments($this->room_id);
+            $this->DeleteReservationByRoomId($this->room_id);
             $sql = "DELETE FROM rooms WHERE rooms.room_id = {$this->room_id} LIMIT 1";
             $result = $database->query($sql);
             if ($result){
@@ -1624,6 +1634,16 @@
 
             }
         }
+        public function DeleteReservationByRoomId($id){
+            global $database, $Functions;
+            $this->reserve_id = $id;
+            $sql = "DELETE FROM room_reservation WHERE room_reservation.room_id = {$this->reserve_id}";
+            $result = $database->query($sql);
+            if ($result)
+                return true;
+            else
+                return false;
+        }
         //////////////////////////////////////////////////////////////////////////////////
 
         // for Room page
@@ -1651,19 +1671,20 @@
                             $_SESSION["errors_message"] .= "نام یا نام خانوادگی کمتر از 150 کارکتر باشد ."; $users->redirect_to("Room.php?roomId={$room_id}");
                         }
                         $reserve_date = $database->escape_value($_POST["reserve_date"]);
-                        $reserve_date = $this->convert_date_to_gregorian($reserve_date,$room_id);
-                        $now_time = strftime("%Y-%m-%d %H:%M:%S",time());
-                        $this->room_id = $database->escape_value($Functions->decrypt_id($room_id));
-                        $this->user_id = $_SESSION["user_id"];
-                        $sql = "INSERT INTO room_reservation(room_id,user_id,firstname,lastname,date_range,reserve_room_person_count,reserve_time,reserved_mode)VALUES({$this->room_id},{$this->user_id},'{$reserve_firstname}','{$reserve_lastname}','{$reserve_date}',{$this->room_person_count},'{$now_time}',0)";
-                        $database->query("SET NAMES 'utf8'");
-                        $result = $database->query($sql);
-                        if ($result){
-                            $_SESSION["errors_message"] .= "با موفقیت رزرو شد ."; $users->redirect_to("Room.php?roomId={$room_id}");
-                        }else{
-                            $_SESSION["errors_message"] .= "خطایی در رزرو پیش آمده ."; $users->redirect_to("Room.php?roomId={$room_id}");
-                        }
-
+                            $reserve_date = $this->convert_date_to_gregorian($reserve_date, $room_id);
+                            $now_time = strftime("%Y-%m-%d %H:%M:%S", time());
+                            $this->room_id = $database->escape_value($Functions->decrypt_id($room_id));
+                            $this->user_id = $_SESSION["user_id"];
+                            $sql = "INSERT INTO room_reservation(room_id,user_id,firstname,lastname,date_range,reserve_room_person_count,reserve_time,reserved_mode)VALUES({$this->room_id},{$this->user_id},'{$reserve_firstname}','{$reserve_lastname}','{$reserve_date}',{$this->room_person_count},'{$now_time}',0)";
+                            $database->query("SET NAMES 'utf8'");
+                            $result = $database->query($sql);
+                            if ($result) {
+                                $_SESSION["errors_message"] .= "با موفقیت رزرو شد .";
+                                $users->redirect_to("Room.php?roomId={$room_id}");
+                            } else {
+                                $_SESSION["errors_message"] .= "خطایی در رزرو پیش آمده .";
+                                $users->redirect_to("Room.php?roomId={$room_id}");
+                            }
 
                     }else{ $_SESSION["errors_message"] .= "برخی از فیلد ها خالیست یا انتخاب نشده ."; $users->redirect_to("Room.php?roomId={$room_id}"); }
                     //////////////////////////////////
@@ -1760,13 +1781,15 @@
             $reserve_date_from_last = $reserve_date_from_last[0]."-".$reserve_date_from_last[1]."-".$reserve_date_from_last[2];
             $reserve_date_to_last = $reserve_date_to_last[0]."-".$reserve_date_to_last[1]."-".$reserve_date_to_last[2];
 
-            /*$reserve_date_from_validation = checkdate($reserve_date_from_mounth, $reserve_date_from_day, $reserve_date_from_year);
-            $reserve_date_to_validation = checkdate($reserve_date_to_mounth, $reserve_date_to_day, $reserve_date_to_year);
-            if($reserve_date_from_validation && $reserve_date_to_validation){
-                */return $reserve_date = $reserve_date_from_last."|".$reserve_date_to_last;
-            /*}else{
+            $reserve_date_from_last_stamp = strtotime($reserve_date_from_last,time());
+            $reserve_date_to_last_stamp = strtotime($reserve_date_to_last,time());
+
+            if($reserve_date_to_last_stamp >= $reserve_date_from_last_stamp){
+                return $reserve_date = $reserve_date_from_last."|".$reserve_date_to_last;
+            }else{
                 $_SESSION["errors_message"] .= "تاریخ وارد شده نامعتبر است ."; $users->redirect_to("Room.php?roomId={$room_id}");
-            }*/
+            }
+
         }
         //for panel
         public function smile_voted_by_price_quality_score_comfort($price,$quality,$score,$comfort){

@@ -3,13 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="c424756b-6ee7-4545-9854-ec57cf6aba41" name="Default Changelist" comment=" noth">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Room.php" beforeDir="false" afterPath="$PROJECT_DIR$/Room.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/all_hotels_grid.php" beforeDir="false" afterPath="$PROJECT_DIR$/RoomsGrid.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/all_hotels_list.php" beforeDir="false" afterPath="$PROJECT_DIR$/RoomsList.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/foods.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/foods.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/functions.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/rooms.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/rooms.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/s" beforeDir="false" afterPath="$PROJECT_DIR$/classes/s" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/datapicker" beforeDir="false" afterPath="$PROJECT_DIR$/datapicker" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/datapicker/demo/Samples1.html" beforeDir="false" afterPath="$PROJECT_DIR$/datapicker/demo/Samples1.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/datapicker/dist/jquery.md.bootstrap.datetimepicker.js" beforeDir="false" />
@@ -17,11 +13,9 @@
       <change beforePath="$PROJECT_DIR$/datapicker/dist/jquery.md.bootstrap.datetimepicker.style.css.map" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/datapicker/src/jquery.md.bootstrap.datetimepicker.js" beforeDir="false" afterPath="$PROJECT_DIR$/datapicker/src/jquery.md.bootstrap.datetimepicker.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/datapicker/src/jquery.md.bootstrap.datetimepicker.style.css" beforeDir="false" afterPath="$PROJECT_DIR$/datapicker/src/jquery.md.bootstrap.datetimepicker.style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/food_details.php" beforeDir="false" afterPath="$PROJECT_DIR$/foodDetails.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/foods_grid.php" beforeDir="false" afterPath="$PROJECT_DIR$/FoodsGrid.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/foods_list.php" beforeDir="false" afterPath="$PROJECT_DIR$/FoodsList.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/logged_in_header.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/logged_in_header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/rooms/اجاره-خانه-یک-روزه-در-تبریز.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/search_slider_all_foods.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/search_slider_all_foods.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/includes/search_slider_all_rooms.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/search_slider_all_rooms.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,6 +170,7 @@
       <workItem from="1590961469006" duration="2060000" />
       <workItem from="1591214248384" duration="3990000" />
       <workItem from="1591276683057" duration="1197000" />
+      <workItem from="1591726521120" duration="8999000" />
     </task>
     <servers />
   </component>
@@ -220,10 +215,10 @@
     </state>
     <state x="392" y="207" key="com.intellij.ide.util.TipDialog/0.26.1366.708@0.26.1366.708" timestamp="1591726521135" />
     <state x="392" y="208" key="com.intellij.ide.util.TipDialog/0.27.1366.707@0.27.1366.707" timestamp="1588723909265" />
-    <state x="336" y="26" width="683" height="708" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1589586228740">
+    <state x="336" y="26" width="683" height="708" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1591736334540">
       <screen x="0" y="26" width="1366" height="708" />
     </state>
-    <state x="336" y="26" width="683" height="708" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.26.1366.708@0.26.1366.708" timestamp="1589586228740" />
+    <state x="336" y="26" width="683" height="708" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.26.1366.708@0.26.1366.708" timestamp="1591736334540" />
     <state x="336" y="27" width="683" height="707" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.27.1366.707@0.27.1366.707" timestamp="1588110468108" />
     <state x="0" y="226" width="1166" height="508" key="dock-window-1" timestamp="1590704873910">
       <screen x="0" y="26" width="1366" height="708" />
