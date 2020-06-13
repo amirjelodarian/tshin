@@ -422,7 +422,7 @@ require_once("functions.php");
                     echo("
                     
                         <tr style='background: #d75e30'>
-                            <td><img class='finger-img' style='border:2px solid darkorange' src='"); self::select_user_image($admins_row['user_image']); echo("' alt='تی شین'></td>
+                            <td><img class='finger-img' style='border:2px solid darkorange' src="); self::select_user_image($admins_row['user_image']); echo(" alt='تی شین'></td>
                             <td class='admins_username'>{$admins_row['username']}</td>
                             <td class='admins_tel'>{$admins_row['tel']}</td>
                             <td>
@@ -456,9 +456,9 @@ require_once("functions.php");
                             <div class='edit_admin_panel col-xs-12'>
                             <form action='{$_SERVER['PHP_SELF']}' method='post' enctype='multipart/form-data'>
                                         <div class='img_list col-lg-4 col-md-4 col-sm-6 col-xs-12' id='edit_admin_image'>
-                                            <img src='"); self::select_user_image($admins_row['user_image']);
-                $_SESSION["image_name"] = $admins_row['user_image'];
-                echo("' alt=''>
+                                            <img src="); self::select_user_image($admins_row['user_image']);
+                                            $_SESSION["image_name"] = $admins_row['user_image'];
+                                            echo(" alt=''>
                                             <select id='select-input-image' name='select-input-image'>
                                                 <option value='browse-file' name='browseFileOption' id='browse-file'>Browse File...</option>
                                                 <option value='url-image' name='urlImageOption' id='url-image'>Link Or Url Image</option> 
@@ -588,7 +588,7 @@ require_once("functions.php");
                         <tr "); if($users_row['user_mode'] == 1){ echo 'style="background: #d75e30;"'; } echo(">
                             <td><img class='finger-img' ");
                             if($users_row['user_mode'] == 1){ echo 'style="border:2px solid darkorange"'; }
-                            echo("src='"); self::select_user_image($users_row['user_image']); echo("' alt='تی شین'></td>
+                            echo("src="); self::select_user_image($users_row['user_image']); echo(" alt='تی شین'></td>
                             <td class='admins_username'>{$users_row['username']}</td>
                             <td class='admins_tel'>{$users_row['tel']}</td>
                             <td>");
@@ -644,9 +644,9 @@ require_once("functions.php");
                             <div class='edit_admin_panel col-xs-12'>
                             <form action='{$_SERVER['PHP_SELF']}' method='post' enctype='multipart/form-data'>
                                         <div class='img_list col-lg-4 col-md-4 col-sm-6 col-xs-12' id='edit_admin_image'>
-                                            <img src='"); self::select_user_image($users_row['user_image']);
-                    $_SESSION["image_name"] = $users_row['user_image'];
-                    echo("' alt=''>
+                                            <img src="); self::select_user_image($users_row['user_image']);
+                                            $_SESSION["image_name"] = $users_row['user_image'];
+                                            echo(" alt=''>
                                             <select id='select-input-image' name='select-input-image'>
                                                 <option value='browse-file' name='browseFileOption' id='browse-file'>Browse File...</option>
                                                 <option value='url-image' name='urlImageOption' id='url-image'>Link Or Url Image</option> 
@@ -801,9 +801,9 @@ require_once("functions.php");
                             <div class='edit_admin_panel col-xs-12'>
                             <form action='{$_SERVER['PHP_SELF']}' method='post' enctype='multipart/form-data'>
                                         <div class='img_list col-lg-4 col-md-4 col-sm-6 col-xs-12' id='edit_admin_image'>
-                                            <img src='"); self::select_user_image($user_row['user_image']);
-                    $_SESSION["image_name"] = $user_row['user_image'];
-                    echo("' alt=''>
+                                            <img src="); self::select_user_image($user_row['user_image']);
+                                            $_SESSION["image_name"] = $user_row['user_image'];
+                                            echo(" alt=''>
                                             <select id='select-input-image' name='select-input-image'>
                                                 <option value='browse-file' name='browseFileOption' id='browse-file'>Browse File...</option>
                                                 <option value='url-image' name='urlImageOption' id='url-image'>Link Or Url Image</option> 
@@ -813,8 +813,8 @@ require_once("functions.php");
                                         </div>
                                         <input type='hidden' name='MAX_FILE_SIZE' value='3145728' />
                                             <input type='hidden' name='user_id' value='");
-                    echo($Functions->encrypt_id($user_row['id']));
-                    echo("'/>
+                                            echo($Functions->encrypt_id($user_row['id']));
+                                            echo("'/>
                                         <div class='admin_info col-xs-12'>
                                             <span id='admin_label'>UserName&nbsp;:</span>&nbsp;<input class='edit_admin_username' value='{$user_row['username']}' name='user_username' required /><hr />
                                             <span id='admin_label'>Tel:</span>&nbsp;<span class='edit_user_tel'>{$user_row['tel']}</span><hr />
@@ -935,13 +935,12 @@ require_once("functions.php");
                         echo(">
                             <td><img class='finger-img' ");
                         if ($users_row['user_mode'] == 1) {
-                            echo 'style="border:2px solid darkorange"';
+                            echo 'style="border:2px solid darkorange" src=';
                         }
-                        echo("src='");
                         self::select_user_image($users_row['user_image']);
                         switch ($_POST["panel_ByWitch_user"]){
                             case 'Tel':
-                                echo("' alt='تی شین'></td>
+                                echo(" alt='تی شین'></td>
                                 <td class='admins_username'>{$users_row['username']}</td>
                                 <td class='admins_tel' style='color: #00A8FF;text-shadow: 2px 2px 1px black;'>{$users_row['tel']}</td><td>");
                                 break;
@@ -1027,7 +1026,7 @@ require_once("functions.php");
                         echo("
                     
                         <tr style='background: #d75e30'>
-                            <td><img class='finger-img' style='border:2px solid darkorange' src='"); self::select_user_image($admins_row['user_image']); echo("' alt='تی شین'></td>
+                            <td><img class='finger-img' style='border:2px solid darkorange' src="); self::select_user_image($admins_row['user_image']); echo(" alt='تی شین'></td>
                             <td class='admins_username'>{$admins_row['username']}</td>
                             <td class='admins_tel'>{$admins_row['tel']}</td>
                             <td>
@@ -1057,11 +1056,16 @@ require_once("functions.php");
             global $database;
             if(!(empty($row))){
                 if(filter_var($row,FILTER_VALIDATE_URL)){
-                    echo $database->escape_value($row);
+                    echo $row;
                 }else{
-                    echo 'userimg/'.$database->escape_value($row);
+                    if($_SESSION["user_mode"] == 0)
+                        echo '../panel/userimg/'.$row;
+                    else
+                        echo 'userimg/'.$row;
                 }
             }else{
+                if($_SESSION["user_mode"] == 0)
+                    echo '../panel/default_user.png';
                 echo 'userimg/default_user.png';
             }
         }

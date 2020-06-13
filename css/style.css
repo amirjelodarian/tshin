@@ -5356,9 +5356,9 @@ a.btn_infobox:hover {
     text-align: center;
     width: 84%;
 }
-#publish_all_btn input:nth-child(1){
+/*#publish_all_btn input:nth-child(1){
     background: green;
-}
+}*/
 #unpublish_all_submit{
     width: 98px;
 }

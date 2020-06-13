@@ -1452,25 +1452,25 @@
                 if (isset($_POST['ByWitch'])) {
                     switch ($_POST['ByWitch']) {
                         case 'user_id':
-                            $sql = "SELECT * FROM room_survey WHERE user_id LIKE '{$keyword}'";
+                            $sql = "SELECT * FROM room_survey WHERE user_id={$keyword}";
                             break;
                         case 'username':
-                            $sql = "SELECT * FROM users WHERE username LIKE '%{$keyword}%'";
+                            $sql = "SELECT * FROM room_survey WHERE username LIKE '%{$keyword}%'";
                             break;
                         case 'tel':
-                            $sql = "SELECT * FROM users WHERE tel LIKE '{$keyword}'";
+                            $sql = "SELECT * FROM users INNER JOIN room_survey ON users.id = room_survey.user_id AND users.tel LIKE '{$keyword}%'";
                             break;
                         case 'address':
-                            $sql = "SELECT * FROM rooms WHERE room_address LIKE '%{$keyword}%' ";
+                            $sql = "SELECT * FROM rooms INNER JOIN room_survey ON rooms.room_id = room_survey.room_id AND rooms.room_address LIKE '%{$keyword}%'";
                             break;
                         case 'title':
-                            $sql = "SELECT * FROM rooms WHERE room_title LIKE '%{$keyword}%'";
+                            $sql = "SELECT * FROM rooms INNER JOIN room_survey ON rooms.room_id = room_survey.room_id AND rooms.room_title LIKE '%{$keyword}%'";
                             break;
                         case 'survey':
                             $sql = "SELECT * FROM room_survey WHERE survey LIKE '%{$keyword}%'";
                             break;
                         case 'score':
-                            $sql = "SELECT * FROM rooms WHERE room_score LIKE '{$keyword}'";
+                            $sql = "SELECT * FROM rooms INNER JOIN room_survey ON rooms.room_id = room_survey.room_id AND rooms.room_score = {$keyword}";
                             break;
                         case 'date':
                             $sql = "SELECT * FROM room_survey WHERE survey_date LIKE '{$keyword}%'";
@@ -1484,7 +1484,7 @@
         }
 
 
-            // Reservation
+            // Reservation For Administrator And Admins
         public function SelectRoomReservation(){
             global $database,$Functions;
             if(isset($_GET["submit_booking"]) && isset($_GET["select_booking"]) && !(empty($_GET["select_booking"]))){
@@ -1643,6 +1643,79 @@
                 return true;
             else
                 return false;
+        }
+
+
+           // Just For Users with 0 user_mode
+        public function SelectUserRoomReservation(){
+            global $database,$Functions;
+            if(isset($_GET["submit_booking"]) && isset($_GET["select_booking"]) && !(empty($_GET["select_booking"]))){
+                switch($_GET["select_booking"]){
+                    case "notbooked":
+                        $sql = "SELECT * FROM room_reservation WHERE user_id={$_SESSION['user_id']} AND reserved_mode = 0 ORDER BY reserve_id DESC";
+                        $result = $database->query($sql);
+                        $booking_mode = "notbooked";
+                        return array($result,$booking_mode);
+                        break;
+                    case "booked":
+                        $sql = "SELECT * FROM room_reservation WHERE user_id={$_SESSION['user_id']} AND reserved_mode = 1 ORDER BY reserve_id DESC";
+                        $result = $database->query($sql);
+                        $booking_mode = "booked";
+                        return array($result,$booking_mode);
+                        break;
+                    default:
+                        $sql = "SELECT * FROM room_reservation WHERE user_id={$_SESSION['user_id']} AND reserved_mode = 0 ORDER BY reserve_id DESC";
+                        $result = $database->query($sql);
+                        $booking_mode = "notbooked";
+                        return array($result,$booking_mode);
+                        break;
+                }
+            }else{
+                $sql = "SELECT * FROM room_reservation WHERE user_id={$_SESSION['user_id']} AND reserved_mode = 0 ORDER BY reserve_id DESC";
+                $result = $database->query($sql);
+                $booking_mode = "notbooked";
+                return array($result,$booking_mode);
+            }
+        }
+        public function DeleteUserAllBookedReservation(){
+            global $database,$users;
+            if (isset($_POST["delete_all_booked_reservation"])){
+                $sql = "DELETE FROM room_reservation WHERE user_id={$_SESSION['user_id']} AND reserved_mode=1";
+                $result = $database->query($sql);
+                if(!$result){
+                    $_SESSION["errors_message"] .= "مشکلی در حذف رزرو های تایید شده به وجود آمده .";
+                    $this->error_state = 1;
+                    return $this->error_state;
+                }
+            }
+        }
+        public function DeleteUserAllNotBookedReservation(){
+            global $database,$users;
+            if (isset($_POST["delete_all_notbooked_reservation"])){
+                $sql = "DELETE FROM room_reservation WHERE user_id={$_SESSION['user_id']} AND reserved_mode=0";
+                $result = $database->query($sql);
+                if(!$result){
+                    $_SESSION["errors_message"] .= "مشکلی در حذف رزروهای تایید نشده به وجود آمده .";
+                    $this->error_state = 1;
+                    return $this->error_state;
+                }
+            }
+        }
+        public function CountUserAllRoomReservation(){
+            global $database;
+            $sql = "SELECT COUNT(*) AS all_user_reservation_count FROM room_reservation WHERE user_id={$_SESSION['user_id']}";
+            $result = $database->query($sql);
+            if($row = $database->fetch_array($result)){
+                echo $row['all_user_reservation_count'];
+            }
+        }
+        public function CountUserBookedAndNotBookedRoomReservationPanel($publish_mode){
+            global $database;
+            $sql = "SELECT COUNT(*) AS reservation_count FROM room_reservation WHERE user_id={$_SESSION['user_id']} AND reserved_mode={$publish_mode}";
+            $result = $database->query($sql);
+            if($row = $database->fetch_array($result)){
+                return $row['reservation_count'];
+            }
         }
         //////////////////////////////////////////////////////////////////////////////////
 

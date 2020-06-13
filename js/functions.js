@@ -92,7 +92,7 @@ $(window).load(function () {
         $(".room_error_message").show();
     }
     $(".delete_room_btn").click(function () {
-        return window.confirm("Are You Sure ?");
+        return window.confirm("Are You Sure ? \n آیا مطمئن هستید ؟");
     });
     $("#status").fadeOut(), $("#preloader").delay(350).fadeOut("slow"), $("body").delay(350).css({overflow: "visible"}), $(window).scroll()
 }), $(window).scroll(function () {

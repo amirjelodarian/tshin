@@ -211,6 +211,16 @@
                 echo "مشکل در ایجاد لاگ فایل !!";
             }
         }
+        public function select_double_quote_or_single($value){
+            if (isset($value)){
+                if (preg_match("/'/")){
+                    echo '"';
+                }
+                if (preg_match('/"/')){
+                    echo "'";
+                }
+            }
+        }
         public function auto_select($option_num,$object){
             if($option_num == $object){
                 return "selected";
