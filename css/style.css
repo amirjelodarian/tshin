@@ -5371,6 +5371,7 @@ a.btn_infobox:hover {
     width: 165px;
 }
 .keyword-style-panel{
+    z-index: 99;
     margin-bottom: 23px;
     bottom: 0;
     position: fixed;

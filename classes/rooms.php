@@ -1446,39 +1446,84 @@
                 }
         }
         public function CommentsSearch(){
-            global $database,$users,$Functions;
+            global $database,$users,$Functions,$rooms;
             if (isset($_POST['submit_search']) && !(empty($_POST['keyword']))) {
                 $keyword = $database->escape_value($_POST['keyword']);
                 if (isset($_POST['ByWitch'])) {
                     switch ($_POST['ByWitch']) {
                         case 'user_id':
-                            $sql = "SELECT * FROM room_survey WHERE user_id={$keyword}";
+                            $sql = "SELECT * FROM room_survey WHERE user_id={$keyword} ORDER BY id DESC";
                             break;
                         case 'username':
-                            $sql = "SELECT * FROM room_survey WHERE username LIKE '%{$keyword}%'";
+                            $sql = "SELECT * FROM room_survey WHERE username LIKE '%{$keyword}%' ORDER BY id DESC";
                             break;
                         case 'tel':
                             $sql = "SELECT * FROM users INNER JOIN room_survey ON users.id = room_survey.user_id AND users.tel LIKE '{$keyword}%'";
                             break;
                         case 'address':
-                            $sql = "SELECT * FROM rooms INNER JOIN room_survey ON rooms.room_id = room_survey.room_id AND rooms.room_address LIKE '%{$keyword}%'";
+                            $sql = "SELECT * FROM rooms INNER JOIN room_survey ON rooms.room_id = room_survey.room_id AND rooms.room_address LIKE '%{$keyword}%' ORDER BY id DESC";
                             break;
                         case 'title':
-                            $sql = "SELECT * FROM rooms INNER JOIN room_survey ON rooms.room_id = room_survey.room_id AND rooms.room_title LIKE '%{$keyword}%'";
+                            $sql = "SELECT * FROM rooms INNER JOIN room_survey ON rooms.room_id = room_survey.room_id AND rooms.room_title LIKE '%{$keyword}%' ORDER BY id DESC";
                             break;
                         case 'survey':
-                            $sql = "SELECT * FROM room_survey WHERE survey LIKE '%{$keyword}%'";
-                            break;
-                        case 'score':
-                            $sql = "SELECT * FROM rooms INNER JOIN room_survey ON rooms.room_id = room_survey.room_id AND rooms.room_score = {$keyword}";
-                            break;
-                        case 'date':
-                            $sql = "SELECT * FROM room_survey WHERE survey_date LIKE '{$keyword}%'";
+                            $sql = "SELECT * FROM room_survey WHERE survey LIKE '%{$keyword}%' ORDER BY id DESC";
                             break;
                         default:
                             $users->redirect_to($_SERVER['PHP_SELF']);
                             break;
                     }
+                    if (!empty($sql)){
+                        $database->query("SET NAMES 'utf8'");
+                        $result = $database->query($sql);
+                        if ($database->num_rows($result) > 0) {
+                            while ($rows = $database->fetch_array($result)) {
+                                echo("
+                                    <div class='comment-panel col-xs-12 col-sm-12 col-md-6 col-lg-6'>");
+                                        if ($users_row = $database->fetch_array($users->SelectById($rows['user_id']))) {
+                                            echo("<img class='finger-img' id='finger-img-panel-comment' src='"); Users::select_user_image($users_row['user_image']); echo("' alt='' class='img-circle'>");
+                                        }
+                                        $divid_date_time = $Functions->divid_date_time_database($rows['survey_date']);
+                                        echo("
+                                        <h4 id='username-panel-comment'>{$rows['username']}</h4>");
+                                        echo("<blockquote style='float: left;'>Comment Id : (<span style='color: #00A8FF;font-weight: bold;'>{$rows['id']}</span>)</blockquote>");
+                                        echo("<blockquote style='float: left;'>Tel : (<span style='color: #00A8FF;font-weight: bold;'>{$users_row['tel']}</span>)</blockquote>");
+                                        if ($rooms_rows = $database->fetch_array($rooms->SelectWithId($rows['room_id']))){
+                                            echo("<br /><h4 style='display: inline-block' class='room_address'>{$database->escape_value($rooms_rows['room_address'])}</h4><h3 style='display: inline-block'>&nbsp;|&nbsp;</h3> 
+                                                    <h5 style='display: inline-block'>{$database->escape_value($rooms_rows['room_title'])}</h5>");
+                                        }
+                                        echo("<div class='survey'><p>"); echo(nl2br($rows['survey'])); echo("</p></div>
+                                        <div id='panel-rating-comment' class='rating'> {$rooms->smile_voted_by_price_quality_score_comfort($rows['room_price'],$rows['room_quality'],$rows['room_score'],$rows['room_comfort'])} </div>
+                                        <small class='icon-clock-8' id='panel-time-comment'>&nbsp;"); echo $Functions->EN_numTo_FA($divid_date_time[0],true); echo("</small>
+                                            <small id='panel-date-comment'>"); echo $Functions->EN_numTo_FA($Functions->convert_db_format_for_gregorian_to_jalali($divid_date_time[1]),true); echo("</small><br />
+                                            <div class='comment-panel-btns col-xs-12 col-sm-12 col-md-12 col-lg-12'>
+                                                     <a href='../Room.php?roomId={$Functions->encrypt_id($rooms_rows['room_id'])}'>
+                                                        <p id='see-room-btn' class='submit_edit'>See Room</p>
+                                                     </a>
+                                                    <form action='{$_SERVER['PHP_SELF']}' id='submit-checkbox-form' method='post'>
+                                                        <input type='hidden' name='survey_id' value='"); echo($Functions->encrypt_id($rows['id'])); echo("' />
+                                                        <div class='publish-area'>");
+                                                        if($rows["publish"] == 0) {
+                                                                echo("<input type='submit' name='publish_submit' id='publish_checkbox_submit' class='submit_edit' value='Publish' />");
+                                                            }
+                                                            if($rows["publish"] == 1) {
+                                                                echo("<input type='submit' name='unpublish_submit' id='unpublish_checkbox_submit' class='submit_edit' value='X  Un Publish' />");
+                                                            }
+                                                            echo("
+                                                            
+                                                        </div>
+                                                        <input type='submit' name='delete_user_comment' value='Delete' class='comments_delete_btn delete_room_btn' />
+                                                    </form>
+                                                    <a class='edit-comment-panel-btn' href='comments_edit.php?commentId={$Functions->decrypt_id($rows['id'])}'>Edit</a>
+                                                </div>
+                                                    <div class='line'></div></hr >
+                                            </div>
+                                    
+
+                                ");
+                            }
+                        }else{ echo "<h1>متاسفانه یافت نشد !</h1>"; }
+                    }else{ $users->redirect_to($_SERVER['PHP_SELF']); }
                 }
             }
         }

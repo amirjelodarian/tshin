@@ -1,45 +1,39 @@
 <?php
 require_once("../classes/initialize.php");
 $sessions->login_administrator_and_admin("../index.php");
-?>
-<?php
+
 if ($_SESSION["user_mode"] == 13) {
     include("includes/administrator_menu.php");
-}
-else if($_SESSION["user_mode"] == 1){
+} else if ($_SESSION["user_mode"] == 1) {
     include("includes/admin_menu.php");
 }
 $SelcetPublishMode = $rooms->SelectRoomComments();
-    if(isset($_POST["publish_submit"])){
-        $rooms->PublishComment();
-    }
-    if(isset($_POST["unpublish_submit"])){
-        $rooms->UnPublishComment();
-    }
-
-    //For All Comments /////////////////
-    if (isset($_POST["publish_all_submit"])){
-        $rooms->PublishAllComments();
-    }
-    if(isset($_POST["unpublish_all_submit"])){
-        $rooms->UnPublishAllComments();
-    }
-    if (isset($_POST["delete_all_comment_published_submit"])){
-        $rooms->DeleteAllCommentsPublished();
-    }
-    if (isset($_POST["delete_all_comment_unpublished_submit"])){
-        $rooms->DeleteAllCommentsUnPublished();
-    }
-    ///////////////////////////////////
-
-if (isset($_POST['submit_search'])){
-    $rooms->CommentsSearch();
+if (isset($_POST["publish_submit"])) {
+    $rooms->PublishComment();
+}
+if (isset($_POST["unpublish_submit"])) {
+    $rooms->UnPublishComment();
 }
 
-    if (isset($_POST["delete_user_comment"])){
-        $rooms->DeleteUserComment();
-    }
+//For All Comments /////////////////
+if (isset($_POST["publish_all_submit"])) {
+    $rooms->PublishAllComments();
+}
+if (isset($_POST["unpublish_all_submit"])) {
+    $rooms->UnPublishAllComments();
+}
+if (isset($_POST["delete_all_comment_published_submit"])) {
+    $rooms->DeleteAllCommentsPublished();
+}
+if (isset($_POST["delete_all_comment_unpublished_submit"])) {
+    $rooms->DeleteAllCommentsUnPublished();
+}
+if (isset($_POST["delete_user_comment"])) {
+    $rooms->DeleteUserComment();
+}
+///////////////////////////////////
 ?>
+
 <h1 id='rooms' align="center">Comments</h1>
 <h2>
     <?php
@@ -80,7 +74,7 @@ $all_room_survey_result = $all_room_survey_result[0];
     while($room_survey = $database->fetch_array($all_room_survey_result)){
 
             echo("
-                    <div class='comment-panel col-xs-12 col-sm-12 col-md-6 col-lg-6' "); if($SelcetPublishMode[1] == "published"){ echo("style='border: 2px solid green'"); }else{ echo("style='border: 2px solid red'"); }  echo(">
+                    <div id='main-comments' class='comment-panel col-xs-12 col-sm-12 col-md-6 col-lg-6' "); if($SelcetPublishMode[1] == "published"){ echo("style='border: 2px solid green'"); }else{ echo("style='border: 2px solid red'"); }  echo(">
                         ");
                         if ($users_row = $database->fetch_array($users->SelectById($room_survey['user_id']))) {
                             echo("<img class='finger-img' "); if($SelcetPublishMode[1] == "published"){ echo("style='border: 4px solid green;'"); }else{ echo("style='border: 4px solid red;'"); }  echo("  id='finger-img-panel-comment' src='"); Users::select_user_image($users_row['user_image']); echo("' alt='' class='img-circle'>");
@@ -129,7 +123,7 @@ $sessions->null_room_id_while_comment(); ?>
     <br /><br />
     <hr />
     <div class="keyword-style-panel">
-        <form action="<?php echo($_SERVER['PHP_SELF']); ?>" method="post">
+        <form action="<?php echo(htmlspecialchars($_SERVER['PHP_SELF'])); ?>" method="post">
             <input type="text" id="keyword" name="keyword" placeholder="Search" />
             <select class="search-by-witch" name="ByWitch">
                 <option value="username">Username</option>

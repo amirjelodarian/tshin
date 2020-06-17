@@ -1,6 +1,7 @@
 <?php
 require_once("../classes/initialize.php");
 $sessions->login_administrator_and_admin("../index.php");
+header('Cache-Control: max-age=900');
 ?>
 <?php
 if ($_SESSION["user_mode"] == 13) {
@@ -30,18 +31,52 @@ $SelcetPublishMode = $rooms->SelectRoomComments();
     if (isset($_POST["delete_all_comment_unpublished_submit"])){
         $rooms->DeleteAllCommentsUnPublished();
     }
-    ///////////////////////////////////
-
-if (isset($_POST['submit_search'])){
-    $rooms->CommentsSearch();
-}
 
     if (isset($_POST["delete_user_comment"])){
         $rooms->DeleteUserComment();
     }
+//////////////////////////////////////////////////////////////////////////////
+
+
 ?>
+
+
+<!-- For Search -->
+<script src="../js/jquery-1.11.2.min.js"></script>
+<script src="../js/common_scripts_min.js"></script>
+<script src="../js/signUp.js"></script>
+<script src="../js/functions.js"></script>
+<script src="../js/icheck.js"></script>
+<div class="keyword-style-panel">
+    <form action="<?php echo(htmlspecialchars($_SERVER['PHP_SELF'])); ?>" method="post">
+        <input type="text" id="keyword" name="keyword" placeholder="Search" />
+        <select class="search-by-witch" name="ByWitch">
+            <option value="username">Username</option>
+            <option value="user_id">ID</option>
+            <option value="tel">Tel</option>
+            <option value="address">Address</option>
+            <option value="title">Title</option>
+            <option value="survey">Survey</option>
+        </select>
+        <input type="submit" value="Search" id="submit_search" class="comment_submit_search" name="submit_search" />
+    </form>
+</div>
+<div class='container-comment-panel col-xs-12 col-sm-12 col-md-12 col-lg-12'>
+    <?php
+        if (isset($_POST['submit_search'])){
+            echo "<h1>جستجو</h1>";
+            $rooms->CommentsSearch();
+            die();
+        }
+    ?>
+</div>
+
+
+
+
 <h1 id='rooms' align="center">Comments</h1>
 <h2>
+
     <?php
         if ($SelcetPublishMode[1] == "published"){
             echo("
@@ -63,6 +98,7 @@ if (isset($_POST['submit_search'])){
     ?>
 </h2>
 <div class='container-comment-panel col-xs-12 col-sm-12 col-md-12 col-lg-12'>
+
     <div id="errors" class="errors-panel " style="margin-top: 70px;"><?php echo $users->Errors(); ?></div>
     <form method="get" action="<?php echo($_SERVER['PHP_SELF']); ?>">
         <div class="publish">
@@ -74,6 +110,7 @@ if (isset($_POST['submit_search'])){
         </div>
     </form>
     <hr/>
+    <div id='main-comment'>
 <?php
 $all_room_survey_result = $rooms->SelectRoomComments();
 $all_room_survey_result = $all_room_survey_result[0];
@@ -95,8 +132,7 @@ $all_room_survey_result = $all_room_survey_result[0];
                                             <h5 style='display: inline-block'>{$database->escape_value($rooms_rows['room_title'])}</h5>");
                         }
                         echo("<div class='survey'><p>"); echo(nl2br($room_survey['survey'])); echo("</p></div>
-                        <div id='panel-rating-comment' class='rating'> {$rooms->smile_voted_by_price_quality_score_comfort($room_survey['room_price'],$room_survey['room_quality'],$room_survey['room_score'],$room_survey['room_comfort'])}
-                        </div>
+                        <div id='panel-rating-comment' class='rating'> {$rooms->smile_voted_by_price_quality_score_comfort($room_survey['room_price'],$room_survey['room_quality'],$room_survey['room_score'],$room_survey['room_comfort'])} </div>
                         
                         <small class='icon-clock-8' id='panel-time-comment'>&nbsp;"); echo $Functions->EN_numTo_FA($divid_date_time[0],true); echo("</small>
                         <small id='panel-date-comment'>"); echo $Functions->EN_numTo_FA($Functions->convert_db_format_for_gregorian_to_jalali($divid_date_time[1]),true); echo("</small><br />
@@ -120,27 +156,13 @@ $all_room_survey_result = $all_room_survey_result[0];
                         <a class='edit-comment-panel-btn' href='comments_edit.php?commentId={$Functions->decrypt_id($room_survey['id'])}'>Edit</a>
                     </div>
                         <div class='line'></div>
-                    </div>
+                  </div>
                 
             ");
 
     }
-$sessions->null_room_id_while_comment(); ?>
+?>
+    </div>
     <br /><br />
     <hr />
-    <div class="keyword-style-panel">
-        <form action="<?php echo($_SERVER['PHP_SELF']); ?>" method="post">
-            <input type="text" id="keyword" name="keyword" placeholder="Search" />
-            <select class="search-by-witch" name="ByWitch">
-                <option value="username">Username</option>
-                <option value="user_id">ID</option>
-                <option value="tel">Tel</option>
-                <option value="address">Address</option>
-                <option value="title">Title</option>
-                <option value="survey">Survey</option>
-                <option value="score">Score 1-5</option>
-            </select>
-            <input type="submit" value="Search" id="submit_search" name="submit_search" />
-        </form>
-    </div>
 <?php include("includes/footer.php"); ?>

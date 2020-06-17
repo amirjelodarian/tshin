@@ -1,4 +1,7 @@
 $(window).load(function () {
+    $(".comment_submit_search").click(function () {
+        $("#main-comment").hide();
+    });
     $(".change-password-inside").hide();
     $(".change-password-outside").click(function () {
         $(".change-password-inside").animate({'height':'toggle'});
