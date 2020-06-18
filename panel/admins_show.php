@@ -1,4 +1,5 @@
 <?php
+header('Cache-Control: max-age=900');
 require_once("../classes/initialize.php");
 $sessions->login_administrator("../index.php");
 ?>
@@ -12,7 +13,7 @@ $sessions->login_administrator("../index.php");
         <div id="errors" class="errors-panel" style="margin-top: 70px;"><?php echo $users->Errors(); ?></div>
         <table class="table_admins">
             <div id="keyword-style" style="margin-bottom: 8px">
-                <form action="<?php echo($_SERVER['PHP_SELF']); ?>" method="post">
+                <form action="<?php echo($_SERVER['PHP_SELF']); ?>" method="get">
                     <input type="text" id="keyword" name="panel_keyword_admin" placeholder="Search" />
                     <select class="search-by-witch" name="panel_ByWitch_admin">
                         <option value="Tel">Tel</option>

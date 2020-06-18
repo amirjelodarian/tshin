@@ -58,8 +58,8 @@ else if($_SESSION["user_mode"] == 1){
                 <div class='col-lg-2 col-md-2 col-sm-2'>
                     <div class='price_list'>
                         <div>
-                            <sup><input type='text' name='food_main_price' placeholder='15.000' class='insert_input' maxlength='10' value='' required />  تومان</sup>
-                            <span class='normal_price_list'><input name='food_off_price' placeholder='20.000' class='insert_input' maxlength='200' value='' required /> تومان</span>
+                            <sup><input type='text' name='food_main_price' placeholder='15.000' id="food_main_price" class='insert_input' maxlength='10' value='' required />  تومان</sup>
+                            <span class='normal_price_list'><input name='food_off_price' placeholder='20.000' id="food_off_price" class='insert_input' maxlength='200' value='' required /> تومان</span>
                             <small>روزانه / شبانه</small>
                             <p>
                                 <input type='submit' name='submit_create_food' class='submit_btn' value='Add Food' />

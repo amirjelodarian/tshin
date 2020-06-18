@@ -404,7 +404,7 @@ class Foods{
                 <div class='row'>
                     <div class='col-lg-4 col-md-4 col-sm-4'>
                         <div class='img_list'>
-                            <a href='#'>
+                            <a href='../foodDetails.php?foodId={$Functions->encrypt_id($foods_rows['food_id'])}'>
                                 <div class='ribbon top_rated'></div>
                                 <img src='../"); self::select_food_image($foods_rows['food_image']); echo("' alt=''>
                                 <div class='short_info'></div>
@@ -415,17 +415,18 @@ class Foods{
                     <div class='col-lg-6 col-md-6 col-sm-6'>
                         <div class='tour_list_desc'>
                             <div class='score'>");
-            echo(self::word_score($foods_rows['food_score']));
-            echo("<span>{$Functions->EN_numTo_FA($database->escape_value($foods_rows['food_score']),true)}</span>
+                                echo(self::word_score($foods_rows['food_score']));
+                                echo("<span>{$Functions->EN_numTo_FA($database->escape_value($foods_rows['food_score']),true)}</span>
                             </div>
                             <div class='rating'>");
-            echo $Functions->give_start_by_number($foods_rows['food_score']);
-            echo ("
+                                echo $Functions->give_start_by_number($foods_rows['food_score']);
+                                echo ("
                             </div>
                             <h3><strong>{$database->escape_value($foods_rows['food_title'])}</strong> </h3>
                             <p>");
-            echo(substr(nl2br(htmlentities($foods_rows['food_description'])),0,200)."...");
-            echo("</p>
+                                echo(substr(nl2br(htmlentities($foods_rows['food_description'])),0,200)."...");
+                                echo("
+                            </p>
                             <ul class='add_info'>
                               <div class='food-detail fade in'>
                                 <h6 class='food-detail-title'>طرز تهیه {$foods_rows['food_title']} </h6>
@@ -441,12 +442,7 @@ class Foods{
                             <sup>{$Functions->EN_numTo_FA($Functions->insert_seperator($database->escape_value($foods_rows['food_main_price'])),true)} تومان</sup>
                             <span class='normal_price_list'>{$Functions->EN_numTo_FA($Functions->insert_seperator($database->escape_value($foods_rows['food_off_price'])),true)} تومان</span>
                             <small>روزانه / شبانه</small>
-                                                <form action='foods_edit.php' method='post'>
-                                                    <input type='submit' name='submit_edit_food' value='Edit Food' class='submit_edit' />
-                                                    <input type='hidden' name='food_id' value='");
-                                                    echo($Functions->encrypt_id($foods_rows['food_id']));
-                                                    echo("' /> 
-                                                </form>
+                            <a class='submit_edit' href='foods_edit.php?foodId={$Functions->encrypt_id($foods_rows['food_id'])}'>Edit Food</a><hr />
                                                 <form method='post' action='foods_delete.php'>
                                                     <input type='submit' name='submit_delete_food' value='Delete' class='delete_room_btn' />
                                                     <input type='hidden' name='food_id' value='");
@@ -464,25 +460,32 @@ class Foods{
     // foods_edit.php
     public function EditFood_panel(){
         global $database,$users,$Functions;
-        if (isset($_POST["submit_edit_food"]) && isset($_POST["food_id"])){
-            if(preg_match("/^[0-9]*$/",$database->escape_value($Functions->decrypt_id($_POST["food_id"])))){
-                $this->food_id = $database->escape_value($Functions->decrypt_id($_POST["food_id"]));
-            }else{
+        if (!(empty($_GET["foodId"])) && isset($_GET["foodId"])) {
+            $this->food_id = $database->escape_value($Functions->decrypt_id($_GET["foodId"]));
+            $this->food_id = $database->escape_value($Functions->decrypt_id($_GET["foodId"]));
+            $sql = "SELECT * FROM foods WHERE food_id={$this->food_id}";
+            $database->query("SET NAMES 'utf8'");
+            $result = $database->query($sql);
+            if(!(preg_match("/^[0-9]*$/",$this->food_id))){
                 $users->redirect_to("foods_show.php");
             }
-        }
-        $sql = "SELECT * FROM foods WHERE food_id={$this->food_id}";
-        $database->query("SET NAMES 'utf8'");
-        $result = $database->query($sql);
-        while ($foods_rows = $database->fetch_array($result)){
-            echo ("
+            if($database->num_rows($result) == 0){
+                $users->redirect_to("foods_show.php");
+            }
+
+            $sql = "SELECT * FROM foods WHERE food_id={$this->food_id}";
+            $database->query("SET NAMES 'utf8'");
+            $result = $database->query($sql);
+            while ($foods_rows = $database->fetch_array($result)) {
+                echo("
                                 <div class='strip_all_tour_list wow fadeIn animated' id='rooms' data-wow-delay='0.1s' style='visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;'>
                 <div class='row'>
                     <div class='col-lg-4 col-md-4 col-sm-4'>
                         <div class='img_list'>
                             <a href='#'>
                                 <div class='ribbon top_rated'></div>
-                                                <img src='../"); self::select_food_image($foods_rows['food_image']);
+                                                <img src='../");
+                self::select_food_image($foods_rows['food_image']);
                 $_SESSION["image_name"] = $foods_rows["food_image"];
                 echo("' alt=''>
                                 <div class='short_info'></div>
@@ -506,22 +509,26 @@ class Foods{
                                             </select>
                                             </div>
                             <h3><input type='text' style='background: white;' value='{$database->escape_value($foods_rows['food_title'])}' name='food_title' maxlength='200' required/></h3>
-                                            <p><textarea name='food_description' placeholder='توضیحات غدا' maxlength='1500' required>"); echo($foods_rows['food_description']); echo("</textarea></p>
+                                            <p><textarea name='food_description' placeholder='توضیحات غدا' maxlength='1500' required>");
+                echo($foods_rows['food_description']);
+                echo("</textarea></p>
                             <ul class='add_info'>
-                                <p><textarea name='food_details' placeholder='دستور پخت غدا' maxlength='1500' required>"); echo($foods_rows['food_details']); echo("</textarea></p>
+                                <p><textarea name='food_details' placeholder='دستور پخت غدا' maxlength='1500' required>");
+                echo($foods_rows['food_details']);
+                echo("</textarea></p>
                             </ul>
                         </div>
                     </div>
                     <div class='col-lg-2 col-md-2 col-sm-2'>
                                         <div class='price_list'>
                                             <div>
-                                            <sup><input type='text' name='food_main_price' placeholder='15.000' class='insert_input' maxlength='10' value='{$database->escape_value($foods_rows['food_main_price'])}' required />  تومان</sup>
-                                            <span class='normal_price_list'><input name='food_off_price' placeholder='20.000' class='insert_input' maxlength='200' value='{$database->escape_value($foods_rows['food_off_price'])}' required /> تومان</span>
+                                            <sup><input type='text' name='food_main_price' id='food_main_price' placeholder='15.000' class='insert_input' maxlength='10' value='{$database->escape_value($foods_rows['food_main_price'])}' required />  تومان</sup>
+                                            <span class='normal_price_list'><input name='food_off_price' id='food_off_price' placeholder='20.000' class='insert_input' maxlength='200' value='{$database->escape_value($foods_rows['food_off_price'])}' required /> تومان</span>
                                             <small>روزانه / شبانه</small>
                                                 <p>
                                                     <input type='hidden' name='food_id' value='");
-                                                    echo($Functions->encrypt_id($this->food_id));
-                                                    echo("' />
+                echo($Functions->encrypt_id($this->food_id));
+                echo("' />
                                                     <input type='submit' name='submit_last_edit_food' class='submit_btn' value='Submit Edit' />
                                                 </p>
                                             </div>
@@ -530,6 +537,9 @@ class Foods{
             </div>
             </div>
                             ");
+            }
+        }else{
+            $users->redirect_to("foods_show.php");
         }
     }
     // foods_edit.php
@@ -690,10 +700,10 @@ class Foods{
     //function for search food
     public function SerachFood(){
         global $database,$users,$Functions;
-        if (isset($_POST["panel_submit_search_food"]) && !(empty($_POST["panel_keyword_food"]))) {
-            $keyword = $database->escape_value($_POST['panel_keyword_food']);
-            if (isset($_POST["panel_ByWitch_food"])){
-                switch ($_POST["panel_ByWitch_food"]){
+        if (isset($_GET["panel_submit_search_food"]) && !(empty($_GET["panel_keyword_food"]))) {
+            $keyword = $database->escape_value($_GET['panel_keyword_food']);
+            if (isset($_GET["panel_ByWitch_food"])){
+                switch ($_GET["panel_ByWitch_food"]){
                     case 'Title':
                         $sql = "SELECT * FROM foods WHERE food_title LIKE '%{$keyword}%'";
                         break;
@@ -726,7 +736,7 @@ class Foods{
                         <div class='wishlist'> <a class='tooltip_flip tooltip-effect-1' href='javascript:void(0);'>+<span class='tooltip-content-flip'><span class='tooltip-back'>علاقمند شدم</span></span></a>
                         </div>
                         <div class='img_list'>
-                            <a href='#'>
+                            <a href='../foodDetails.php?foodId={$Functions->encrypt_id($foods_rows['food_id'])}'>
                                 <div class='ribbon top_rated'></div>
                                 <img src='../"); self::select_food_image($foods_rows['food_image']); echo("' alt=''>
                                 <div class='short_info'></div>
@@ -763,12 +773,7 @@ class Foods{
                             <sup>{$Functions->EN_numTo_FA($Functions->insert_seperator($database->escape_value($foods_rows['food_main_price'])),true)} تومان</sup>
                             <span class='normal_price_list'>{$Functions->EN_numTo_FA($Functions->insert_seperator($database->escape_value($foods_rows['food_off_price'])),true)} تومان</span>
                             <small>روزانه / شبانه</small>
-                                                <form action='foods_edit.php' method='post'>
-                                                    <input type='submit' name='submit_edit_food' value='Edit Food' class='submit_edit' />
-                                                    <input type='hidden' name='food_id' value='");
-                    echo($Functions->encrypt_id($foods_rows['food_id']));
-                    echo("' /> 
-                                                </form>
+                                                <a class='submit_edit' href='foods_edit.php?foodId={$Functions->encrypt_id($foods_rows['food_id'])}'>Edit Food</a><hr />
                                                 <form method='post' action='foods_delete.php'>
                                                     <input type='submit' name='submit_delete_food' value='Delete' class='delete_room_btn' />
                                                     <input type='hidden' name='food_id' value='");

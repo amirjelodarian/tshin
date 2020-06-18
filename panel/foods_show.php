@@ -1,4 +1,5 @@
 <?php
+header('Cache-Control: max-age=900');
 require_once("../classes/initialize.php");
 $sessions->login_administrator_and_admin("../index.php");
 ?>
@@ -17,7 +18,7 @@ $sessions->login_administrator_and_admin("../index.php");
         <div class="panel_rooms col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div id="errors" class="errors-panel" style="margin-top: 70px;"><?php echo $users->Errors(); ?></div>
             <?php
-            if (isset($_POST["panel_submit_search_food"])){
+            if (isset($_GET["panel_submit_search_food"])){
                 $foods->SerachFood();
             }else{
                 $foods->AllFoods_panel();
@@ -26,7 +27,7 @@ $sessions->login_administrator_and_admin("../index.php");
             <hr>
         </div>
         <div id="keyword-style" style="margin-bottom: 8px">
-            <form action="<?php echo($_SERVER['PHP_SELF']); ?>" method="post">
+            <form action="<?php echo($_SERVER['PHP_SELF']); ?>" method="get">
                 <input type="text" id="keyword" name="panel_keyword_food" placeholder="Search" />
                 <select class="search-by-witch" name="panel_ByWitch_food">
                     <option value="Title">Title</option>

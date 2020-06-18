@@ -941,10 +941,10 @@
         // function for search panel
         public function PanelSerachRoom(){
             global $database,$Functions,$users;
-            if (isset($_POST["panel_submit_search_room"]) && !(empty($_POST["panel_keyword_room"]))) {
-                $keyword = $database->escape_value($_POST['panel_keyword_room']);
-                if (isset($_POST["panel_ByWitch_room"])){
-                    switch ($_POST["panel_ByWitch_room"]){
+            if (isset($_GET["panel_submit_search_room"]) && !(empty($_GET["panel_keyword_room"]))) {
+                $keyword = $database->escape_value($_GET['panel_keyword_room']);
+                if (isset($_GET["panel_ByWitch_room"])){
+                    switch ($_GET["panel_ByWitch_room"]){
                         case 'Address':
                             $sql = "SELECT * FROM rooms WHERE room_address LIKE '%{$keyword}%'";
                             break;

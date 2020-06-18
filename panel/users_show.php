@@ -1,4 +1,5 @@
 <?php
+header('Cache-Control: max-age=900');
 require_once("../classes/initialize.php");
 $sessions->login_administrator("../index.php");
 ?>
@@ -8,7 +9,7 @@ $sessions->login_administrator("../index.php");
             <div id="errors" class="errors-panel" style="margin-top: 70px;"><?php echo $users->Errors(); ?></div>
             <table class="table_admins" id="TABLE_ADMINS">
                 <div id="keyword-style">
-                    <form action="<?php echo($_SERVER['PHP_SELF']); ?>" method="post">
+                    <form action="<?php echo($_SERVER['PHP_SELF']); ?>" method="get">
                         <input type="text" id="keyword" name="panel_keyword_user" placeholder="Search" />
                         <select class="search-by-witch" name="panel_ByWitch_user">
                             <option value="Tel">Tel</option>
@@ -26,7 +27,7 @@ $sessions->login_administrator("../index.php");
                     <th>Delete</th>
                 </tr>
                 <?php
-                    if (isset($_POST["panel_submit_search_user"])){
+                    if (isset($_GET["panel_submit_search_user"])){
                         $users->SerachUserByTelOrUsername();
                     }else{
                         $users->AllUsers();

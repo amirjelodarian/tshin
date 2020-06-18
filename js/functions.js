@@ -29,7 +29,7 @@ $(window).load(function () {
     $("#users-search-icon").click(function () {
         $(".users-submit-search").click();
     });
-    $("#room_person_count,#room_main_price,#room_off_price").keypress(function (e) {
+    $("#room_person_count,#room_main_price,#room_off_price,#food_main_price,#food_off_price").keypress(function (e) {
         var ew = e.which || e.keyCode;
         if (ew == 37 || ew == 39 || ew == 8 || ew == 46 || ew == 9 || ew == 33 || ew == 34 || ew == 35 || ew == 36)
             return true;

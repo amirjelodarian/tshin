@@ -907,11 +907,11 @@ require_once("functions.php");
 
         // This Function For Search Box And By Tel Or Username
         public function SerachUserByTelOrUsername(){
-            global $database,$Functions;
-            if (isset($_POST["panel_submit_search_user"]) && !(empty($_POST["panel_keyword_user"]))) {
-                $keyword = $database->escape_value($_POST['panel_keyword_user']);
-                if (isset($_POST["panel_ByWitch_user"])){
-                    switch ($_POST["panel_ByWitch_user"]){
+            global $database,$Functions,$users;
+            if (isset($_GET["panel_submit_search_user"]) && !(empty($_GET["panel_keyword_user"]))) {
+                $keyword = $database->escape_value($_GET['panel_keyword_user']);
+                if (isset($_GET["panel_ByWitch_user"])){
+                    switch ($_GET["panel_ByWitch_user"]){
                         case 'Tel':
                             $sql = "SELECT * FROM users WHERE tel LIKE '{$keyword}%'";
                             break;
@@ -935,10 +935,11 @@ require_once("functions.php");
                         echo(">
                             <td><img class='finger-img' ");
                         if ($users_row['user_mode'] == 1) {
-                            echo 'style="border:2px solid darkorange" src=';
+                            echo 'style="border:2px solid darkorange"';
                         }
+                        echo "src=";
                         self::select_user_image($users_row['user_image']);
-                        switch ($_POST["panel_ByWitch_user"]){
+                        switch ($_GET["panel_ByWitch_user"]){
                             case 'Tel':
                                 echo(" alt='تی شین'></td>
                                 <td class='admins_username'>{$users_row['username']}</td>
@@ -950,6 +951,7 @@ require_once("functions.php");
                                 <td class='admins_tel'>{$users_row['tel']}</td><td>");
                                 break;
                             default:
+                                $users->redirect_to("users_show.php");
                                 break;
                         }
                         if ($users_row['user_mode'] == 1) {
@@ -1005,9 +1007,9 @@ require_once("functions.php");
         }
         public function SerachAdminByTelOrUsername(){
             global $database,$Functions;
-            if (isset($_POST["panel_submit_search_admin"]) && !(empty($_POST["panel_keyword_admin"]))) {
-                $keyword = $database->escape_value($_POST['panel_keyword_admin']);
-                if (isset($_POST["panel_ByWitch_admin"])){
+            if (isset($_GET["panel_submit_search_admin"]) && !(empty($_GET["panel_keyword_admin"]))) {
+                $keyword = $database->escape_value($_GET['panel_keyword_admin']);
+                if (isset($_GET["panel_ByWitch_admin"])){
                     switch ($_POST["panel_ByWitch_admin"]){
                         case 'Tel':
                             $sql = "SELECT * FROM users WHERE user_mode=1 AND tel LIKE '{$keyword}%'";
@@ -1055,9 +1057,9 @@ require_once("functions.php");
         public function select_user_image($row){
             global $database;
             if(!(empty($row))){
-                if(filter_var($row,FILTER_VALIDATE_URL)){
+                if(filter_var($row,FILTER_VALIDATE_URL))
                     echo $row;
-                }else{
+                else{
                     if($_SESSION["user_mode"] == 0)
                         echo '../panel/userimg/'.$row;
                     else
@@ -1065,8 +1067,9 @@ require_once("functions.php");
                 }
             }else{
                 if($_SESSION["user_mode"] == 0)
-                    echo '../panel/default_user.png';
-                echo 'userimg/default_user.png';
+                    echo '../panel/userimg/default_user.png';
+                else
+                    echo 'userimg/default_user.png';
             }
         }
         public function select_user_image_for_comment($row){
