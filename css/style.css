@@ -5245,7 +5245,6 @@ a.btn_infobox:hover {
     width: 60px;
     height: 60px;
     display: inline-block;
-    background: #51bce6;
 }
 #username-panel-comment{
     display: inline-block;
@@ -5308,7 +5307,7 @@ a.btn_infobox:hover {
 }
 .published{
     text-align: center;
-    color: green;
+    color: #00A8FF;
 }
 .unpublished{
     color: red;
@@ -5345,7 +5344,7 @@ a.btn_infobox:hover {
     display: inline-block;
 }
 #publish_checkbox_submit{
-    background: green;
+    background: #00A8FF;
 }
 #unpublish_checkbox_submit{
     background: #ca0d30;
@@ -5360,15 +5359,15 @@ a.btn_infobox:hover {
     background: green;
 }*/
 #unpublish_all_submit{
-    width: 98px;
+    width: 130px;
 }
 #unpublish_all_btn input{
     background: #ca0d30;
-    max-width: 165px;
+    max-width: 180px;
 }
 .delete_all_comments{
     background: #ca0d30;
-    width: 165px;
+    width: 180px;
 }
 .keyword-style-panel{
     z-index: 99;
@@ -5436,6 +5435,9 @@ a.btn_infobox:hover {
     right: 0;
     position: absolute;
     display: inline-block;
+}
+#delete_user_image_btn{
+    width: 85px;
 }
 .comments_delete_btn{
     background: #cb1d1d;

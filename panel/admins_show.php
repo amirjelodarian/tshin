@@ -31,7 +31,7 @@ $sessions->login_administrator("../index.php");
                 <th>Delete</th>
             </tr>
             <?php
-            if (isset($_POST["panel_submit_search_admin"])){
+            if (isset($_GET["panel_submit_search_admin"])){
                 $users->SerachAdminByTelOrUsername();
             }else{
                 $users->AllAdmins();

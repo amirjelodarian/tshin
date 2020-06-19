@@ -40,23 +40,23 @@ if (isset($_POST["delete_single_reservation"])){
     $rooms->DeleteSingleReservation();
 }
 ?>
-<h1 id='rooms' align="center">Reservation</h1>
+<h1 id='rooms' align="center">رزرو ها</h1>
 <h2>
     <?php
     if ($SelectReservedMode[1] == "booked"){
         echo("
-                <div id='rooms' class='published'>({$rooms->CountBookedAndNotBookedRoomReservationPanel(1)})&nbsp;Booked</div><hr/>
+                <div id='rooms' class='published'>({$rooms->CountBookedAndNotBookedRoomReservationPanel(1)})&nbsp;رزرو شده ها</div><hr/>
                 <form id='unpublish_all_btn' action='{$_SERVER['PHP_SELF']}' method='post'>
-                    <input type='submit' name='notbooked_all_booked' id='unpublish_all_submit' class='submit_edit delete_room_btn'  value='Not Booked All' />
-                    <input type='submit' name='delete_all_booked_reservation'  class='delete_all_comments delete_room_btn'  value='X Delete All Booked' />
+                    <input type='submit' name='notbooked_all_booked' id='unpublish_all_submit' style='width: 145px;' class='submit_edit delete_room_btn'  value='افزودن به رزرو نشده ها' />
+                    <input type='submit' name='delete_all_booked_reservation'  class='delete_all_comments delete_room_btn'  value='X حذف همه رزرو شده ها' />
                 </form>
             ");
     }elseif ($SelectReservedMode[1] == "notbooked"){
         echo("
-                    <div id='rooms' class='unpublished'>({$rooms->CountBookedAndNotBookedRoomReservationPanel(0)})&nbsp;Booking</div><hr/>
+                    <div id='rooms' class='unpublished'>({$rooms->CountBookedAndNotBookedRoomReservationPanel(0)})&nbsp;در حال رزرو ها</div><hr/>
                     <form id='publish_all_btn' action='{$_SERVER['PHP_SELF']}' method='post'>
-                        <input type='submit' name='booked_all_notbooked'  class='submit_edit delete_room_btn'  value='Booked All' />
-                        <input type='submit' name='delete_all_notbooked_reservation'  class='delete_all_comments delete_room_btn'  value='X Delete All Not Booked' />
+                        <input type='submit' name='booked_all_notbooked' style='width: 138px;' class='submit_edit delete_room_btn'  value='افزودن به رزرو شده ها' />
+                        <input type='submit' name='delete_all_notbooked_reservation'  class='delete_all_comments delete_room_btn'  value='X حذف همه درحال رزروها' />
                     </form>
                 ");
     }
@@ -67,8 +67,8 @@ if (isset($_POST["delete_single_reservation"])){
     <form method="get" action="<?php echo($_SERVER['PHP_SELF']); ?>">
         <div class="publish">
             <select name="select_booking">
-                <option value="notbooked" id="unpublished" <?php if($SelectReservedMode[1] == "notbooked") echo "selected"; ?>><?php echo("({$rooms->CountBookedAndNotBookedRoomReservationPanel(0)})"); ?>&nbsp;Un Booked</option>
-                <option value="booked" id="published" <?php if($SelectReservedMode[1] == "booked") echo "selected"; ?>><?php echo("({$rooms->CountBookedAndNotBookedRoomReservationPanel(1)})"); ?>&nbsp;Booked</option>
+                <option value="notbooked" id="unpublished" <?php if($SelectReservedMode[1] == "notbooked") echo "selected"; ?>><?php echo("({$rooms->CountBookedAndNotBookedRoomReservationPanel(0)})"); ?>&nbsp;در حال رزرو ها</option>
+                <option value="booked" id="published" <?php if($SelectReservedMode[1] == "booked") echo "selected"; ?>><?php echo("({$rooms->CountBookedAndNotBookedRoomReservationPanel(1)})"); ?>&nbsp;رزرو شده ها</option>
                 <input type="submit" name="submit_booking" id="submit_publish" hidden />
             </select>
         </div>
@@ -80,13 +80,13 @@ if (isset($_POST["delete_single_reservation"])){
     while($room_reservation = $database->fetch_array($all_room_reservation_result)){
         if ($rooms_rows = $database->fetch_array($rooms->SelectWithId($room_reservation['room_id']))){
         echo("
-                    <div class='comment-panel col-xs-12 col-sm-12 col-md-6 col-lg-6' "); if($SelectReservedMode[1] == "booked"){ echo("style='border: 2px solid green'"); }else{ echo("style='border: 2px solid red'"); }  echo(">
+                    <div class='comment-panel col-xs-12 col-sm-12 col-md-6 col-lg-6' "); if($SelectReservedMode[1] == "booked"){ echo("style='border: 2px solid #00A8FF'"); }else{ echo("style='border: 2px solid #ca0d30'"); }  echo(">
                     <span class='reservation-bg-outside'>
                         <img id='reservation-bg' src='../"); Rooms::select_room_image($rooms_rows['room_image']); echo("' alt='تی شین' />
                     </span>
                         ");
         if ($users_row = $database->fetch_array($users->SelectById($room_reservation['user_id']))) {
-            echo("<img class='finger-img' "); if($SelectReservedMode[1] == "booked"){ echo("style='border: 4px solid green;'"); }else{ echo("style='border: 4px solid red;'"); }  echo("  id='finger-img-panel-comment' src='"); Users::select_user_image($users_row['user_image']); echo("' alt='' class='img-circle'>");
+            echo("<img class='finger-img' "); if($SelectReservedMode[1] == "booked"){ echo("style='border: 4px solid #00A8FF;'"); }else{ echo("style='border: 4px solid #ca0d30;'"); }  echo("  id='finger-img-panel-comment' src='"); Users::select_user_image($users_row['user_image']); echo("' alt='' class='img-circle'>");
         }
         $divid_date_time = $Functions->divid_date_time_database($room_reservation['reserve_time']);
         echo("  
@@ -111,20 +111,20 @@ if (isset($_POST["delete_single_reservation"])){
                         <small id='panel-date-comment'>"); echo $Functions->EN_numTo_FA($Functions->convert_db_format_for_gregorian_to_jalali($divid_date_time[1]),true); echo("</small><br />
                     <div class='comment-panel-btns col-xs-12 col-sm-12 col-md-12 col-lg-12'>
                          <a href='../Room.php?roomId={$Functions->encrypt_id($rooms_rows['room_id'])}'>
-                            <p id='see-room-btn' class='submit_edit'>See Room</p>
+                            <p id='see-room-btn' class='submit_edit'>بازدید اتاق</p>
                          </a>
                         <form action='{$_SERVER['PHP_SELF']}' id='submit-checkbox-form' method='post'>
                             <input type='hidden' name='reserve_id' value='"); echo($Functions->encrypt_id($room_reservation['reserve_id'])); echo("' />
                             <div class='publish-area'>");                                if($room_reservation["reserved_mode"] == 0) {
-            echo("<input type='submit' name='booking_submit' id='publish_checkbox_submit' class='submit_edit' value='Booked' />");
+            echo("<input type='submit' name='booking_submit' id='publish_checkbox_submit' class='submit_edit' style='width: 130px' value='افزودن به رزرو شده' />");
         }
         if($room_reservation["reserved_mode"] == 1) {
-            echo("<input type='submit' name='notbooked_submit' id='unpublish_checkbox_submit' class='submit_edit' value='X  Not Booked' />");
+            echo("<input type='submit' name='notbooked_submit' id='unpublish_checkbox_submit' style='width: 145px' class='submit_edit' value='X  افزودن به رزرو نشده' />");
         }
         echo("
                                 
                             </div>
-                            <input type='submit' name='delete_single_reservation' value='Delete' class='comments_delete_btn delete_room_btn' />
+                            <input type='submit' name='delete_single_reservation' value='حذف' class='comments_delete_btn delete_room_btn' />
                         </form>
                     </div>
                         <div class='line'></div>

@@ -4,6 +4,9 @@ $sessions->login_administrator("../index.php");
 if (isset($_POST["submit_last_edit_panel"])){
     $users->UpdatePanel();
 }
+if (isset($_POST['delete_user_pro_img'])){
+    $users->DeleteUserProImg();
+}
 ?>
 <?php include("includes/administrator_menu.php"); ?>
 <div class="panel_rooms col-lg-12 col-md-12 col-sm-12 col-xs-12 edit_main_page">

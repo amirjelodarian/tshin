@@ -2,6 +2,7 @@
     class Functions{
         public static $image_name;
         public function photo_upload($submit){
+            global $database,$users;
             if (isset($submit) && isset($_FILES["roomImage"])){
                 $files = $_FILES["roomImage"];
                 $target_dir = "../img/rooms/";
@@ -126,12 +127,9 @@
             }
             if (isset($submit) && isset($_FILES["userImage"])){
                 $files = $_FILES["userImage"];
-                if (isset($_SESSION["user_mode"]) && $_SESSION["user_mode"] == 0){
-                    $target_dir = "../panel/userimg/";
-                }else{
-                    $target_dir = "userimg/";
-                }
-                $target_file = $target_dir . basename($files["name"]);
+                $target_dir = "userimg/";
+                $fileName = @trim(basename($files['name']));
+                $target_file = $target_dir . $users->mytrim($fileName);
                 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
                 $uploadOk = 1;
                 if (isset($files["tmp_name"]) && !(empty($files["tmp_name"]))){
@@ -178,7 +176,7 @@
                     }
                 }else{
                     if (move_uploaded_file($files["tmp_name"],$target_file)){
-                        self::$image_name = $files["name"];
+                        self::$image_name = $users->mytrim($fileName);
                         echo "فایل آپلود شد ." . $files["name"];
                     }else{
                         if (isset($_SESSION["errors_message"])){

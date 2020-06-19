@@ -1152,10 +1152,10 @@
                 if ($room_survey = $database->fetch_array($result)){
                     echo("
                     <h1 class='comment-edit-h'>Comment Edit</h1>
-                    <div class='comment-panel-edit col-xs-12 col-sm-12 col-md-6 col-lg-6' "); if($room_survey['publish'] == 1){ echo("style='border: 2px solid green;padding: 16px;'"); }else{ echo("style='border: 2px solid red;padding: 16px;'"); }  echo(">
+                    <div class='comment-panel-edit col-xs-12 col-sm-12 col-md-6 col-lg-6' "); if($room_survey['publish'] == 1){ echo("style='border: 2px solid #00A8FF;padding: 16px;'"); }else{ echo("style='border: 2px solid #ca0d30;padding: 16px;'"); }  echo(">
                         ");
                     if ($users_row = $database->fetch_array($users->SelectById($room_survey['user_id']))) {
-                        echo("<img class='finger-img' "); if($room_survey['publish'] == 1){ echo("style='border: 4px solid green;'"); }else{ echo("style='border: 4px solid red;'"); }  echo("  id='finger-img-panel-comment' src='"); Users::select_user_image($users_row['user_image']); echo("' alt='' class='img-circle'>");
+                        echo("<img class='finger-img' "); if($room_survey['publish'] == 1){ echo("style='border: 4px solid #00A8FF;'"); }else{ echo("style='border: 4px solid #ca0d30;'"); }  echo("  id='finger-img-panel-comment' src='"); Users::select_user_image($users_row['user_image']); echo("' alt='' class='img-circle'>");
                     }
                     $divid_date_time = $Functions->divid_date_time_database($room_survey['survey_date']);
                     echo("

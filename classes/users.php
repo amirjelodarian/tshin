@@ -80,7 +80,7 @@ require_once("functions.php");
                             switch($users_row["user_mode"]) {
                                 case 0:
                                     $_SESSION["user_mode"] = 0;
-                                    $this->redirect_to("dashboard/user.php");
+                                    $this->redirect_to("panel/user.php");
                                     break;
                                 case 1:
                                     $_SESSION["user_mode"] = 1;
@@ -284,7 +284,7 @@ require_once("functions.php");
                                     $_SESSION["user_mode"] = 0;
                                     $_SESSION["errors_message"] = " ";
                                     $_SESSION["errors_message"] = "رمز با موفقیت تغییر کرد";
-                                    $this->redirect_to("dashboard/user.php");
+                                    $this->redirect_to("panel/user.php");
                                     break;
                                 case 1:
                                     $_SESSION["user_mode"] = 1;
@@ -789,6 +789,20 @@ require_once("functions.php");
             $result = $database->query($sql);
             return $result;
         }
+        public function DeleteUserProImg(){
+            global $database,$users;
+            if (isset($_POST['delete_user_pro_img'])){
+                $sql = "UPDATE users SET  user_image='' WHERE id={$_SESSION['user_id']}";
+                if($database->query($sql)){
+                    $this->redirect_to($_SERVER["PHP_SELF"]);
+                }else{
+                    $_SESSION["errors_message"] .= "خطایی هنگام حذف عکس رخ داد.";
+                    $this->error_state = 1;
+                    return $this->error_state;
+                    $this->redirect_to($_SERVER["PHP_SELF"]);
+                }
+            }
+        }
         public function Panel(){
             global $database,$Functions;
             // Admins id equal 1
@@ -799,8 +813,11 @@ require_once("functions.php");
                 if($user_row = $database->fetch_array($result)) {
                     echo("
                             <div class='edit_admin_panel col-xs-12'>
-                            <form action='{$_SERVER['PHP_SELF']}' method='post' enctype='multipart/form-data'>
-                                        <div class='img_list col-lg-4 col-md-4 col-sm-6 col-xs-12' id='edit_admin_image'>
+                                <div class='img_list col-lg-4 col-md-4 col-sm-6 col-xs-12' id='edit_admin_image'>
+                                    <form method='post' action='"); echo(htmlspecialchars($_SERVER['PHP_SELF'])); echo("'>
+                                        <input type='submit' class='delete_room_btn' name='delete_user_pro_img' id='delete_user_image_btn' value='حذف عکس' />
+                                    </form>
+                                    <form action='{$_SERVER['PHP_SELF']}' method='post' enctype='multipart/form-data'>
                                             <img src="); self::select_user_image($user_row['user_image']);
                                             $_SESSION["image_name"] = $user_row['user_image'];
                                             echo(" alt=''>
@@ -808,6 +825,7 @@ require_once("functions.php");
                                                 <option value='browse-file' name='browseFileOption' id='browse-file'>Browse File...</option>
                                                 <option value='url-image' name='urlImageOption' id='url-image'>Link Or Url Image</option> 
                                             </select>  
+                                           
                                             <div class='add_photo_user'>عکس پروفایل +<input type='file' id='browse-file-input' class='edit_input_image' name='userImage' /><input type='url' id='url-image-input' placeholder='www.image.com' class='edit_input_image' name='userImageUrl' /></div>
                                             
                                         </div>
@@ -937,7 +955,7 @@ require_once("functions.php");
                         if ($users_row['user_mode'] == 1) {
                             echo 'style="border:2px solid darkorange"';
                         }
-                        echo "src=";
+                        echo " src=";
                         self::select_user_image($users_row['user_image']);
                         switch ($_GET["panel_ByWitch_user"]){
                             case 'Tel':
@@ -946,7 +964,7 @@ require_once("functions.php");
                                 <td class='admins_tel' style='color: #00A8FF;text-shadow: 2px 2px 1px black;'>{$users_row['tel']}</td><td>");
                                 break;
                             case 'Username':
-                                echo("' alt='تی شین'></td>
+                                echo(" alt='تی شین'></td>
                                 <td class='admins_username' style='color: #00A8FF;text-shadow: 2px 2px 1px black;'>{$users_row['username']}</td>
                                 <td class='admins_tel'>{$users_row['tel']}</td><td>");
                                 break;
@@ -1010,7 +1028,7 @@ require_once("functions.php");
             if (isset($_GET["panel_submit_search_admin"]) && !(empty($_GET["panel_keyword_admin"]))) {
                 $keyword = $database->escape_value($_GET['panel_keyword_admin']);
                 if (isset($_GET["panel_ByWitch_admin"])){
-                    switch ($_POST["panel_ByWitch_admin"]){
+                    switch ($_GET["panel_ByWitch_admin"]){
                         case 'Tel':
                             $sql = "SELECT * FROM users WHERE user_mode=1 AND tel LIKE '{$keyword}%'";
                             break;
@@ -1055,22 +1073,15 @@ require_once("functions.php");
         }
 
         public function select_user_image($row){
-            global $database;
+            global $database,$users;
             if(!(empty($row))){
                 if(filter_var($row,FILTER_VALIDATE_URL))
                     echo $row;
-                else{
-                    if($_SESSION["user_mode"] == 0)
-                        echo '../panel/userimg/'.$row;
-                    else
-                        echo 'userimg/'.$row;
-                }
-            }else{
-                if($_SESSION["user_mode"] == 0)
-                    echo '../panel/userimg/default_user.png';
                 else
-                    echo 'userimg/default_user.png';
-            }
+                    echo 'userimg/'.($row);
+            }else
+                echo 'userimg/default_user.png';
+
         }
         public function select_user_image_for_comment($row){
             global $database;

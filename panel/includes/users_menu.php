@@ -14,7 +14,7 @@
     <link href="../css/ion.rangeSlider.skinFlat.css" rel="stylesheet">
 
 </head>
-<body>
+<body onload="startTime()">
 <?php require_once('../classes/initialize.php'); ?>
 <?php
 if(isset($_POST["logout_submit"])) {
@@ -26,7 +26,16 @@ if(isset($_POST["logout_submit"])) {
     <div class="row">
         <div class="mobile-menu"><div class="icon-menu" id="icon_menu"></div><div class="icon-close">X</div></div>
         <div class="panel_menu col-lg-2 col-md-2 col-sm-2 col-xs-12">
-            <div class="home"><a href="../index.php"><span class="icon-home" id="icon-home"></span>Home</a></div>
+            <div class="home"><a href="../index.php" target="_blank"><span class="icon-home" id="icon-home"></span>خانه</a></div>
+            <div class="DateTime">
+                <p id="today-time"></p>
+                <p id="today-date">
+                    <?php
+                    global $Functions;
+                    $Functions->today_date();
+                    ?>
+                </p>
+            </div>
             <ul>
                 <li class="icon-tools"><a href="user.php">پروفایل</a></li>
                 <li class="icon-doc-add"><a href="reservedRooms.php">رزرو ها <span class="count">(<?php $rooms->CountUserAllRoomReservation(); ?>)</span></a></li>
@@ -38,7 +47,16 @@ if(isset($_POST["logout_submit"])) {
             </ul>
         </div>
         <div class="panel_menu_mobile col-lg-2 col-md-2 col-sm-2 col-xs-12">
-            <div class="home"><a href="../index.php"><span class="icon-home" id="icon-home"></span>Home</a></div>
+            <div class="home"><a href="../index.php" target="_blank"><span class="icon-home" id="icon-home"></span>خانه</a></div>
+            <div class="DateTime">
+                <p id="today-time-mobile"></p>
+                <p id="today-date-mobile">
+                    <?php
+                    global $Functions;
+                    $Functions->today_date();
+                    ?>
+                </p>
+            </div>
             <ul>
                 <li class="icon-tools"><a href="user.php">پروفایل</a></li>
                 <li class="icon-doc-add"><a href="reservedRooms.php">رزرو ها <span class="count">(<?php $rooms->CountUserAllRoomReservation(); ?>)</span></a></li>

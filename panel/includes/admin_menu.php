@@ -14,24 +14,22 @@
     <link href="../css/ion.rangeSlider.skinFlat.css" rel="stylesheet">
 
 </head>
-<body>
-<?php require_once('../classes/rooms.php'); ?>
-<?php require_once('../classes/foods.php'); ?>
-<?php require_once('../classes/users.php'); ?>
+<body onload="startTime()">
+<?php require_once('../classes/initialize.php'); ?>
 <?php
-    if(isset($_POST["logout_submit"])) {
-        $sessions->logout();
-        $users->redirect_to("../index.php");
-    }
+if(isset($_POST["logout_submit"])) {
+    $sessions->logout();
+    $users->redirect_to("../index.php");
+}
 ?>
 <div class="container-fluid">
     <div class="row">
         <div class="mobile-menu"><div class="icon-menu" id="icon_menu"></div><div class="icon-close">X</div></div>
         <div class="panel_menu col-lg-2 col-md-2 col-sm-2 col-xs-12">
-            <div class="home"><a href="../index.php"><span class="icon-home" id="icon-home"></span>خانه</a></div>
+            <div class="home"><a href="../index.php" target="_blank"><span class="icon-home" id="icon-home"></span>خانه</a></div>
             <div class="DateTime">
-                <p id="today-time-mobile"></p>
-                <p id="today-date-mobile">
+                <p id="today-time"></p>
+                <p id="today-date">
                     <?php
                     global $Functions;
                     $Functions->today_date();
@@ -52,7 +50,7 @@
             </ul>
         </div>
         <div class="panel_menu_mobile col-lg-2 col-md-2 col-sm-2 col-xs-12">
-            <div class="home"><a href="../index.php"><span class="icon-home" id="icon-home"></span>خانه</a></div>
+            <div class="home"><a href="../index.php" target="_blank"><span class="icon-home" id="icon-home"></span>خانه</a></div>
             <div class="DateTime">
                 <p id="today-time-mobile"></p>
                 <p id="today-date-mobile">

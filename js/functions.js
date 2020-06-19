@@ -48,28 +48,28 @@ $(window).load(function () {
         $("#submit_publish,.btn_map,.pic_food_details_submit").click();
     });
     if($(".publish select").val() == "published" || $(".publish select").val() == "booked"){
-        $(".publish select").css({"background-image":"linear-gradient(to bottom,#161616,green)"});
+        $(".publish select").css({"background-image":"linear-gradient(to bottom,#161616,#00A8FF)"});
     }
     if($(".publish select").val() == "unpublished" || $(".publish select").val() == "notbooked"){
-        $(".publish select").css({"background-image":"linear-gradient(to bottom,#161616,red)"});
+        $(".publish select").css({"background-image":"linear-gradient(to bottom,#161616,#ca0d30)"});
     }
     $("#published").click(function () {
         $(".publish select").css(
-            {"background-image":"-webkit-linear-gradient(to bottom,#161616,green)",
-            "background-image":"-moz-linear-gradient(to bottom,#161616,green)",
-            "background-image":"-ms-linear-gradient(to bottom,#161616,green)",
-            "background-image":"-o-linear-gradient(to bottom,#161616,green)",
-            "background-image":"linear-gradient(to bottom,#161616,green)"}
+            {"background-image":"-webkit-linear-gradient(to bottom,#161616,#00A8FF)",
+            "background-image":"-moz-linear-gradient(to bottom,#161616,#00A8FF)",
+            "background-image":"-ms-linear-gradient(to bottom,#161616,#00A8FF)",
+            "background-image":"-o-linear-gradient(to bottom,#161616,#00A8FF)",
+            "background-image":"linear-gradient(to bottom,#161616,#00A8FF)"}
         );
         $("#published").select();
     });
     $("#unpublished").click(function () {
         $(".publish select").css(
-            {"background-image":"-webkit-linear-gradient(to bottom,#161616,red)",
-            "background-image":"-moz-linear-gradient(to bottom,#161616,red)",
-            "background-image":"-ms-linear-gradient(to bottom,#161616,red)",
-            "background-image":"-o-linear-gradient(to bottom,#161616,red)",
-            "background-image":"linear-gradient(to bottom,#161616,red)"}
+            {"background-image":"-webkit-linear-gradient(to bottom,#161616,#ca0d30)",
+            "background-image":"-moz-linear-gradient(to bottom,#161616,#ca0d30)",
+            "background-image":"-ms-linear-gradient(to bottom,#161616,#ca0d30)",
+            "background-image":"-o-linear-gradient(to bottom,#161616,#ca0d30)",
+            "background-image":"linear-gradient(to bottom,#161616,#ca0d30)"}
         );
         $("#unpublished").select();
     });

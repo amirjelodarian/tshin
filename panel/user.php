@@ -6,6 +6,9 @@ if (!($sessions->login_state() && $_SESSION["user_mode"] == 0)){
 if (isset($_POST["submit_last_edit_panel"])){
     $users->UpdatePanel();
 }
+if (isset($_POST['delete_user_pro_img'])){
+    $users->DeleteUserProImg();
+}
 ?>
 <?php include("includes/users_menu.php"); ?>
 <div class="panel_rooms col-lg-12 col-md-12 col-sm-12 col-xs-12 edit_main_page">

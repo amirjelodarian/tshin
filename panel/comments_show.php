@@ -74,24 +74,24 @@ $SelcetPublishMode = $rooms->SelectRoomComments();
 
 
 
-<h1 id='rooms' align="center">Comments</h1>
+<h1 id='rooms' align="center">نظرات</h1>
 <h2>
 
     <?php
         if ($SelcetPublishMode[1] == "published"){
             echo("
-                <div id='rooms' class='published'>({$rooms->CountPublishAndUnPublishRoomCommentsPanel(1)})&nbsp;Published</div><hr/>
+                <div id='rooms' class='published'>({$rooms->CountPublishAndUnPublishRoomCommentsPanel(1)})&nbsp;منتشر شده ها</div><hr/>
                 <form id='unpublish_all_btn' action='{$_SERVER['PHP_SELF']}' method='post'>
-                    <input type='submit' name='unpublish_all_submit' id='unpublish_all_submit' class='submit_edit delete_room_btn'  value='Un Publish All' />
-                    <input type='submit' name='delete_all_comment_published_submit'  class='delete_all_comments delete_room_btn'  value='X Delete All Published' />
+                    <input type='submit' name='unpublish_all_submit' id='unpublish_all_submit' class='submit_edit delete_room_btn' value='غیر منتشر کردن همه' />
+                    <input type='submit' name='delete_all_comment_published_submit'  class='delete_all_comments delete_room_btn' value='X حذف همه منتشر شده ها' />
                 </form>
             ");
         }elseif ($SelcetPublishMode[1] == "unpublished"){
             echo("
-                    <div id='rooms' class='unpublished'>({$rooms->CountPublishAndUnPublishRoomCommentsPanel(0)})&nbsp;Un Published</div><hr/>
+                    <div id='rooms' class='unpublished'>({$rooms->CountPublishAndUnPublishRoomCommentsPanel(0)})&nbsp;منتشر نشده ها</div><hr/>
                     <form id='publish_all_btn' action='{$_SERVER['PHP_SELF']}' method='post'>
-                        <input type='submit' name='publish_all_submit'  class='submit_edit delete_room_btn'  value='Publish All' />
-                        <input type='submit' name='delete_all_comment_unpublished_submit'  class='delete_all_comments delete_room_btn'  value='X Delete All UnPublished' />
+                        <input type='submit' name='publish_all_submit'  style='width: 130px' class='submit_edit delete_room_btn'  value='منتشر کردن همه' />
+                        <input type='submit' name='delete_all_comment_unpublished_submit'  class='delete_all_comments delete_room_btn'  value='X حذف همه منتشر نشده ها' />
                     </form>
                 ");
         }
@@ -103,8 +103,8 @@ $SelcetPublishMode = $rooms->SelectRoomComments();
     <form method="get" action="<?php echo($_SERVER['PHP_SELF']); ?>">
         <div class="publish">
             <select name="select_publish">
-                <option value="unpublished" id="unpublished" <?php if($SelcetPublishMode[1] == "unpublished") echo "selected"; ?>><?php echo("({$rooms->CountPublishAndUnPublishRoomCommentsPanel(0)})"); ?>&nbsp;Un Published</option>
-                <option value="published" id="published" <?php if($SelcetPublishMode[1] == "published") echo "selected"; ?>><?php echo("({$rooms->CountPublishAndUnPublishRoomCommentsPanel(1)})"); ?>&nbsp;Published</option>
+                <option value="unpublished" id="unpublished" <?php if($SelcetPublishMode[1] == "unpublished") echo "selected"; ?>><?php echo("({$rooms->CountPublishAndUnPublishRoomCommentsPanel(0)})"); ?>&nbsp;منتشر نشده ها</option>
+                <option value="published" id="published" <?php if($SelcetPublishMode[1] == "published") echo "selected"; ?>><?php echo("({$rooms->CountPublishAndUnPublishRoomCommentsPanel(1)})"); ?>&nbsp;منتشر شده ها</option>
                 <input type="submit" name="submit_publish" id="submit_publish" hidden />
             </select>
         </div>
@@ -117,10 +117,10 @@ $all_room_survey_result = $all_room_survey_result[0];
     while($room_survey = $database->fetch_array($all_room_survey_result)){
 
             echo("
-                    <div class='comment-panel col-xs-12 col-sm-12 col-md-6 col-lg-6' "); if($SelcetPublishMode[1] == "published"){ echo("style='border: 2px solid green'"); }else{ echo("style='border: 2px solid red'"); }  echo(">
+                    <div class='comment-panel col-xs-12 col-sm-12 col-md-6 col-lg-6' "); if($SelcetPublishMode[1] == "published"){ echo("style='border: 2px solid #00A8FF'"); }else{ echo("style='border: 2px solid #ca0d30'"); }  echo(">
                         ");
                         if ($users_row = $database->fetch_array($users->SelectById($room_survey['user_id']))) {
-                            echo("<img class='finger-img' "); if($SelcetPublishMode[1] == "published"){ echo("style='border: 4px solid green;'"); }else{ echo("style='border: 4px solid red;'"); }  echo("  id='finger-img-panel-comment' src='"); Users::select_user_image($users_row['user_image']); echo("' alt='' class='img-circle'>");
+                            echo("<img class='finger-img' "); if($SelcetPublishMode[1] == "published"){ echo("style='border: 4px solid #00A8FF;'"); }else{ echo("style='border: 4px solid #ca0d30;'"); }  echo("  id='finger-img-panel-comment' src='"); Users::select_user_image($users_row['user_image']); echo("' alt='' class='img-circle'>");
                         }
                         $divid_date_time = $Functions->divid_date_time_database($room_survey['survey_date']);
                         echo("
@@ -138,22 +138,22 @@ $all_room_survey_result = $all_room_survey_result[0];
                         <small id='panel-date-comment'>"); echo $Functions->EN_numTo_FA($Functions->convert_db_format_for_gregorian_to_jalali($divid_date_time[1]),true); echo("</small><br />
                     <div class='comment-panel-btns col-xs-12 col-sm-12 col-md-12 col-lg-12'>
                          <a href='../Room.php?roomId={$Functions->encrypt_id($rooms_rows['room_id'])}'>
-                            <p id='see-room-btn' class='submit_edit'>See Room</p>
+                            <p id='see-room-btn' class='submit_edit'>بازدید اتاق</p>
                          </a>
                         <form action='{$_SERVER['PHP_SELF']}' id='submit-checkbox-form' method='post'>
                             <input type='hidden' name='survey_id' value='"); echo($Functions->encrypt_id($room_survey['id'])); echo("' />
                             <div class='publish-area'>");                                if($room_survey["publish"] == 0) {
-                                    echo("<input type='submit' name='publish_submit' id='publish_checkbox_submit' class='submit_edit' value='Publish' />");
+                                    echo("<input type='submit' name='publish_submit' id='publish_checkbox_submit' class='submit_edit' value='منتشر' />");
                                 }
                                 if($room_survey["publish"] == 1) {
-                                    echo("<input type='submit' name='unpublish_submit' id='unpublish_checkbox_submit' class='submit_edit' value='X  Un Publish' />");
+                                    echo("<input type='submit' name='unpublish_submit' id='unpublish_checkbox_submit' class='submit_edit' value='X  غیر منتشر' />");
                                 }
                                 echo("
                                 
                             </div>
-                            <input type='submit' name='delete_user_comment' value='Delete' class='comments_delete_btn delete_room_btn' />
+                            <input type='submit' name='delete_user_comment' value='حذف' class='comments_delete_btn delete_room_btn' />
                         </form>
-                        <a class='edit-comment-panel-btn' href='comments_edit.php?commentId={$Functions->decrypt_id($room_survey['id'])}'>Edit</a>
+                        <a class='edit-comment-panel-btn' href='comments_edit.php?commentId={$Functions->decrypt_id($room_survey['id'])}'>ویرایش</a>
                     </div>
                         <div class='line'></div>
                   </div>

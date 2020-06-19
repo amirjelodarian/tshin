@@ -48,11 +48,8 @@
                     </div><a href="#" class="open_close" id="close_in"><i class="icon_set_1_icon-77"></i></a>
                     <ul>
                         <?php
-                            if (isset($_SESSION["logged_in_administrator"]) || isset($_SESSION["logged_in_admin"])){
-                                echo("<li class='submenu panel-icon'><a href='panel/' class='icon-tools'>Panel</a></li>");
-                            }
-                            if ($sessions->login_state() && $_SESSION["user_mode"] == 0){
-                                echo("<li class='submenu panel-icon'><a href='dashboard/' class='icon-tools'>داشبورد</a></li>");
+                            if ($sessions->login_state()){
+                                echo("<li class='submenu panel-icon'><a href='panel/' class='icon-tools'>داشبورد</a></li>");
                             }
                         ?>
                         <li class="submenu"> <a href="index.php" class="show-submenu">صفحه اصلی <i class="icon-home"></i></a>
