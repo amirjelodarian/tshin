@@ -3,56 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c424756b-6ee7-4545-9854-ec57cf6aba41" name="Default Changelist" comment=" noth">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/functions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/rooms.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/rooms.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/users.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/users.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/admins_delete.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/admins_edit.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/admins_show.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/comments_edit.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/comments_show.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/foods_create.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/foods_delete.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/foods_edit.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/foods_show.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/includes/footer.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/includes/index.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/includes/users_menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/panel/includes/users_menu.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/index.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/logfile.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/reservation_show.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/reservedRooms.php" beforeDir="false" afterPath="$PROJECT_DIR$/panel/reservedRooms.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/rooms_create.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/rooms_delete.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/rooms_edit.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/rooms_show.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/style/bootstrap/css/bootstrap-grid.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/style/bootstrap/css/bootstrap-grid.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/style/bootstrap/css/bootstrap-grid.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/style/bootstrap/css/bootstrap-grid.min.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/style/bootstrap/css/bootstrap-reboot.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/style/bootstrap/css/bootstrap-reboot.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/style/bootstrap/css/bootstrap-reboot.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/style/bootstrap/css/bootstrap-reboot.min.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/style/bootstrap/css/bootstrap.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/style/bootstrap/css/bootstrap.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/style/bootstrap/css/bootstrap.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/style/bootstrap/css/bootstrap.min.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/style/bootstrap/css/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/style/bootstrap/js/bootstrap.bundle.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/style/bootstrap/js/bootstrap.bundle.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/style/bootstrap/js/bootstrap.bundle.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/style/bootstrap/js/bootstrap.bundle.min.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/style/bootstrap/js/bootstrap.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/style/bootstrap/js/bootstrap.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/style/bootstrap/js/bootstrap.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/style/bootstrap/js/bootstrap.min.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/style/bootstrap/js/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/user.php" beforeDir="false" afterPath="$PROJECT_DIR$/panel/user.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/users_delete.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/users_edit.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dashboard/users_show.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/datapicker" beforeDir="false" afterPath="$PROJECT_DIR$/datapicker" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/datapicker/demo/Samples1.html" beforeDir="false" afterPath="$PROJECT_DIR$/datapicker/demo/Samples1.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/datapicker/dist/jquery.md.bootstrap.datetimepicker.js" beforeDir="false" />
@@ -60,57 +11,7 @@
       <change beforePath="$PROJECT_DIR$/datapicker/dist/jquery.md.bootstrap.datetimepicker.style.css.map" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/datapicker/src/jquery.md.bootstrap.datetimepicker.js" beforeDir="false" afterPath="$PROJECT_DIR$/datapicker/src/jquery.md.bootstrap.datetimepicker.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/datapicker/src/jquery.md.bootstrap.datetimepicker.style.css" beforeDir="false" afterPath="$PROJECT_DIR$/datapicker/src/jquery.md.bootstrap.datetimepicker.style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/logged_in_header.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/logged_in_header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/functions.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/functions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/panel/admin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/administrator.php" beforeDir="false" afterPath="$PROJECT_DIR$/panel/administrator.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/admins_show.php" beforeDir="false" afterPath="$PROJECT_DIR$/panel/admins_show.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/comments_show.php" beforeDir="false" afterPath="$PROJECT_DIR$/panel/comments_show.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/includes/admin_menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/panel/includes/admin_menu.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/panel/includes/administrator_menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/panel/includes/administrator_menu.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/panel/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/reservation_show.php" beforeDir="false" afterPath="$PROJECT_DIR$/panel/reservation_show.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/userimg/20190325_131453.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/userimg/3 (1).jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/userimg/3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/userimg/4images.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/userimg/56 (10).jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/userimg/7images.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/userimg/8images.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/userimg/9images.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/userimg/I'MG_20190709_011056_443.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/userimg/IMG_20180103_191143.JPG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/userimg/IMG_20180107_202216.JPG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/userimg/IMG_20190709_011038_863.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/userimg/IMG_20190709_011043_494.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/userimg/IMG_20190709_011056_443.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/userimg/IMG_20200126_001100_741.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/userimg/Screenshot from 2019-08-21 12-18-59.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/userimg/Screenshot from 2019-08-21 12-34-15.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/userimg/Screenshot from 2019-08-31 00-29-39.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/userimg/b (19).jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/userimg/b (21).jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/userimg/black-white-graphic.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/userimg/eye2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/userimg/eye6.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/userimg/gavahi2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/userimg/images5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/userimg/images7.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/userimg/images8.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/userimg/index.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/userimg/newnew.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/userimg/photo_2017-11-30_04-19-03.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/userimg/photo_2017-11-30_04-19-16.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/userimg/photo_2017-11-30_04-19-28.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/userimg/photo_2017-11-30_04-19-31.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/userimg/photo_2017-11-30_04-19-36.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/userimg/photo_2017-11-30_04-19-52.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/userimg/photo_2017-11-30_04-19-55.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/userimg/photo_2017-11-30_04-20-00.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/userimg/photo_2020-03-16_01-03-38.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/userimg/photo_2020-06-10_00-14-06.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/userimg/skelet.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/userimg/ssrs.jpg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -272,7 +173,7 @@
       <workItem from="1592072244018" duration="11809000" />
       <workItem from="1592312657739" duration="7997000" />
       <workItem from="1592496454060" duration="9455000" />
-      <workItem from="1592560564425" duration="17182000" />
+      <workItem from="1592560564425" duration="18676000" />
     </task>
     <servers />
   </component>

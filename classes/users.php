@@ -790,9 +790,21 @@ require_once("functions.php");
             return $result;
         }
         public function DeleteUserProImg(){
-            global $database,$users;
+            global $database,$users,$Functions;
             if (isset($_POST['delete_user_pro_img'])){
-                $sql = "UPDATE users SET  user_image='' WHERE id={$_SESSION['user_id']}";
+                if (preg_match("/^[0-9]*$/",$database->escape_value($Functions->decrypt_id($_SESSION['user_id']))))
+                    $this->user_id = $Functions->decrypt_id($_SESSION['user_id']);
+                else
+                    $this->redirect_to($_SERVER['PHP_SELF']);
+
+                $AllResult = $this->SelectById($this->user_id);
+                if ($row = $database->fetch_array($AllResult))
+                    $this->user_image = $row["user_image"];
+
+                if ($this->user_image != "default_user.png")
+                    unlink("userimg/".$this->user_image);
+
+                $sql = "UPDATE users SET  user_image='' WHERE id={$this->user_id}";
                 if($database->query($sql)){
                     $this->redirect_to($_SERVER["PHP_SELF"]);
                 }else{
@@ -897,7 +909,7 @@ require_once("functions.php");
                             $this->password = $this->mytrim($_POST["new_password"]);
                             $this->password = $database->escape_value($this->password);
                             $this->user_image = $database->escape_value($this->user_image);
-                            $sql = "UPDATE users SET username='{$this->username}' , password='{$this->password}', user_image='{$this->user_image}' WHERE id={$this->user_id}";
+                            $sql = "UPDATE users SET username='{$this->username}' , password='{$this->password}', user_image='{$this->mytrim($this->user_image)}' WHERE id={$this->user_id}";
                             $_SESSION["errors_message"] .= "<رمز با موفقیت تغییر کرد> .";
                         }
                     }

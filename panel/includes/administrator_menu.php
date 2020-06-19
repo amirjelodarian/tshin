@@ -52,7 +52,7 @@ if(isset($_POST["logout_submit"])) {
             </ul>
         </div>
         <div class="panel_menu_mobile col-lg-2 col-md-2 col-sm-2 col-xs-12">
-            <div class="home"><a href="../index.php" target="_blank"><span class="icon-home" id="icon-home"></span>خانه</a></div>-
+            <div class="home"><a href="../index.php" target="_blank"><span class="icon-home" id="icon-home"></span>خانه</a></div>
             <div class="DateTime">
                 <p id="today-time-mobile"></p>
                 <p id="today-date-mobile">
