@@ -1,4 +1,5 @@
 $(window).load(function () {
+    $('#today-date-mobile').hide();
     $(".comment_submit_search").click(function () {
         $("#main-comment").hide();
     });
@@ -15,14 +16,14 @@ $(window).load(function () {
             $(".panel_menu_mobile").css({'width': '150px'});
             $(".panel_menu_mobile ul").css({'width': '100%', 'display': 'block'});
             $(".panel_menu_mobile li").css({'width': '100%', 'display': 'block'});
-            $(".icon-close").show();
+            $(".icon-close,#today-date-mobile").show();
             $("#icon_menu").hide();
         });
         $(".icon-close").click(function () {
             $(".panel_menu_mobile").css({'width': '0px'});
             $(".panel_menu_mobile ul").css({'width': '0px', 'display': 'none'});
             $(".panel_menu_mobile li").css({'width': '0px', 'display': 'none'});
-            $(".icon-close").hide();
+            $(".icon-close,#today-date-mobile").hide();
             $("#icon_menu").show();
         });
     }
@@ -230,14 +231,14 @@ window.onresize = function () {
             $(".panel_menu_mobile").css({'width': '150px'});
             $(".panel_menu_mobile ul").css({'width': '100%', 'display': 'block'});
             $(".panel_menu_mobile li").css({'width': '100%', 'display': 'block'});
-            $(".icon-close").show();
+            $(".icon-close,#today-date-mobile").show();
             $("#icon_menu").hide();
         });
         $(".icon-close").click(function () {
             $(".panel_menu_mobile").css({'width': '0px'});
             $(".panel_menu_mobile ul").css({'width': '0px', 'display': 'none'});
             $(".panel_menu_mobile li").css({'width': '0px', 'display': 'none'});
-            $(".icon-close").hide();
+            $(".icon-close,#today-date-mobile").hide();
             $("#icon_menu").show();
         });
     }
@@ -271,4 +272,21 @@ window.onresize = function () {
     }
 }
 */
+function startTime() {
+    var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    m = checkTime(m);
+    s = checkTime(s);
+    document.getElementById('today-time').innerHTML =
+        h + ":" + m + ":" + s;
+    document.getElementById('today-time-mobile').innerHTML =
+        h + ":" + m + ":" + s;
+    var t = setTimeout(startTime, 500);
+}
+function checkTime(i) {
+    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+    return i;
+}
 

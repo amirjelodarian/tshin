@@ -5416,6 +5416,27 @@ a.btn_infobox:hover {
     padding: 16px;
     border-radius: 50px 0px 0px 0px;
 }
+.DateTime{
+    color: #999999;
+    font-weight: bold;
+    font-size: 15px;
+    width: 100%;
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 13px;
+}
+#today-date,#today-date-mobile{
+    left: 0;
+    margin-left: 20px;
+    position: absolute;
+    display: inline-block;
+}
+#today-time,#today-time-mobile{
+    margin-right: 20px;
+    right: 0;
+    position: absolute;
+    display: inline-block;
+}
 .comments_delete_btn{
     background: #cb1d1d;
     display: inline-block;

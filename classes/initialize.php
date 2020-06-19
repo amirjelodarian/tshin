@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('Asia/Tehran');
     require_once("database.php");
     require_once("users.php");
     require_once("sessions.php");

@@ -387,6 +387,17 @@
                     break;
             }
         }
+        public function today_date($ger = ""){
+            $now = strftime("%Y-%m-%d",time());
+            $nowSplit = explode("-",$now);
+            $YMD = array('year' => $nowSplit[0] , 'month' => $nowSplit[1] , 'day' => $nowSplit[2]);
+            if (isset($ger) && $ger == true){
+                echo $now;
+            }else{
+                $jalali = $this->gregorian_to_jalali($YMD['year'],$YMD['month'],$YMD['day']);
+                echo $jalali[0]."/".$jalali[1]."/".$jalali[2];
+            }
+        }
         public function redirect_with_get($url){
             $ch = curl_init($url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

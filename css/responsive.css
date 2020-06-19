@@ -267,6 +267,7 @@ only screen and (min-device-pixel-ratio: 2) and (max-width: 991px) {
         display: none;
     }
     .panel_menu_mobile{
+        z-index: 999;
         display: block;
     }
     .add_new_room{
@@ -726,7 +727,7 @@ only screen and (min-device-pixel-ratio: 2) and (max-width: 991px) {
 @media screen and (min-width: 769px){
     .panel_menu{
         height: 100%;
-        font-size: 15px;
+        font-size: 14px;
     }
     .panel_menu li{
         border-bottom: 1px solid white;
@@ -806,5 +807,18 @@ only screen and (min-device-pixel-ratio: 2) and (max-width: 991px) {
     }
     .room-person-count-reservation{
         float: none;
+    }
+}
+@media screen and (max-width: 980px){
+    .DateTime {
+        font-size: 11px;
+    }
+    #today-date,#today-date-mobile{
+        display: inline-block;
+        margin-left: 14px;
+    }
+    #today-time,#today-time-mobile{
+        display: inline-block;
+        margin-right: 14px;
     }
 }
