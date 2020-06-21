@@ -1033,12 +1033,7 @@
                                             <div>
                                             <sup>{$database->escape_value($Functions->EN_numTo_FA($Functions->insert_seperator($rooms_rows['room_main_price']),true))} تومان</sup>
                                             <span class='normal_price_list'>{$database->escape_value($Functions->EN_numTo_FA($Functions->insert_seperator($rooms_rows['room_off_price']),true))} تومان</span>                                            <small>روزانه / شبانه</small>
-                                                <form action='rooms_edit.php' method='post'>
-                                                    <input type='submit' name='submit_edit_room' value='Edit Room' class='submit_edit' />
-                                                    <input type='hidden' name='room_id' value='");
-                        echo($Functions->encrypt_id($rooms_rows['room_id']));
-                        echo("' /> 
-                                                </form>
+                                                <a href='rooms_edit.php?roomId={$Functions->encrypt_id($rooms_rows['room_id'])}'><div class='submit_edit'>Edit Room</div></a>
                                                 <form method='post' action='rooms_delete.php'>
                                                     <input type='submit' name='submit_delete_room' value='Delete' class='delete_room_btn' />
                                                     <input type='hidden' name='room_id' value='");

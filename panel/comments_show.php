@@ -129,7 +129,11 @@ $all_room_survey_result = $all_room_survey_result[0];
                         echo("<blockquote style='float: left;'>Tel : (<span style='color: #00A8FF;font-weight: bold;'>{$users_row['tel']}</span>)</blockquote>");
                         if ($rooms_rows = $database->fetch_array($rooms->SelectWithId($room_survey['room_id']))){
                             echo("<br /><h4 style='display: inline-block' class='room_address'>{$database->escape_value($rooms_rows['room_address'])}</h4><h3 style='display: inline-block'>&nbsp;|&nbsp;</h3> 
-                                            <h5 style='display: inline-block'>{$database->escape_value($rooms_rows['room_title'])}</h5>");
+                                        <h5 style='display: inline-block'>{$database->escape_value($rooms_rows['room_title'])}</h5>
+                                        <span class='reservation-bg-outside'>
+                                            <img id='reservation-bg' src='../"); Rooms::select_room_image($rooms_rows['room_image']); echo("' alt='تی شین' />
+                                        </span>
+                    ");
                         }
                         echo("<div class='survey'><p>"); echo(nl2br($room_survey['survey'])); echo("</p></div>
                         <div id='panel-rating-comment' class='rating'> {$rooms->smile_voted_by_price_quality_score_comfort($room_survey['room_price'],$room_survey['room_quality'],$room_survey['room_score'],$room_survey['room_comfort'])} </div>
