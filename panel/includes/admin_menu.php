@@ -38,10 +38,10 @@ if(isset($_POST["logout_submit"])) {
             </div>
             <ul>
                 <li class="icon-tools"><a href="admin.php">مدیر</a></li>
-                <li class="icon-doc-add"><a href="rooms_show.php">اتاق ها <span class="count">(<?php $rooms->CountRoom(); ?>)</span></a></li>
-                <li class="icon-food"><a href="foods_show.php">غذاها <span class="count">(<?php $foods->CountFood(); ?>)</span></a></li>
-                <li class="icon-comment-alt-1"><a href="comments_show.php">نظرات <span class="count">(<?php $rooms->CountAllRoomComments(); ?>)</span></a></li>
-                <li class="icon-comment-alt-1"><a href="reservation_show.php">رزرو ها <span class="count">(<?php $rooms->CountAllRoomReservation(); ?>)</span></a></li>
+                <li class="icon-doc-add"><a href="rooms_show.php">اتاق ها <span class="count"><?php $rooms->CountRoom(); ?></span></a></li>
+                <li class="icon-food"><a href="foods_show.php">غذاها <span class="count"><?php $foods->CountFood(); ?></span></a></li>
+                <li class="icon-comment-alt-1"><a href="comments_show.php">نظرات <span class="count"><?php $rooms->CountAllRoomComments(); ?></span></a></li>
+                <li class="icon-comment-alt-1"><a href="reservation_show.php">رزرو ها <span class="count"><?php $rooms->CountAllRoomReservation(); ?></span></a></li>
                 <li>
                     <form action="<?php echo(htmlspecialchars($_SERVER['PHP_SELF'])); ?>" method="post">
                         <span class="icon-logout"><input type="submit" name="logout_submit" class="logout-btn" value="خروج" /></span>
@@ -62,10 +62,10 @@ if(isset($_POST["logout_submit"])) {
             </div>
             <ul>
                 <li class="icon-tools"><a href="admin.php">مدیر</a></li>
-                <li class="icon-doc-add"><a href="rooms_show.php">اتاق ها <span class="count">(<?php $rooms->CountRoom(); ?>)</span></a></li>
-                <li class="icon-food"><a href="foods_show.php">غذاها <span class="count">(<?php $foods->CountFood(); ?>)</span></a></li>
-                <li class="icon-comment-alt-1"><a href="comments_show.php">نظرات <span class="count">(<?php $rooms->CountAllRoomComments(); ?>)</span></a></li>
-                <li class="icon-comment-alt-1"><a href="reservation_show.php">رزرو ها <span class="count">(<?php $rooms->CountAllRoomReservation(); ?>)</span></a></li>
+                <li class="icon-doc-add"><a href="rooms_show.php">اتاق ها <span class="count"><?php $rooms->CountRoom(); ?></span></a></li>
+                <li class="icon-food"><a href="foods_show.php">غذاها <span class="count"><?php $foods->CountFood(); ?></span></a></li>
+                <li class="icon-comment-alt-1"><a href="comments_show.php">نظرات <span class="count"><?php $rooms->CountAllRoomComments(); ?></span></a></li>
+                <li class="icon-comment-alt-1"><a href="reservation_show.php">رزرو ها <span class="count"><?php $rooms->CountAllRoomReservation(); ?></span></a></li>
                 <li>
                     <form action="<?php echo(htmlspecialchars($_SERVER['PHP_SELF'])); ?>" method="post">
                         <span class="icon-logout"><input type="submit" name="logout_submit" class="logout-btn" value="خروج" /></span>

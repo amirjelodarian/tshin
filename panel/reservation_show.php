@@ -91,8 +91,8 @@ if (isset($_POST["delete_single_reservation"])){
         $divid_date_time = $Functions->divid_date_time_database($room_reservation['reserve_time']);
         echo("  
                         <h4 id='username-panel-comment'>{$room_reservation['firstname']} {$room_reservation['lastname']}</h4>");
-        echo("<blockquote style='float: left;'>Reservation Id : (<span style='color: #00A8FF;font-weight: bold;'>{$room_reservation['reserve_id']}</span>)</blockquote>");
-        echo("<blockquote style='float: left;'>Tel : (<span style='color: #00A8FF;font-weight: bold;'>{$users_row['tel']}</span>)</blockquote>");
+        echo("<blockquote style='float: left;'>شماره رزرو : <span style='color: #00A8FF;font-weight: bold;'>{$room_reservation['reserve_id']}</span></blockquote>");
+        echo("<blockquote style='float: left;'>Tel : <span style='color: #00A8FF;font-weight: bold;'>{$users_row['tel']}</span></blockquote>");
         echo("<h6>{$users_row['username']}</h6>");
             if($room_reservation["reserved_mode"] == 1) { echo "<div class='tick'><img src='../img/verify-tick.png' alt='تی شین' /></div>"; }else { echo "<div class='tick'><img src='../img/un-verify.png' alt='تی شین' /></div>"; }
             echo("<br /><h4 style='display: inline-block' class='room_address'>{$database->escape_value($rooms_rows['room_address'])}</h4><h3 style='display: inline-block'>&nbsp;|&nbsp;</h3> 

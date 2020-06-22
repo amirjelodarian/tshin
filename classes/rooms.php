@@ -616,10 +616,10 @@
                                             <span class='normal_price_list'>{$database->escape_value($Functions->EN_numTo_FA($Functions->insert_seperator($rooms_rows['room_off_price']),true))} تومان</span>
                                             <small>روزانه / شبانه</small>
                                            
-                                                <a href='rooms_edit.php?roomId={$Functions->encrypt_id($rooms_rows['room_id'])}'><div class='submit_edit'>Edit Room</div></a>
+                                                <a href='rooms_edit.php?roomId={$Functions->encrypt_id($rooms_rows['room_id'])}'><div class='submit_edit'>ویرایش</div></a>
                                           
                                                 <form method='post' action='rooms_delete.php'>
-                                                    <input type='submit' name='submit_delete_room' value='Delete' class='delete_room_btn' />
+                                                    <input type='submit' name='submit_delete_room' value='حذف' class='delete_room_btn' />
                                                     <input type='hidden' name='room_id' value='");
                                                     echo($Functions->encrypt_id($rooms_rows['room_id']));
                                                     echo("' />
@@ -1033,9 +1033,9 @@
                                             <div>
                                             <sup>{$database->escape_value($Functions->EN_numTo_FA($Functions->insert_seperator($rooms_rows['room_main_price']),true))} تومان</sup>
                                             <span class='normal_price_list'>{$database->escape_value($Functions->EN_numTo_FA($Functions->insert_seperator($rooms_rows['room_off_price']),true))} تومان</span>                                            <small>روزانه / شبانه</small>
-                                                <a href='rooms_edit.php?roomId={$Functions->encrypt_id($rooms_rows['room_id'])}'><div class='submit_edit'>Edit Room</div></a>
+                                                <a href='rooms_edit.php?roomId={$Functions->encrypt_id($rooms_rows['room_id'])}'><div class='submit_edit'>ویرایش</div></a>
                                                 <form method='post' action='rooms_delete.php'>
-                                                    <input type='submit' name='submit_delete_room' value='Delete' class='delete_room_btn' />
+                                                    <input type='submit' name='submit_delete_room' value='حذف' class='delete_room_btn' />
                                                     <input type='hidden' name='room_id' value='");
                         echo($Functions->encrypt_id($rooms_rows['room_id']));
                         echo("' />
@@ -1481,8 +1481,8 @@
                                         $divid_date_time = $Functions->divid_date_time_database($rows['survey_date']);
                                         echo("
                                         <h4 id='username-panel-comment'>{$rows['username']}</h4>");
-                                        echo("<blockquote style='float: left;'>Comment Id : (<span style='color: #00A8FF;font-weight: bold;'>{$rows['id']}</span>)</blockquote>");
-                                        echo("<blockquote style='float: left;'>Tel : (<span style='color: #00A8FF;font-weight: bold;'>{$users_row['tel']}</span>)</blockquote>");
+                                        echo("<blockquote style='float: left;'>Comment Id : <span style='color: #00A8FF;font-weight: bold;'>{$rows['id']}</span></blockquote>");
+                                        echo("<blockquote style='float: left;'>Tel : <span style='color: #00A8FF;font-weight: bold;'>{$users_row['tel']}</span></blockquote>");
                                         if ($rooms_rows = $database->fetch_array($rooms->SelectWithId($rows['room_id']))){
                                             echo("<br /><h4 style='display: inline-block' class='room_address'>{$database->escape_value($rooms_rows['room_address'])}</h4><h3 style='display: inline-block'>&nbsp;|&nbsp;</h3> 
                                                     <h5 style='display: inline-block'>{$database->escape_value($rooms_rows['room_title'])}</h5>");
@@ -1493,23 +1493,23 @@
                                             <small id='panel-date-comment'>"); echo $Functions->EN_numTo_FA($Functions->convert_db_format_for_gregorian_to_jalali($divid_date_time[1]),true); echo("</small><br />
                                             <div class='comment-panel-btns col-xs-12 col-sm-12 col-md-12 col-lg-12'>
                                                      <a href='../Room.php?roomId={$Functions->encrypt_id($rooms_rows['room_id'])}'>
-                                                        <p id='see-room-btn' class='submit_edit'>See Room</p>
+                                                        <p id='see-room-btn' class='submit_edit'>بازدید اتاق</p>
                                                      </a>
                                                     <form action='{$_SERVER['PHP_SELF']}' id='submit-checkbox-form' method='post'>
                                                         <input type='hidden' name='survey_id' value='"); echo($Functions->encrypt_id($rows['id'])); echo("' />
                                                         <div class='publish-area'>");
                                                         if($rows["publish"] == 0) {
-                                                                echo("<input type='submit' name='publish_submit' id='publish_checkbox_submit' class='submit_edit' value='Publish' />");
+                                                                echo("<input type='submit' name='publish_submit' id='publish_checkbox_submit' class='submit_edit' value='منتشر' />");
                                                             }
                                                             if($rows["publish"] == 1) {
-                                                                echo("<input type='submit' name='unpublish_submit' id='unpublish_checkbox_submit' class='submit_edit' value='X  Un Publish' />");
+                                                                echo("<input type='submit' name='unpublish_submit' id='unpublish_checkbox_submit' class='submit_edit' value='X  غیر منتشر' />");
                                                             }
                                                             echo("
                                                             
                                                         </div>
-                                                        <input type='submit' name='delete_user_comment' value='Delete' class='comments_delete_btn delete_room_btn' />
+                                                        <input type='submit' name='delete_user_comment' value='حذف' class='comments_delete_btn delete_room_btn' />
                                                     </form>
-                                                    <a class='edit-comment-panel-btn' href='comments_edit.php?commentId={$Functions->decrypt_id($rows['id'])}'>Edit</a>
+                                                    <a class='edit-comment-panel-btn' href='comments_edit.php?commentId={$Functions->decrypt_id($rows['id'])}'>ویرایش</a>
                                                 </div>
                                                     <div class='line'></div></hr >
                                             </div>
@@ -1804,7 +1804,7 @@
 
 
 
-                }else{ $_SESSION["errors_message"] .= "برای درج نظر بایستی به حساب کاربری خود وارد شوید یا حسابی بسازید ."; $users->redirect_to("Room.php?roomId={$room_id}"); }
+                }else{ $_SESSION["errors_message"] .= "برای رزرو بایستی به حساب کاربری خود وارد شوید یا حسابی بسازید ."; $users->redirect_to("Room.php?roomId={$room_id}"); }
             }else{ $users->redirect_to("Room.php?roomId={$room_id}"); }
         }
         public function SelectUserRoomComments($room_id){

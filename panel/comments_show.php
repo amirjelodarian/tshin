@@ -125,8 +125,8 @@ $all_room_survey_result = $all_room_survey_result[0];
                         $divid_date_time = $Functions->divid_date_time_database($room_survey['survey_date']);
                         echo("
                         <h4 id='username-panel-comment'>{$room_survey['username']}</h4>");
-                        echo("<blockquote style='float: left;'>Comment Id : (<span style='color: #00A8FF;font-weight: bold;'>{$room_survey['id']}</span>)</blockquote>");
-                        echo("<blockquote style='float: left;'>Tel : (<span style='color: #00A8FF;font-weight: bold;'>{$users_row['tel']}</span>)</blockquote>");
+                        echo("<blockquote style='float: left;'>Comment Id : <span style='color: #00A8FF;font-weight: bold;'>{$room_survey['id']}</span></blockquote>");
+                        echo("<blockquote style='float: left;'>Tel : <span style='color: #00A8FF;font-weight: bold;'>{$users_row['tel']}</span></blockquote>");
                         if ($rooms_rows = $database->fetch_array($rooms->SelectWithId($room_survey['room_id']))){
                             echo("<br /><h4 style='display: inline-block' class='room_address'>{$database->escape_value($rooms_rows['room_address'])}</h4><h3 style='display: inline-block'>&nbsp;|&nbsp;</h3> 
                                         <h5 style='display: inline-block'>{$database->escape_value($rooms_rows['room_title'])}</h5>

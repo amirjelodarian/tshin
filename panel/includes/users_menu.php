@@ -38,7 +38,7 @@ if(isset($_POST["logout_submit"])) {
             </div>
             <ul>
                 <li class="icon-tools"><a href="user.php">پروفایل</a></li>
-                <li class="icon-doc-add"><a href="reservedRooms.php">رزرو ها <span class="count">(<?php $rooms->CountUserAllRoomReservation(); ?>)</span></a></li>
+                <li class="icon-doc-add"><a href="reservedRooms.php">رزرو ها <span class="count"><?php $rooms->CountUserAllRoomReservation(); ?></span></a></li>
                 <li>
                     <form action="<?php echo(htmlspecialchars($_SERVER['PHP_SELF'])); ?>" method="post">
                         <span class="icon-logout"><input type="submit" name="logout_submit" class="logout-btn" value="خروج" /></span>
@@ -59,7 +59,7 @@ if(isset($_POST["logout_submit"])) {
             </div>
             <ul>
                 <li class="icon-tools"><a href="user.php">پروفایل</a></li>
-                <li class="icon-doc-add"><a href="reservedRooms.php">رزرو ها <span class="count">(<?php $rooms->CountUserAllRoomReservation(); ?>)</span></a></li>
+                <li class="icon-doc-add"><a href="reservedRooms.php">رزرو ها <span class="count"><?php $rooms->CountUserAllRoomReservation(); ?></span></a></li>
                 <li>
                     <form action="<?php echo(htmlspecialchars($_SERVER['PHP_SELF'])); ?>" method="post">
                         <span class="icon-logout"><input type="submit" name="logout_submit" class="logout-btn" value="خروج" /></span>

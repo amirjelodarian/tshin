@@ -442,9 +442,9 @@ class Foods{
                             <sup>{$Functions->EN_numTo_FA($Functions->insert_seperator($database->escape_value($foods_rows['food_main_price'])),true)} تومان</sup>
                             <span class='normal_price_list'>{$Functions->EN_numTo_FA($Functions->insert_seperator($database->escape_value($foods_rows['food_off_price'])),true)} تومان</span>
                             <small>روزانه / شبانه</small>
-                            <a class='submit_edit' href='foods_edit.php?foodId={$Functions->encrypt_id($foods_rows['food_id'])}'>Edit Food</a><hr />
+                            <a class='submit_edit' href='foods_edit.php?foodId={$Functions->encrypt_id($foods_rows['food_id'])}'>ویرایش</a><hr />
                                                 <form method='post' action='foods_delete.php'>
-                                                    <input type='submit' name='submit_delete_food' value='Delete' class='delete_room_btn' />
+                                                    <input type='submit' name='submit_delete_food' value='حذف' class='delete_room_btn' />
                                                     <input type='hidden' name='food_id' value='");
                                                     echo($Functions->encrypt_id($foods_rows['food_id']));
                                                     echo("' />
@@ -773,9 +773,9 @@ class Foods{
                             <sup>{$Functions->EN_numTo_FA($Functions->insert_seperator($database->escape_value($foods_rows['food_main_price'])),true)} تومان</sup>
                             <span class='normal_price_list'>{$Functions->EN_numTo_FA($Functions->insert_seperator($database->escape_value($foods_rows['food_off_price'])),true)} تومان</span>
                             <small>روزانه / شبانه</small>
-                                                <a class='submit_edit' href='foods_edit.php?foodId={$Functions->encrypt_id($foods_rows['food_id'])}'>Edit Food</a><hr />
+                                                <a class='submit_edit' href='foods_edit.php?foodId={$Functions->encrypt_id($foods_rows['food_id'])}'>ویرایش</a><hr />
                                                 <form method='post' action='foods_delete.php'>
-                                                    <input type='submit' name='submit_delete_food' value='Delete' class='delete_room_btn' />
+                                                    <input type='submit' name='submit_delete_food' value='حذف' class='delete_room_btn' />
                                                     <input type='hidden' name='food_id' value='");
                     echo($Functions->encrypt_id($foods_rows['food_id']));
                     echo("' />
