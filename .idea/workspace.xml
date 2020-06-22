@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="c424756b-6ee7-4545-9854-ec57cf6aba41" name="Default Changelist" comment=" noth">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/foods.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/foods.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Room.php" beforeDir="false" afterPath="$PROJECT_DIR$/Room.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/functions.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/rooms.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/rooms.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/datapicker" beforeDir="false" afterPath="$PROJECT_DIR$/datapicker" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/datapicker/demo/Samples1.html" beforeDir="false" afterPath="$PROJECT_DIR$/datapicker/demo/Samples1.html" afterDir="false" />
@@ -12,14 +13,6 @@
       <change beforePath="$PROJECT_DIR$/datapicker/dist/jquery.md.bootstrap.datetimepicker.style.css.map" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/datapicker/src/jquery.md.bootstrap.datetimepicker.js" beforeDir="false" afterPath="$PROJECT_DIR$/datapicker/src/jquery.md.bootstrap.datetimepicker.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/datapicker/src/jquery.md.bootstrap.datetimepicker.style.css" beforeDir="false" afterPath="$PROJECT_DIR$/datapicker/src/jquery.md.bootstrap.datetimepicker.style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/rooms/unnamed.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/comments_show.php" beforeDir="false" afterPath="$PROJECT_DIR$/panel/comments_show.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/includes/admin_menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/panel/includes/admin_menu.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/includes/administrator_menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/panel/includes/administrator_menu.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/includes/users_menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/panel/includes/users_menu.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/reservation_show.php" beforeDir="false" afterPath="$PROJECT_DIR$/panel/reservation_show.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/reservedRooms.php" beforeDir="false" afterPath="$PROJECT_DIR$/panel/reservedRooms.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/userimg/me-me.jpg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -184,6 +177,7 @@
       <workItem from="1592560564425" duration="18676000" />
       <workItem from="1592754703571" duration="3269000" />
       <workItem from="1592820837245" duration="3527000" />
+      <workItem from="1592857645003" duration="7273000" />
     </task>
     <servers />
   </component>
@@ -228,10 +222,10 @@
       <screen x="0" y="27" width="1366" height="707" />
     </state>
     <state width="498" height="445" key="SwitcherDM/0.27.1366.707@0.27.1366.707" timestamp="1587767136684" />
-    <state x="392" y="207" key="com.intellij.ide.util.TipDialog" timestamp="1592820959471">
+    <state x="392" y="207" key="com.intellij.ide.util.TipDialog" timestamp="1592857647073">
       <screen x="0" y="26" width="1366" height="708" />
     </state>
-    <state x="392" y="207" key="com.intellij.ide.util.TipDialog/0.26.1366.708@0.26.1366.708" timestamp="1592820959471" />
+    <state x="392" y="207" key="com.intellij.ide.util.TipDialog/0.26.1366.708@0.26.1366.708" timestamp="1592857647073" />
     <state x="392" y="208" key="com.intellij.ide.util.TipDialog/0.27.1366.707@0.27.1366.707" timestamp="1588723909265" />
     <state x="336" y="26" width="683" height="708" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1592509500696">
       <screen x="0" y="26" width="1366" height="708" />

@@ -29,6 +29,8 @@
         public $room_parking; // BIT(1)
         public $room_image; // VARCHAR(200)
         public $room_person_count = 0; // TINYINT(1)
+        public static $all_room_days = array();
+        public static $room_days_reserved = array();
         private $username;
         private $user_id;
 
@@ -1764,7 +1766,6 @@
             global $users,$Functions,$database,$sessions;
             if (isset($_POST["reserve_submit"]) && isset($room_id) && !(empty($room_id))){
                 if ($sessions->login_state()) {
-
                     // main code after main conditions
                     if (isset($_POST["reserve_firstname"]) && !(empty($_POST["reserve_firstname"])) && isset($_POST["reserve_lastname"]) && !(empty($_POST["reserve_lastname"])) && isset($_POST["reserve_date"]) && !(empty($_POST["reserve_date"]))){
                         $max_person_room = (int)$max_person_room;
@@ -1785,6 +1786,10 @@
                         }
                         $reserve_date = $database->escape_value($_POST["reserve_date"]);
                             $reserve_date = $this->convert_date_to_gregorian($reserve_date, $room_id);
+                            $roomDayFreeOrNot = $this->DayFreeOrNot($reserve_date,$room_id);
+                            if($roomDayFreeOrNot == false){
+                                $_SESSION["errors_message"] .= "متاسفانه روز های انتخاب شده از قبل رزرو شده ."; $users->redirect_to("Room.php?roomId={$room_id}");
+                            }
                             $now_time = strftime("%Y-%m-%d %H:%M:%S", time());
                             $this->room_id = $database->escape_value($Functions->decrypt_id($room_id));
                             $this->user_id = $_SESSION["user_id"];
@@ -1872,6 +1877,31 @@
                 }
             }
             return round($sum/4);
+        }
+
+        public function DayFreeOrNot($date,$room_id){
+            global $Functions,$users,$database;
+            $room_id = $Functions->decrypt_id($room_id);
+            $range_date_self_room = explode("|",$date);
+            $start_day_room = $range_date_self_room[0];
+            $end_day_room = $range_date_self_room[1];
+            $Functions->ShowBetweenTwoDateRange($start_day_room,$end_day_room,true);
+
+            $sql = "SELECT date_range FROM room_reservation WHERE room_id={$room_id} AND reserved_mode = 0";
+            $result = $database->query($sql);
+            while ($data_ranges = $database->fetch_array($result)){
+                $range_date_room = explode("|",$data_ranges["date_range"]); $start_day = $range_date_room[0]; $end_day = $range_date_room[1];
+                $Functions::AllDateRange($start_day,$end_day);
+            }
+            $a1=array("fds");
+            $a2=array("a","b","c","d","s","fds");
+
+            $DaysResult = array_intersect(Rooms::$all_room_days,Rooms::$room_days_reserved);
+            if($DaysResult){
+                return false;
+            }else{
+                return true;
+            }
         }
         public function convert_date_to_gregorian($date,$room_id){
             global $Functions,$users;

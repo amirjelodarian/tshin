@@ -320,7 +320,27 @@
             $i++;
             return substr($str,$i);
         }
-        public function ShowBetweenTwoDateRange($start_day,$end_day){
+        public function ShowBetweenTwoDateRange($start_day,$end_day,$check_self_room){
+            $new_date = new DateTime($end_day);
+            $new_date->add(new DateInterval('P1D'));
+            $end_day = $new_date->format('Y-m-d');
+            $period = new DatePeriod(
+                new DateTime($start_day),
+                new DateInterval('P1D'),
+                new DateTime($end_day)
+            );
+            if ($check_self_room == true){
+                foreach ($period as $key => $value) {
+                    array_push(Rooms::$room_days_reserved,$value->format('Y,m,d'));
+                }
+                return Rooms::$room_days_reserved;
+            }else {
+                foreach ($period as $key => $value) {
+                    echo "new Date(" . $value->format('Y,m-1,d') . "),";
+                }
+            }
+        }
+        public static function AllDateRange($start_day,$end_day){
             $new_date = new DateTime($end_day);
             $new_date->add(new DateInterval('P1D'));
             $end_day = $new_date->format('Y-m-d');
@@ -330,8 +350,9 @@
                 new DateTime($end_day)
             );
             foreach ($period as $key => $value) {
-                echo "new Date(".$value->format('Y,m-1,d') . "),";
+                array_push(Rooms::$all_room_days,$value->format('Y,m,d'));
             }
+            return Rooms::$all_room_days;
         }
         public function DividedStartAndEndDate($date,$sep){
             $date = explode($sep,$date);

@@ -535,7 +535,7 @@ if (isset($_GET['roomId']) && !(empty($_GET["roomId"])) || isset($_POST['room_id
                         $date_reserved_room_result = $rooms->DatesRoomReservedAttr($room_id);
                         while($dates_room_reserved = $database->fetch_array($date_reserved_room_result)) {
                             $range_date_room = explode("|",$dates_room_reserved["date_range"]); $start_day = $range_date_room[0]; $end_day = $range_date_room[1];
-                            echo $Functions->ShowBetweenTwoDateRange($start_day,$end_day);
+                            echo $Functions->ShowBetweenTwoDateRange($start_day,$end_day,false);
                         }
                     ?>
                 ],
