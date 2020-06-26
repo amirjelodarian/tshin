@@ -1444,10 +1444,10 @@
         }
         public function CommentsSearch(){
             global $database,$users,$Functions,$rooms;
-            if (isset($_POST['submit_search']) && !(empty($_POST['keyword']))) {
-                $keyword = $database->escape_value($_POST['keyword']);
-                if (isset($_POST['ByWitch'])) {
-                    switch ($_POST['ByWitch']) {
+            if (isset($_GET['comments_keyword']) && !(empty($_GET['comments_keyword'])) && isset($_GET['comments_ByWitch']) && !(empty($_GET['comments_ByWitch']))) {
+                $keyword = $database->escape_value($_GET['comments_keyword']);
+                if (isset($_GET['comments_ByWitch'])) {
+                    switch ($_GET['comments_ByWitch']) {
                         case 'user_id':
                             $sql = "SELECT * FROM room_survey WHERE user_id={$keyword} ORDER BY id DESC";
                             break;
@@ -1474,6 +1474,7 @@
                         $database->query("SET NAMES 'utf8'");
                         $result = $database->query($sql);
                         if ($database->num_rows($result) > 0) {
+                            echo "<h3>جستجو ...</h3>";
                             while ($rows = $database->fetch_array($result)) {
                                 echo("
                                     <div class='comment-panel col-xs-12 col-sm-12 col-md-6 col-lg-6'>");
@@ -1520,7 +1521,7 @@
                                 ");
                             }
                         }else{ echo "<h1>متاسفانه یافت نشد !</h1>"; }
-                    }else{ $users->redirect_to($_SERVER['PHP_SELF']); }
+                    }else{ $users->redirect_to('comments_show.php'); }
                 }
             }
         }

@@ -13,14 +13,11 @@ $sessions->login_administrator("../index.php");
         <div id="errors" class="errors-panel" style="margin-top: 70px;"><?php echo $users->Errors(); ?></div>
         <table class="table_admins">
             <div id="keyword-style" style="margin-bottom: 8px">
-                <form action="<?php echo($_SERVER['PHP_SELF']); ?>" method="get">
-                    <input type="text" id="keyword" name="panel_keyword_admin" placeholder="Search" />
-                    <select class="search-by-witch" name="panel_ByWitch_admin">
-                        <option value="Tel">Tel</option>
-                        <option value="Username">Username</option>
-                    </select>
-                    <input type="submit" value="Search" id="submit_search" name="panel_submit_search_admin" />
-                </form>
+                <input type="text" id="admins-keyword" name="panel_keyword_admin" placeholder="Search" />
+                <select class="admins-search-by-witch" name="panel_ByWitch_admin">
+                    <option value="Tel">Tel</option>
+                    <option value="Username">Username</option>
+                </select>
             </div>
             <tbody>
             <tr class="title_th">
@@ -30,13 +27,8 @@ $sessions->login_administrator("../index.php");
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
-            <?php
-            if (isset($_GET["panel_submit_search_admin"])){
-                $users->SerachAdminByTelOrUsername();
-            }else{
-                $users->AllAdmins();
-            }
-            ?>
+            <tbody id="result"></tbody>
+            <tbody id="main-result"><?php $users->AllAdmins(); ?></tbody>
             </tbody>
         </table>
     </div>

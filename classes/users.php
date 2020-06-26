@@ -421,7 +421,7 @@ require_once("functions.php");
             while($admins_row = $database->fetch_array($result)){
                     echo("
                     
-                        <tr style='background: #d75e30'>
+                        <tr id='main-result' style='background: #d75e30'>
                             <td><img class='finger-img' style='border:2px solid darkorange' src="); self::select_user_image($admins_row['user_image']); echo(" alt='تی شین'></td>
                             <td class='admins_username'>{$admins_row['username']}</td>
                             <td class='admins_tel'>{$admins_row['tel']}</td>
@@ -588,7 +588,8 @@ require_once("functions.php");
                         <tr "); if($users_row['user_mode'] == 1){ echo 'style="background: #d75e30;"'; } echo(">
                             <td><img class='finger-img' ");
                             if($users_row['user_mode'] == 1){ echo 'style="border:2px solid darkorange"'; }
-                            echo("src="); self::select_user_image($users_row['user_image']); echo(" alt='تی شین'></td>
+                            echo("src="); self::select_user_image($users_row['user_image']); echo(" alt='تی شین'>
+                            </td>
                             <td class='admins_username'>{$users_row['username']}</td>
                             <td class='admins_tel'>{$users_row['tel']}</td>
                             <td>");
@@ -938,7 +939,7 @@ require_once("functions.php");
         // This Function For Search Box And By Tel Or Username
         public function SerachUserByTelOrUsername(){
             global $database,$Functions,$users;
-            if (isset($_GET["panel_submit_search_user"]) && !(empty($_GET["panel_keyword_user"]))) {
+            if (isset($_GET["panel_keyword_user"]) && !(empty($_GET["panel_keyword_user"])) && isset($_GET["panel_ByWitch_user"]) && !(empty($_GET["panel_ByWitch_user"]))) {
                 $keyword = $database->escape_value($_GET['panel_keyword_user']);
                 if (isset($_GET["panel_ByWitch_user"])){
                     switch ($_GET["panel_ByWitch_user"]){
@@ -1029,15 +1030,15 @@ require_once("functions.php");
                     ");
                     }
                 } else {
-                    echo "<h1 class='no-result'>No Result !</h1>";
+                    echo "<h1 class='no-result'>یافت نشد !</h1>";
                 }
             }else{
-                $this->redirect_to("users_show.php");
+                $users->AllUsers();
             }
         }
         public function SerachAdminByTelOrUsername(){
             global $database,$Functions;
-            if (isset($_GET["panel_submit_search_admin"]) && !(empty($_GET["panel_keyword_admin"]))) {
+            if (isset($_GET["panel_keyword_admin"]) && !(empty($_GET["panel_keyword_admin"])) && isset($_GET["panel_ByWitch_admin"]) && !(empty($_GET["panel_ByWitch_admin"]))) {
                 $keyword = $database->escape_value($_GET['panel_keyword_admin']);
                 if (isset($_GET["panel_ByWitch_admin"])){
                     switch ($_GET["panel_ByWitch_admin"]){
@@ -1077,10 +1078,10 @@ require_once("functions.php");
                     ");
                     }
                 } else {
-                    echo "<h1 class='no-result'>No Result !</h1>";
+                    echo "<h1 class='no-result' style='color: white'>یافت نشد !</h1>";
                 }
             }else{
-                $this->redirect_to("admins_show.php");
+                $this->AllAdmins();
             }
         }
 

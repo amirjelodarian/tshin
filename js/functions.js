@@ -47,6 +47,78 @@ $(document).ready(function () {
             $('#result').hide();
         }
     });
+    $('#admins-keyword').keyup(function () {
+        var keyword = $("#admins-keyword").val();
+        var bywitch = $(".admins-search-by-witch").val();
+        if (keyword != ''){
+            $('#result').html('');
+            $.ajax({
+                url: "admins_search.php",
+                method: "get",
+                dataType: "text",
+                beforeSend: function() {
+                    $("#searching").val("...Searching");
+                },
+                data: {panel_keyword_admin: keyword,panel_ByWitch_admin: bywitch},
+                success:function (data) {
+                    $('tbody #main-result').hide();
+                    $('#result').show();
+                    $('#result').html(data);
+                }
+            });
+        }else{
+            $('tbody #main-result').show();
+            $('#result').hide();
+        }
+    });
+    $('#users-keyword').keyup(function () {
+        var keyword = $("#users-keyword").val();
+        var bywitch = $(".users-search-by-witch").val();
+        if (keyword != ''){
+            $('#result').html('');
+            $.ajax({
+                url: "users_search.php",
+                method: "get",
+                dataType: "text",
+                beforeSend: function() {
+                    $("#searching").val("...Searching");
+                },
+                data: {panel_keyword_user: keyword,panel_ByWitch_user: bywitch},
+                success:function (data) {
+                    $('#main-result').hide();
+                    $('#result').show();
+                    $('#result').html(data);
+                }
+            });
+        }else{
+            $('#main-result').show();
+            $('#result').hide();
+        }
+    });
+    $('#comments-keyword').keyup(function () {
+        var keyword = $("#comments-keyword").val();
+        var bywitch = $(".comments-search-by-witch").val();
+        if (keyword != ''){
+            $('#result').html('');
+            $.ajax({
+                url: "comments_search.php",
+                method: "get",
+                dataType: "text",
+                beforeSend: function() {
+                    $("#searching").val("...Searching");
+                },
+                data: {comments_keyword: keyword,comments_ByWitch: bywitch},
+                success:function (data) {
+                    $('#main-result').hide();
+                    $('#result').show();
+                    $('#result').html(data);
+                }
+            });
+        }else{
+            $('#main-result').show();
+            $('#result').hide();
+        }
+    });
 });
 $(window).load(function () {
     $('#today-date-mobile').hide();

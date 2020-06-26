@@ -48,32 +48,22 @@ $SelcetPublishMode = $rooms->SelectRoomComments();
 <script src="../js/functions.js"></script>
 <script src="../js/icheck.js"></script>
 <div class="keyword-style-panel">
-    <form action="<?php echo(htmlspecialchars($_SERVER['PHP_SELF'])); ?>" method="post">
-        <input type="text" id="keyword" name="keyword" placeholder="Search" />
-        <select class="search-by-witch" name="ByWitch">
+        <input type="text" id="comments-keyword" name="comments_keyword" placeholder="Search" />
+        <select class="comments-search-by-witch" name="comments_ByWitch">
             <option value="username">Username</option>
-            <option value="user_id">ID</option>
             <option value="tel">Tel</option>
             <option value="address">Address</option>
             <option value="title">Title</option>
             <option value="survey">Survey</option>
         </select>
-        <input type="submit" value="Search" id="submit_search" class="comment_submit_search" name="submit_search" />
-    </form>
 </div>
 <div class='container-comment-panel col-xs-12 col-sm-12 col-md-12 col-lg-12'>
-    <?php
-        if (isset($_POST['submit_search'])){
-            echo "<h1>جستجو</h1>";
-            $rooms->CommentsSearch();
-            die();
-        }
-    ?>
+    <div id="result"></div>
 </div>
 
 
 
-
+<div id="main-result">
 <h1 id='rooms' align="center">نظرات</h1>
 <h2>
 
@@ -166,7 +156,9 @@ $all_room_survey_result = $all_room_survey_result[0];
 
     }
 ?>
+
     </div>
+</div>
     <br /><br />
     <hr />
 <?php include("includes/footer.php"); ?>
