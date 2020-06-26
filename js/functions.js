@@ -1,3 +1,53 @@
+$(document).ready(function () {
+    $('#keyword').keyup(function () {
+        var keyword = $("#keyword").val();
+        var bywitch = $(".search-by-witch").val();
+        if (keyword != ''){
+            $('#result').html('');
+            $.ajax({
+                url: "rooms_search.php",
+                method: "get",
+                dataType: "text",
+                beforeSend: function() {
+                    $("#searching").val("...Searching");
+                },
+                data: {panel_keyword_room: keyword,panel_ByWitch_room: bywitch},
+                success:function (data) {
+                    $('#main-result').hide();
+                    $('#result').show();
+                    $('#result').html(data);
+                }
+            });
+        }else{
+            $('#main-result').show();
+            $('#result').hide();
+        }
+    });
+    $('#food-keyword').keyup(function () {
+        var keyword = $("#food-keyword").val();
+        var bywitch = $(".food-search-by-witch").val();
+        if (keyword != ''){
+            $('#result').html('');
+            $.ajax({
+                url: "foods_search.php",
+                method: "get",
+                dataType: "text",
+                beforeSend: function() {
+                    $("#searching").val("...Searching");
+                },
+                data: {panel_keyword_food: keyword,panel_ByWitch_food: bywitch},
+                success:function (data) {
+                    $('#main-result').hide();
+                    $('#result').show();
+                    $('#result').html(data);
+                }
+            });
+        }else{
+            $('#main-result').show();
+            $('#result').hide();
+        }
+    });
+});
 $(window).load(function () {
     $('#today-date-mobile').hide();
     $(".comment_submit_search").click(function () {
@@ -243,35 +293,6 @@ window.onresize = function () {
         });
     }
 };
-/*function searchRoom(){
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200){
-            document.getElementById("demo").innerHTML = this.responseText;
-        }
-    };
-    xhttp.open("POST","classes/rooms.php",true);
-    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    xhttp.send();
-}*/
-/*function searchRoom() {
-    var min_length = 0;
-    var keyword = $("#keyword").val();
-    if (keyword.length >= min_length){
-        $.ajax({
-            url: 'classes/rooms.php',
-            type: 'POST',
-            data: {ByWitch:ByWitch,keyword:keyword},
-            success:function (data) {
-                $('.row').show();
-                $('.row').html(data);
-            }
-        });
-    }else{
-
-    }
-}
-*/
 function startTime() {
     var today = new Date();
     var h = today.getHours();
@@ -289,4 +310,39 @@ function checkTime(i) {
     if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
     return i;
 }
+/*function searchRoom(){
+    var keyword = document.getElementById("keyword");
+    if (keyword.length !== 0) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("result").innerHTML = this.responseText;
+            }
+        };
+        xhttp.open("GET", "rooms_show.php", false);
+        xhttp.send();
+    }
+}*/
+
+/*function searchRoom() {
+    var min_length = 0;
+    var keyword = $("#keyword").val();
+    var bywitch = $(".search-by-witch").val();
+    if (keyword.length > min_length) {
+        $.ajax({
+            url: 'rooms_show.php',
+            cache: false,
+            type: 'GET',
+            async: true,
+            data: {panel_ByWitch_room: bywitch, panel_keyword_room: keyword},
+            beforeSend : function() {
+                $('#searching').html('...Searching');
+            },
+            success: function (result) {
+                $('#result').html(result);
+            }
+        });
+    }
+}*/
+
 

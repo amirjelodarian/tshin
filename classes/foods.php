@@ -400,7 +400,7 @@ class Foods{
         $result = $database->query($sql);
         while ($foods_rows = $database->fetch_array($result)){
             echo ("
-                                <div class='strip_all_tour_list wow fadeIn animated' id='rooms' data-wow-delay='0.1s' style='visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;'>
+             <div class='strip_all_tour_list wow fadeIn animated' id='rooms' data-wow-delay='0.1s' style='visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;'>
                 <div class='row'>
                     <div class='col-lg-4 col-md-4 col-sm-4'>
                         <div class='img_list'>
@@ -431,8 +431,9 @@ class Foods{
                               <div class='food-detail fade in'>
                                 <h6 class='food-detail-title'>طرز تهیه {$foods_rows['food_title']} </h6>
                                 <p>");
-                                echo(substr(htmlentities($foods_rows['food_details']),0,200)."...");
-                                echo("</p>
+                                    echo(substr(htmlentities($foods_rows['food_details']),0,200)."...");
+                                    echo("
+                                </p>
                               </div>
                             </ul>
                         </div>
@@ -443,13 +444,12 @@ class Foods{
                             <span class='normal_price_list'>{$Functions->EN_numTo_FA($Functions->insert_seperator($database->escape_value($foods_rows['food_off_price'])),true)} تومان</span>
                             <small>روزانه / شبانه</small>
                             <a class='submit_edit' href='foods_edit.php?foodId={$Functions->encrypt_id($foods_rows['food_id'])}'>ویرایش</a><hr />
-                                                <form method='post' action='foods_delete.php'>
-                                                    <input type='submit' name='submit_delete_food' value='حذف' class='delete_room_btn' />
-                                                    <input type='hidden' name='food_id' value='");
-                                                    echo($Functions->encrypt_id($foods_rows['food_id']));
-                                                    echo("' />
-                                                </form>
-                            </div>
+                            <form method='post' action='foods_delete.php'>
+                                <input type='submit' name='submit_delete_food' value='حذف' class='delete_room_btn' />
+                                <input type='hidden' name='food_id' value='");
+                                 echo($Functions->encrypt_id($foods_rows['food_id']));
+                                 echo("' />
+                            </form>
                         </div>
                     </div>
             </div>
@@ -700,7 +700,7 @@ class Foods{
     //function for search food
     public function SerachFood(){
         global $database,$users,$Functions;
-        if (isset($_GET["panel_submit_search_food"]) && !(empty($_GET["panel_keyword_food"]))) {
+        if (isset($_GET["panel_keyword_food"]) && !(empty($_GET["panel_keyword_food"])) && isset($_GET["panel_ByWitch_food"]) && !(empty($_GET["panel_ByWitch_food"]))) {
             $keyword = $database->escape_value($_GET['panel_keyword_food']);
             if (isset($_GET["panel_ByWitch_food"])){
                 switch ($_GET["panel_ByWitch_food"]){
@@ -728,9 +728,10 @@ class Foods{
             }
             $result = $database->query($sql);
             if ($database->num_rows($result) > 0) {
+                echo "<h3>جستجو ...</h3>";
                 while ($foods_rows = $database->fetch_array($result)) {
                     echo ("
-                                <div class='strip_all_tour_list wow fadeIn animated' id='rooms' data-wow-delay='0.1s' style='visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;'>
+                                <div class='strip_all_tour_list wow fadeIn animated' style='background-image: linear-gradient(to left, rgb(224, 79, 103) 1%, rgb(255, 255, 255) 35%);' id='rooms' data-wow-delay='0.1s' style='visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;'>
                 <div class='row'>
                     <div class='col-lg-4 col-md-4 col-sm-4'>
                         <div class='wishlist'> <a class='tooltip_flip tooltip-effect-1' href='javascript:void(0);'>+<span class='tooltip-content-flip'><span class='tooltip-back'>علاقمند شدم</span></span></a>
@@ -788,10 +789,10 @@ class Foods{
                             ");
                 }
             } else {
-                echo "<h1 class='no-result'>No Result !</h1>";
+                echo "<h1 class='no-result'>یافت نشد !</h1>";
             }
         }else{
-            $users->redirect_to("foods_show.php");
+            $this->AllFoods_panel();
         }
     }
 }

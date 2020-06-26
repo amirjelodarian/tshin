@@ -5056,7 +5056,7 @@ a.btn_infobox:hover {
     padding: 0;
     margin: 0;
 }
-#keyword{
+#keyword,#food-keyword{
     width: 130px;
     opacity: 0.9;
     background: white;
@@ -5081,7 +5081,7 @@ a.btn_infobox:hover {
     outline: none;
     border: 1px solid darkorange;
 }
-.search-by-witch{
+.search-by-witch,.food-search-by-witch{
     opacity: 0.9;
     font-weight: bold;
     font-size: 10px;

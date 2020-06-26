@@ -4,6 +4,7 @@
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/MD.BootstrapPersianDateTimePicker" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/datapicker" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/js/jquery" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/pwt.datepicker" vcs="Git" />
   </component>
 </project>

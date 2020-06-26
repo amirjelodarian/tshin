@@ -569,42 +569,41 @@
                                     <div class='col-lg-6 col-md-6 col-sm-6'>
                                         <div class='tour_list_desc'>
                                             <div class='score'>");
-                echo(self::word_score($rooms_rows['room_score']));
-                echo("<span>{$database->escape_value($Functions->EN_numTo_FA($rooms_rows['room_score'],true))}</span>
+                                                echo(self::word_score($rooms_rows['room_score']));
+                                                echo("<span>{$database->escape_value($Functions->EN_numTo_FA($rooms_rows['room_score'],true))}</span>
                                             </div>
                                             <h3 class='room_address'>{$database->escape_value($rooms_rows['room_address'])}</h3>
                                             <div class='rating'>
-                                            ");
-                echo($Functions->give_start_by_number($rooms_rows['room_score']));
-                echo ("
+                                            "); echo($Functions->give_start_by_number($rooms_rows['room_score']));
+                                                echo ("
                                             </div>
                                             <h3>{$database->escape_value($rooms_rows['room_title'])}</h3>
                                             <p>"); echo(substr(nl2br(htmlentities($rooms_rows['room_description'])),0,200)); echo("</p>
                                             <ul class='add_info'>
                                                     <li> <a href='javascript:void(0);' class='tooltip-1 ");
-                if($rooms_rows['room_wifi'] == 1){ echo 'rooms_checkbox';}
-                echo("' data-placement='top' title='وای فای رایگان'><i class='icon_set_1_icon-86'></i></a>
-                                                </li>
-                                                <li> <a href='javascript:void(0);' class='tooltip-1 ");
-                if($rooms_rows['room_television'] == 1){ echo 'rooms_checkbox';}
-                echo("' data-placement='top' title='تلویزیون پلاسما با کانال های اچ دی'><i class='icon_set_2_icon-116'></i></a>
-                                                </li>
-                                                <li> <a href='javascript:void(0);' class='tooltip-1 ");
-                if($rooms_rows['room_pool'] == 1){ echo 'rooms_checkbox';}
-                echo("' data-placement='top' title='استخر شنا'><i class='icon_set_2_icon-110'></i></a>
-                                                </li>
-                                                <li> <a href='javascript:void(0);' class='tooltip-1 ");
-                if($rooms_rows['room_gym'] == 1){ echo 'rooms_checkbox';}
-                echo("' data-placement='top' title='مرکز تناسب اندام'><i class='icon_set_2_icon-117'></i></a>
-                                                </li>
-                                                <li> <a href='javascript:void(0);' class='tooltip-1 ");
-                if($rooms_rows['room_food'] == 1){ echo 'rooms_checkbox';}
-                echo("' data-placement='top' title='رستوران'><i class='icon_set_1_icon-58'></i></a>
-                                                </li>
-                                                <li> <a href='javascript:void(0);' class='tooltip-1 ");
-                if($rooms_rows['room_parking'] == 1){ echo 'rooms_checkbox';}
-                echo("' data-placement='top' title='پارکینگ'><i class='icon_set_1_icon-27'></i></a>
-                                                </li>
+                                                        if($rooms_rows['room_wifi'] == 1){ echo 'rooms_checkbox';}
+                                                        echo("' data-placement='top' title='وای فای رایگان'><i class='icon_set_1_icon-86'></i></a>
+                                                    </li>
+                                                    <li> <a href='javascript:void(0);' class='tooltip-1 ");
+                                                        if($rooms_rows['room_television'] == 1){ echo 'rooms_checkbox';}
+                                                        echo("' data-placement='top' title='تلویزیون پلاسما با کانال های اچ دی'><i class='icon_set_2_icon-116'></i></a>
+                                                    </li>
+                                                    <li> <a href='javascript:void(0);' class='tooltip-1 ");
+                                                        if($rooms_rows['room_pool'] == 1){ echo 'rooms_checkbox';}
+                                                        echo("' data-placement='top' title='استخر شنا'><i class='icon_set_2_icon-110'></i></a>
+                                                    </li>
+                                                    <li> <a href='javascript:void(0);' class='tooltip-1 ");
+                                                        if($rooms_rows['room_gym'] == 1){ echo 'rooms_checkbox';}
+                                                        echo("' data-placement='top' title='مرکز تناسب اندام'><i class='icon_set_2_icon-117'></i></a>
+                                                    </li>
+                                                    <li> <a href='javascript:void(0);' class='tooltip-1 ");
+                                                        if($rooms_rows['room_food'] == 1){ echo 'rooms_checkbox';}
+                                                        echo("' data-placement='top' title='رستوران'><i class='icon_set_1_icon-58'></i></a>
+                                                    </li>
+                                                    <li> <a href='javascript:void(0);' class='tooltip-1 ");
+                                                        if($rooms_rows['room_parking'] == 1){ echo 'rooms_checkbox';}
+                                                        echo("' data-placement='top' title='پارکینگ'><i class='icon_set_1_icon-27'></i></a>
+                                                    </li>
                                             </ul><hr />
                                             <div id='comment-info'><span style='"); if($this->CountRoomComments($Functions->encrypt_id($rooms_rows['room_id'])) == 0){ echo 'background:red'; } echo("'>{$Functions->EN_numTo_FA($this->CountRoomComments($Functions->encrypt_id($rooms_rows['room_id'])),true)}</span> : Comment </div>
                                         </div>
@@ -943,7 +942,7 @@
         // function for search panel
         public function PanelSerachRoom(){
             global $database,$Functions,$users;
-            if (isset($_GET["panel_submit_search_room"]) && !(empty($_GET["panel_keyword_room"]))) {
+            if (isset($_GET["panel_keyword_room"]) && !(empty($_GET["panel_keyword_room"])) && isset($_GET["panel_ByWitch_room"]) && !(empty($_GET["panel_ByWitch_room"]))) {
                 $keyword = $database->escape_value($_GET['panel_keyword_room']);
                 if (isset($_GET["panel_ByWitch_room"])){
                     switch ($_GET["panel_ByWitch_room"]){
@@ -975,10 +974,11 @@
                 }
                 $result = $database->query($sql);
                 if ($database->num_rows($result) > 0) {
+                    echo "<h3>جستجو ...</h3>";
                     while ($rooms_rows = $database->fetch_array($result)) {
                         echo ("
                 
-                                <div class='strip_all_tour_list wow fadeIn' id='rooms' data-wow-delay='0.1s'>
+                                <div style='background-image: linear-gradient(to left, rgb(224, 79, 103) 1%, rgb(255, 255, 255) 35%);' class='strip_all_tour_list wow fadeIn' id='rooms' data-wow-delay='0.1s'>
                                 <div class='row'>
                                     <div class='col-lg-4 col-md-4 col-sm-4'>
                                         <div class='img_list'>
@@ -1029,8 +1029,8 @@
                                         </div>
                                     </div>
                                     <div class='col-lg-2 col-md-2 col-sm-2'>");
-                                    if($rooms_rows['room_person_count'] != 0){ echo("<div class='room_person_count_show'>{$Functions->EN_numTo_FA($rooms_rows['room_person_count'],true)}</div>"); }
-                                        echo("
+                        if($rooms_rows['room_person_count'] != 0){ echo("<div class='room_person_count_show'>{$Functions->EN_numTo_FA($rooms_rows['room_person_count'],true)}</div>"); }
+                        echo("
                                         <div class='price_list'>
                                             <div>
                                             <sup>{$database->escape_value($Functions->EN_numTo_FA($Functions->insert_seperator($rooms_rows['room_main_price']),true))} تومان</sup>
@@ -1049,10 +1049,10 @@
                             </div>
                             ");
                     }
-                }else { echo "<h1 class='no-result'>No Result !</h1>"; }
+                }else { echo "<h1 class='no-result'>یافت نشد !</h1>"; }
 
             }else{
-                    $users->redirect_to($_SERVER["PHP_SELF"]);
+                $this->AllRooms_panel();
             }
         }
 

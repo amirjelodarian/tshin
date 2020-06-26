@@ -10,6 +10,7 @@
 </script>
 </body>
 </html>
+
 <?php
 
 if (isset($_SESSION["errors_message"])) {
