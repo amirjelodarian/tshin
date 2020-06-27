@@ -1105,7 +1105,22 @@
         // functions for Rooms Survey////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////////////
         // this function is for Insert Comment for Room Review
-
+        public function DeleteUserComment()
+        {
+            global $Functions,$users,$database;
+            if(isset($_POST["delete_user_comment"]) && isset($_POST["survey_id"]) && !(empty($_POST["survey_id"]))){
+                $this->survey_id = $Functions->decrypt_id($_POST["survey_id"]);
+                $sql = "DELETE FROM room_survey WHERE room_survey.id = {$this->survey_id} LIMIT 1";
+                $result = $database->query($sql);
+                if($result)
+                    $users->redirect_to("comments_show.php");
+                else{
+                    $_SESSION["errors_message"] = "خطا در حذف نظر";
+                }
+            }else{
+                $users->redirect_to("comments_show.php");
+            }
+        }
         public function SelectRoomComments(){
             global $database,$Functions;
             if(isset($_GET["submit_publish"]) && isset($_GET["select_publish"]) && !(empty($_GET["select_publish"]))){
@@ -1387,7 +1402,7 @@
             }
         }
         public function PublishComment(){
-            global $database,$Functions;
+            global $database,$Functions,$users;
             if(isset($_POST["publish_submit"]) && isset($_POST["survey_id"]) && !(empty($_POST["survey_id"]))) {
                 $this->survey_id = $Functions->decrypt_id($_POST["survey_id"]);
                     $sql = "UPDATE room_survey SET publish=1 WHERE id = {$this->survey_id}";
@@ -1396,11 +1411,13 @@
                         $_SESSION["errors_message"] .= "مشکلی در انتشار کامنت رخ داد .";
                         $this->error_state = 1;
                         return $this->error_state;
+                    }else{
+                        $users->redirect_to("comments_show.php");
                     }
             }
         }
         public function UnPublishComment(){
-            global $database,$Functions;
+            global $database,$Functions,$users;
             if(isset($_POST["unpublish_submit"]) && isset($_POST["survey_id"]) && !(empty($_POST["survey_id"]))) {
                 $this->survey_id = $Functions->decrypt_id($_POST["survey_id"]);
                     $sql = "UPDATE room_survey SET publish=0 WHERE id = {$this->survey_id}";
@@ -1409,6 +1426,8 @@
                         $_SESSION["errors_message"] .= "مشکلی در عدم انتشار کامنت رخ داد .";
                         $this->error_state = 1;
                         return $this->error_state;
+                    }else{
+                        $users->redirect_to("comments_show.php");
                     }
             }
         }
@@ -1456,6 +1475,8 @@
                     $_SESSION["errors_message"] .= "مشکلی در حذف کامنت های منتشر شده به وجود آمده .";
                     $this->error_state = 1;
                     return $this->error_state;
+                }else{
+                    $users->redirect_to("comments_show.php");
                 }
             }
         }
@@ -1468,6 +1489,8 @@
                         $_SESSION["errors_message"] .= "مشکلی در حذف کامنت های منتشر نشده به وجود آمده .";
                         $this->error_state = 1;
                         return $this->error_state;
+                    }else{
+                        $users->redirect_to("comments_show.php");
                     }
                 }
         }
