@@ -59,6 +59,33 @@ class Foods{
             $users->redirect_to("FoodsList.php");
         }
     }
+    public function DeleteFoodImg(){
+        global $database,$users,$Functions;
+        if (isset($_GET['delete_food_pro_img'])){
+            if (preg_match("/^[0-9]*$/",$database->escape_value($Functions->decrypt_id($_GET["delete_food_pro_img"]))))
+                $this->food_id = $Functions->decrypt_id($_GET['delete_food_pro_img']);
+            else
+                $users->redirect_to($_SERVER['PHP_SELF']);
+
+
+            $AllResult = $database->query("SELECT * FROM foods WHERE food_id={$this->food_id}");
+            if ($row = $database->fetch_array($AllResult))
+                $this->food_image = $row["food_image"];
+
+            if ($this->food_image != "default_food.jpg")
+                unlink("../img/foods/".$this->food_image);
+
+            $sql = "UPDATE foods SET food_image='' WHERE food_id={$this->food_id}";
+            if($database->query($sql)){
+                $users->redirect_to($_SERVER["PHP_SELF"]);
+            }else{
+                $_SESSION["errors_message"] .= "خطایی هنگام حذف عکس رخ داد.";
+                $users->error_state = 1;
+                return $users->error_state;
+                $users->redirect_to($_SERVER["PHP_SELF"]);
+            }
+        }
+    }
     // FoodsList.php And FoodsGrid.php
     public static function AllFoods($grid = ""){
         global $database,$Functions;
@@ -481,6 +508,7 @@ class Foods{
                                 <div class='strip_all_tour_list wow fadeIn animated' id='rooms' data-wow-delay='0.1s' style='visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;'>
                 <div class='row'>
                     <div class='col-lg-4 col-md-4 col-sm-4'>
+                    <a href='foods_edit.php?delete_food_pro_img={$foods_rows['food_id']}' id='delete_user_image_btn' class='delete-food-room-img'>حذف عکس</a>
                         <div class='img_list'>
                             <a href='#'>
                                 <div class='ribbon top_rated'></div>

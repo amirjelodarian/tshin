@@ -4,6 +4,8 @@ $sessions->login_administrator_and_admin("../index.php");
 if (isset($_POST["submit_last_edit_food"])){
     $foods->UpdateFood();
 }
+if (isset($_GET["delete_food_pro_img"]))
+    $foods->DeleteFoodImg();
 ?>
 <?php
 if ($_SESSION["user_mode"] == 13) {

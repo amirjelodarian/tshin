@@ -4,6 +4,8 @@ require_once("../classes/initialize.php");
     if (isset($_POST["submit_last_edit_room"])){
         $rooms->UpdateRoom();
     }
+if (isset($_GET["delete_room_pro_img"]))
+    $rooms->DeleteRoomImg();
 ?>
 <?php
 if ($_SESSION["user_mode"] == 13) {

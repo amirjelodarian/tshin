@@ -652,12 +652,13 @@
                                 <div id='rooms' class='strip_all_tour_list wow fadeIn' data-wow-delay='0.1s'>
                                 <div class='row'>
                                     <div class='col-lg-4 col-md-4 col-sm-4'>
+                                    <a href='rooms_edit.php?delete_room_pro_img={$rooms_rows['room_id']}' id='delete_user_image_btn' class='delete-food-room-img'>حذف عکس</a>
                                         <div class='img_list'>
                                                 <div class='ribbon top_rated'></div>
                                                 <img src='../");
-                self::select_room_image($rooms_rows['room_image']);
-                $_SESSION["image_name"] = $rooms_rows["room_image"];
-                echo("' alt=''>
+                                                    self::select_room_image($rooms_rows['room_image']);
+                                                    $_SESSION["image_name"] = $rooms_rows["room_image"];
+                                                    echo("' alt=''>
                                                 <div class='short_info'></div>
                                             </a>
                                         </div>
@@ -681,74 +682,75 @@
                                             <h2><input type='text' class='room_address' style='background: white;' value='{$database->escape_value($rooms_rows['room_address'])}' name='room_address' placeholder='گرگان - خیابان مرادی' maxlength='400' required/></h2>
                                             <h3><input type='text' style='background: white;' value='{$database->escape_value($rooms_rows['room_title'])}' name='room_title' maxlength='200' required/></h3>
                                             <p><textarea name='room_description' maxlength='1500' required>");
-                echo($rooms_rows['room_description']);
-                echo("</textarea></p>
+                                                    echo($rooms_rows['room_description']);
+                                         echo("</textarea>
+                                            </p>
                                             <ul class='add_info'>
                                                 <li> <a href='javascript:void(0);' class='tooltip-1 ");
-                if ($rooms_rows['room_wifi'] == 1) {
-                    echo('rooms_checkbox');
-                }
-                echo("' data-placement='top' title='وای فای رایگان'><i class='icon_set_1_icon-86'></i></a>
-                                                <input type='checkbox' class='rooms_checkbox' name='room_wifi' ");
-                if ($rooms_rows['room_wifi'] == 1) {
-                    echo('checked');
-                }
-                echo(" />
+                                                    if ($rooms_rows['room_wifi'] == 1) {
+                                                        echo('rooms_checkbox');
+                                                    }
+                                                    echo("' data-placement='top' title='وای فای رایگان'><i class='icon_set_1_icon-86'></i></a>
+                                                    <input type='checkbox' class='rooms_checkbox' name='room_wifi' ");
+                                                    if ($rooms_rows['room_wifi'] == 1) {
+                                                        echo('checked');
+                                                    }
+                                                    echo(" />
                                                 </li>
                                                 <li> <a href='javascript:void(0);' class='tooltip-1 ");
-                if ($rooms_rows['room_television'] == 1) {
-                    echo('rooms_checkbox');
-                }
-                echo("' data-placement='top' title='تلویزیون پلاسما با کانال های اچ دی'><i class='icon_set_2_icon-116'></i></a>
+                                                    if ($rooms_rows['room_television'] == 1) {
+                                                        echo('rooms_checkbox');
+                                                    }
+                                                    echo("' data-placement='top' title='تلویزیون پلاسما با کانال های اچ دی'><i class='icon_set_2_icon-116'></i></a>
                                                 <input type='checkbox' class='rooms_checkbox' name='room_television' ");
-                if ($rooms_rows['room_television'] == 1) {
-                    echo('checked');
-                }
-                echo(" />
+                                                    if ($rooms_rows['room_television'] == 1) {
+                                                        echo('checked');
+                                                    }
+                                                    echo(" />
                                                 </li>
                                                 <li> <a href='javascript:void(0);' class='tooltip-1 ");
-                if ($rooms_rows['room_pool'] == 1) {
-                    echo('rooms_checkbox');
-                }
-                echo("' data-placement='top' title='استخر شنا'><i class='icon_set_2_icon-110'></i></a>
+                                                    if ($rooms_rows['room_pool'] == 1) {
+                                                        echo('rooms_checkbox');
+                                                    }
+                                                    echo("' data-placement='top' title='استخر شنا'><i class='icon_set_2_icon-110'></i></a>
                                                 <input type='checkbox' class='rooms_checkbox' name='room_pool' ");
-                if ($rooms_rows['room_pool'] == 1) {
-                    echo('checked');
-                }
-                echo(" />
+                                                    if ($rooms_rows['room_pool'] == 1) {
+                                                        echo('checked');
+                                                    }
+                                                    echo(" />
                                                 </li>
                                                 <li> <a href='javascript:void(0);' class='tooltip-1 ");
-                if ($rooms_rows['room_gym'] == 1) {
-                    echo('rooms_checkbox');
-                }
-                echo("'data-placement='top' title='مرکز تناسب اندام'><i class='icon_set_2_icon-117'></i></a>
+                                                    if ($rooms_rows['room_gym'] == 1) {
+                                                        echo('rooms_checkbox');
+                                                    }
+                                                    echo("'data-placement='top' title='مرکز تناسب اندام'><i class='icon_set_2_icon-117'></i></a>
                                                 <input type='checkbox' class='rooms_checkbox' name='room_gym' ");
-                if ($rooms_rows['room_gym'] == 1) {
-                    echo('checked');
-                }
-                echo(" />
+                                                    if ($rooms_rows['room_gym'] == 1) {
+                                                        echo('checked');
+                                                    }
+                                                    echo(" />
                                                 </li>
                                                 <li> <a href='javascript:void(0);' class='tooltip-1 ");
-                if ($rooms_rows['room_food'] == 1) {
-                    echo('rooms_checkbox');
-                }
-                echo("' data-placement='top' title='رستوران'><i class='icon_set_1_icon-58'></i></a>
+                                                    if ($rooms_rows['room_food'] == 1) {
+                                                        echo('rooms_checkbox');
+                                                    }
+                                                    echo("' data-placement='top' title='رستوران'><i class='icon_set_1_icon-58'></i></a>
                                                 <input type='checkbox' class='rooms_checkbox' name='room_food' ");
-                if ($rooms_rows['room_food'] == 1) {
-                    echo('checked');
-                }
-                echo(" />
+                                                    if ($rooms_rows['room_food'] == 1) {
+                                                        echo('checked');
+                                                    }
+                                                    echo(" />
                                                 </li>
                                                 <li> <a href='javascript:void(0);' class='tooltip-1 ");
-                if ($rooms_rows['room_parking'] == 1) {
-                    echo('rooms_checkbox');
-                }
-                echo("' data-placement='top' title='پارکینگ'><i class='icon_set_1_icon-27'></i></a>
+                                                    if ($rooms_rows['room_parking'] == 1) {
+                                                        echo('rooms_checkbox');
+                                                    }
+                                                    echo("' data-placement='top' title='پارکینگ'><i class='icon_set_1_icon-27'></i></a>
                                                 <input type='checkbox' class='rooms_checkbox' name='room_parking' ");
-                if ($rooms_rows['room_parking'] == 1) {
-                    echo('checked');
-                }
-                echo(" />
+                                                    if ($rooms_rows['room_parking'] == 1) {
+                                                        echo('checked');
+                                                    }
+                                                    echo(" />
                                                 </li>
                                             </ul>
                                         </div>
@@ -762,8 +764,8 @@
                                             <small>روزانه / شبانه</small>
                                                 <p>
                                                     <input type='hidden' name='room_id' value='");
-                echo($Functions->encrypt_id($this->room_id));
-                echo("' />
+                                                        echo($Functions->encrypt_id($this->room_id));
+                                                        echo("' />
                                                     <input type='submit' name='submit_last_edit_room' class='submit_btn' value='Submit Edit' />
                                                 </p>
                                             </div>
@@ -1103,6 +1105,7 @@
         // functions for Rooms Survey////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////////////
         // this function is for Insert Comment for Room Review
+
         public function SelectRoomComments(){
             global $database,$Functions;
             if(isset($_GET["submit_publish"]) && isset($_GET["select_publish"]) && !(empty($_GET["select_publish"]))){
@@ -1133,7 +1136,33 @@
                 return array($result,$publish_mode);
             }
         }
+        public function DeleteRoomImg(){
+            global $database,$users,$Functions;
+            if (isset($_GET['delete_room_pro_img'])){
+                if (preg_match("/^[0-9]*$/",$database->escape_value($Functions->decrypt_id($_GET["delete_room_pro_img"]))))
+                    $this->room_id = $Functions->decrypt_id($_GET['delete_room_pro_img']);
+                else
+                    $users->redirect_to($_SERVER['PHP_SELF']);
 
+
+                $AllResult = $database->query("SELECT * FROM rooms WHERE room_id={$this->room_id}");
+                if ($row = $database->fetch_array($AllResult))
+                    $this->room_image = $row["room_image"];
+
+                if ($this->room_image != "default_room.jpg")
+                    unlink("../img/rooms/".$this->room_image);
+
+                $sql = "UPDATE rooms SET  room_image='' WHERE room_id={$this->room_id}";
+                if($database->query($sql)){
+                    $users->redirect_to($_SERVER["PHP_SELF"]);
+                }else{
+                    $_SESSION["errors_message"] .= "خطایی هنگام حذف عکس رخ داد.";
+                    $users->error_state = 1;
+                    return $users->error_state;
+                    $users->redirect_to($_SERVER["PHP_SELF"]);
+                }
+            }
+        }
         public function EditCommentPanel(){
             global $users,$Functions,$database;
             if (isset($_GET["commentId"]) && !empty($_GET["commentId"])){
@@ -1488,7 +1517,11 @@
                                         echo("<blockquote style='float: left;'>Tel : <span style='color: #00A8FF;font-weight: bold;'>{$users_row['tel']}</span></blockquote>");
                                         if ($rooms_rows = $database->fetch_array($rooms->SelectWithId($rows['room_id']))){
                                             echo("<br /><h4 style='display: inline-block' class='room_address'>{$database->escape_value($rooms_rows['room_address'])}</h4><h3 style='display: inline-block'>&nbsp;|&nbsp;</h3> 
-                                                    <h5 style='display: inline-block'>{$database->escape_value($rooms_rows['room_title'])}</h5>");
+                                                    <h5 style='display: inline-block'>{$database->escape_value($rooms_rows['room_title'])}</h5>
+                                                    <span class='reservation-bg-outside'>
+                                                        <img id='reservation-bg' src='../"); Rooms::select_room_image($rooms_rows['room_image']); echo("' alt='تی شین' />
+                                                    </span>
+                                        ");
                                         }
                                         echo("<div class='survey'><p>"); echo(nl2br($rows['survey'])); echo("</p></div>
                                         <div id='panel-rating-comment' class='rating'> {$rooms->smile_voted_by_price_quality_score_comfort($rows['room_price'],$rows['room_quality'],$rows['room_score'],$rows['room_comfort'])} </div>
