@@ -1033,7 +1033,7 @@ require_once("functions.php");
                     ");
                     }
                 } else {
-                    echo "<h1 class='no-result'>یافت نشد !</h1>";
+                    echo "<h1 class='no-result' style='color:white;'>یافت نشد !</h1>";
                 }
             }else{
                 $users->AllUsers();

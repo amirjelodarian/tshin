@@ -119,36 +119,12 @@ if (isset($_GET['roomId']) && !(empty($_GET["roomId"])) || isset($_POST['room_id
         <div class='col-md-8' id='single_tour_desc'>
             <div id='single_tour_feat'>
                 <ul>
-                    <li><i id='in_room_checkbox' class='icon_set_2_icon-116 ");
-        if ($roomattribute["room_television"] == 1) {
-            echo "rooms_checkbox'";
-        }
-        echo("'></i>تلویزیون</li>
-                    <li><i id='in_room_checkbox' class='icon_set_1_icon-86  ");
-        if ($roomattribute["room_wifi"] == 1) {
-            echo "rooms_checkbox'";
-        }
-        echo("'></i>وای فای رایگان</li>
-                    <li><i id='in_room_checkbox' class='icon_set_2_icon-110  ");
-        if ($roomattribute["room_pool"] == 1) {
-            echo "rooms_checkbox'";
-        }
-        echo("'></i>استخر</li>
-                    <li><i id='in_room_checkbox' class='icon_set_2_icon-117  ");
-        if ($roomattribute["room_gym"] == 1) {
-            echo "rooms_checkbox'";
-        }
-        echo("'></i>باشگاه یا لوازم ورزشی</li>
-                    <li><i id='in_room_checkbox' class='icon_set_1_icon-59  ");
-        if ($roomattribute["room_food"] == 1) {
-            echo "rooms_checkbox'";
-        }
-        echo("'></i>صبحانه</li>
-                    <li><i id='in_room_checkbox' class='icon_set_1_icon-27  ");
-        if ($roomattribute["room_parking"] == 1) {
-            echo "rooms_checkbox'";
-        }
-        echo("'></i>پارکینگ اختصاصی</li>
+                    <li><i id='in_room_checkbox' class='icon_set_2_icon-116 "); if ($roomattribute["room_television"] == 1) echo "rooms_checkbox'"; echo("'></i>تلویزیون</li>
+                    <li><i id='in_room_checkbox' class='icon_set_1_icon-86  "); if ($roomattribute["room_wifi"] == 1) echo "rooms_checkbox'"; echo("'></i>وای فای رایگان</li>
+                    <li><i id='in_room_checkbox' class='icon_set_2_icon-110  "); if ($roomattribute["room_pool"] == 1) echo "rooms_checkbox'"; echo("'></i>استخر</li>
+                    <li><i id='in_room_checkbox' class='icon_set_2_icon-117  "); if ($roomattribute["room_gym"] == 1) echo "rooms_checkbox'"; echo("'></i>باشگاه یا لوازم ورزشی</li>
+                    <li><i id='in_room_checkbox' class='icon-food-1  "); if ($roomattribute["room_food"] == 1) echo "rooms_checkbox'"; echo("'></i>صبحانه</li>
+                    <li><i id='in_room_checkbox' class='icon_set_1_icon-27  "); if ($roomattribute["room_parking"] == 1) echo "rooms_checkbox'"; echo("'></i>پارکینگ اختصاصی</li>
                 </ul>
             </div>
             <p class='visible-sm visible-xs'><a class='btn_map' data-toggle='collapse' href=''#collapseMap' aria-expanded='false' aria-controls='collapseMap'>مشاهده نقشه</a>

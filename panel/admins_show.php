@@ -15,8 +15,8 @@ $sessions->login_administrator("../index.php");
             <div id="keyword-style" style="margin-bottom: 8px">
                 <input type="text" id="admins-keyword" name="panel_keyword_admin" placeholder="Search" />
                 <select class="admins-search-by-witch" name="panel_ByWitch_admin">
-                    <option value="Tel">Tel</option>
-                    <option value="Username">Username</option>
+                    <option value="Tel">تلفن</option>
+                    <option value="Username">نام کاربری</option>
                 </select>
             </div>
             <tbody>

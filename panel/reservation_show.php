@@ -31,15 +31,25 @@ if (isset($_POST["delete_all_notbooked_reservation"])){
     $rooms->DeleteAllNotBookedReservation();
 }
 ///////////////////////////////////
-
-if (isset($_POST['submit_search'])){
-    $rooms->CommentsSearch();
-}
-
 if (isset($_POST["delete_single_reservation"])){
     $rooms->DeleteSingleReservation();
 }
 ?>
+<div class="keyword-style-panel">
+        <input type="text" id="reservation_keyword" name="reservation_keyword" placeholder="Search" />
+        <select class="reservation-search-by-witch" name="reservation_ByWitch">
+            <option value="username">نام کاربری</option>
+            <option value="firstname">نام</option>
+            <option value="lastname">نام خانوادگی</option>
+            <option value="tel">تلفن</option>
+            <option value="address">آدرس</option>
+            <option value="title">عنوان</option>
+            <option value="person">چند نفره</option>
+            <option value="reserved_id">شماره رزرو</option>
+        </select>
+</div>
+<div class='container-comment-panel col-xs-12 col-sm-12 col-md-12 col-lg-12'><div id="result"></div></div>
+<div id="main-result">
 <h1 id='rooms' align="center">رزرو ها</h1>
 <h2>
     <?php
@@ -80,7 +90,7 @@ if (isset($_POST["delete_single_reservation"])){
     while($room_reservation = $database->fetch_array($all_room_reservation_result)){
         if ($rooms_rows = $database->fetch_array($rooms->SelectWithId($room_reservation['room_id']))){
         echo("
-                    <div class='comment-panel col-xs-12 col-sm-12 col-md-6 col-lg-6' "); if($SelectReservedMode[1] == "booked"){ echo("style='border: 2px solid #00A8FF'"); }else{ echo("style='border: 2px solid #ca0d30'"); }  echo(">
+                    <div class='comment-panel col-xs-12 col-sm-12' "); if($SelectReservedMode[1] == "booked"){ echo("style='border: 2px solid #00A8FF'"); }else{ echo("style='border: 2px solid #ca0d30'"); }  echo(">
                     <span class='reservation-bg-outside'>
                         <img id='reservation-bg' src='../"); Rooms::select_room_image($rooms_rows['room_image']); echo("' alt='تی شین' />
                     </span>
@@ -97,7 +107,7 @@ if (isset($_POST["delete_single_reservation"])){
             if($room_reservation["reserved_mode"] == 1) { echo "<div class='tick'><img src='../img/verify-tick.png' alt='تی شین' /></div>"; }else { echo "<div class='tick'><img src='../img/un-verify.png' alt='تی شین' /></div>"; }
             echo("<br /><h4 style='display: inline-block' class='room_address'>{$database->escape_value($rooms_rows['room_address'])}</h4><h3 style='display: inline-block'>&nbsp;|&nbsp;</h3> 
                                             <h5 style='display: inline-block'>{$database->escape_value($rooms_rows['room_title'])}</h5>");
-        }
+            }
         echo("
         <div class='survey' id='reservation-content'>
               <h5 class='date-range'>");
@@ -133,22 +143,9 @@ if (isset($_POST["delete_single_reservation"])){
             ");
 
     }
-    $sessions->null_room_id_while_comment(); ?>
+?>
+</div>
+</div>
     <br /><br />
     <hr />
-    <div class="keyword-style-panel">
-        <form action="<?php echo($_SERVER['PHP_SELF']); ?>" method="post">
-            <input type="text" id="keyword" name="keyword" placeholder="Search" />
-            <select class="search-by-witch" name="ByWitch">
-                <option value="username">Username</option>
-                <option value="user_id">ID</option>
-                <option value="tel">Tel</option>
-                <option value="address">Address</option>
-                <option value="title">Title</option>
-                <option value="survey">Survey</option>
-                <option value="score">Score 1-5</option>
-            </select>
-            <input type="submit" value="Search" id="submit_search" name="submit_search" />
-        </form>
-    </div>
     <?php include("includes/footer.php"); ?>

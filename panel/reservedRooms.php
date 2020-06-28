@@ -62,7 +62,7 @@ if (isset($_POST["delete_single_reservation"])){
     while($room_reservation = $database->fetch_array($all_room_reservation_result)){
         if ($rooms_rows = $database->fetch_array($rooms->SelectWithId($room_reservation['room_id']))){
             echo("
-                    <div class='comment-panel col-xs-12 col-sm-12 col-md-6 col-lg-6' "); if($SelectReservedMode[1] == "booked"){ echo("style='border: 2px solid green'"); }else{ echo("style='border: 2px solid red'"); }  echo(">
+                    <div class='comment-panel col-xs-12 col-sm-12' "); if($SelectReservedMode[1] == "booked"){ echo("style='border: 2px solid green'"); }else{ echo("style='border: 2px solid red'"); }  echo(">
                     <span class='reservation-bg-outside'>
                         <img id='reservation-bg' src='../"); Rooms::select_room_image($rooms_rows['room_image']); echo("' alt='تی شین' />
                     </span>

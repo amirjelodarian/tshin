@@ -28,13 +28,13 @@ else if($_SESSION["user_mode"] == 1){
                     <p id="searching"></p>
                     <input type="text" id="keyword" name="panel_keyword_room" placeholder="Search" />
                     <select class="search-by-witch" name="panel_ByWitch_room">
-                        <option>Address</option>
-                        <option>Title</option>
-                        <option>Descript</option>
-                        <option>Score</option>
-                        <option>Price</option>
-                        <option>Off-Price</option>
-                        <option>Person</option>
+                        <option value="Address">آدرس</option>
+                        <option value="Title">عنوان</option>
+                        <option value="Descript">توضیحات</option>
+                        <option value="Score">۱-۵ امتیاز</option>
+                        <option value="Price">قیمت</option>
+                        <option value="Off-Price">قبل تخفیف</option>
+                        <option value="Person">نفرات</option>
                     </select>
             </div>
 

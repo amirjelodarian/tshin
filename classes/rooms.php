@@ -1164,7 +1164,7 @@
                 if ($row = $database->fetch_array($AllResult))
                     $this->room_image = $row["room_image"];
 
-                if ($this->room_image != "default_room.jpg")
+                if ($this->room_image != "default_room.jpg" || $this->room_image != "single_hotel_default.jpg")
                     unlink("../img/rooms/".$this->room_image);
 
                 $sql = "UPDATE rooms SET  room_image='' WHERE room_id={$this->room_id}";
@@ -1554,7 +1554,7 @@
                                                      <a href='../Room.php?roomId={$Functions->encrypt_id($rooms_rows['room_id'])}'>
                                                         <p id='see-room-btn' class='submit_edit'>بازدید اتاق</p>
                                                      </a>
-                                                    <form action='{$_SERVER['PHP_SELF']}' id='submit-checkbox-form' method='post'>
+                                                    <form action='comments_show.php' id='submit-checkbox-form' method='post'>
                                                         <input type='hidden' name='survey_id' value='"); echo($Functions->encrypt_id($rows['id'])); echo("' />
                                                         <div class='publish-area'>");
                                                         if($rows["publish"] == 0) {
@@ -1818,6 +1818,120 @@
         }
         //////////////////////////////////////////////////////////////////////////////////
 
+        public function ReservationSearch(){
+            global $database,$users,$Functions;
+            if (isset($_GET['reservation_keyword']) && !(empty($_GET['reservation_keyword'])) && isset($_GET['reservation_ByWitch']) && !(empty($_GET['reservation_ByWitch']))) {
+                $keyword = $database->escape_value($_GET['reservation_keyword']);
+                if (isset($_GET['reservation_ByWitch'])) {
+                    switch ($_GET['reservation_ByWitch']) {
+                        case 'reserved_id':
+                            $sql = "SELECT * FROM room_reservation WHERE reserve_id LIKE '{$keyword}' ORDER BY reserve_id DESC";
+                            break;
+                        case 'username':
+                            $sql = "SELECT * FROM users INNER JOIN room_reservation ON users.id = room_reservation.user_id INNER JOIN rooms ON room_reservation.room_id = rooms.room_id AND room_reservation.room_id = rooms.room_id AND users.username LIKE '%{$keyword}%' ORDER BY reserve_id DESC";
+                            break;
+                        case 'firstname':
+                            $sql = "SELECT * FROM room_reservation WHERE firstname LIKE '%{$keyword}%' ORDER BY reserve_id DESC";
+                            break;
+                        case 'lastname':
+                            $sql = "SELECT * FROM room_reservation WHERE lastname LIKE '%{$keyword}%' ORDER BY reserve_id DESC";
+                            break;
+                        case 'tel':
+                            $sql = "SELECT * FROM users INNER JOIN room_reservation ON users.id = room_reservation.user_id AND users.tel LIKE '{$keyword}%' ORDER BY reserve_id DESC";
+                            break;
+                        case 'address':
+                            $sql = "SELECT * FROM rooms INNER JOIN room_reservation ON rooms.room_id = room_reservation.room_id AND rooms.room_address LIKE '%{$keyword}%' ORDER BY reserve_id DESC";
+                            break;
+                        case 'title':
+                            $sql = "SELECT * FROM rooms INNER JOIN room_reservation ON rooms.room_id = room_reservation.room_id AND rooms.room_title LIKE '%{$keyword}%' ORDER BY reserve_id DESC";
+                            break;
+                        case 'person':
+                            $sql = "SELECT * FROM rooms INNER JOIN room_reservation ON rooms.room_id = room_reservation.room_id AND room_reservation.reserve_room_person_count LIKE '{$keyword}' ORDER BY reserve_id DESC";
+                            break;
+                        default:
+                            $users->redirect_to($_SERVER['PHP_SELF']);
+                            break;
+                    }
+                    if (!empty($sql)) {
+                        $database->query("SET NAMES 'utf8'");
+                        $result = $database->query($sql);
+                        if ($database->num_rows($result) > 0) {
+                            echo "<h3>جستجو ...</h3>";
+                            while ($rows = $database->fetch_array($result)) {
+                                echo("
+                                      <div class='comment-panel col-xs-12 col-sm-12'>");
+                                      if ($rooms_rows = $database->fetch_array($this->SelectWithId($rows['room_id']))) {
+                                          echo("<span class='reservation-bg-outside'>
+                                              <img id='reservation-bg' src='../");
+                                          Rooms::select_room_image($rooms_rows['room_image']);
+                                          echo("' alt='تی شین' />
+                                          </span>");
+                                          if ($users_row = $database->fetch_array($users->SelectById($rows['user_id']))) echo("<img class='finger-img' id='finger-img-panel-comment' src='");
+                                          Users::select_user_image($users_row['user_image']);
+                                          echo("' alt='' class='img-circle'>");
+
+                                          $divid_date_time = $Functions->divid_date_time_database($rows['reserve_time']);
+                                          echo("<h4 id='username-panel-comment'>{$rows['firstname']} {$rows['lastname']}</h4>");
+                                          echo("<blockquote style='float: left;'>شماره رزرو : <span style='color: #00A8FF;font-weight: bold;'>{$rows['reserve_id']}</span></blockquote>");
+                                          echo("<blockquote style='float: left;'>Tel : <span style='color: #00A8FF;font-weight: bold;'>{$users_row['tel']}</span></blockquote>");
+                                          echo("<h6>{$users_row['username']}</h6>");
+                                          if ($rows["reserved_mode"] == 1) {
+                                              echo "<div class='tick'><img src='../img/verify-tick.png' alt='تی شین' /></div>";
+                                          } else {
+                                              echo "<div class='tick'><img src='../img/un-verify.png' alt='تی شین' /></div>";
+                                          }
+                                          echo("<br /><h4 style='display: inline-block' class='room_address'>{$database->escape_value($rooms_rows['room_address'])}</h4><h3 style='display: inline-block'>&nbsp;|&nbsp;</h3> 
+                                        <h5 style='display: inline-block'>{$database->escape_value($rooms_rows['room_title'])}</h5>");
+                                          echo("
+                                    <div class='survey' id='reservation-content'>
+                                        <h5 class='date-range'>");
+                                          $date_reservation = $Functions->DividedStartAndEndDate($rows['date_range'], "|");
+                                          echo(" از " . $Functions->EN_numTo_FA($Functions->convert_db_format_for_gregorian_to_jalali($date_reservation[0]), true));
+                                          echo(" تا " . $Functions->EN_numTo_FA($Functions->convert_db_format_for_gregorian_to_jalali($date_reservation[1]), true));
+                                          echo("
+                                        </h5>
+                                        <div class='room-person-count-reservation'><blockquote>رزرو شده برای&nbsp;<span>{$Functions->EN_numTo_FA($rows['reserve_room_person_count'],true)}</span>&nbsp;نفر&nbsp;</blockquote></div>
+                                    </div>
+                                    <small class='icon-clock-8' id='panel-time-comment'>&nbsp;");
+                                          echo $Functions->EN_numTo_FA($divid_date_time[0], true);
+                                          echo("</small>
+                                    <small id='panel-date-comment'>");
+                                          echo $Functions->EN_numTo_FA($Functions->convert_db_format_for_gregorian_to_jalali($divid_date_time[1]), true);
+                                          echo("</small><br />
+                                    <div class='comment-panel-btns col-xs-12 col-sm-12 col-md-12 col-lg-12'>
+                                     <a href='../Room.php?roomId={$Functions->encrypt_id($rows['room_id'])}'>
+                                        <p id='see-room-btn' class='submit_edit'>بازدید اتاق</p>
+                                     </a>
+                                    <form action='reservation_show.php' id='submit-checkbox-form' method='post'>
+                                        <input type='hidden' name='reserve_id' value='");
+                                          echo($Functions->encrypt_id($rows['reserve_id']));
+                                          echo("' />
+                                        <div class='publish-area'>");
+                                          if ($rows["reserved_mode"] == 0) echo("<input type='submit' name='booking_submit' id='publish_checkbox_submit' class='submit_edit' style='width: 130px' value='افزودن به رزرو شده' />");
+                                          if ($rows["reserved_mode"] == 1) echo("<input type='submit' name='notbooked_submit' id='unpublish_checkbox_submit' style='width: 145px' class='submit_edit' value='X  افزودن به رزرو نشده' />");
+                                      }
+                                        echo("
+                                        </div>
+                                        <input type='submit' name='delete_single_reservation' value='حذف' class='comments_delete_btn delete_room_btn' />
+                                    </form>
+                                    </div>
+                                <div class='line'></div>
+                            </div>
+                        
+                    ");
+                            }
+                        }else
+                            echo "<h1>متاسفانه یافت نشد !</h1>";
+                    }else{
+                        if($_SESSION["user_mode"] == 0)
+                            $users->redirect_to("reservedRooms.php");
+                        else
+                            $users->redirect_to("reservation_show.php");
+                    }
+                }
+            }
+        }
+        
         // for Room page
         public function ReserveRoom($room_id,$max_person_room){
             global $users,$Functions,$database,$sessions;
@@ -1950,8 +2064,6 @@
                 $range_date_room = explode("|",$data_ranges["date_range"]); $start_day = $range_date_room[0]; $end_day = $range_date_room[1];
                 $Functions::AllDateRange($start_day,$end_day);
             }
-            $a1=array("fds");
-            $a2=array("a","b","c","d","s","fds");
 
             $DaysResult = array_intersect(Rooms::$all_room_days,Rooms::$room_days_reserved);
             if($DaysResult){

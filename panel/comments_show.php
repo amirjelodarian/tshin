@@ -50,11 +50,11 @@ $SelcetPublishMode = $rooms->SelectRoomComments();
 <div class="keyword-style-panel">
         <input type="text" id="comments-keyword" name="comments_keyword" placeholder="Search" />
         <select class="comments-search-by-witch" name="comments_ByWitch">
-            <option value="username">Username</option>
-            <option value="tel">Tel</option>
-            <option value="address">Address</option>
-            <option value="title">Title</option>
-            <option value="survey">Survey</option>
+            <option value="username">نام کاربری</option>
+            <option value="tel">تلفن</option>
+            <option value="address">آدرس</option>
+            <option value="title">عنوان</option>
+            <option value="survey">نظر</option>
         </select>
 </div>
 <div class='container-comment-panel col-xs-12 col-sm-12 col-md-12 col-lg-12'>

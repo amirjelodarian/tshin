@@ -27,12 +27,12 @@ $sessions->login_administrator_and_admin("../index.php");
             <p id="searching"></p>
             <input type="text" id="food-keyword" name="panel_keyword_food" placeholder="Search" />
             <select class="food-search-by-witch" name="panel_ByWitch_food">
-                <option value="Title">Title</option>
-                <option value="Descript">Descript</option>
-                <option value="Details">Details</option>
-                <option value="Score">Score</option>
-                <option value="Price">Price</option>
-                <option value="Off-Price">Off-Price</option>
+                <option value="Title">عنوان</option>
+                <option value="Descript">توضیحات</option>
+                <option value="Details">طرز تهیه</option>
+                <option value="Score">۱-۵ امتیاز</option>
+                <option value="Price">قیمت</option>
+                <option value="Off-Price">قبل تخفیف</option>
             </select>
         </div>
 
