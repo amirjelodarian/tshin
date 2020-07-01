@@ -75,6 +75,11 @@ class Sessions{
             $users->redirect_to($to);
         }
     }
+    public function is_logged_in_admin_and_administrator(){
+	    if (isset($_SESSION["logged_in_administrator"]) || (isset($_SESSION["logged_in_admin"]))){
+	        return true;
+        }
+    }
     public function null_room_id_while_comment(){
         if (isset($_SESSION["room_id_while_comment"]) || !(empty($_SESSION["room_id_while_comment"]))) {
             $_SESSION["room_id_while_comment"] = '';

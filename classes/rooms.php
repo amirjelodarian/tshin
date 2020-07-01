@@ -1819,7 +1819,7 @@
         //////////////////////////////////////////////////////////////////////////////////
 
         public function ReservationSearch($user){
-            global $database,$users,$Functions;
+            global $database,$users,$Functions,$sessions;
             if (isset($_GET['reservation_keyword']) && !(empty($_GET['reservation_keyword'])) && isset($_GET['reservation_ByWitch']) && !(empty($_GET['reservation_ByWitch']))) {
                 $keyword = $database->escape_value($_GET['reservation_keyword']);
                 if (isset($_GET['reservation_ByWitch'])) {
@@ -1929,13 +1929,18 @@
                                      <a href='../Room.php?roomId={$Functions->encrypt_id($rows['room_id'])}'>
                                         <p id='see-room-btn' class='submit_edit'>بازدید اتاق</p>
                                      </a>
-                                    <form action='reservation_show.php' id='submit-checkbox-form' method='post'>
+                                    <form action='");
+                                          if($sessions->is_logged_in_admin_and_administrator()) { echo htmlspecialchars("reservation_show.php"); }
+                                          if($user == true && isset($_SESSION["user_id"])) echo htmlspecialchars("reservedRooms.php");
+                                          echo("' id='submit-checkbox-form' method='post'>
                                         <input type='hidden' name='reserve_id' value='");
                                           echo($Functions->encrypt_id($rows['reserve_id']));
                                           echo("' />
                                         <div class='publish-area'>");
-                                          if ($rows["reserved_mode"] == 0) echo("<input type='submit' name='booking_submit' id='publish_checkbox_submit' class='submit_edit' style='width: 130px' value='افزودن به رزرو شده' />");
-                                          if ($rows["reserved_mode"] == 1) echo("<input type='submit' name='notbooked_submit' id='unpublish_checkbox_submit' style='width: 145px' class='submit_edit' value='X  افزودن به رزرو نشده' />");
+                                          if($sessions->is_logged_in_admin_and_administrator()) {
+                                              if ($rows["reserved_mode"] == 0) echo("<input type='submit' name='booking_submit' id='publish_checkbox_submit' class='submit_edit' style='width: 130px' value='افزودن به رزرو شده' />");
+                                              if ($rows["reserved_mode"] == 1) echo("<input type='submit' name='notbooked_submit' id='unpublish_checkbox_submit' style='width: 145px' class='submit_edit' value='X  افزودن به رزرو نشده' />");
+                                          }
                                       }
                                         echo("
                                         </div>
