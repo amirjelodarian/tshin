@@ -5055,7 +5055,7 @@ a.btn_infobox:hover {
     padding: 0;
     margin: 0;
 }
-#keyword,#food-keyword,#admins-keyword,#users-keyword,#comments-keyword,#reservation_keyword{
+#keyword,#food-keyword,#admins-keyword,#users-keyword,#comments-keyword,#reservation_keyword,#user_reservation_keyword{
     width: 130px;
     opacity: 0.9;
     background: white;
@@ -5088,7 +5088,7 @@ a.btn_infobox:hover {
     outline: none;
     border: 1px solid darkorange;
 }
-.search-by-witch,.food-search-by-witch,.admins-search-by-witch,.users-search-by-witch,.comments-search-by-witch,.reservation-search-by-witch{
+.search-by-witch,.food-search-by-witch,.admins-search-by-witch,.users-search-by-witch,.comments-search-by-witch,.reservation-search-by-witch,.user-reservation-search-by-witch{
     opacity: 0.9;
     font-weight: bold;
     font-size: 10px;

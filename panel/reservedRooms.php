@@ -1,6 +1,6 @@
 <?php
 require_once("../classes/initialize.php");
-if (!($sessions->login_state())){
+if (!($sessions->login_state() && $_SESSION["user_mode"] == 0)){
     $users->redirect_to("../index.php");
 }
 include("includes/users_menu.php");
@@ -24,6 +24,19 @@ if (isset($_POST["delete_single_reservation"])){
     $rooms->DeleteSingleReservation();
 }
 ?>
+<div class="keyword-style-panel">
+    <input type="text" id="user_reservation_keyword" name="reservation_keyword" placeholder="Search" />
+    <select class="user-reservation-search-by-witch" name="reservation_ByWitch">
+        <option value="firstname">نام</option>
+        <option value="lastname">نام خانوادگی</option>
+        <option value="address">آدرس</option>
+        <option value="title">عنوان</option>
+        <option value="person">چند نفره</option>
+        <option value="reserved_id">شماره رزرو</option>
+    </select>
+</div>
+<div class='container-comment-panel col-xs-12 col-sm-12 col-md-12 col-lg-12'><div id="result"></div></div>
+<div id="main-result">
 <h1 id='rooms' align="center">رزرو ها</h1>
 <h2>
     <?php
@@ -106,22 +119,9 @@ if (isset($_POST["delete_single_reservation"])){
             ");
 
     }
-    $sessions->null_room_id_while_comment(); ?>
-    <br /><br />
-
-    <div class="keyword-style-panel">
-        <form action="<?php echo($_SERVER['PHP_SELF']); ?>" method="post">
-            <input type="text" id="keyword" name="keyword" placeholder="Search" />
-            <select class="search-by-witch" name="ByWitch">
-                <option value="username">Username</option>
-                <option value="user_id">ID</option>
-                <option value="tel">Tel</option>
-                <option value="address">Address</option>
-                <option value="title">Title</option>
-                <option value="survey">Survey</option>
-                <option value="score">Score 1-5</option>
-            </select>
-            <input type="submit" value="Search" id="submit_search" name="submit_search" />
-        </form>
-    </div>
+    ?>
+</div>
+</div>
+<br /><br />
+<hr />
     <?php include("includes/footer.php"); ?>

@@ -1818,12 +1818,38 @@
         }
         //////////////////////////////////////////////////////////////////////////////////
 
-        public function ReservationSearch(){
+        public function ReservationSearch($user){
             global $database,$users,$Functions;
             if (isset($_GET['reservation_keyword']) && !(empty($_GET['reservation_keyword'])) && isset($_GET['reservation_ByWitch']) && !(empty($_GET['reservation_ByWitch']))) {
                 $keyword = $database->escape_value($_GET['reservation_keyword']);
                 if (isset($_GET['reservation_ByWitch'])) {
-                    switch ($_GET['reservation_ByWitch']) {
+                    if ($user == true && isset($_SESSION["user_id"])){
+                        $this->user_id = $_SESSION["user_id"];
+                        switch ($_GET['reservation_ByWitch']) {
+                            case 'reserved_id':
+                                $sql = "SELECT * FROM room_reservation WHERE reserve_id LIKE '{$keyword}' AND room_reservation.user_id={$this->user_id} ORDER BY reserve_id DESC";
+                                break;
+                            case 'firstname':
+                                $sql = "SELECT * FROM room_reservation WHERE firstname LIKE '%{$keyword}%' AND room_reservation.user_id={$this->user_id} ORDER BY reserve_id DESC";
+                                break;
+                            case 'lastname':
+                                $sql = "SELECT * FROM room_reservation WHERE lastname LIKE '%{$keyword}%' AND room_reservation.user_id={$this->user_id} ORDER BY reserve_id DESC";
+                                break;
+                            case 'address':
+                                $sql = "SELECT * FROM rooms INNER JOIN room_reservation ON rooms.room_id = room_reservation.room_id AND rooms.room_address LIKE '%{$keyword}%' WHERE room_reservation.user_id={$this->user_id} ORDER BY reserve_id DESC";
+                                break;
+                            case 'title':
+                                $sql = "SELECT * FROM rooms INNER JOIN room_reservation ON rooms.room_id = room_reservation.room_id AND rooms.room_title LIKE '%{$keyword}%' WHERE room_reservation.user_id={$this->user_id} ORDER BY reserve_id DESC";
+                                break;
+                            case 'person':
+                                $sql = "SELECT * FROM rooms INNER JOIN room_reservation ON rooms.room_id = room_reservation.room_id AND room_reservation.reserve_room_person_count LIKE '{$keyword}' WHERE room_reservation.user_id={$this->user_id} ORDER BY reserve_id DESC";
+                                break;
+                            default:
+                                $users->redirect_to($_SERVER['PHP_SELF']);
+                                break;
+                        }
+                    }else{
+                        switch ($_GET['reservation_ByWitch']) {
                         case 'reserved_id':
                             $sql = "SELECT * FROM room_reservation WHERE reserve_id LIKE '{$keyword}' ORDER BY reserve_id DESC";
                             break;
@@ -1851,6 +1877,7 @@
                         default:
                             $users->redirect_to($_SERVER['PHP_SELF']);
                             break;
+                    }
                     }
                     if (!empty($sql)) {
                         $database->query("SET NAMES 'utf8'");

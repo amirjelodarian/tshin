@@ -143,6 +143,30 @@ $(document).ready(function () {
             $('#result').hide();
         }
     });
+    $('#user_reservation_keyword').keyup(function () {
+        var keyword = $("#user_reservation_keyword").val();
+        var bywitch = $(".user-reservation-search-by-witch").val();
+        if (keyword != ''){
+            $('#result').html('');
+            $.ajax({
+                url: "reservedRooms_search.php",
+                method: "get",
+                dataType: "text",
+                beforeSend: function() {
+                    $("#searching").val("...Searching");
+                },
+                data: {reservation_keyword: keyword,reservation_ByWitch: bywitch},
+                success:function (data) {
+                    $('#main-result').hide();
+                    $('#result').show();
+                    $('#result').html(data);
+                }
+            });
+        }else{
+            $('#main-result').show();
+            $('#result').hide();
+        }
+    });
 });
 $(window).load(function () {
     $('#today-date-mobile').hide();
