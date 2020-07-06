@@ -10,6 +10,7 @@ if ($_SESSION["user_mode"] == 13) {
 else if($_SESSION["user_mode"] == 1){
     include("includes/admin_menu.php");
 }
+isset($_GET["page"]) ? $page = $_GET["page"] : $page = 1;
 ?>
 
             <div class="add_new_room">
@@ -20,7 +21,7 @@ else if($_SESSION["user_mode"] == 1){
                 <div id="errors" class="errors-panel" style="margin-top: 70px;"><?php echo $users->Errors(); ?></div>
                 <div id="result"></div>
                 <div id="main-result">
-                    <?php $rooms->AllRooms_panel(); ?>
+                    <?php $rooms->AllRooms_panel($page); ?>
                 </div>
                 <hr>
             </div>
@@ -37,5 +38,4 @@ else if($_SESSION["user_mode"] == 1){
                         <option value="Person">نفرات</option>
                     </select>
             </div>
-
 <?php include("includes/footer.php"); ?>

@@ -415,12 +415,13 @@ require_once("functions.php");
 
 
         // this functions for admins panel
-        public function AllAdmins(){
+        public function AllAdmins($page){
             global $database,$Functions;
             // Admins id equal 1
-            $sql = "SELECT * FROM users WHERE user_mode=1";
+            settype($page,"integer");
+            $pagination = $Functions->pagination(15,$page,'users','id',' WHERE user_mode=1');
+            $sql = "SELECT * FROM users WHERE user_mode=1 ORDER BY id DESC LIMIT {$pagination['start_from']},{$pagination['record_per_page']}";
             $result = $database->query($sql);
-
             while($admins_row = $database->fetch_array($result)){
                     echo("
                     
@@ -443,6 +444,16 @@ require_once("functions.php");
                         </tr>
                     ");
             }
+            echo "<br /><div class='pagination-outside col-lg-10 col-md-10 col-sm-10 col-xs-12'>
+                    <div class='pagination'>";
+            for ($i = 1; $i <= $pagination["total_page"]; $i++):
+                echo "<a href='{$_SERVER['PHP_SELF']}?page={$i}' ";
+                if ($i == $page)
+                    echo "id='current-page'";
+                echo">&nbsp;{$i}&nbsp;</a>";
+            endfor;
+            echo"</div>
+                </div>";
         }
         public function EditAdmins_panel(){
             global $database,$Functions;
@@ -579,12 +590,13 @@ require_once("functions.php");
 
 
         // this functions for Users panel
-        public function AllUsers(){
+        public function AllUsers($page){
             global $database,$Functions;
             // Admins id equal 1
-            $sql = "SELECT * FROM users WHERE user_mode=0 OR user_mode=1";
+            settype($page,"integer");
+            $pagination = $Functions->pagination(15,$page,'users','id');
+            $sql = "SELECT * FROM users WHERE user_mode=0 OR user_mode=1 ORDER BY id DESC LIMIT {$pagination['start_from']},{$pagination['record_per_page']}";
             $result = $database->query($sql);
-
             while($users_row = $database->fetch_array($result)){
                 echo("
                     
@@ -632,6 +644,17 @@ require_once("functions.php");
                         </tr>
                     ");
             }
+
+            echo "<br /><div class='pagination-outside col-lg-10 col-md-10 col-sm-10 col-xs-12'>
+                    <div class='pagination'>";
+            for ($i = 1; $i <= $pagination["total_page"]; $i++):
+                echo "<a href='{$_SERVER['PHP_SELF']}?page={$i}' ";
+                if ($i == $page)
+                    echo "id='current-page'";
+                echo">&nbsp;{$i}&nbsp;</a>";
+            endfor;
+            echo"</div>
+                </div>";
         }
         public function EditUsers_panel(){
             global $database,$Functions;
@@ -1036,7 +1059,7 @@ require_once("functions.php");
                     echo "<h1 class='no-result' style='color:white;'>یافت نشد !</h1>";
                 }
             }else{
-                $users->AllUsers();
+                $users->AllUsers('');
             }
         }
         public function SerachAdminByTelOrUsername(){
@@ -1084,7 +1107,7 @@ require_once("functions.php");
                     echo "<h1 class='no-result' style='color: white'>یافت نشد !</h1>";
                 }
             }else{
-                $this->AllAdmins();
+                $this->AllAdmins('');
             }
         }
 

@@ -417,6 +417,31 @@
                 echo $jalali[0]."/".$jalali[1]."/".$jalali[2];
             }
         }
+
+        public function pagination($record_per_page,$page,$tableName,$table_id,$sqlmanual = ''){
+            global $database;
+            $record_per_page = $record_per_page;
+            if (!(isset($page)) || empty($page)){
+                $page = 1;
+            }
+            settype($record_per_page,"integer");
+            $page = abs($database->escape_value($page));
+            settype($page,"integer");
+
+            $start_from = ($page-1)*$record_per_page;
+            $sql = "SELECT * FROM {$tableName} ORDER BY {$table_id} DESC";
+            if (!(empty($sqlmanual)) && $sqlmanual !== ''){
+                $sql = "SELECT * FROM {$tableName} {$sqlmanual} ORDER BY {$table_id} DESC";
+            }
+            $result = $database->query($sql);
+            $total_record = $database->num_rows($result);
+            $total_page = ceil($total_record/$record_per_page);
+            return array(
+                "start_from" => abs($database->escape_value($start_from)),
+                "record_per_page" => $database->escape_value($record_per_page) ,
+                "total_page" => abs($database->escape_value($total_page))
+                );
+        }
         public function redirect_with_get($url){
             $ch = curl_init($url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

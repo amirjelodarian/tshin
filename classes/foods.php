@@ -420,9 +420,11 @@ class Foods{
 
     // for Display Panel For Admin And Administrator
     // foods_show.php
-    public function AllFoods_panel(){
+    public function AllFoods_panel($page){
         global $database,$Functions;
-        $sql = "SELECT * FROM foods ORDER BY food_id DESC";
+        settype($page,"integer");
+        $pagination = $Functions->pagination(5,$page,'foods','food_id');
+        $sql = "SELECT * FROM foods ORDER BY food_id DESC LIMIT {$pagination['start_from']},{$pagination['record_per_page']}";
         $database->query("SET NAMES 'utf8'");
         $result = $database->query($sql);
         while ($foods_rows = $database->fetch_array($result)){
@@ -483,6 +485,16 @@ class Foods{
             </div>
                             ");
         }
+        echo "<div class='pagination-outside col-lg-10 col-md-10 col-sm-10 col-xs-12'>
+                    <div class='pagination'>";
+        for ($i = 1; $i <= $pagination["total_page"]; $i++):
+            echo "<a href='{$_SERVER['PHP_SELF']}?page={$i}' ";
+            if ($i == $page)
+                echo "id='current-page'";
+            echo">&nbsp;{$i}&nbsp;</a>";
+        endfor;
+        echo"</div>
+                </div>";
     }
     // foods_edit.php
     public function EditFood_panel(){
@@ -820,7 +832,7 @@ class Foods{
                 echo "<h1 class='no-result'>یافت نشد !</h1>";
             }
         }else{
-            $this->AllFoods_panel();
+            $this->AllFoods_panel('');
         }
     }
 }

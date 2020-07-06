@@ -22,6 +22,7 @@ if(isset($_POST["logout_submit"])) {
     $users->redirect_to("../index.php");
 }
 ?>
+<div class="loader"></div>
 <div class="container-fluid">
     <div class="row">
         <div class="mobile-menu"><div class="icon-menu" id="icon_menu"></div><div class="icon-close">X</div></div>

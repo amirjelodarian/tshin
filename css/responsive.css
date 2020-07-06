@@ -77,8 +77,8 @@ only screen and (min-device-pixel-ratio: 2) and (max-width: 991px) {
     }
     a#email_footer,
     a#phone {
-        font-size: 12px;800px
-    padding-left: 25px;
+        font-size: 12px;
+        padding-left: 25px;
         margin: 15px 0
     }
     a#email_footer:before,
@@ -399,7 +399,6 @@ only screen and (min-device-pixel-ratio: 2) and (max-width: 991px) {
         left: 15px;
         top: 15px
     }
-,
     .styled-select-cat::-ms-expand {
         display: none
     }
@@ -820,5 +819,15 @@ only screen and (min-device-pixel-ratio: 2) and (max-width: 991px) {
     #today-time,#today-time-mobile{
         display: inline-block;
         margin-right: 14px;
+    }
+}
+@media screen and (max-width: 420px){
+    .loader{
+        margin-right: 34%;
+    }
+}
+@media screen and (min-width: 421px) and (max-width: 505px){
+    .loader{
+        margin-right: 36%;
     }
 }

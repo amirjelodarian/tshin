@@ -2,6 +2,7 @@
 header('Cache-Control: max-age=900');
 require_once("../classes/initialize.php");
 $sessions->login_administrator("../index.php");
+isset($_GET["page"]) ? $page = $_GET["page"] : $page = 1;
 ?>
 <?php include("includes/administrator_menu.php"); ?>
 <div class="add_new_room">
@@ -28,7 +29,7 @@ $sessions->login_administrator("../index.php");
                 <th>Delete</th>
             </tr>
             <tbody id="result"></tbody>
-            <tbody id="main-result"><?php $users->AllAdmins(); ?></tbody>
+            <tbody id="main-result"><?php $users->AllAdmins($page); ?></tbody>
             </tbody>
         </table>
     </div>

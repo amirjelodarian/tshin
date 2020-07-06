@@ -4,13 +4,14 @@ $sessions->login_administrator_and_admin("../index.php");
 header('Cache-Control: max-age=900');
 ?>
 <?php
+isset($_GET["page"]) ? $page = $_GET["page"] : $page = 1;
 if ($_SESSION["user_mode"] == 13) {
     include("includes/administrator_menu.php");
 }
 else if($_SESSION["user_mode"] == 1){
     include("includes/admin_menu.php");
 }
-$SelcetPublishMode = $rooms->SelectRoomComments();
+$SelcetPublishMode = $rooms->SelectRoomComments($page);
     if(isset($_POST["publish_submit"])){
         $rooms->PublishComment();
     }
@@ -102,7 +103,7 @@ $SelcetPublishMode = $rooms->SelectRoomComments();
     <hr/>
     <div id='main-comment'>
 <?php
-$all_room_survey_result = $rooms->SelectRoomComments();
+$all_room_survey_result = $rooms->SelectRoomComments($page);
 $all_room_survey_result = $all_room_survey_result[0];
     while($room_survey = $database->fetch_array($all_room_survey_result)){
 
@@ -155,6 +156,17 @@ $all_room_survey_result = $all_room_survey_result[0];
             ");
 
     }
+echo "<br /><div class='pagination-outside col-lg-10 col-md-10 col-sm-10 col-xs-12'>
+                    <div class='pagination'>";
+//select_publish=published&submit_publish=Submit+Query
+for ($i = 1; $i <= Rooms::$total_page; $i++):
+    echo "<a href='{$_SERVER['PHP_SELF']}?select_publish={$SelcetPublishMode[1]}&submit_publish=Submit+Query&page={$i}' ";
+    if ($i == $page)
+        echo "id='current-page'";
+    echo">&nbsp;{$i}&nbsp;</a>";
+endfor;
+echo"</div>
+                </div>";
 ?>
 
     </div>

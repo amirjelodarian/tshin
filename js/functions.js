@@ -1,7 +1,9 @@
 $(document).ready(function () {
+    $(".loader").hide();
     $('#keyword').keyup(function () {
         var keyword = $("#keyword").val();
         var bywitch = $(".search-by-witch").val();
+
         if (keyword != ''){
             $('#result').html('');
             $.ajax({
@@ -10,15 +12,18 @@ $(document).ready(function () {
                 dataType: "text",
                 beforeSend: function() {
                     $("#searching").val("...Searching");
-                },
+                    $(".loader").show();
+                    },
                 data: {panel_keyword_room: keyword,panel_ByWitch_room: bywitch},
                 success:function (data) {
+                    $(".loader").hide();
                     $('#main-result').hide();
                     $('#result').show();
                     $('#result').html(data);
-                }
-            });
+                    }
+                });
         }else{
+            $(".loader").hide();
             $('#main-result').show();
             $('#result').hide();
         }
@@ -34,15 +39,18 @@ $(document).ready(function () {
                 dataType: "text",
                 beforeSend: function() {
                     $("#searching").val("...Searching");
+                    $(".loader").show();
                 },
                 data: {panel_keyword_food: keyword,panel_ByWitch_food: bywitch},
                 success:function (data) {
+                    $(".loader").hide();
                     $('#main-result').hide();
                     $('#result').show();
                     $('#result').html(data);
                 }
             });
         }else{
+            $(".loader").hide();
             $('#main-result').show();
             $('#result').hide();
         }
@@ -58,15 +66,18 @@ $(document).ready(function () {
                 dataType: "text",
                 beforeSend: function() {
                     $("#searching").val("...Searching");
+                    $(".loader").show();
                 },
                 data: {panel_keyword_admin: keyword,panel_ByWitch_admin: bywitch},
                 success:function (data) {
+                    $(".loader").hide();
                     $('tbody #main-result').hide();
                     $('#result').show();
                     $('#result').html(data);
                 }
             });
         }else{
+            $(".loader").hide();
             $('tbody #main-result').show();
             $('#result').hide();
         }
@@ -82,15 +93,18 @@ $(document).ready(function () {
                 dataType: "text",
                 beforeSend: function() {
                     $("#searching").val("...Searching");
+                    $(".loader").show();
                 },
                 data: {panel_keyword_user: keyword,panel_ByWitch_user: bywitch},
                 success:function (data) {
+                    $(".loader").hide();
                     $('#main-result').hide();
                     $('#result').show();
                     $('#result').html(data);
                 }
             });
         }else{
+            $(".loader").hide();
             $('#main-result').show();
             $('#result').hide();
         }
@@ -106,15 +120,18 @@ $(document).ready(function () {
                 dataType: "text",
                 beforeSend: function() {
                     $("#searching").val("...Searching");
+                    $(".loader").show();
                 },
                 data: {comments_keyword: keyword,comments_ByWitch: bywitch},
                 success:function (data) {
+                    $(".loader").hide();
                     $('#main-result').hide();
                     $('#result').show();
                     $('#result').html(data);
                 }
             });
         }else{
+            $(".loader").hide();
             $('#main-result').show();
             $('#result').hide();
         }
@@ -130,15 +147,18 @@ $(document).ready(function () {
                 dataType: "text",
                 beforeSend: function() {
                     $("#searching").val("...Searching");
+                    $(".loader").show();
                 },
                 data: {reservation_keyword: keyword,reservation_ByWitch: bywitch},
                 success:function (data) {
+                    $(".loader").hide();
                     $('#main-result').hide();
                     $('#result').show();
                     $('#result').html(data);
                 }
             });
         }else{
+            $(".loader").hide();
             $('#main-result').show();
             $('#result').hide();
         }
@@ -154,9 +174,11 @@ $(document).ready(function () {
                 dataType: "text",
                 beforeSend: function() {
                     $("#searching").val("...Searching");
+                    $(".loader").show();
                 },
                 data: {reservation_keyword: keyword,reservation_ByWitch: bywitch},
                 success:function (data) {
+                    $(".loader").hide();
                     $('#main-result').hide();
                     $('#result').show();
                     $('#result').html(data);
@@ -164,6 +186,7 @@ $(document).ready(function () {
             });
         }else{
             $('#main-result').show();
+            $(".loader").hide();
             $('#result').hide();
         }
     });

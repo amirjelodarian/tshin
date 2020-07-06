@@ -31,6 +31,7 @@
         public $room_person_count = 0; // TINYINT(1)
         public static $all_room_days = array();
         public static $room_days_reserved = array();
+        public static $total_page;
         private $username;
         private $user_id;
 
@@ -546,9 +547,11 @@
             }
         }
         // for panel display
-        public function AllRooms_panel(){
+        public function AllRooms_panel($page){
             global $database,$Functions;
-            $sql = "SELECT * FROM rooms ORDER BY room_id DESC";
+            settype($page,"integer");
+            $pagination = $Functions->pagination(10,$page,'rooms','room_id');
+            $sql = "SELECT * FROM rooms ORDER BY room_id DESC LIMIT {$pagination['start_from']},{$pagination['record_per_page']}";
             $database->query("SET NAMES 'utf8'");
             $result = $database->query($sql);
             while ($rooms_rows = $database->fetch_array($result)){
@@ -632,6 +635,16 @@
                             </div>
                             ");
             }
+            echo "<div class='pagination-outside col-lg-10 col-md-10 col-sm-10 col-xs-12'>
+                    <div class='pagination'>";
+                        for ($i = 1; $i <= $pagination["total_page"]; $i++):
+                            echo "<a href='{$_SERVER['PHP_SELF']}?page={$i}' ";
+                            if ($i == $page)
+                                echo "id='current-page'";
+                            echo">&nbsp;{$i}&nbsp;</a>";
+                        endfor;
+                    echo"</div>
+                </div>";
         }
         public function EditRoom_panel(){
             global $database,$Functions,$users;
@@ -844,7 +857,7 @@
                     unset($_SESSION["image_exists_name"]);
                     unset($_SESSION["image_name"]);
                     $_SESSION["image_name"] = null;
-                    $users->redirect_to("rooms_show.php");
+                    $users->redirect_to($_SERVER["PHP_SELF"]);
                 }
             }
         }
@@ -974,6 +987,7 @@
                             break;
                     }
                 }
+                $sql .= " ORDER BY room_id DESC";
                 $result = $database->query($sql);
                 if ($database->num_rows($result) > 0) {
                     echo "<h3>جستجو ...</h3>";
@@ -1054,7 +1068,7 @@
                 }else { echo "<h1 class='no-result'>یافت نشد !</h1>"; }
 
             }else{
-                $this->AllRooms_panel();
+                $this->AllRooms_panel('');
             }
         }
 
@@ -1121,31 +1135,44 @@
                 $users->redirect_to("comments_show.php");
             }
         }
-        public function SelectRoomComments(){
+        public function SelectRoomComments($page){
             global $database,$Functions;
-            if(isset($_GET["submit_publish"]) && isset($_GET["select_publish"]) && !(empty($_GET["select_publish"]))){
+            if(isset($_GET["submit_publish"]) && isset($_GET["select_publish"]) && !(empty($_GET["select_publish"])) || isset($_GET["page"])){
+                isset($_GET["page"]) ? $page = $_GET["page"] : $page = 1;
                 switch($_GET["select_publish"]){
                     case "unpublished":
-                        $sql = "SELECT * FROM room_survey WHERE publish = 0 ORDER BY id DESC";
+                        settype($page,"integer");
+                        $pagination = $Functions->pagination(15,$page,'room_survey','id',' WHERE publish = 0 ');
+                        self::$total_page = $pagination["total_page"];
+                        $sql = "SELECT * FROM room_survey WHERE publish = 0 ORDER BY id DESC LIMIT {$pagination['start_from']},{$pagination['record_per_page']}";
                         $result = $database->query($sql);
                         $publish_mode = "unpublished";
                         return array($result,$publish_mode);
                         break;
                     case "published":
-                        $sql = "SELECT * FROM room_survey WHERE publish = 1 ORDER BY id DESC";
+                        settype($page,"integer");
+                        $pagination = $Functions->pagination(15,$page,'room_survey','id',' WHERE publish = 1 ');
+                        self::$total_page = $pagination["total_page"];
+                        $sql = "SELECT * FROM room_survey WHERE publish = 1 ORDER BY id DESC LIMIT {$pagination['start_from']},{$pagination['record_per_page']}";
                         $result = $database->query($sql);
                         $publish_mode = "published";
                         return array($result,$publish_mode);
                         break;
                     default:
-                        $sql = "SELECT * FROM room_survey WHERE publish = 0 ORDER BY id DESC";
+                        settype($page,"integer");
+                        $pagination = $Functions->pagination(15,$page,'room_survey','id',' WHERE publish = 0 ');
+                        self::$total_page = $pagination["total_page"];
+                        $sql = "SELECT * FROM room_survey WHERE publish = 0 ORDER BY id DESC LIMIT {$pagination['start_from']},{$pagination['record_per_page']}";
                         $result = $database->query($sql);
                         $publish_mode = "unpublished";
                         return array($result,$publish_mode);
                         break;
                 }
             }else{
-                $sql = "SELECT * FROM room_survey WHERE publish = 0 ORDER BY id DESC";
+                settype($page,"integer");
+                $pagination = $Functions->pagination(15,$page,'room_survey','id',' WHERE publish = 0 ');
+                self::$total_page = $pagination["total_page"];
+                $sql = "SELECT * FROM room_survey WHERE publish = 0 ORDER BY id DESC LIMIT {$pagination['start_from']},{$pagination['record_per_page']}";
                 $result = $database->query($sql);
                 $publish_mode = "unpublished";
                 return array($result,$publish_mode);

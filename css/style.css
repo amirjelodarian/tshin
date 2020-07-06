@@ -5056,16 +5056,50 @@ a.btn_infobox:hover {
     margin: 0;
 }
 #keyword,#food-keyword,#admins-keyword,#users-keyword,#comments-keyword,#reservation_keyword,#user_reservation_keyword{
+    transition: 0.8s;
     width: 130px;
-    opacity: 0.9;
-    background: white;
-    border: 2px solid darkorange;
-    border-radius: 15px;
+    opacity: 0.7;
+    background: darkorange;
+    border: 2px solid #00A8FF;
+    border-radius: 8.2px;
     height: 25px;
     font-weight: bold;
-    color: #00A8FF;
+    color: white;
     text-align: center;
     margin-bottom: 20px;
+}
+#keyword:hover,#food-keyword:hover,#admins-keyword:hover,#users-keyword:hover,#comments-keyword:hover,#reservation_keyword:hover,#user_reservation_keyword:hover{
+    transition: 0.8s;
+    transform: scale(1.1);
+    background: white;
+    color: darkorange;
+    opacity: 1;
+}
+.pagination-outside{
+    text-align: center;
+    margin-bottom: 75px;
+}
+#current-page{
+    background: darkorange;
+    color: white;
+}
+.pagination{
+    background: white;
+
+    position: relative;
+    padding: 1px;
+}
+.pagination a{
+    padding: 2px;
+    font-size: 13px;
+    display: inline-block;
+    font-weight: bold;
+    transition: 1s;
+}
+.pagination a:hover{
+    transition: 1s;
+    background: #00A8FF;
+    color: white;
 }
 .delete-food-room-img{
     background: #cb1d1d;
@@ -5089,18 +5123,29 @@ a.btn_infobox:hover {
     border: 1px solid darkorange;
 }
 .search-by-witch,.food-search-by-witch,.admins-search-by-witch,.users-search-by-witch,.comments-search-by-witch,.reservation-search-by-witch,.user-reservation-search-by-witch{
-    opacity: 0.9;
+    transition: 0.8s;
+    opacity: 0.7;
     font-weight: bold;
+    border-radius: 8.2px;
     font-size: 10px;
     position: relative;
     width: 73px;
-    font-family: Arial;
+    font-family: unset;
     border: none;
     text-align: center;
     background: #00A8FF;
     color: white;
     outline: none;
     height: 25px;
+}
+.search-by-witch:hover,.food-search-by-witch:hover,.admins-search-by-witch:hover,.users-search-by-witch:hover,.comments-search-by-witch:hover,.reservation-search-by-witch:hover,.user-reservation-search-by-witch:hover{
+    transition: 0.8s;
+    opacity: 1;
+    background: white;
+    color: #00A8FF;
+}
+.search-by-witch option,.food-search-by-witch option,.admins-search-by-witch option,.users-search-by-witch option,.comments-search-by-witch option,.reservation-search-by-witch option,.user-reservation-search-by-witch option{
+    font-family: unset;
 }
 .room_person_count{
     text-align: center;
@@ -5591,6 +5636,31 @@ a.btn_infobox:hover {
     padding: 10px;
     opacity: 0.8;
     border-radius: 2.5px 2.5px 30.5px 30.5px;
+}
+.loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid darkorange;
+    border-bottom: 16px solid darkorange;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+    z-index: 99999999999;
+    top: 0;
+    margin-right: 40%;
+    position: fixed;
+    margin-top: 15%;
+}
+
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 @keyframes room_error_message{
     from{

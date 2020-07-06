@@ -2,6 +2,7 @@
 header('Cache-Control: max-age=900');
 require_once("../classes/initialize.php");
 $sessions->login_administrator_and_admin("../index.php");
+isset($_GET["page"]) ? $page = $_GET["page"] : $page = 1;
 ?>
 <?php
     if ($_SESSION["user_mode"] == 13) {
@@ -19,7 +20,7 @@ $sessions->login_administrator_and_admin("../index.php");
             <div id="errors" class="errors-panel" style="margin-top: 70px;"><?php echo $users->Errors(); ?></div>
             <div id="result"></div>
             <div id="main-result">
-                <?php $foods->AllFoods_panel(); ?>
+                <?php $foods->AllFoods_panel($page); ?>
             </div>
             <hr>
         </div>
