@@ -3,6 +3,7 @@ require_once("../classes/initialize.php");
 $sessions->login_administrator_and_admin("../index.php");
 ?>
 <?php
+isset($_GET["page"]) ? $page = $_GET["page"] : $page = 1;
 if ($_SESSION["user_mode"] == 13) {
     include("includes/administrator_menu.php");
 }
@@ -144,6 +145,19 @@ if (isset($_POST["delete_single_reservation"])){
 
     }
 ?>
+    <?=
+    "<br /><div class='pagination-outside col-lg-10 col-md-10 col-sm-10 col-xs-12'>
+            <div class='pagination'>";
+    //select_publish=published&submit_publish=Submit+Query
+    for ($i = 1; $i <= Rooms::$total_page; $i++):
+        echo "<a href='{$_SERVER['PHP_SELF']}?select_booking={$SelectReservedMode[1]}&submit_booking=Submit+Query&page={$i}' ";
+        if ($i == $page)
+            echo "id='current-page'";
+        echo">&nbsp;{$i}&nbsp;</a>";
+    endfor;
+    echo"</div>
+        </div>";
+    ?>
 </div>
 </div>
     <br /><br />

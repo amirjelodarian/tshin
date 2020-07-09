@@ -89,7 +89,6 @@ $SelcetPublishMode = $rooms->SelectRoomComments($page);
     ?>
 </h2>
 <div class='container-comment-panel col-xs-12 col-sm-12 col-md-12 col-lg-12'>
-
     <div id="errors" class="errors-panel " style="margin-top: 70px;"><?php echo $users->Errors(); ?></div>
     <form method="get" action="<?php echo($_SERVER['PHP_SELF']); ?>">
         <div class="publish">
@@ -156,19 +155,20 @@ $all_room_survey_result = $all_room_survey_result[0];
             ");
 
     }
-echo "<br /><div class='pagination-outside col-lg-10 col-md-10 col-sm-10 col-xs-12'>
-                    <div class='pagination'>";
-//select_publish=published&submit_publish=Submit+Query
-for ($i = 1; $i <= Rooms::$total_page; $i++):
-    echo "<a href='{$_SERVER['PHP_SELF']}?select_publish={$SelcetPublishMode[1]}&submit_publish=Submit+Query&page={$i}' ";
-    if ($i == $page)
-        echo "id='current-page'";
-    echo">&nbsp;{$i}&nbsp;</a>";
-endfor;
-echo"</div>
-                </div>";
 ?>
-
+<?=
+    "<br /><div class='pagination-outside col-lg-10 col-md-10 col-sm-10 col-xs-12'>
+            <div class='pagination'>";
+    //select_publish=published&submit_publish=Submit+Query
+    for ($i = 1; $i <= Rooms::$total_page; $i++):
+        echo "<a href='{$_SERVER['PHP_SELF']}?select_publish={$SelcetPublishMode[1]}&submit_publish=Submit+Query&page={$i}' ";
+        if ($i == $page)
+            echo "id='current-page'";
+        echo">&nbsp;{$i}&nbsp;</a>";
+    endfor;
+    echo"</div>
+        </div>";
+?>
     </div>
 </div>
     <br /><br />

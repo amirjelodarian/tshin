@@ -3,13 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c424756b-6ee7-4545-9854-ec57cf6aba41" name="Default Changelist" comment=" noth">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/foods.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/foods.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/functions.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/rooms.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/rooms.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/test.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/users.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/users.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/responsive.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/responsive.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/datapicker" beforeDir="false" afterPath="$PROJECT_DIR$/datapicker" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/datapicker/demo/Samples1.html" beforeDir="false" afterPath="$PROJECT_DIR$/datapicker/demo/Samples1.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/datapicker/dist/jquery.md.bootstrap.datetimepicker.js" beforeDir="false" />
@@ -17,16 +11,9 @@
       <change beforePath="$PROJECT_DIR$/datapicker/dist/jquery.md.bootstrap.datetimepicker.style.css.map" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/datapicker/src/jquery.md.bootstrap.datetimepicker.js" beforeDir="false" afterPath="$PROJECT_DIR$/datapicker/src/jquery.md.bootstrap.datetimepicker.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/datapicker/src/jquery.md.bootstrap.datetimepicker.style.css" beforeDir="false" afterPath="$PROJECT_DIR$/datapicker/src/jquery.md.bootstrap.datetimepicker.style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/functions.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/functions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/admins_show.php" beforeDir="false" afterPath="$PROJECT_DIR$/panel/admins_show.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/panel/comments_show.php" beforeDir="false" afterPath="$PROJECT_DIR$/panel/comments_show.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/foods_show.php" beforeDir="false" afterPath="$PROJECT_DIR$/panel/foods_show.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/includes/admin_menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/panel/includes/admin_menu.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/includes/administrator_menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/panel/includes/administrator_menu.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/includes/users_menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/panel/includes/users_menu.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/panel/logfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/panel/logfile.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/rooms_show.php" beforeDir="false" afterPath="$PROJECT_DIR$/panel/rooms_show.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/users_show.php" beforeDir="false" afterPath="$PROJECT_DIR$/panel/users_show.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/panel/reservation_show.php" beforeDir="false" afterPath="$PROJECT_DIR$/panel/reservation_show.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +61,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../file" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
@@ -203,7 +190,8 @@
       <workItem from="1593668805661" duration="571000" />
       <workItem from="1593703433556" duration="46000" />
       <workItem from="1593769412812" duration="25969000" />
-      <workItem from="1594011082302" duration="2382000" />
+      <workItem from="1594011082302" duration="3372000" />
+      <workItem from="1594329240825" duration="1214000" />
     </task>
     <servers />
   </component>

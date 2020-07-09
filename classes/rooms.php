@@ -1137,7 +1137,7 @@
         }
         public function SelectRoomComments($page){
             global $database,$Functions;
-            if(isset($_GET["submit_publish"]) && isset($_GET["select_publish"]) && !(empty($_GET["select_publish"])) || isset($_GET["page"])){
+            if(isset($_GET["submit_publish"]) && isset($_GET["select_publish"]) && !(empty($_GET["select_publish"]))){
                 isset($_GET["page"]) ? $page = $_GET["page"] : $page = 1;
                 switch($_GET["select_publish"]){
                     case "unpublished":
@@ -1614,28 +1614,41 @@
         public function SelectRoomReservation(){
             global $database,$Functions;
             if(isset($_GET["submit_booking"]) && isset($_GET["select_booking"]) && !(empty($_GET["select_booking"]))){
+                isset($_GET["page"]) ? $page = $_GET["page"] : $page = 1;
                 switch($_GET["select_booking"]){
                     case "notbooked":
-                        $sql = "SELECT * FROM room_reservation WHERE reserved_mode = 0 ORDER BY reserve_id DESC";
+                        settype($page,"integer");
+                        $pagination = $Functions->pagination(5,$page,'room_reservation','reserve_id',' WHERE reserved_mode = 0 ');
+                        self::$total_page = $pagination["total_page"];
+                        $sql = "SELECT * FROM room_reservation WHERE reserved_mode = 0 ORDER BY reserve_id DESC LIMIT {$pagination['start_from']},{$pagination['record_per_page']}";
                         $result = $database->query($sql);
                         $booking_mode = "notbooked";
                         return array($result,$booking_mode);
                         break;
                     case "booked":
-                        $sql = "SELECT * FROM room_reservation WHERE reserved_mode = 1 ORDER BY reserve_id DESC";
+                        settype($page,"integer");
+                        $pagination = $Functions->pagination(5,$page,'room_reservation','reserve_id',' WHERE reserved_mode = 1 ');
+                        self::$total_page = $pagination["total_page"];
+                        $sql = "SELECT * FROM room_reservation WHERE reserved_mode = 1 ORDER BY reserve_id DESC LIMIT {$pagination['start_from']},{$pagination['record_per_page']}";
                         $result = $database->query($sql);
                         $booking_mode = "booked";
                         return array($result,$booking_mode);
                         break;
                     default:
-                        $sql = "SELECT * FROM room_reservation WHERE reserved_mode = 0 ORDER BY reserve_id DESC";
+                        settype($page,"integer");
+                        $pagination = $Functions->pagination(5,$page,'room_reservation','reserve_id',' WHERE reserved_mode = 0 ');
+                        self::$total_page = $pagination["total_page"];
+                        $sql = "SELECT * FROM room_reservation WHERE reserved_mode = 0 ORDER BY reserve_id DESC LIMIT {$pagination['start_from']},{$pagination['record_per_page']}";
                         $result = $database->query($sql);
                         $booking_mode = "notbooked";
                         return array($result,$booking_mode);
                         break;
                 }
             }else{
-                $sql = "SELECT * FROM room_reservation WHERE reserved_mode = 0 ORDER BY reserve_id DESC";
+                settype($page,"integer");
+                $pagination = $Functions->pagination(5,$page,'room_reservation','reserve_id',' WHERE reserved_mode = 0 ');
+                self::$total_page = $pagination["total_page"];
+                $sql = "SELECT * FROM room_reservation WHERE reserved_mode = 0 ORDER BY reserve_id DESC LIMIT {$pagination['start_from']},{$pagination['record_per_page']}";
                 $result = $database->query($sql);
                 $booking_mode = "notbooked";
                 return array($result,$booking_mode);
