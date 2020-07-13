@@ -1,11 +1,11 @@
 <?php
 require_once("../classes/initialize.php");
-if (!($sessions->login_state() && $_SESSION["user_mode"] == 0)){
+if (!($sessions->login_state() && $_SESSION["user_mode"] == 0))
     $users->redirect_to("../index.php");
-}
 include("includes/users_menu.php");
 ?>
 <?php
+isset($_GET["page"]) ? $page = $_GET["page"] : $page = 1;
 $SelectReservedMode = $rooms->SelectUserRoomReservation();
 
 if (isset($_POST["delete_all_booked_reservation"])){
@@ -75,13 +75,13 @@ if (isset($_POST["delete_single_reservation"])){
     while($room_reservation = $database->fetch_array($all_room_reservation_result)){
         if ($rooms_rows = $database->fetch_array($rooms->SelectWithId($room_reservation['room_id']))){
             echo("
-                    <div class='comment-panel col-xs-12 col-sm-12' "); if($SelectReservedMode[1] == "booked"){ echo("style='border: 2px solid green'"); }else{ echo("style='border: 2px solid red'"); }  echo(">
+                    <div class='comment-panel col-xs-12 col-sm-12' "); if($SelectReservedMode[1] == "booked"){ echo("style='border: 2px solid #00A8FF'"); }else{ echo("style='border: 2px solid red'"); }  echo(">
                     <span class='reservation-bg-outside'>
                         <img id='reservation-bg' src='../"); Rooms::select_room_image($rooms_rows['room_image']); echo("' alt='تی شین' />
                     </span>
                         ");
             if ($users_row = $database->fetch_array($users->SelectById($room_reservation['user_id']))) {
-                echo("<img class='finger-img' "); if($SelectReservedMode[1] == "booked"){ echo("style='border: 4px solid green;'"); }else{ echo("style='border: 4px solid red;'"); }  echo("  id='finger-img-panel-comment' src='"); Users::select_user_image($users_row['user_image']); echo("' alt='' class='img-circle'>");
+                echo("<img class='finger-img' "); if($SelectReservedMode[1] == "booked"){ echo("style='border: 4px solid #00A8FF;'"); }else{ echo("style='border: 4px solid red;'"); }  echo("  id='finger-img-panel-comment' src='"); Users::select_user_image($users_row['user_image']); echo("' alt='' class='img-circle'>");
             }
             $divid_date_time = $Functions->divid_date_time_database($room_reservation['reserve_time']);
             echo("  
@@ -119,6 +119,18 @@ if (isset($_POST["delete_single_reservation"])){
             ");
 
     }
+    ?>
+    <?=
+    "<br /><div class='pagination-outside col-lg-10 col-md-10 col-sm-10 col-xs-12'>
+            <div class='pagination'>";
+    for ($i = 1; $i <= Rooms::$total_page; $i++):
+        echo "<a href='{$_SERVER['PHP_SELF']}?select_booking={$SelectReservedMode[1]}&submit_booking=Submit+Query&page={$i}' ";
+        if ($i == $page)
+            echo "id='current-page'";
+        echo">&nbsp;{$i}&nbsp;</a>";
+    endfor;
+    echo"</div>
+        </div>";
     ?>
 </div>
 </div>

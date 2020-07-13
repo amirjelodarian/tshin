@@ -148,7 +148,6 @@ if (isset($_POST["delete_single_reservation"])){
     <?=
     "<br /><div class='pagination-outside col-lg-10 col-md-10 col-sm-10 col-xs-12'>
             <div class='pagination'>";
-    //select_publish=published&submit_publish=Submit+Query
     for ($i = 1; $i <= Rooms::$total_page; $i++):
         echo "<a href='{$_SERVER['PHP_SELF']}?select_booking={$SelectReservedMode[1]}&submit_booking=Submit+Query&page={$i}' ";
         if ($i == $page)

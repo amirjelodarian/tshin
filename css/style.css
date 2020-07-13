@@ -5617,7 +5617,8 @@ a.btn_infobox:hover {
     font-weight: bold;
 }
 .change-password-outside{
-    background: darkorange;
+    background-image: radial-gradient(#4e555b 40%, #00A8FF 160%);
+    border-radius: 6.9px;
     transition: 1s;
     padding: 1px;
 }

@@ -4,6 +4,7 @@
     <list default="true" id="c424756b-6ee7-4545-9854-ec57cf6aba41" name="Default Changelist" comment=" noth">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/rooms.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/rooms.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/datapicker" beforeDir="false" afterPath="$PROJECT_DIR$/datapicker" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/datapicker/demo/Samples1.html" beforeDir="false" afterPath="$PROJECT_DIR$/datapicker/demo/Samples1.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/datapicker/dist/jquery.md.bootstrap.datetimepicker.js" beforeDir="false" />
@@ -11,9 +12,9 @@
       <change beforePath="$PROJECT_DIR$/datapicker/dist/jquery.md.bootstrap.datetimepicker.style.css.map" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/datapicker/src/jquery.md.bootstrap.datetimepicker.js" beforeDir="false" afterPath="$PROJECT_DIR$/datapicker/src/jquery.md.bootstrap.datetimepicker.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/datapicker/src/jquery.md.bootstrap.datetimepicker.style.css" beforeDir="false" afterPath="$PROJECT_DIR$/datapicker/src/jquery.md.bootstrap.datetimepicker.style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/comments_show.php" beforeDir="false" afterPath="$PROJECT_DIR$/panel/comments_show.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/panel/logfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/panel/logfile.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/panel/reservation_show.php" beforeDir="false" afterPath="$PROJECT_DIR$/panel/reservation_show.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/panel/reservedRooms.php" beforeDir="false" afterPath="$PROJECT_DIR$/panel/reservedRooms.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,7 +192,8 @@
       <workItem from="1593703433556" duration="46000" />
       <workItem from="1593769412812" duration="25969000" />
       <workItem from="1594011082302" duration="3372000" />
-      <workItem from="1594329240825" duration="1214000" />
+      <workItem from="1594329240825" duration="1818000" />
+      <workItem from="1594667124118" duration="3634000" />
     </task>
     <servers />
   </component>
@@ -236,10 +238,10 @@
       <screen x="0" y="27" width="1366" height="707" />
     </state>
     <state width="498" height="445" key="SwitcherDM/0.27.1366.707@0.27.1366.707" timestamp="1587767136684" />
-    <state x="392" y="207" key="com.intellij.ide.util.TipDialog" timestamp="1594012461740">
+    <state x="392" y="207" key="com.intellij.ide.util.TipDialog" timestamp="1594667123057">
       <screen x="0" y="26" width="1366" height="708" />
     </state>
-    <state x="392" y="207" key="com.intellij.ide.util.TipDialog/0.26.1366.708@0.26.1366.708" timestamp="1594012461740" />
+    <state x="392" y="207" key="com.intellij.ide.util.TipDialog/0.26.1366.708@0.26.1366.708" timestamp="1594667123057" />
     <state x="392" y="208" key="com.intellij.ide.util.TipDialog/0.27.1366.707@0.27.1366.707" timestamp="1588723909265" />
     <state x="336" y="26" width="683" height="708" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1593171198958">
       <screen x="0" y="26" width="1366" height="708" />
