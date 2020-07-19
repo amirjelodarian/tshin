@@ -32,6 +32,7 @@
         public static $all_room_days = array();
         public static $room_days_reserved = array();
         public static $total_page;
+        private static $last_search_sql;
         private $username;
         private $user_id;
 
@@ -41,9 +42,18 @@
         }
 
         // functions for display rooms
-        public static function AllRooms($grid = ""){
+        public static function AllRooms($grid = "",$manual_sql = "",$pagination = "",$page = ""){
             global $database,$Functions;
-            $sql = "SELECT * FROM rooms ORDER BY room_id DESC";
+            if (!(empty($manual_sql)))
+                $sql = $manual_sql;
+            else
+                $sql = "SELECT * FROM rooms ORDER BY room_id DESC";
+
+            if ($pagination == true && isset($page)){
+                settype($page,"integer");
+                $pagination = $Functions->pagination(10,$page,'rooms','room_id');
+                $sql = "SELECT * FROM rooms ORDER BY room_id DESC LIMIT {$pagination['start_from']},{$pagination['record_per_page']}";
+            }
             $database->query("SET NAMES 'utf8'");
             $result = $database->query($sql);
             while ($rooms_rows = $database->fetch_array($result)){
@@ -158,6 +168,18 @@
                             </div>
                             ");
                 }
+            }
+            if ($pagination == true && isset($page)){
+                echo "<div class='pagination-outside col-lg-10 col-md-10 col-sm-10 col-xs-12'>
+                    <div class='pagination'>";
+                for ($i = 1; $i <= $pagination["total_page"]; $i++):
+                    echo "<a href='{$_SERVER['PHP_SELF']}?page={$i}' ";
+                    if ($i == $page)
+                        echo "id='current-page'";
+                    echo">&nbsp;{$i}&nbsp;</a>";
+                endfor;
+                echo"</div>
+                </div>";
             }
         }
         public function ShowAllRoomsBy($grid = ""){
@@ -958,36 +980,47 @@
         public function PanelSerachRoom(){
             global $database,$Functions,$users;
             if (isset($_GET["panel_keyword_room"]) && !(empty($_GET["panel_keyword_room"])) && isset($_GET["panel_ByWitch_room"]) && !(empty($_GET["panel_ByWitch_room"]))) {
+                settype($page, "integer");
                 $keyword = $database->escape_value($_GET['panel_keyword_room']);
-                if (isset($_GET["panel_ByWitch_room"])){
-                    switch ($_GET["panel_ByWitch_room"]){
+                if (isset($_GET["panel_ByWitch_room"])) {
+                    switch ($_GET["panel_ByWitch_room"]) {
                         case 'Address':
                             $sql = "SELECT * FROM rooms WHERE room_address LIKE '%{$keyword}%'";
+                            /*$pagination = $Functions->pagination(10, $page, 'rooms', 'room_id', " WHERE room_address LIKE '%{$keyword}%'");*/
                             break;
                         case 'Title':
                             $sql = "SELECT * FROM rooms WHERE room_title LIKE '%{$keyword}%'";
+                            /*$pagination = $Functions->pagination(10, $page, 'rooms', 'room_id', " WHERE room_title LIKE '%{$keyword}%'");*/
                             break;
                         case 'Descript':
                             $sql = "SELECT * FROM rooms WHERE room_description LIKE '%{$keyword}%'";
+                            /*$pagination = $Functions->pagination(10, $page, 'rooms', 'room_id', " WHERE room_description LIKE '%{$keyword}%'");*/
                             break;
                         case 'Score':
                             $sql = "SELECT * FROM rooms WHERE room_score LIKE '{$keyword}'";
+                            /*$pagination = $Functions->pagination(10, $page, 'rooms', 'room_id', " WHERE room_score LIKE '{$keyword}'");*/
                             break;
                         case 'Price':
                             $sql = "SELECT * FROM rooms WHERE room_main_price LIKE '{$keyword}%'";
+                            /*$pagination = $Functions->pagination(10, $page, 'rooms', 'room_id', " WHERE room_main_price LIKE '{$keyword}%'");*/
                             break;
                         case 'Off-Price':
                             $sql = "SELECT * FROM rooms WHERE room_off_price LIKE '{$keyword}%'";
+                            /*$pagination = $Functions->pagination(10, $page, 'rooms', 'room_id', " WHERE room_off_price LIKE '{$keyword}%'");*/
                             break;
                         case 'Person':
                             $sql = "SELECT * FROM rooms WHERE room_person_count LIKE '{$keyword}'";
+                            /*$pagination = $Functions->pagination(10, $page, 'rooms', 'room_id', " WHERE room_person_count LIKE '{$keyword}'");*/
                             break;
                         default:
                             $sql = "SELECT * FROM rooms WHERE room_address LIKE '%{$keyword}%'";
+                            /*$pagination = $Functions->pagination(10, $page, 'rooms', 'room_id', " WHERE room_person_count LIKE '{$keyword}'");*/
                             break;
                     }
+                    /*$sql .= " ORDER BY room_id DESC LIMIT {$pagination['start_from']},{$pagination['record_per_page']}";*/
+                    $sql .= " ORDER BY room_id DESC";
                 }
-                $sql .= " ORDER BY room_id DESC";
+            }
                 $result = $database->query($sql);
                 if ($database->num_rows($result) > 0) {
                     echo "<h3>جستجو ...</h3>";
@@ -1055,8 +1088,8 @@
                                                 <form method='post' action='rooms_delete.php'>
                                                     <input type='submit' name='submit_delete_room' value='حذف' class='delete_room_btn' />
                                                     <input type='hidden' name='room_id' value='");
-                        echo($Functions->encrypt_id($rooms_rows['room_id']));
-                        echo("' />
+                                                    echo($Functions->encrypt_id($rooms_rows['room_id']));
+                                                    echo("' />
                                                 </form>
                                             </div>
                                         </div>
@@ -1065,12 +1098,20 @@
                             </div>
                             ");
                     }
+                    echo "<div class='pagination-outside col-lg-10 col-md-10 col-sm-10 col-xs-12'>
+                    <div class='pagination'>";
+                    for ($i = 1; $i <= $pagination["total_page"]; $i++):
+                        echo "<a href='rooms_search.php?searchPage={$i}' ";
+                        if ($i == $page)
+                            echo "id='current-page'";
+                        echo">&nbsp;{$i}&nbsp;</a>";
+                    endfor;
+                    echo"</div>
+                    </div>";
                 }else { echo "<h1 class='no-result'>یافت نشد !</h1>"; }
 
-            }else{
-                $this->AllRooms_panel('');
-            }
         }
+
 
         // functions for rooms
         public function word_score($room_score){

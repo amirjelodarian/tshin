@@ -49,7 +49,7 @@
                     <ul>
                         <?php
                             if ($sessions->login_state()){
-                                echo("<li class='submenu panel-icon'><a href='panel/' class='icon-tools'>داشبورد</a></li>");
+                                echo("<li class='submenu panel-icon'><a href='panel/' class='icon-tools' target='_blank'>داشبورد</a></li>");
                             }
                         ?>
                         <li class="submenu"> <a href="index.php" class="show-submenu">صفحه اصلی <i class="icon-home"></i></a>

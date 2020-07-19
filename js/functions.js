@@ -3,7 +3,6 @@ $(document).ready(function () {
     $('#keyword').keyup(function () {
         var keyword = $("#keyword").val();
         var bywitch = $(".search-by-witch").val();
-
         if (keyword != ''){
             $('#result').html('');
             $.ajax({
@@ -487,5 +486,4 @@ function checkTime(i) {
         });
     }
 }*/
-
 

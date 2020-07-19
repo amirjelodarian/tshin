@@ -5080,8 +5080,8 @@ a.btn_infobox:hover {
     margin-bottom: 75px;
 }
 #current-page{
-    background: darkorange;
     color: white;
+    background: #51bce6;
 }
 .pagination{
     background: white;

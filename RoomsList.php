@@ -1,12 +1,12 @@
 ﻿<?php include("includes/search_slider_all_rooms.php"); ?>
-
+<?php isset($_GET["page"]) ? $page = $_GET["page"] : $page = 1; ?>
         <?php
         if(isset($_POST["user_show_by_all_hotels_room"])){
             $rooms->ShowAllRoomsBy();
         }elseif (isset($_POST["user_submit_search_room"]) && isset($_POST["user_keyword_room"]) && !(empty($_POST["user_keyword_room"]))){
             $rooms->UserََSerachRoom();
         }else{
-            $rooms->AllRooms();
+            $rooms->AllRooms(false,'',true,$page);
         }
         ?>
             <hr>

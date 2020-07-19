@@ -42,7 +42,7 @@
                 <div class="tp-caption customin tp-resizeme rs-parallaxlevel-0 text-center" data-x="center" data-y="center" data-hoffset="0" data-voffset="15" data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;" data-speed="500" data-start="2600" data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0.05" data-endelementdelay="0.1" style="z-index: 9; max-width: auto; max-height: auto; white-space: nowrap;">
                     <div style="color:#ffffff; font-size:16px; text-transform:uppercase">شهرهای گردشگری / تور / راهنمای تور</div>
                 </div>
-                <div class="tp-caption customin tp-resizeme rs-parallaxlevel-0" data-x="center" data-y="center" data-hoffset="0" data-voffset="70" data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;" data-speed="500" data-start="2900" data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-linktoslide="next" style="z-index: 12;"><a href='all_tour_list.php' class="button_intro">نمایش </a>  <a href='Room.php' class=" button_intro outline">ادامه مطلب</a>
+                <div class="tp-caption customin tp-resizeme rs-parallaxlevel-0" data-x="center" data-y="center" data-hoffset="0" data-voffset="70" data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;" data-speed="500" data-start="2900" data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-linktoslide="next" style="z-index: 12;"><a href='RoomsList.php' class="button_intro">نمایش </a>  <a href='Room.php' class=" button_intro outline">ادامه مطلب</a>
                 </div>
             </li>
             <li data-transition="fade" data-slotamount="7" data-masterspeed="500" data-saveperformance="on" data-title="Intro Slide">
@@ -53,7 +53,7 @@
                 <div class="tp-caption customin tp-resizeme rs-parallaxlevel-0 text-center" data-x="center" data-y="center" data-hoffset="0" data-voffset="15" data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;" data-speed="500" data-start="2600" data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0.05" data-endelementdelay="0.1" style="z-index: 9; max-width: auto; max-height: auto; white-space: nowrap;">
                     <div style="color:#ffffff; font-size:16px; text-transform:uppercase">ابنیه تاریخی / تور گردی / راهنمای موزه ها</div>
                 </div>
-                <div class="tp-caption customin tp-resizeme rs-parallaxlevel-0" data-x="center" data-y="center" data-hoffset="0" data-voffset="70" data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;" data-speed="500" data-start="2900" data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-linktoslide="next" style="z-index: 12;"><a href='all_tour_list.php' class="button_intro">نمایش </a>  <a href='Room.php' class=" button_intro outline">ادامه مطلب</a>
+                <div class="tp-caption customin tp-resizeme rs-parallaxlevel-0" data-x="center" data-y="center" data-hoffset="0" data-voffset="70" data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;" data-speed="500" data-start="2900" data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-linktoslide="next" style="z-index: 12;"><a href='RoomsList.php' class="button_intro">نمایش </a>  <a href='Room.php' class=" button_intro outline">ادامه مطلب</a>
                 </div>
             </li>
             <li data-transition="fade" data-slotamount="7" data-masterspeed="500" data-saveperformance="on" data-title="Intro Slide">
@@ -64,7 +64,7 @@
                 <div class="tp-caption customin tp-resizeme rs-parallaxlevel-0 text-center" data-x="center" data-y="center" data-hoffset="0" data-voffset="15" data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;" data-speed="500" data-start="2600" data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0.05" data-endelementdelay="0.1" style="z-index: 9; max-width: auto; max-height: auto; white-space: nowrap;">
                     <div style="color:#ffffff; font-size:16px; text-transform:uppercase">ارائه انواع خدمات</div>
                 </div>
-                <div class="tp-caption customin tp-resizeme rs-parallaxlevel-0" data-x="center" data-y="center" data-hoffset="0" data-voffset="70" data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;" data-speed="500" data-start="2900" data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-linktoslide="next" style="z-index: 12;"><a href='all_tour_list.php' class="button_intro">نمایش تورها</a>  <a href='Room.php' class=" button_intro outline">ادامه مطلب</a>
+                <div class="tp-caption customin tp-resizeme rs-parallaxlevel-0" data-x="center" data-y="center" data-hoffset="0" data-voffset="70" data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;" data-speed="500" data-start="2900" data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-linktoslide="next" style="z-index: 12;"><a href='RoomsList.php' class="button_intro">نمایش تورها</a>  <a href='Room.php' class=" button_intro outline">ادامه مطلب</a>
                 </div>
             </li>
         </ul>
@@ -73,253 +73,21 @@
 </div>
 <div class="container margin_60">
     <div class="main_title">
-        <h2>اقاممتگاه های <span>برتر</span> تی شین </h2>
+        <h2>اقامتگاه های <span>برتر</span> تی شین </h2>
         <p>اولین اقامتگاه بوم گردی گیلان در منطقه آزاد انزلی</p>
     </div>
     <div class="row">
-        <div class="col-md-4 col-sm-6 wow zoomIn" data-wow-delay="0.1s">
-            <div class="tour_container">
-                <div class="img_container">
-                    <a href="Room.php">
-                        <img src="img\tour_box_1.jpg" class="img-responsive" alt="">
-                        <div class="ribbon top_rated"></div>
-                        <div class="short_info"> <i class="icon_set_1_icon-44"></i>اقامتگاه <span class="price"><sup>۶۰.۰۰۰ تومان</sup></span>
-                        </div>
-                    </a>
-                </div>
-                <div class="tour_title">
-                    <h3><strong>اقامتگاه</strong> قدیمی گیلان</h3>
-                    <div class="rating"> <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i>
-                    </div>
-                    <div class="wishlist"> <a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">علاقه مند شدم</span></span></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-6 wow zoomIn" data-wow-delay="0.2s">
-            <div class="tour_container">
-                <div class="img_container">
-                    <a href="Room.php">
-                        <img src="img\tour_box_1.jpg" width="800" height="533" class="img-responsive" alt="">
-                        <div class="ribbon top_rated"></div>
-                        <div class="short_info"> <i class="icon_set_1_icon-44"></i>اقامتگاه <span class="price"><sup>۶۰.۰۰۰ تومان</sup></span>
-                        </div>
-                    </a>
-                </div>
-                <div class="tour_title">
-                    <h3><strong>اقامتگاه</strong> قدیمی گیلان</h3>
-                    <div class="rating"> <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i>
-                    </div>
-                    <div class="wishlist"> <a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">علاقه مند شدم</span></span></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-6 wow zoomIn" data-wow-delay="0.3s">
-            <div class="tour_container">
-                <div class="img_container">
-                    <a href="Room.php">
-                        <img src="img\tour_box_1.jpg" width="800" height="533" class="img-responsive" alt="">
-                        <div class="ribbon top_rated"></div>
-                        <div class="short_info"> <i class="icon_set_1_icon-44"></i>اقامتگاه <span class="price"><sup>۶۰.۰۰۰ تومان</sup></span>
-                        </div>
-                    </a>
-                </div>
-                <div class="tour_title">
-                    <h3><strong>اقامتگاه</strong> قدیمی گیلان</h3>
-                    <div class="rating"> <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i>
-                    </div>
-                    <div class="wishlist"> <a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">علاقه مند شدم</span></span></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-6 wow zoomIn" data-wow-delay="0.4s">
-            <div class="tour_container">
-                <div class="img_container">
-                    <a href="Room.php">
-                        <img src="img\tour_box_1.jpg" width="800" height="533" class="img-responsive" alt="">
-                        <div class="ribbon top_rated"></div>
-                        <div class="short_info"> <i class="icon_set_1_icon-44"></i>اقامتگاه <span class="price"><sup>۶۰.۰۰۰ تومان</sup></span>
-                        </div>
-                    </a>
-                </div>
-                <div class="tour_title">
-                    <h3><strong>اقامتگاه</strong> قدیمی گیلان</h3>
-                    <div class="rating"> <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i>
-                    </div>
-                    <div class="wishlist"> <a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">علاقه مند شدم</span></span></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-6 wow zoomIn" data-wow-delay="0.5s">
-            <div class="tour_container">
-                <div class="img_container">
-                    <a href="Room.php">
-                        <img src="img\tour_box_1.jpg" width="800" height="533" class="img-responsive" alt="">
-                        <div class="ribbon top_rated"></div>
-                        <div class="short_info"> <i class="icon_set_1_icon-44"></i>اقامتگاه <span class="price"><sup>۶۰.۰۰۰ تومان</sup></span>
-                        </div>
-                    </a>
-                </div>
-                <div class="tour_title">
-                    <h3><strong>اقامتگاه</strong> قدیمی گیلان</h3>
-                    <div class="rating"> <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i>
-                    </div>
-                    <div class="wishlist"> <a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">علاقه مند شدم</span></span></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-6 wow zoomIn" data-wow-delay="0.6s">
-            <div class="tour_container">
-                <div class="img_container">
-                    <a href="Room.php">
-                        <img src="img\tour_box_1.jpg" width="800" height="533" class="img-responsive" alt="">
-                        <div class="ribbon top_rated"></div>
-                        <div class="short_info"> <i class="icon_set_1_icon-44"></i>اقامتگاه <span class="price"><sup>۶۰.۰۰۰ تومان</sup></span>
-                        </div>
-                    </a>
-                </div>
-                <div class="tour_title">
-                    <h3><strong>اقامتگاه</strong> قدیمی گیلان</h3>
-                    <div class="rating"> <i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile voted"></i><i class="icon-smile"></i>
-                    </div>
-                    <div class="wishlist"> <a class="tooltip_flip tooltip-effect-1" href="javascript:void(0);">+<span class="tooltip-content-flip"><span class="tooltip-back">علاقه مند شدم</span></span></a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <?php $rooms->AllRooms(true,'SELECT * FROM rooms WHERE room_score = 5 OR room_score = 4 ORDER BY room_score = 5 DESC LIMIT 6'); ?>
     </div>
     <p class="text-center add_bottom_30"> <a href="RoomsList.php" class="btn_1 medium"><i class="icon-eye-7"></i>مشاهده همه اقامتگاه ها</a>
     </p>
     <hr>
     <div class="main_title">
-        <h2><span>اتاق های </span> ما</h2>
-        <p>اولین اقامتگاه بوم گردی گیلان در منطقه آزاد انزلی</p>
+        <h2><span>جدیدترین </span>اتاق های ما</h2>
+        <p>جدید ترین اقامتگاه بوم گردی گیلان در منطقه آزاد انزلی</p>
     </div>
     <div class="row">
-        <div class="col-md-4 col-sm-6 wow zoomIn" data-wow-delay="0.1s">
-            <div class="hotel_container">
-                <div class="img_container">
-                    <a href="Room.php">
-                        <img src="img\hotel_1.jpg" width="800" height="533" class="img-responsive" alt="">
-                        <div class="ribbon top_rated"></div>
-                        <div class="score"><span>4.۵</span>خوب</div>
-                        <div class="short_info hotel">اتاق ۲ نفره<span class="price"><sup>۴۲.۰۰۰ تومان</sup></span>
-                        </div>
-                    </a>
-                </div>
-                <div class="hotel_title">
-                    <h3><strong> طبقه اول خانه </strong>شکیلی</h3>
-                    <div class="rating"> <i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star-empty"></i>
-                    </div>
-                    <div class="wishlist"> <a class="tooltip_flip tooltip-effect-1" href="#">+<span class="tooltip-content-flip"><span class="tooltip-back">علاقمند شدم</span></span></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-6 wow zoomIn" data-wow-delay="0.2s">
-            <div class="hotel_container">
-                <div class="img_container">
-                    <a href="Room.php">
-                        <img src="img\hotel_1.jpg" width="800" height="533" class="img-responsive" alt="">
-                        <div class="ribbon top_rated"></div>
-                        <div class="score"><span>4.۵</span>خوب</div>
-                        <div class="short_info hotel">اتاق ۲ نفره<span class="price"><sup>۴۲.۰۰۰ تومان</sup></span>
-                        </div>
-                    </a>
-                </div>
-                <div class="hotel_title">
-                    <h3><strong> طبقه اول خانه </strong>شکیلی</h3>
-                    <div class="rating"> <i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star-empty"></i>
-                    </div>
-                    <div class="wishlist"> <a class="tooltip_flip tooltip-effect-1" href="#">+<span class="tooltip-content-flip"><span class="tooltip-back">علاقمند شدم</span></span></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-6 wow zoomIn" data-wow-delay="0.3s">
-            <div class="hotel_container">
-                <div class="img_container">
-                    <a href="Room.php">
-                        <img src="img\hotel_1.jpg" width="800" height="533" class="img-responsive" alt="">
-                        <div class="ribbon top_rated"></div>
-                        <div class="score"><span>4.۵</span>خوب</div>
-                        <div class="short_info hotel">اتاق ۲ نفره<span class="price"><sup>۴۲.۰۰۰ تومان</sup></span>
-                        </div>
-                    </a>
-                </div>
-                <div class="hotel_title">
-                    <h3><strong> طبقه اول خانه </strong>شکیلی</h3>
-                    <div class="rating"> <i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star-empty"></i>
-                    </div>
-                    <div class="wishlist"> <a class="tooltip_flip tooltip-effect-1" href="#">+<span class="tooltip-content-flip"><span class="tooltip-back">علاقمند شدم</span></span></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-6 wow zoomIn" data-wow-delay="0.4s">
-            <div class="hotel_container">
-                <div class="img_container">
-                    <a href="Room.php">
-                        <img src="img\hotel_1.jpg" width="800" height="533" class="img-responsive" alt="">
-                        <div class="ribbon top_rated"></div>
-                        <div class="score"><span>4.۵</span>خوب</div>
-                        <div class="short_info hotel">اتاق ۲ نفره<span class="price"><sup>۴۲.۰۰۰ تومان</sup></span>
-                        </div>
-                    </a>
-                </div>
-                <div class="hotel_title">
-                    <h3><strong> طبقه اول خانه </strong>شکیلی</h3>
-                    <div class="rating"> <i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star-empty"></i>
-                    </div>
-                    <div class="wishlist"> <a class="tooltip_flip tooltip-effect-1" href="#">+<span class="tooltip-content-flip"><span class="tooltip-back">علاقمند شدم</span></span></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-6 wow zoomIn" data-wow-delay="0.5s">
-            <div class="hotel_container">
-                <div class="img_container">
-                    <a href="Room.php">
-                        <img src="img\hotel_1.jpg" width="800" height="533" class="img-responsive" alt="">
-                        <div class="ribbon top_rated"></div>
-                        <div class="score"><span>4.۵</span>خوب</div>
-                        <div class="short_info hotel">اتاق ۲ نفره<span class="price"><sup>۴۲.۰۰۰ تومان</sup></span>
-                        </div>
-                    </a>
-                </div>
-                <div class="hotel_title">
-                    <h3><strong> طبقه اول خانه </strong>شکیلی</h3>
-                    <div class="rating"> <i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star-empty"></i>
-                    </div>
-                    <div class="wishlist"> <a class="tooltip_flip tooltip-effect-1" href="#">+<span class="tooltip-content-flip"><span class="tooltip-back">علاقمند شدم</span></span></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-6 wow zoomIn" data-wow-delay="0.6s">
-            <div class="hotel_container">
-                <div class="img_container">
-                    <a href="Room.php">
-                        <img src="img\hotel_1.jpg" width="800" height="533" class="img-responsive" alt="">
-                        <div class="ribbon top_rated"></div>
-                        <div class="score"><span>4.۵</span>خوب</div>
-                        <div class="short_info hotel">اتاق ۲ نفره<span class="price"><sup>۴۲.۰۰۰ تومان</sup></span>
-                        </div>
-                    </a>
-                </div>
-                <div class="hotel_title">
-                    <h3><strong> طبقه اول خانه </strong>شکیلی</h3>
-                    <div class="rating"> <i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star-empty"></i>
-                    </div>
-                    <div class="wishlist"> <a class="tooltip_flip tooltip-effect-1" href="#">+<span class="tooltip-content-flip"><span class="tooltip-back">علاقمند شدم</span></span></a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <?php $rooms->AllRooms(true,'SELECT * FROM rooms ORDER BY room_id DESC LIMIT 6'); ?>
     </div>
     <p class="text-center nopadding"> <a href="RoomsList.php" class="btn_1 medium"><i class="icon-eye-7"></i>مشاهده همه هتل ها</a>
     </p>
