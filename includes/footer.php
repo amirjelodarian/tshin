@@ -6,13 +6,25 @@
             </div>
             <div class="col-md-3 col-sm-3">
                 <h3>در باره ما</h3>
-                <ul>
-                    <li><a href="about.php">درباره ما</a>
-                    </li>
-                    <li><a href="login.php">ورود</a>
-                    </li>
-                    <li><a href="register.php">ثبت نام</a>
-                    </li>
+                <ul class="footer-menu">
+                    <?php
+                    if ($sessions->login_state()){
+                        echo("
+                            <li class='submenu panel-icon' style='max-height: 24px'><a href='panel/' class='icon-tools' style='padding: 6px' target='_blank'>داشبورد</a></li>
+                            <li>
+                                <form action='");?><?php echo(htmlspecialchars($_SERVER['PHP_SELF'])); ?><?php echo("' method='post'>
+                                    <span class='icon-logout'><input type='submit' name='logout_submit' class='logout-btn icon-logout outline' value='خروج' /></span>
+                                </form>
+                            </li>
+                        ");
+                    }else{
+                      echo("
+                          <li><a href='login.php'>ورود</a></li>
+                        <li><a href='register.php'>ثبت نام</a></li>
+                      ");
+                    }
+                    ?>
+                    <li><a href="about.php">درباره ما</a></li>
                 </ul>
             </div>
             <div class="col-md-3 col-sm-3">
@@ -20,7 +32,7 @@
                 <ul>
                     <li><a href="blog.php">وبلاگ ها</a>
                     </li>
-                    <li><a href="all_hotels_list.php">اقامتگاه های ما </a>
+                    <li><a href="RoomsList.php">اقامتگاه های ما </a>
                     </li>
                     <li><a href="gallery.html">گالری</a>
                     </li>
@@ -74,7 +86,6 @@ if (isset($_SESSION["errors_message"])) {
     }
 }
 global $database;
-    if ($database->open_connection()){
+    if ($database->open_connection())
         $database->close_connection();
-    }
 ?>

@@ -44,16 +44,18 @@
         // functions for display rooms
         public static function AllRooms($grid = "",$manual_sql = "",$pagination = "",$page = ""){
             global $database,$Functions;
+            //-------------------------------------------------------------
             if (!(empty($manual_sql)))
                 $sql = $manual_sql;
             else
                 $sql = "SELECT * FROM rooms ORDER BY room_id DESC";
-
+            //-------------------------------------------------------------
             if ($pagination == true && isset($page)){
                 settype($page,"integer");
                 $pagination = $Functions->pagination(10,$page,'rooms','room_id');
                 $sql = "SELECT * FROM rooms ORDER BY room_id DESC LIMIT {$pagination['start_from']},{$pagination['record_per_page']}";
             }
+            //-------------------------------------------------------------
             $database->query("SET NAMES 'utf8'");
             $result = $database->query($sql);
             while ($rooms_rows = $database->fetch_array($result)){
@@ -109,48 +111,48 @@
                                         <div class='tour_list_desc'>
                                         <h4 class='room_address'>{$database->escape_value($rooms_rows['room_address'])}</h4>
                                             <div class='score'>");
-                    echo(self::word_score($rooms_rows['room_score']));
-                    echo("<span>{$database->escape_value($Functions->EN_numTo_FA($rooms_rows['room_score'],true))}</span>
+                                                echo(self::word_score($rooms_rows['room_score']));
+                                                echo("<span>{$database->escape_value($Functions->EN_numTo_FA($rooms_rows['room_score'],true))}</span>
                                             </div>
                                             <div class='rating' style='background: white'>
                                             ");
-                    echo($Functions->give_start_by_number($rooms_rows['room_score']));
-                    echo ("
+                                                echo($Functions->give_start_by_number($rooms_rows['room_score']));
+                                                echo ("
                                             </div>
                                             <h3>{$database->escape_value($rooms_rows['room_title'])}</h3>
                                             <p>");
-                    echo(substr(nl2br(htmlentities($rooms_rows['room_description'])),0,250)."...");
-                    echo("</p>
+                                                echo(substr(nl2br(htmlentities($rooms_rows['room_description'])),0,250)."...");
+                                                echo("</p>
                                             <ul class='add_info'>
                                                 <li> <a href='javascript:void(0);' class='tooltip-1 ");
-                    if($rooms_rows["room_wifi"] == 1){ echo 'rooms_checkbox';}
-                    echo("' data-placement='top' title='وای فای رایگان'><i class='icon_set_1_icon-86'></i></a>
+                                                if($rooms_rows["room_wifi"] == 1){ echo 'rooms_checkbox';}
+                                                echo("' data-placement='top' title='وای فای رایگان'><i class='icon_set_1_icon-86'></i></a>
                                                 </li>
                                                 <li> <a href='javascript:void(0);' class='tooltip-1 ");
-                    if($rooms_rows["room_television"] == 1){ echo 'rooms_checkbox';}
-                    echo("' data-placement='top' title='تلویزیون پلاسما با کانال های اچ دی'><i class='icon_set_2_icon-116'></i></a>
+                                                if($rooms_rows["room_television"] == 1){ echo 'rooms_checkbox';}
+                                                echo("' data-placement='top' title='تلویزیون پلاسما با کانال های اچ دی'><i class='icon_set_2_icon-116'></i></a>
                                                 </li>
                                                 <li> <a href='javascript:void(0);' class='tooltip-1 ");
-                    if($rooms_rows["room_pool"] == 1){ echo 'rooms_checkbox';}
-                    echo("' data-placement='top' title='استخر شنا'><i class='icon_set_2_icon-110'></i></a>
+                                                if($rooms_rows["room_pool"] == 1){ echo 'rooms_checkbox';}
+                                                echo("' data-placement='top' title='استخر شنا'><i class='icon_set_2_icon-110'></i></a>
                                                 </li>
                                                 <li> <a href='javascript:void(0);' class='tooltip-1 ");
-                    if($rooms_rows["room_gym"] == 1){ echo 'rooms_checkbox';}
-                    echo("' data-placement='top' title='مرکز تناسب اندام'><i class='icon_set_2_icon-117'></i></a>
+                                                if($rooms_rows["room_gym"] == 1){ echo 'rooms_checkbox';}
+                                                echo("' data-placement='top' title='مرکز تناسب اندام'><i class='icon_set_2_icon-117'></i></a>
                                                 </li>
                                                 <li> <a href='javascript:void(0);' class='tooltip-1 ");
-                    if($rooms_rows["room_food"] == 1){ echo 'rooms_checkbox';}
-                    echo("' data-placement='top' title='رستوران'><i class='icon_set_1_icon-58'></i></a>
+                                                if($rooms_rows["room_food"] == 1){ echo 'rooms_checkbox';}
+                                                echo("' data-placement='top' title='رستوران'><i class='icon_set_1_icon-58'></i></a>
                                                 </li>
                                                 <li> <a href='javascript:void(0);' class='tooltip-1 ");
-                    if($rooms_rows["room_parking"] == 1){ echo 'rooms_checkbox';}
-                    echo("' data-placement='top' title='پارکینگ'><i class='icon_set_1_icon-27'></i></a>
+                                                if($rooms_rows["room_parking"] == 1){ echo 'rooms_checkbox';}
+                                                echo("' data-placement='top' title='پارکینگ'><i class='icon_set_1_icon-27'></i></a>
                                                 </li>
                                             </ul>
                                         </div>
                                     </div>
                                     <div class='col-lg-2 col-md-2 col-sm-2'>");
-                    if($rooms_rows['room_person_count'] != 0){ echo("<div class='room_person_count_show'>{$Functions->EN_numTo_FA($rooms_rows['room_person_count'],true)} نفره</div>"); }
+                                        if($rooms_rows['room_person_count'] != 0){ echo("<div class='room_person_count_show'>{$Functions->EN_numTo_FA($rooms_rows['room_person_count'],true)} نفره</div>"); }
                     echo("
                                         <div class='price_list'>
                                             <div>
@@ -182,116 +184,158 @@
                 </div>";
             }
         }
-        public function ShowAllRoomsBy($grid = ""){
+        public function ShowAllRoomsBy($grid = "",$roomByPage = ""){
             global $database, $Functions,$users;
-            $sql = "SELECT * FROM rooms ";
+            $sql = "SELECT * FROM tshin.rooms ";
             if (isset($_POST["user_show_by_all_hotels_room"])) {
-                if (isset($_POST["user_star_score_room"])){
+                if (isset($_POST["user_star_score_room"])) {
                     $this->room_score = $database->escape_value($_POST["user_star_score_room"]);
-                    settype($this->room_score,"integer");
-                    if (preg_match("/WHERE/",$sql)){
-                            $sql .= " && room_score={$this->room_score} ";
-                    }else{
+                    settype($this->room_score, "integer");
+                    if (preg_match("/WHERE/", $sql)) {
+                        $sql .= " && room_score={$this->room_score} ";
+                    } else {
                         $sql .= " WHERE room_score={$this->room_score} ";
                     }
                 }
-                if(isset($_POST["user_wifi_room"])){
-                    if (preg_match("/WHERE/",$sql)){
+                if (isset($_POST["user_wifi_room"])) {
+                    if (preg_match("/WHERE/", $sql)) {
                         $sql .= " && room_wifi=1 ";
-                    }else{
+                    } else {
                         $sql .= " WHERE room_wifi=1 ";
                     }
                 }
-                if(isset($_POST["user_television_room"])){
-                    if (preg_match("/WHERE/",$sql)){
+                if (isset($_POST["user_television_room"])) {
+                    if (preg_match("/WHERE/", $sql)) {
                         $sql .= " && room_television=1 ";
-                    }else{
+                    } else {
                         $sql .= " WHERE room_television=1 ";
                     }
                 }
-                if(isset($_POST["user_food_room"])){
-                    if (preg_match("/WHERE/",$sql)){
+                if (isset($_POST["user_food_room"])) {
+                    if (preg_match("/WHERE/", $sql)) {
                         $sql .= " && room_food=1 ";
-                    }else{
+                    } else {
                         $sql .= " WHERE room_food=1 ";
                     }
                 }
-                if(isset($_POST["user_pool_room"])){
-                    if (preg_match("/WHERE/",$sql)){
+                if (isset($_POST["user_pool_room"])) {
+                    if (preg_match("/WHERE/", $sql)) {
                         $sql .= " && room_pool=1 ";
-                    }else{
+                    } else {
                         $sql .= " WHERE room_pool=1 ";
                     }
                 }
-                if(isset($_POST["user_parking_room"])){
-                    if (preg_match("/WHERE/",$sql)){
+                if (isset($_POST["user_parking_room"])) {
+                    if (preg_match("/WHERE/", $sql)) {
                         $sql .= " && room_parking=1 ";
-                    }else{
+                    } else {
                         $sql .= " WHERE room_parking=1 ";
                     }
                 }
-                if(isset($_POST["user_gym_room"])){
-                    if (preg_match("/WHERE/",$sql)){
+                if (isset($_POST["user_gym_room"])) {
+                    if (preg_match("/WHERE/", $sql)) {
                         $sql .= " && room_gym=1 ";
-                    }else{
+                    } else {
                         $sql .= " WHERE room_gym=1 ";
                     }
                 }
-                if (isset($_POST["user_price_range_room"]) && !(empty($_POST["user_price_range_room"]))){
+                if (isset($_POST["user_price_range_room"]) && !(empty($_POST["user_price_range_room"]))) {
                     $price_range = $database->escape_value($_POST["user_price_range_room"]);
-                    $price_range = explode(";",$price_range);
-                    $first_attr = $price_range[0]; $second_attr = $price_range[1];
-                    $first_attr = (int)$first_attr; $second_attr = (int)$second_attr;
-                    settype($first_attr,"integer");
-                    settype($second_attr,"integer");
+                    $price_range = explode(";", $price_range);
+                    $first_attr = $price_range[0];
+                    $second_attr = $price_range[1];
+                    $first_attr = (int)$first_attr;
+                    $second_attr = (int)$second_attr;
+                    settype($first_attr, "integer");
+                    settype($second_attr, "integer");
                     if (!(empty($first_attr)) && !(empty($second_attr))) {
                         if (preg_match("/WHERE/", $sql)) {
                             $sql .= " && room_main_price BETWEEN {$first_attr} AND {$second_attr} ";
                         } else {
                             $sql .= " WHERE room_main_price BETWEEN {$first_attr} AND {$second_attr} ";
                         }
-                    }else{
+                    } else {
                         $users->redirect_to("RoomsList.php");
                     }
                 }
-                if (isset($_POST["user_person_count_range_room"]) && !(empty($_POST["user_person_count_range_room"]))){
+                if (isset($_POST["user_person_count_range_room"]) && !(empty($_POST["user_person_count_range_room"]))) {
                     $person_count_range = $database->escape_value($_POST["user_person_count_range_room"]);
-                    $person_count_range = explode(";",$person_count_range);
-                    $first_attr = $person_count_range[0]; $second_attr = $person_count_range[1];
-                    $first_attr = (int)$first_attr; $second_attr = (int)$second_attr;
-                    settype($first_attr,"integer");
-                    settype($second_attr,"integer");
-                    if (preg_match("/WHERE/",$sql)){
+                    $person_count_range = explode(";", $person_count_range);
+                    $first_attr = $person_count_range[0];
+                    $second_attr = $person_count_range[1];
+                    $first_attr = (int)$first_attr;
+                    $second_attr = (int)$second_attr;
+                    settype($first_attr, "integer");
+                    settype($second_attr, "integer");
+                    if (preg_match("/WHERE/", $sql)) {
                         $sql .= " && room_person_count BETWEEN {$first_attr} AND {$second_attr} ";
-                    }else{
+                    } else {
                         $sql .= " WHERE room_person_count BETWEEN {$first_attr} AND {$second_attr} ";
                     }
                 }
                 $sql .= " ORDER BY room_id DESC";
-                if (isset($_POST["user_sort_rating_room"])){
+                if (isset($_POST["user_sort_rating_room"])) {
+                    settype($roomByPage, "integer");
+                    $pagination = $Functions->pagination(10, $roomByPage, 'rooms', 'room_id');
                     switch ($_POST["user_sort_rating_room"]) {
                         case "lower":
-                            $sql = "SELECT * FROM rooms ORDER BY room_score ASC";
+                            $ByWhich = array("rate" => "lower");
+                            $sql = "SELECT * FROM rooms ORDER BY room_score ASC LIMIT {$pagination['start_from']},{$pagination['record_per_page']}";
                             break;
                         case "higher":
-                            $sql = "SELECT * FROM rooms ORDER BY room_score DESC";
-                            break;
-                        default:
+                            $ByWhich = array("rate" => "higher");
+                            $sql = "SELECT * FROM rooms ORDER BY room_score DESC LIMIT {$pagination['start_from']},{$pagination['record_per_page']}";
                             break;
                     }
                 }
-                if (isset($_POST["user_sort_price_room"])){
+                if (isset($_POST["user_sort_price_room"])) {
+                    settype($roomByPage, "integer");
+                    $pagination = $Functions->pagination(10, $roomByPage, 'rooms', 'room_id');
                     switch ($_POST["user_sort_price_room"]) {
                         case "lower":
-                            $sql = "SELECT * FROM rooms ORDER BY room_main_price ASC";
+                            $ByWhich = array("price" => "lower");
+                            $sql = "SELECT * FROM rooms ORDER BY room_main_price ASC LIMIT {$pagination['start_from']},{$pagination['record_per_page']}";
                             break;
                         case "higher":
-                            $sql = "SELECT * FROM rooms ORDER BY room_main_price DESC";
-                            break;
-                        default:
+                            $ByWhich = array("price" => "higher");
+                            $sql = "SELECT * FROM rooms ORDER BY room_main_price DESC LIMIT {$pagination['start_from']},{$pagination['record_per_page']}";
                             break;
                     }
                 }
+            }
+            if(isset($_GET["roomByPage"])){
+                if(isset($_GET["ByPrice"])){
+                    settype($roomByPage, "integer");
+                    $pagination = $Functions->pagination(10, $roomByPage, 'rooms', 'room_id');
+                    switch ($_GET["ByPrice"]){
+                        case "lower":
+                            $sql = "SELECT * FROM rooms ORDER BY room_main_price ASC LIMIT {$pagination['start_from']},{$pagination['record_per_page']}";
+                            break;
+                        case "higher":
+                            $sql = "SELECT * FROM rooms ORDER BY room_main_price DESC LIMIT {$pagination['start_from']},{$pagination['record_per_page']}";
+                            break;
+                        default:
+                            $users->redirect_to("RoomsList.php");
+                            break;
+                    }
+                }
+                if(isset($_GET["ByRate"])){
+                    settype($roomByPage, "integer");
+                    $pagination = $Functions->pagination(10, $roomByPage, 'rooms', 'room_id');
+                    switch ($_GET["ByRate"]){
+                        case "lower":
+                            $sql = "SELECT * FROM rooms ORDER BY room_score ASC LIMIT {$pagination['start_from']},{$pagination['record_per_page']}";
+                            break;
+                        case "higher":
+                            $sql = "SELECT * FROM rooms ORDER BY room_score DESC LIMIT {$pagination['start_from']},{$pagination['record_per_page']}";
+                            break;
+                        default:
+                            $users->redirect_to("RoomsList.php");
+                            break;
+                    }
+                }
+            }
+
                 $database->query("SET NAMES 'utf8'");
                 $result = $database->query($sql);
                 if($database->num_rows($result) == 0){ echo "<h1 class='no-result'>متاسفانه یافت نشد !</h1>"; }
@@ -408,7 +452,61 @@
                             ");
                     }
                 }
-            }
+
+
+                if (isset($_POST["user_sort_price_room"])){
+                    switch ($_POST["user_sort_price_room"]){
+                        case "lower" || "higher":
+                            echo "<div class='pagination-outside col-lg-10 col-md-10 col-sm-10 col-xs-12'>
+                                <div class='pagination'>";
+                            for ($i = 1; $i <= $pagination["total_page"]; $i++):
+                                echo "<a href='{$_SERVER['PHP_SELF']}?roomByPage={$i}&ByPrice={$ByWhich['price']}' ";
+                                if ($i == $roomByPage) echo "id='current-page'";
+                                echo">&nbsp;{$i}&nbsp;</a>";
+                            endfor;
+                            echo"</div>
+                                </div>";
+                            break;
+                    }
+                }
+                if(isset($_GET["ByPrice"])){
+                    echo "<div class='pagination-outside col-lg-10 col-md-10 col-sm-10 col-xs-12'>
+                                <div class='pagination'>";
+                    for ($i = 1; $i <= $pagination["total_page"]; $i++):
+                        echo "<a href='{$_SERVER['PHP_SELF']}?roomByPage={$i}&ByPrice={$_GET["ByPrice"]}' ";
+                        if ($i == $roomByPage) echo "id='current-page'";
+                        echo">&nbsp;{$i}&nbsp;</a>";
+                    endfor;
+                    echo"</div>
+                                </div>";
+                }
+                if(isset($_POST["user_sort_rating_room"])){
+                    switch ($_POST["user_sort_rating_room"]){
+                        case "lower" || "higher":
+                            echo "<div class='pagination-outside col-lg-10 col-md-10 col-sm-10 col-xs-12'>
+                                <div class='pagination'>";
+                            for ($i = 1; $i <= $pagination["total_page"]; $i++):
+                                echo "<a href='{$_SERVER['PHP_SELF']}?roomByPage={$i}&ByRate={$ByWhich['rate']}' ";
+                                if ($i == $roomByPage) echo "id='current-page'";
+                                echo">&nbsp;{$i}&nbsp;</a>";
+                            endfor;
+                            echo"</div>
+                                </div>";
+                            break;
+                    }
+                }
+                if (isset($_GET["ByRate"])){
+                    echo "<div class='pagination-outside col-lg-10 col-md-10 col-sm-10 col-xs-12'>
+                                <div class='pagination'>";
+                    for ($i = 1; $i <= $pagination["total_page"]; $i++):
+                    echo "<a href='{$_SERVER['PHP_SELF']}?roomByPage={$i}&ByRate={$_GET["ByRate"]}' ";
+                        if ($i == $roomByPage) echo "id='current-page'";
+                        echo">&nbsp;{$i}&nbsp;</a>";
+                    endfor;
+                    echo"</div>
+                                </div>";
+                }
+
         }
         public function UserََSerachRoom($grid = ""){
             global $database,$Functions,$users;
@@ -1098,7 +1196,7 @@
                             </div>
                             ");
                     }
-                    echo "<div class='pagination-outside col-lg-10 col-md-10 col-sm-10 col-xs-12'>
+                    /*echo "<div class='pagination-outside col-lg-10 col-md-10 col-sm-10 col-xs-12'>
                     <div class='pagination'>";
                     for ($i = 1; $i <= $pagination["total_page"]; $i++):
                         echo "<a href='rooms_search.php?searchPage={$i}' ";
@@ -1107,7 +1205,7 @@
                         echo">&nbsp;{$i}&nbsp;</a>";
                     endfor;
                     echo"</div>
-                    </div>";
+                    </div>";*/
                 }else { echo "<h1 class='no-result'>یافت نشد !</h1>"; }
 
         }
