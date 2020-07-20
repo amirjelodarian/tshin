@@ -6,7 +6,6 @@
       <change beforePath="$PROJECT_DIR$/RoomsGrid.php" beforeDir="false" afterPath="$PROJECT_DIR$/RoomsGrid.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RoomsList.php" beforeDir="false" afterPath="$PROJECT_DIR$/RoomsList.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/rooms.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/rooms.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/datapicker" beforeDir="false" afterPath="$PROJECT_DIR$/datapicker" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/datapicker/demo/Samples1.html" beforeDir="false" afterPath="$PROJECT_DIR$/datapicker/demo/Samples1.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/datapicker/dist/jquery.md.bootstrap.datetimepicker.js" beforeDir="false" />
@@ -14,9 +13,6 @@
       <change beforePath="$PROJECT_DIR$/datapicker/dist/jquery.md.bootstrap.datetimepicker.style.css.map" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/datapicker/src/jquery.md.bootstrap.datetimepicker.js" beforeDir="false" afterPath="$PROJECT_DIR$/datapicker/src/jquery.md.bootstrap.datetimepicker.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/datapicker/src/jquery.md.bootstrap.datetimepicker.style.css" beforeDir="false" afterPath="$PROJECT_DIR$/datapicker/src/jquery.md.bootstrap.datetimepicker.style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/includes/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/includes/footer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/includes/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/panel/includes/footer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/panel/logfile.txt" beforeDir="false" afterPath="$PROJECT_DIR$/panel/logfile.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -199,7 +195,7 @@
       <workItem from="1594753646399" duration="64000" />
       <workItem from="1594878177329" duration="382000" />
       <workItem from="1595161473155" duration="12235000" />
-      <workItem from="1595269217856" duration="11554000" />
+      <workItem from="1595269217856" duration="14923000" />
     </task>
     <servers />
   </component>
@@ -249,10 +245,10 @@
     </state>
     <state x="392" y="207" key="com.intellij.ide.util.TipDialog/0.26.1366.708@0.26.1366.708" timestamp="1595269512055" />
     <state x="392" y="208" key="com.intellij.ide.util.TipDialog/0.27.1366.707@0.27.1366.707" timestamp="1588723909265" />
-    <state x="336" y="26" width="683" height="708" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1593171198958">
+    <state x="336" y="26" width="683" height="708" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1595285532760">
       <screen x="0" y="26" width="1366" height="708" />
     </state>
-    <state x="336" y="26" width="683" height="708" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.26.1366.708@0.26.1366.708" timestamp="1593171198958" />
+    <state x="336" y="26" width="683" height="708" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.26.1366.708@0.26.1366.708" timestamp="1595285532760" />
     <state x="336" y="27" width="683" height="707" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.27.1366.707@0.27.1366.707" timestamp="1588110468108" />
     <state x="0" y="226" width="1166" height="508" key="dock-window-1" timestamp="1592565484918">
       <screen x="0" y="26" width="1366" height="708" />

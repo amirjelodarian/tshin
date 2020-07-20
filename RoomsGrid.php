@@ -2,11 +2,12 @@
                 <?php
                 isset($_GET["page"]) ? $page = $_GET["page"] : $page = 1;
                 isset($_GET["roomByPage"]) ? $roomByPage = $_GET["roomByPage"] : $roomByPage = 1;
+                isset($_GET["roomSearchPage"]) ? $roomSearchPage = $_GET["roomSearchPage"] : $roomSearchPage = 1;
 
                 if(isset($_POST["user_show_by_all_hotels_room"]) || isset($_GET["roomByPage"])){
                     $rooms->ShowAllRoomsBy(true,$roomByPage);
-                }elseif (isset($_POST["user_submit_search_room"]) && isset($_POST["user_keyword_room"]) && !(empty($_POST["user_keyword_room"]))){
-                    $rooms->UserََSerachRoom(true);
+                }elseif (isset($_POST["user_submit_search_room"]) && isset($_POST["user_keyword_room"]) && !(empty($_POST["user_keyword_room"])) || isset($_GET["roomSearchPage"])){
+                    $rooms->UserََSerachRoom(true,$roomSearchPage);
                 }else{
                     $rooms->AllRooms(true,'',true,$page);
                 }

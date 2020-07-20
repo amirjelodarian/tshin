@@ -508,29 +508,67 @@
                 }
 
         }
-        public function UserََSerachRoom($grid = ""){
+
+        public function UserََSerachRoom($grid = "",$roomSearchPage){
             global $database,$Functions,$users;
+            settype($roomSearchPage,"integer");
             if (isset($_POST["user_submit_search_room"]) && !(empty($_POST["user_keyword_room"]))) {
                 $keyword = $database->escape_value($_POST['user_keyword_room']);
-                if (isset($_POST["user_ByWitch_room"])){
-                    switch ($_POST["user_ByWitch_room"]){
+                if (isset($_POST["user_ByWitch_room"])) {
+                    switch ($_POST["user_ByWitch_room"]) {
                         case 'Address':
                             $sql = "SELECT * FROM rooms WHERE room_address LIKE '%{$keyword}%'";
+                            $pagination = $Functions->pagination(10, $roomSearchPage, 'rooms', 'room_id'," WHERE room_address LIKE '%{$keyword}%'");
+                            $ByWhich = array("Address" => $keyword);
                             break;
                         case 'Title':
                             $sql = "SELECT * FROM rooms WHERE room_title LIKE '%{$keyword}%'";
+                            $pagination = $Functions->pagination(10, $roomSearchPage, 'rooms', 'room_id'," WHERE room_title LIKE '%{$keyword}%'");
+                            $ByWhich = array("Title" => $keyword);
                             break;
                         case 'Descript':
                             $sql = "SELECT * FROM rooms WHERE room_description LIKE '%{$keyword}%'";
+                            $pagination = $Functions->pagination(10, $roomSearchPage, 'rooms', 'room_id'," WHERE room_description LIKE '%{$keyword}%'");
+                            $ByWhich = array("Descript" => $keyword);
                             break;
                         case 'Price':
                             $sql = "SELECT * FROM rooms WHERE room_main_price LIKE '{$keyword}%'";
+                            $pagination = $Functions->pagination(10, $roomSearchPage, 'rooms', 'room_id'," WHERE room_main_price LIKE '{$keyword}%'");
+                            $ByWhich = array("Price" => $keyword);
                             break;
                         default:
+                            $ByWhich = array("Address" => $keyword);
                             $sql = "SELECT * FROM rooms WHERE room_address LIKE '%{$keyword}%'";
+                            $pagination = $Functions->pagination(10, $roomSearchPage, 'rooms', 'room_id'," WHERE room_address LIKE '%{$keyword}%'");
                             break;
                     }
                 }
+            }
+                if(isset($_GET['roomSearchPage'])){
+                    $keyword = $database->escape_value($_GET["keyword"]);
+                    switch ($_GET["ByWhich"]){
+                        case 'Address':
+                            $sql = "SELECT * FROM rooms WHERE room_address LIKE '%{$keyword}%'";
+                            $pagination = $Functions->pagination(10, $roomSearchPage, 'rooms', 'room_id'," WHERE room_address LIKE '%{$keyword}%'");
+                            break;
+                        case 'Title':
+                            $sql = "SELECT * FROM rooms WHERE room_title LIKE '%{$keyword}%'";
+                            $pagination = $Functions->pagination(10, $roomSearchPage, 'rooms', 'room_id'," WHERE room_title LIKE '%{$keyword}%'");
+                            break;
+                        case 'Descript':
+                            $sql = "SELECT * FROM rooms WHERE room_description LIKE '%{$keyword}%'";
+                            $pagination = $Functions->pagination(10, $roomSearchPage, 'rooms', 'room_id'," WHERE room_description LIKE '%{$keyword}%'");
+                            break;
+                        case 'Price':
+                            $sql = "SELECT * FROM rooms WHERE room_main_price LIKE '{$keyword}%'";
+                            $pagination = $Functions->pagination(10, $roomSearchPage, 'rooms', 'room_id'," WHERE room_main_price LIKE '{$keyword}%'");
+                            break;
+                        default:
+                            $users->redirect_to("RoomsList.php");
+                            break;
+                    }
+                }
+                $sql .= " LIMIT {$pagination['start_from']},{$pagination['record_per_page']}";
                 $result = $database->query($sql);
                 if ($database->num_rows($result) > 0) {
                     while ($rooms_rows = $database->fetch_array($result)) {
@@ -649,9 +687,32 @@
                     }
                 }else { echo "<h1 class='no-result'>متاسفانه یافت نشد !</h1>"; }
 
-            }else{
-                $users->redirect_to($_SERVER["PHP_SELF"]);
-            }
+                if (isset($_POST["user_submit_search_room"]) && !(empty($_POST["user_keyword_room"]))){
+                            echo "<div class='pagination-outside col-lg-10 col-md-10 col-sm-10 col-xs-12'>
+                                <div class='pagination'>";
+                            for ($i = 1; $i <= $pagination["total_page"]; $i++):
+                                foreach ((array) $ByWhich as $key => $value){
+                                    echo "<a href='{$_SERVER['PHP_SELF']}?roomSearchPage={$i}&ByWhich={$key}&keyword={$value}' ";
+                                }
+                                if ($i == $roomSearchPage) echo "id='current-page'";
+                                echo">&nbsp;{$i}&nbsp;</a>";
+                            endfor;
+                            echo"</div>
+                                </div>";
+                }
+                if(isset($_GET["ByWhich"])){
+                    echo "<div class='pagination-outside col-lg-10 col-md-10 col-sm-10 col-xs-12'>
+                                <div class='pagination'>";
+                    for ($i = 1; $i <= $pagination["total_page"]; $i++):
+                        echo "<a href='{$_SERVER['PHP_SELF']}?roomSearchPage={$i}&ByWhich={$_GET['ByWhich']}&keyword={$_GET['keyword']}' ";
+                        if ($i == $roomSearchPage) echo "id='current-page'";
+                        echo">&nbsp;{$i}&nbsp;</a>";
+                    endfor;
+                    echo"</div>
+                                </div>";
+                }
+
+
         }
 
         public function DatesRoomReservedAttr($room_id){
