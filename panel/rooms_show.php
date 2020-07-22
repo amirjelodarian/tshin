@@ -11,6 +11,7 @@ else if($_SESSION["user_mode"] == 1){
     include("includes/admin_menu.php");
 }
 isset($_GET["page"]) ? $page = $_GET["page"] : $page = 1;
+isset($_GET["roomSearchPage"]) ? $roomSearchPage = $_GET["roomSearchPage"] : $roomSearchPage = 1;
 ?>
 
             <div class="add_new_room">
@@ -21,7 +22,14 @@ isset($_GET["page"]) ? $page = $_GET["page"] : $page = 1;
                 <div id="errors" class="errors-panel" style="margin-top: 70px;"><?php echo $users->Errors(); ?></div>
                 <div id="result"></div>
                 <div id="main-result">
-                    <?php $rooms->AllRooms_panel($page); ?>
+                    <?php
+                        if (isset($_GET['roomSearchPage'])){
+                            $rooms->PanelSerachRoom($roomSearchPage);
+                        }
+                        else{
+                            $rooms->AllRooms_panel($page);
+                        }
+                    ?>
                 </div>
                 <hr>
             </div>

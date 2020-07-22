@@ -1136,50 +1136,94 @@
         }
 
         // function for search panel
-        public function PanelSerachRoom(){
+        public function PanelSerachRoom($roomSearchPage = ""){
             global $database,$Functions,$users;
+            settype($roomSearchPage, "integer");
             if (isset($_GET["panel_keyword_room"]) && !(empty($_GET["panel_keyword_room"])) && isset($_GET["panel_ByWitch_room"]) && !(empty($_GET["panel_ByWitch_room"]))) {
-                settype($page, "integer");
                 $keyword = $database->escape_value($_GET['panel_keyword_room']);
                 if (isset($_GET["panel_ByWitch_room"])) {
                     switch ($_GET["panel_ByWitch_room"]) {
                         case 'Address':
+                            $ByWhich = array("Address" => $keyword);
                             $sql = "SELECT * FROM rooms WHERE room_address LIKE '%{$keyword}%'";
-                            /*$pagination = $Functions->pagination(10, $page, 'rooms', 'room_id', " WHERE room_address LIKE '%{$keyword}%'");*/
+                            $pagination = $Functions->pagination(10, $roomSearchPage, 'rooms', 'room_id', " WHERE room_address LIKE '%{$keyword}%'");
                             break;
                         case 'Title':
+                            $ByWhich = array("Title" => $keyword);
                             $sql = "SELECT * FROM rooms WHERE room_title LIKE '%{$keyword}%'";
-                            /*$pagination = $Functions->pagination(10, $page, 'rooms', 'room_id', " WHERE room_title LIKE '%{$keyword}%'");*/
+                            $pagination = $Functions->pagination(10, $roomSearchPage, 'rooms', 'room_id', " WHERE room_title LIKE '%{$keyword}%'");
                             break;
                         case 'Descript':
+                            $ByWhich = array("Descript" => $keyword);
                             $sql = "SELECT * FROM rooms WHERE room_description LIKE '%{$keyword}%'";
-                            /*$pagination = $Functions->pagination(10, $page, 'rooms', 'room_id', " WHERE room_description LIKE '%{$keyword}%'");*/
+                            $pagination = $Functions->pagination(10, $roomSearchPage, 'rooms', 'room_id', " WHERE room_description LIKE '%{$keyword}%'");
                             break;
                         case 'Score':
+                            $ByWhich = array("Score" => $keyword);
                             $sql = "SELECT * FROM rooms WHERE room_score LIKE '{$keyword}'";
-                            /*$pagination = $Functions->pagination(10, $page, 'rooms', 'room_id', " WHERE room_score LIKE '{$keyword}'");*/
+                            $pagination = $Functions->pagination(10, $roomSearchPage, 'rooms', 'room_id', " WHERE room_score LIKE '{$keyword}'");
                             break;
                         case 'Price':
+                            $ByWhich = array("Price" => $keyword);
                             $sql = "SELECT * FROM rooms WHERE room_main_price LIKE '{$keyword}%'";
-                            /*$pagination = $Functions->pagination(10, $page, 'rooms', 'room_id', " WHERE room_main_price LIKE '{$keyword}%'");*/
+                            $pagination = $Functions->pagination(10, $roomSearchPage, 'rooms', 'room_id', " WHERE room_main_price LIKE '{$keyword}%'");
                             break;
                         case 'Off-Price':
+                            $ByWhich = array("Off-Price" => $keyword);
                             $sql = "SELECT * FROM rooms WHERE room_off_price LIKE '{$keyword}%'";
-                            /*$pagination = $Functions->pagination(10, $page, 'rooms', 'room_id', " WHERE room_off_price LIKE '{$keyword}%'");*/
+                            $pagination = $Functions->pagination(10, $roomSearchPage, 'rooms', 'room_id', " WHERE room_off_price LIKE '{$keyword}%'");
                             break;
                         case 'Person':
+                            $ByWhich = array("Person" => $keyword);
                             $sql = "SELECT * FROM rooms WHERE room_person_count LIKE '{$keyword}'";
-                            /*$pagination = $Functions->pagination(10, $page, 'rooms', 'room_id', " WHERE room_person_count LIKE '{$keyword}'");*/
+                            $pagination = $Functions->pagination(10, $roomSearchPage, 'rooms', 'room_id', " WHERE room_person_count LIKE '{$keyword}'");
                             break;
                         default:
+                            $ByWhich = array("Address" => $keyword);
                             $sql = "SELECT * FROM rooms WHERE room_address LIKE '%{$keyword}%'";
-                            /*$pagination = $Functions->pagination(10, $page, 'rooms', 'room_id', " WHERE room_person_count LIKE '{$keyword}'");*/
+                            $pagination = $Functions->pagination(10, $roomSearchPage, 'rooms', 'room_id', " WHERE room_person_count LIKE '{$keyword}'");
                             break;
                     }
-                    /*$sql .= " ORDER BY room_id DESC LIMIT {$pagination['start_from']},{$pagination['record_per_page']}";*/
-                    $sql .= " ORDER BY room_id DESC";
                 }
             }
+            if (isset($_GET['roomSearchPage'])){
+                $keyword = $database->escape_value($_GET['keyword']);
+                switch ($_GET["ByWhich"]) {
+                    case 'Address':
+                        $sql = "SELECT * FROM rooms WHERE room_address LIKE '%{$keyword}%'";
+                        $pagination = $Functions->pagination(10, $roomSearchPage, 'rooms', 'room_id', " WHERE room_address LIKE '%{$keyword}%'");
+                        break;
+                    case 'Title':
+                        $sql = "SELECT * FROM rooms WHERE room_title LIKE '%{$keyword}%'";
+                        $pagination = $Functions->pagination(10, $roomSearchPage, 'rooms', 'room_id', " WHERE room_title LIKE '%{$keyword}%'");
+                        break;
+                    case 'Descript':
+                        $sql = "SELECT * FROM rooms WHERE room_description LIKE '%{$keyword}%'";
+                        $pagination = $Functions->pagination(10, $roomSearchPage, 'rooms', 'room_id', " WHERE room_description LIKE '%{$keyword}%'");
+                        break;
+                    case 'Score':
+                        $sql = "SELECT * FROM rooms WHERE room_score LIKE '{$keyword}'";
+                        $pagination = $Functions->pagination(10, $roomSearchPage, 'rooms', 'room_id', " WHERE room_score LIKE '{$keyword}'");
+                        break;
+                    case 'Price':
+                        $sql = "SELECT * FROM rooms WHERE room_main_price LIKE '{$keyword}%'";
+                        $pagination = $Functions->pagination(10, $roomSearchPage, 'rooms', 'room_id', " WHERE room_main_price LIKE '{$keyword}%'");
+                        break;
+                    case 'Off-Price':
+                        $sql = "SELECT * FROM rooms WHERE room_off_price LIKE '{$keyword}%'";
+                        $pagination = $Functions->pagination(10, $roomSearchPage, 'rooms', 'room_id', " WHERE room_off_price LIKE '{$keyword}%'");
+                        break;
+                    case 'Person':
+                        $sql = "SELECT * FROM rooms WHERE room_person_count LIKE '{$keyword}'";
+                        $pagination = $Functions->pagination(10, $roomSearchPage, 'rooms', 'room_id', " WHERE room_person_count LIKE '{$keyword}'");
+                        break;
+                    default:
+                        $users->redirect_to("rooms_show.php");
+                        break;
+                }
+
+            }
+            $sql .= " ORDER BY room_id DESC LIMIT {$pagination['start_from']},{$pagination['record_per_page']}";
                 $result = $database->query($sql);
                 if ($database->num_rows($result) > 0) {
                     echo "<h3>جستجو ...</h3>";
@@ -1257,16 +1301,30 @@
                             </div>
                             ");
                     }
-                    /*echo "<div class='pagination-outside col-lg-10 col-md-10 col-sm-10 col-xs-12'>
-                    <div class='pagination'>";
-                    for ($i = 1; $i <= $pagination["total_page"]; $i++):
-                        echo "<a href='rooms_search.php?searchPage={$i}' ";
-                        if ($i == $page)
-                            echo "id='current-page'";
-                        echo">&nbsp;{$i}&nbsp;</a>";
-                    endfor;
-                    echo"</div>
-                    </div>";*/
+                    if (isset($_GET["panel_keyword_room"]) && !(empty($_GET["panel_keyword_room"])) && isset($_GET["panel_ByWitch_room"]) && !(empty($_GET["panel_ByWitch_room"]))){
+                        echo "<div class='pagination-outside col-lg-10 col-md-10 col-sm-10 col-xs-12'>
+                                <div class='pagination'>";
+                        for ($i = 1; $i <= $pagination["total_page"]; $i++):
+                            foreach ((array) $ByWhich as $key => $value){
+                                echo "<a href='rooms_show.php?roomSearchPage={$i}&ByWhich={$key}&keyword={$value}' ";
+                            }
+                            if ($i == $roomSearchPage) echo "id='current-page'";
+                            echo">&nbsp;{$i}&nbsp;</a>";
+                        endfor;
+                        echo"</div>
+                                </div>";
+                    }
+                    if(isset($_GET["ByWhich"])){
+                        echo "<div class='pagination-outside col-lg-10 col-md-10 col-sm-10 col-xs-12'>
+                                <div class='pagination'>";
+                        for ($i = 1; $i <= $pagination["total_page"]; $i++):
+                            echo "<a href='rooms_show.php?roomSearchPage={$i}&ByWhich={$_GET['ByWhich']}&keyword={$_GET['keyword']}' ";
+                            if ($i == $roomSearchPage) echo "id='current-page'";
+                            echo">&nbsp;{$i}&nbsp;</a>";
+                        endfor;
+                        echo"</div>
+                                </div>";
+                    }
                 }else { echo "<h1 class='no-result'>یافت نشد !</h1>"; }
 
         }
