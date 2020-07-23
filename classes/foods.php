@@ -87,9 +87,22 @@ class Foods{
         }
     }
     // FoodsList.php And FoodsGrid.php
-    public static function AllFoods($grid = ""){
+    public static function AllFoods($grid = "",$manual_sql = "",$pagination = "",$page = ""){
         global $database,$Functions;
-        $sql = "SELECT * FROM foods ORDER BY food_id DESC";
+
+        //-------------------------------------------------------------
+        if (!(empty($manual_sql)))
+            $sql = $manual_sql;
+        else
+            $sql = "SELECT * FROM foods ORDER BY food_id DESC";
+
+        //-------------------------------------------------------------
+        if ($pagination == true && isset($page)){
+            settype($page,"integer");
+            $pagination = $Functions->pagination(10,$page,'foods','food_id');
+            $sql = "SELECT * FROM foods ORDER BY food_id DESC LIMIT {$pagination['start_from']},{$pagination['record_per_page']}";
+        }
+        //-------------------------------------------------------------
         $database->query("SET NAMES 'utf8'");
         $result = $database->query($sql);
         while ($foods_rows = $database->fetch_array($result)){
@@ -136,23 +149,25 @@ class Foods{
                     <div class='col-lg-6 col-md-6 col-sm-6'>
                         <div class='tour_list_desc'>
                             <div class='score'>");
-                echo(self::word_score($foods_rows['food_score']));
-                echo("<span>{$Functions->EN_numTo_FA($database->escape_value($foods_rows['food_score']),true)}</span>
+                                echo(self::word_score($foods_rows['food_score']));
+                                echo("<span>{$Functions->EN_numTo_FA($database->escape_value($foods_rows['food_score']),true)}</span>
                             </div>
                             <div class='rating'>");
-                echo $Functions->give_start_by_number($foods_rows['food_score']);
-                echo ("
+                                echo $Functions->give_start_by_number($foods_rows['food_score']);
+                                echo ("
                             </div>
                             <h3><strong>{$database->escape_value($foods_rows['food_title'])}</strong> </h3>
                             <p>");
-                echo(substr(nl2br(htmlentities($foods_rows['food_description'])),0,150)."...");
-                echo("</p>
+                            echo(substr(nl2br(htmlentities($foods_rows['food_description'])),0,150)."...");
+                            echo("
+                            </p>
                 <ul class='add_info'>
                               <div class='food-detail fade in'>
                                 <h6 class='food-detail-title'>طرز تهیه {$foods_rows['food_title']} </h6>
                                 <p>");
-                echo(substr(htmlspecialchars($foods_rows['food_details']),0,150)."...");
-                echo("</p>
+                                    echo(substr(htmlspecialchars($foods_rows['food_details']),0,150)."...");
+                                    echo("
+                                </p>
                               </div>
                             </ul>
                         </div>
@@ -174,55 +189,106 @@ class Foods{
                             ");
             }
         }
+        if ($pagination == true && isset($page)){
+            echo "<div class='pagination-outside col-lg-10 col-md-10 col-sm-10 col-xs-12'>
+                    <div class='pagination'>";
+            for ($i = 1; $i <= $pagination["total_page"]; $i++):
+                echo "<a href='{$_SERVER['PHP_SELF']}?page={$i}' ";
+                if ($i == $page)
+                    echo "id='current-page'";
+                echo">&nbsp;{$i}&nbsp;</a>";
+            endfor;
+            echo"</div>
+                </div>";
+        }
     }
-    public function ShowAllFoodsBy($grid = ""){
-        global $database, $Functions;
+    public function ShowAllFoodsBy($grid = "",$foodByPage = ""){
+        global $database, $Functions,$users;
         $sql = "SELECT * FROM foods ";
         if (isset($_POST["user_show_by_all_hotels_food"])) {
-            if (isset($_POST["user_star_score_food"])){
+            if (isset($_POST["user_star_score_food"])) {
                 $this->food_score = $database->escape_value($_POST["user_star_score_food"]);
-                if (preg_match("/WHERE/",$sql)){
+                if (preg_match("/WHERE/", $sql)) {
                     $sql .= " && food_score={$this->food_score} ";
-                }else{
+                } else {
                     $sql .= " WHERE food_score={$this->food_score} ";
                 }
             }
-            if (isset($_POST["user_price_range_food"]) && !(empty($_POST["user_price_range_food"]))){
+            if (isset($_POST["user_price_range_food"]) && !(empty($_POST["user_price_range_food"]))) {
                 $range = $database->escape_value($_POST["user_price_range_food"]);
-                $range = explode(";",$range);
-                $first_attr = $range[0]; $second_attr = $range[1];
-                $first_attr = (int)$first_attr; $second_attr = (int)$second_attr;
-                if (preg_match("/WHERE/",$sql)){
+                $range = explode(";", $range);
+                $first_attr = $range[0];
+                $second_attr = $range[1];
+                $first_attr = (int)$first_attr;
+                $second_attr = (int)$second_attr;
+                if (preg_match("/WHERE/", $sql)) {
                     $sql .= " && food_main_price BETWEEN {$first_attr} AND {$second_attr} ";
-                }else{
+                } else {
                     $sql .= " WHERE food_main_price BETWEEN {$first_attr} AND {$second_attr} ";
                 }
             }
             $sql .= " ORDER BY food_id DESC";
-            if (isset($_POST["user_sort_rating_food"])){
+            if (isset($_POST["user_sort_rating_food"])) {
+                settype($foodByPage, "integer");
+                $pagination = $Functions->pagination(10, $foodByPage, 'foods', 'food_id');
                 switch ($_POST["user_sort_rating_food"]) {
                     case "lower":
-                        $sql = "SELECT * FROM foods ORDER BY food_score ASC";
+                        $ByWhich = array("rate" => "lower");
+                        $sql = "SELECT * FROM foods ORDER BY food_score ASC LIMIT {$pagination['start_from']},{$pagination['record_per_page']}";
                         break;
                     case "higher":
-                        $sql = "SELECT * FROM foods ORDER BY food_score DESC";
-                        break;
-                    default:
+                        $ByWhich = array("rate" => "higher");
+                        $sql = "SELECT * FROM foods ORDER BY food_score DESC LIMIT {$pagination['start_from']},{$pagination['record_per_page']}";
                         break;
                 }
             }
-            if (isset($_POST["user_sort_price_food"])){
+            if (isset($_POST["user_sort_price_food"])) {
+                settype($foodByPage, "integer");
+                $pagination = $Functions->pagination(10, $foodByPage, 'foods', 'food_id');
                 switch ($_POST["user_sort_price_food"]) {
                     case "lower":
-                        $sql = "SELECT * FROM foods ORDER BY food_main_price ASC";
+                        $ByWhich = array("price" => "lower");
+                        $sql = "SELECT * FROM foods ORDER BY food_main_price ASC LIMIT {$pagination['start_from']},{$pagination['record_per_page']}";
                         break;
                     case "higher":
-                        $sql = "SELECT * FROM foods ORDER BY food_main_price DESC";
-                        break;
-                    default:
+                        $ByWhich = array("price" => "higher");
+                        $sql = "SELECT * FROM foods ORDER BY food_main_price DESC LIMIT {$pagination['start_from']},{$pagination['record_per_page']}";
                         break;
                 }
             }
+        }
+        if(isset($_GET["foodByPage"])){
+            if(isset($_GET["ByPrice"])){
+                settype($foodByPage, "integer");
+                $pagination = $Functions->pagination(10, $foodByPage, 'foods', 'food_id');
+                switch ($_GET["ByPrice"]){
+                    case "lower":
+                        $sql = "SELECT * FROM foods ORDER BY food_main_price ASC LIMIT {$pagination['start_from']},{$pagination['record_per_page']}";
+                        break;
+                    case "higher":
+                        $sql = "SELECT * FROM foods ORDER BY food_main_price DESC LIMIT {$pagination['start_from']},{$pagination['record_per_page']}";
+                        break;
+                    default:
+                        $users->redirect_to("FoodsList.php");
+                        break;
+                }
+            }
+            if(isset($_GET["ByRate"])){
+                settype($foodByPage, "integer");
+                $pagination = $Functions->pagination(10, $foodByPage, 'foods', 'food_id');
+                switch ($_GET["ByRate"]){
+                    case "lower":
+                        $sql = "SELECT * FROM foods ORDER BY food_score ASC LIMIT {$pagination['start_from']},{$pagination['record_per_page']}";
+                        break;
+                    case "higher":
+                        $sql = "SELECT * FROM foods ORDER BY food_score DESC LIMIT {$pagination['start_from']},{$pagination['record_per_page']}";
+                        break;
+                    default:
+                        $users->redirect_to("FoodsList.php");
+                        break;
+                }
+            }
+        }
             $database->query("SET NAMES 'utf8'");
             $result = $database->query($sql);
             if($database->num_rows($result) == 0){ echo "<h1 class='no-result'>متاسفانه یافت نشد !</h1>"; }
@@ -270,23 +336,25 @@ class Foods{
                     <div class='col-lg-6 col-md-6 col-sm-6'>
                         <div class='tour_list_desc'>
                             <div class='score'>");
-                    echo(self::word_score($foods_rows['food_score']));
-                    echo("<span>{$Functions->EN_numTo_FA($database->escape_value($foods_rows['food_score']),true)}</span>
+                                echo(self::word_score($foods_rows['food_score']));
+                                echo("<span>{$Functions->EN_numTo_FA($database->escape_value($foods_rows['food_score']),true)}</span>
                             </div>
                             <div class='rating'>");
-                    echo $Functions->give_start_by_number($foods_rows['food_score']);
-                    echo ("
+                                echo $Functions->give_start_by_number($foods_rows['food_score']);
+                                echo ("
                             </div>
                             <h3><strong>{$database->escape_value($foods_rows['food_title'])}</strong> </h3>
                             <p>");
-                    echo(substr(nl2br(htmlentities($foods_rows['food_description'])),0,150)."...");
-                    echo("</p>
-<ul class='add_info'>
+                                echo(substr(nl2br(htmlentities($foods_rows['food_description'])),0,150)."...");
+                                echo("
+                            </p>
+                            <ul class='add_info'>
                               <div class='food-detail fade in'>
                                 <h6 class='food-detail-title'>طرز تهیه {$foods_rows['food_title']} </h6>
                                 <p>");
-                    echo(substr(htmlspecialchars($foods_rows['food_details']),0,150)."...");
-                    echo("</p>
+                                    echo(substr(htmlspecialchars($foods_rows['food_details']),0,150)."...");
+                                    echo("
+                                </p>
                               </div>
                             </ul>
                         </div>
@@ -308,43 +376,130 @@ class Foods{
                             ");
                 }
             }
+        if (isset($_POST["user_sort_price_food"])){
+            switch ($_POST["user_sort_price_food"]){
+                case "lower" || "higher":
+                    echo "<div class='pagination-outside col-lg-10 col-md-10 col-sm-10 col-xs-12'>
+                                <div class='pagination'>";
+                    for ($i = 1; $i <= $pagination["total_page"]; $i++):
+                        echo "<a href='{$_SERVER['PHP_SELF']}?foodByPage={$i}&ByPrice={$ByWhich['price']}' ";
+                        if ($i == $foodByPage) echo "id='current-page'";
+                        echo">&nbsp;{$i}&nbsp;</a>";
+                    endfor;
+                    echo"</div>
+                                </div>";
+                    break;
+            }
+        }
+        if(isset($_GET["ByPrice"])){
+            echo "<div class='pagination-outside col-lg-10 col-md-10 col-sm-10 col-xs-12'>
+                                <div class='pagination'>";
+            for ($i = 1; $i <= $pagination["total_page"]; $i++):
+                echo "<a href='{$_SERVER['PHP_SELF']}?foodByPage={$i}&ByPrice={$_GET["ByPrice"]}' ";
+                if ($i == $foodByPage) echo "id='current-page'";
+                echo">&nbsp;{$i}&nbsp;</a>";
+            endfor;
+            echo"</div>
+                                </div>";
+        }
+        if(isset($_POST["user_sort_rating_food"])){
+            switch ($_POST["user_sort_rating_food"]){
+                case "lower" || "higher":
+                    echo "<div class='pagination-outside col-lg-10 col-md-10 col-sm-10 col-xs-12'>
+                                <div class='pagination'>";
+                    for ($i = 1; $i <= $pagination["total_page"]; $i++):
+                        echo "<a href='{$_SERVER['PHP_SELF']}?foodByPage={$i}&ByRate={$ByWhich['rate']}' ";
+                        if ($i == $foodByPage) echo "id='current-page'";
+                        echo">&nbsp;{$i}&nbsp;</a>";
+                    endfor;
+                    echo"</div>
+                                </div>";
+                    break;
+            }
+        }
+        if (isset($_GET["ByRate"])){
+            echo "<div class='pagination-outside col-lg-10 col-md-10 col-sm-10 col-xs-12'>
+                                <div class='pagination'>";
+            for ($i = 1; $i <= $pagination["total_page"]; $i++):
+                echo "<a href='{$_SERVER['PHP_SELF']}?foodByPage={$i}&ByRate={$_GET["ByRate"]}' ";
+                if ($i == $foodByPage) echo "id='current-page'";
+                echo">&nbsp;{$i}&nbsp;</a>";
+            endfor;
+            echo"</div>
+                                </div>";
         }
     }
-    public function UserََSerachFood($grid = ""){
+    public function UserََSerachFood($grid = "",$foodSearchPage){
         global $database,$Functions,$users;
-        if (isset($_POST["user_submit_search_food"]) && !(empty($_POST["user_keyword_food"]))) {
-            $keyword = $database->escape_value($_POST['user_keyword_food']);
-            if (isset($_POST["user_ByWitch_food"])){
-                switch ($_POST["user_ByWitch_food"]){
+        settype($foodSearchPage,"integer");
+        if (isset($_GET['foodSearchPage']) && isset($_GET["keyword"]) && isset($_GET["ByWhich"]) || isset($_POST["user_submit_search_food"]) && !(empty($_POST["user_keyword_food"]))) {
+
+
+            if (isset($_POST["user_submit_search_food"]) && !(empty($_POST["user_keyword_food"]))) {
+                $keyword = $database->escape_value($_POST['user_keyword_food']);
+                if (isset($_POST["user_ByWitch_food"])) {
+                    switch ($_POST["user_ByWitch_food"]) {
+                        case 'Title':
+                            $sql = "SELECT * FROM foods WHERE food_title LIKE '%{$keyword}%'";
+                            $pagination = $Functions->pagination(10, $foodSearchPage, 'foods', 'food_id', " WHERE food_title LIKE '%{$keyword}%'");
+                            $ByWhich = array("Title" => $keyword);
+                            break;
+                        case 'Descript':
+                            $sql = "SELECT * FROM foods WHERE food_description LIKE '%{$keyword}%'";
+                            $pagination = $Functions->pagination(10, $foodSearchPage, 'foods', 'food_id', " WHERE food_description LIKE '%{$keyword}%'");
+                            $ByWhich = array("Descript" => $keyword);
+                            break;
+                        default:
+                            $sql = "SELECT * FROM foods WHERE food_title LIKE '%{$keyword}%'";
+                            $pagination = $Functions->pagination(10, $foodSearchPage, 'foods', 'food_id', " WHERE food_title LIKE '%{$keyword}%'");
+                            $ByWhich = array("Title" => $keyword);
+                            break;
+                    }
+                }
+            }
+            if (isset($_GET['foodSearchPage']) && isset($_GET["keyword"]) && isset($_GET["ByWhich"])) {
+                $keyword = $database->escape_value($_GET["keyword"]);
+                switch ($_GET["ByWhich"]) {
                     case 'Title':
                         $sql = "SELECT * FROM foods WHERE food_title LIKE '%{$keyword}%'";
+                        $pagination = $Functions->pagination(10, $foodSearchPage, 'foods', 'food_id', " WHERE food_title LIKE '%{$keyword}%'");
                         break;
                     case 'Descript':
                         $sql = "SELECT * FROM foods WHERE food_description LIKE '%{$keyword}%'";
+                        $pagination = $Functions->pagination(10, $foodSearchPage, 'foods', 'food_id', " WHERE food_description LIKE '%{$keyword}%'");
                         break;
                     default:
-                        $sql = "SELECT * FROM foods WHERE food_title LIKE '%{$keyword}%'";
+                        $users->redirect_to("FoodsList.php");
                         break;
                 }
             }
+            $sql .= " LIMIT {$pagination['start_from']},{$pagination['record_per_page']}";
             $result = $database->query($sql);
             if ($database->num_rows($result) > 0) {
                 while ($foods_rows = $database->fetch_array($result)) {
-                    if (isset($grid) && $grid == true){
+                    if (isset($grid) && $grid == true) {
                         echo("
                             <div class='col-md-6 col-sm-6 wow zoomIn' data-wow-delay='0.7s'>
                                     <div class='hotel_container'>
                                         <div class='img_container'>
                                             <a href='foodDetails.php?foodId={$Functions->encrypt_id($foods_rows['food_id'])}'>
-                                                <img src='"); self::select_food_image($foods_rows['food_image']); echo("' width='800' height='533' class='img-responsive' alt='تی شین'>
-                                                <div class='score'><span>{$Functions->EN_numTo_FA($database->escape_value($foods_rows['food_score']),true)}</span>"); echo(self::word_score($foods_rows['food_score'])); echo("</div>
-                                                <div class='short_info hotel'>"); echo(substr(nl2br(htmlentities($foods_rows['food_description'])),0,150)."..."); echo("<span class='price'><sup>{$Functions->EN_numTo_FA($Functions->insert_seperator($database->escape_value($foods_rows['food_main_price'])),true)} تومان</sup></span>
+                                                <img src='");
+                                                self::select_food_image($foods_rows['food_image']);
+                                                echo("' width='800' height='533' class='img-responsive' alt='تی شین'>
+                                                <div class='score'><span>{$Functions->EN_numTo_FA($database->escape_value($foods_rows['food_score']),true)}</span>");
+                                                    echo(self::word_score($foods_rows['food_score']));
+                                                    echo("</div>
+                                                <div class='short_info hotel'>");
+                                                    echo(substr(nl2br(htmlentities($foods_rows['food_description'])), 0, 150) . "...");
+                                                    echo("<span class='price'><sup>{$Functions->EN_numTo_FA($Functions->insert_seperator($database->escape_value($foods_rows['food_main_price'])),true)} تومان</sup></span>
                                                 </div>
                                             </a>
                                         </div>
                                         <div class='hotel_title'>
                                             <h3><strong>{$database->escape_value($foods_rows['food_title'])}</strong></h3>
-                                            <div class='rating'>"); echo $Functions->give_start_by_number($foods_rows['food_score']); echo("</div>
+                                            <div class='rating'>");
+                                                echo $Functions->give_start_by_number($foods_rows['food_score']);
+                                                echo("</div>
                                             <a href='foodDetails.php?foodId={$Functions->encrypt_id($foods_rows['food_id'])}'> 
                                                 <p class='food_details_submit text-center'>طرز تهیه</p>
                                             </a>
@@ -354,67 +509,97 @@ class Foods{
                                     </div>
                              </div>
                         ");
-                    } else{
-                        echo ("
+                    } else {
+                        echo("
                                 <div class='strip_all_tour_list wow fadeIn animated' data-wow-delay='0.1s' style='visibility: visible; animation-delay: 0.1s; animation-name: fadeIn;'>
-                <div class='row'>
-                    <div class='col-lg-4 col-md-4 col-sm-4'>
-                        <div class='wishlist'> <a class='tooltip_flip tooltip-effect-1' href='javascript:void(0);'>+<span class='tooltip-content-flip'><span class='tooltip-back'>علاقمند شدم</span></span></a>
-                        </div>
-                        <div class='img_list'>
-                            <a href='foodDetails.php?foodId={$Functions->encrypt_id($foods_rows['food_id'])}'>
-                                <div class='ribbon top_rated'></div>
-                                <img src='"); self::select_food_image($foods_rows['food_image']); echo("' alt='تی شین'>
-                                <div class='short_info'></div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class='clearfix visible-xs-block'></div>
-                    <div class='col-lg-6 col-md-6 col-sm-6'>
-                        <div class='tour_list_desc'>
-                            <div class='score'>");
-                        echo(self::word_score($foods_rows['food_score']));
-                        echo("<span>{$Functions->EN_numTo_FA($database->escape_value($foods_rows['food_score']),true)}</span>
-                            </div>
-                            <div class='rating'>");
-                        echo $Functions->give_start_by_number($foods_rows['food_score']);
-                        echo ("
-                            </div>
-                            <h3><strong>{$database->escape_value($foods_rows['food_title'])}</strong> </h3>
-                            <p>");
-                        echo(substr(nl2br(htmlentities($foods_rows['food_description'])),0,150)."...");
-                        echo("</p>
-<ul class='add_info'>
-                              <div class='food-detail fade in'>
-                                <h6 class='food-detail-title'>طرز تهیه {$foods_rows['food_title']} </h6>
-                                <p>");
-                        echo(substr(htmlspecialchars($foods_rows['food_details']),0,150)."...");
-                        echo("</p>
-                              </div>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class='col-lg-2 col-md-2 col-sm-2'>
-                        <div class='price_list'>
-                            <div>
-                            <sup>{$Functions->EN_numTo_FA($Functions->insert_seperator($database->escape_value($foods_rows['food_main_price'])),true)} تومان</sup>
-                            <span class='normal_price_list'>{$Functions->EN_numTo_FA($Functions->insert_seperator($database->escape_value($foods_rows['food_off_price'])),true)} تومان</span>
-                            <small>روزانه / شبانه</small>
-                            <a href='foodDetails.php?foodId={$Functions->encrypt_id($foods_rows['food_id'])}'> 
-                                <p class='food_details_submit text-center'>طرز تهیه</p>
-                            </a>           
-                            </div>
-                        </div>
-                    </div>
-            </div>
-            </div>
+                                    <div class='row'>
+                                        <div class='col-lg-4 col-md-4 col-sm-4'>
+                                            <div class='wishlist'> <a class='tooltip_flip tooltip-effect-1' href='javascript:void(0);'>+<span class='tooltip-content-flip'><span class='tooltip-back'>علاقمند شدم</span></span></a>
+                                            </div>
+                                            <div class='img_list'>
+                                                <a href='foodDetails.php?foodId={$Functions->encrypt_id($foods_rows['food_id'])}'>
+                                                    <div class='ribbon top_rated'></div>
+                                                    <img src='");
+                                                        self::select_food_image($foods_rows['food_image']);
+                                                        echo("' alt='تی شین'>
+                                                    <div class='short_info'></div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class='clearfix visible-xs-block'></div>
+                                        <div class='col-lg-6 col-md-6 col-sm-6'>
+                                            <div class='tour_list_desc'>
+                                                <div class='score'>");
+                                                    echo(self::word_score($foods_rows['food_score']));
+                                                    echo("<span>{$Functions->EN_numTo_FA($database->escape_value($foods_rows['food_score']),true)}</span>
+                                                </div>
+                                                <div class='rating'>");
+                                                    echo $Functions->give_start_by_number($foods_rows['food_score']);
+                                                    echo("
+                                                </div>
+                                                <h3><strong>{$database->escape_value($foods_rows['food_title'])}</strong> </h3>
+                                                <p>");
+                                                    echo(substr(nl2br(htmlentities($foods_rows['food_description'])), 0, 150) . "...");
+                                                    echo("
+                                                </p>
+                                                <ul class='add_info'>
+                                                  <div class='food-detail fade in'>
+                                                    <h6 class='food-detail-title'>طرز تهیه {$foods_rows['food_title']} </h6>
+                                                    <p>");
+                                                        echo(substr(htmlspecialchars($foods_rows['food_details']), 0, 150) . "...");
+                                                        echo("
+                                                    </p>
+                                                  </div>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class='col-lg-2 col-md-2 col-sm-2'>
+                                            <div class='price_list'>
+                                                <div>
+                                                <sup>{$Functions->EN_numTo_FA($Functions->insert_seperator($database->escape_value($foods_rows['food_main_price'])),true)} تومان</sup>
+                                                <span class='normal_price_list'>{$Functions->EN_numTo_FA($Functions->insert_seperator($database->escape_value($foods_rows['food_off_price'])),true)} تومان</span>
+                                                <small>روزانه / شبانه</small>
+                                                <a href='foodDetails.php?foodId={$Functions->encrypt_id($foods_rows['food_id'])}'> 
+                                                    <p class='food_details_submit text-center'>طرز تهیه</p>
+                                                </a>           
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>
+                                </div>
                             ");
                     }
                 }
-            }else { echo "<h1 class='no-result'>متاسفانه یافت نشد !</h1>"; }
+            } else {
+                echo "<h1 class='no-result'>متاسفانه یافت نشد !</h1>";
+            }
 
+            if (isset($_POST["user_submit_search_food"]) && !(empty($_POST["user_keyword_food"]))) {
+                echo "<div class='pagination-outside col-lg-10 col-md-10 col-sm-10 col-xs-12'>
+                                <div class='pagination'>";
+                for ($i = 1; $i <= $pagination["total_page"]; $i++):
+                    foreach ((array)$ByWhich as $key => $value) {
+                        echo "<a href='{$_SERVER['PHP_SELF']}?foodSearchPage={$i}&ByWhich={$key}&keyword={$value}' ";
+                    }
+                    if ($i == $foodSearchPage) echo "id='current-page'";
+                    echo ">&nbsp;{$i}&nbsp;</a>";
+                endfor;
+                echo "</div>
+                                </div>";
+            }
+            if (isset($_GET["ByWhich"])) {
+                echo "<div class='pagination-outside col-lg-10 col-md-10 col-sm-10 col-xs-12'>
+                     <div class='pagination'>";
+                for ($i = 1; $i <= $pagination["total_page"]; $i++):
+                    echo "<a href='{$_SERVER['PHP_SELF']}?foodSearchPage={$i}&ByWhich={$_GET['ByWhich']}&keyword={$_GET['keyword']}' ";
+                    if ($i == $foodSearchPage) echo "id='current-page'";
+                    echo ">&nbsp;{$i}&nbsp;</a>";
+                endfor;
+                echo "    </div>
+                 </div>";
+            }
         }else{
-            $users->redirect_to($_SERVER["PHP_SELF"]);
+            $users->redirect_to("FoodsList.php");
         }
     }
 

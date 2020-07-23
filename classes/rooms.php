@@ -68,10 +68,12 @@
                                             <img src='"); self::select_room_image($rooms_rows['room_image']); echo("' width='800' height='533' class='img-responsive' alt='تی شین'>
                                             <div class='ribbon top_rated'></div>
                                         </a>");
-                    if($rooms_rows['room_person_count'] != 0){ echo("<div class='room_person_count_show' id='room_person_count_grid_show'>{$rooms_rows['room_person_count']} نفره</div>"); }
-                                            echo("<div class='score'>");
-                    echo(self::word_score($rooms_rows['room_score']));
-                    echo("<span>{$database->escape_value($Functions->EN_numTo_FA($rooms_rows['room_score'], true))}</span>
+                                        if($rooms_rows['room_person_count'] != 0){ echo("<div class='room_person_count_show' id='room_person_count_grid_show'>{$rooms_rows['room_person_count']} نفره</div>"); }
+                                                                echo("<div class='score'>");
+                                        echo(self::word_score($rooms_rows['room_score']));
+                                        echo("
+                                             <span>{$database->escape_value($Functions->EN_numTo_FA($rooms_rows['room_score'], true))}
+                                              </span>
                                             </div>
                                             <div class='short_info hotel'>{$database->escape_value($rooms_rows['room_address'])}<span class='price'><sup>{$Functions->EN_numTo_FA($Functions->insert_seperator($rooms_rows['room_main_price']),true)} تومان</sup></span></div>
                                     </div>
@@ -79,8 +81,8 @@
                                         <h3>{$database->escape_value($rooms_rows['room_title'])}</h3>
                                         <div class='rating'>
                                         ");
-                    echo($Functions->give_start_by_number($rooms_rows['room_score']));
-                    echo ("
+                                            echo($Functions->give_start_by_number($rooms_rows['room_score']));
+                                            echo ("
                                         </div>
                                         <div class='wishlist'> <a class='tooltip_flip tooltip-effect-1' href='#'>+<span class='tooltip-content-flip'><span class='tooltip-back'>علاقمند شدم</span></span></a>
                                         </div>
@@ -153,7 +155,7 @@
                                     </div>
                                     <div class='col-lg-2 col-md-2 col-sm-2'>");
                                         if($rooms_rows['room_person_count'] != 0){ echo("<div class='room_person_count_show'>{$Functions->EN_numTo_FA($rooms_rows['room_person_count'],true)} نفره</div>"); }
-                    echo("
+                                          echo("
                                         <div class='price_list'>
                                             <div>
                                             <sup>{$Functions->EN_numTo_FA($Functions->insert_seperator($rooms_rows['room_main_price']),true)} تومان</sup>
@@ -184,6 +186,7 @@
                 </div>";
             }
         }
+
         public function ShowAllRoomsBy($grid = "",$roomByPage = ""){
             global $database, $Functions,$users;
             $sql = "SELECT * FROM tshin.rooms ";
@@ -349,10 +352,10 @@
                                             <img src='"); self::select_room_image($rooms_rows['room_image']); echo("' width='800' height='533' class='img-responsive' alt='تی شین'>
                                             <div class='ribbon top_rated'></div>
                                         </a>");
-                        if($rooms_rows['room_person_count'] != 0){ echo("<div class='room_person_count_show' id='room_person_count_grid_show'>{$rooms_rows['room_person_count']} نفره</div>"); }
+                                            if($rooms_rows['room_person_count'] != 0){ echo("<div class='room_person_count_show' id='room_person_count_grid_show'>{$rooms_rows['room_person_count']} نفره</div>"); }
                                             echo("<div class='score'>");
-                        echo(self::word_score($rooms_rows['room_score']));
-                        echo("<span>{$database->escape_value($Functions->EN_numTo_FA($rooms_rows['room_score'], true))}</span>
+                                            echo(self::word_score($rooms_rows['room_score']));
+                                            echo("<span>{$database->escape_value($Functions->EN_numTo_FA($rooms_rows['room_score'], true))}</span>
                                             </div>
                                             <div class='short_info hotel'>{$database->escape_value($rooms_rows['room_address'])}<span class='price'><sup>{$Functions->EN_numTo_FA($Functions->insert_seperator($rooms_rows['room_main_price']),true)} تومان</sup></span></div>
                                     </div>
@@ -360,8 +363,8 @@
                                         <h3>{$database->escape_value($rooms_rows['room_title'])}</h3>
                                         <div class='rating'>
                                         ");
-                        echo($Functions->give_start_by_number($rooms_rows['room_score']));
-                        echo ("
+                                            echo($Functions->give_start_by_number($rooms_rows['room_score']));
+                                            echo ("
                                         </div>
                                         <div class='wishlist'> <a class='tooltip_flip tooltip-effect-1' href='#'>+<span class='tooltip-content-flip'><span class='tooltip-back'>علاقمند شدم</span></span></a>
                                         </div>
@@ -392,49 +395,49 @@
                                         <div class='tour_list_desc'>
                                         <h4 class='room_address'>{$database->escape_value($rooms_rows['room_address'])}</h4>
                                             <div class='score'>");
-                        echo(self::word_score($rooms_rows['room_score']));
-                        echo("<span>{$database->escape_value($rooms_rows['room_score'])}</span>
+                                                echo(self::word_score($rooms_rows['room_score']));
+                                                echo("<span>{$database->escape_value($rooms_rows['room_score'])}</span>
                                             </div>
                                             <div class='rating'>
                                             ");
-                        echo($Functions->give_start_by_number($rooms_rows['room_score']));
-                        echo ("
+                                                echo($Functions->give_start_by_number($rooms_rows['room_score']));
+                                                echo ("
                                             </div>
                                             <h3>{$database->escape_value($rooms_rows['room_title'])}</h3>
                                             <p>");
-                        echo(substr(nl2br(htmlentities($rooms_rows['room_description'])),0,250)."...");
-                        echo("</p>
+                                                echo(substr(nl2br(htmlentities($rooms_rows['room_description'])),0,250)."...");
+                                                echo("</p>
                                             <ul class='add_info'>
                                                 <li> <a href='javascript:void(0);' class='tooltip-1 ");
-                        if($rooms_rows["room_wifi"] == 1){ echo 'rooms_checkbox';}
-                        echo("' data-placement='top' title='وای فای رایگان'><i class='icon_set_1_icon-86'></i></a>
+                                                    if($rooms_rows["room_wifi"] == 1){ echo 'rooms_checkbox';}
+                                                    echo("' data-placement='top' title='وای فای رایگان'><i class='icon_set_1_icon-86'></i></a>
                                                 </li>
                                                 <li> <a href='javascript:void(0);' class='tooltip-1 ");
-                        if($rooms_rows["room_television"] == 1){ echo 'rooms_checkbox';}
-                        echo("' data-placement='top' title='تلویزیون پلاسما با کانال های اچ دی'><i class='icon_set_2_icon-116'></i></a>
+                                                    if($rooms_rows["room_television"] == 1){ echo 'rooms_checkbox';}
+                                                    echo("' data-placement='top' title='تلویزیون پلاسما با کانال های اچ دی'><i class='icon_set_2_icon-116'></i></a>
                                                 </li>
                                                 <li> <a href='javascript:void(0);' class='tooltip-1 ");
-                        if($rooms_rows["room_pool"] == 1){ echo 'rooms_checkbox';}
-                        echo("' data-placement='top' title='استخر شنا'><i class='icon_set_2_icon-110'></i></a>
+                                                    if($rooms_rows["room_pool"] == 1){ echo 'rooms_checkbox';}
+                                                    echo("' data-placement='top' title='استخر شنا'><i class='icon_set_2_icon-110'></i></a>
                                                 </li>
                                                 <li> <a href='javascript:void(0);' class='tooltip-1 ");
-                        if($rooms_rows["room_gym"] == 1){ echo 'rooms_checkbox';}
-                        echo("' data-placement='top' title='مرکز تناسب اندام'><i class='icon_set_2_icon-117'></i></a>
+                                                    if($rooms_rows["room_gym"] == 1){ echo 'rooms_checkbox';}
+                                                    echo("' data-placement='top' title='مرکز تناسب اندام'><i class='icon_set_2_icon-117'></i></a>
                                                 </li>
                                                 <li> <a href='javascript:void(0);' class='tooltip-1 ");
-                        if($rooms_rows["room_food"] == 1){ echo 'rooms_checkbox';}
-                        echo("' data-placement='top' title='رستوران'><i class='icon_set_1_icon-58'></i></a>
+                                                    if($rooms_rows["room_food"] == 1){ echo 'rooms_checkbox';}
+                                                    echo("' data-placement='top' title='رستوران'><i class='icon_set_1_icon-58'></i></a>
                                                 </li>
                                                 <li> <a href='javascript:void(0);' class='tooltip-1 ");
-                        if($rooms_rows["room_parking"] == 1){ echo 'rooms_checkbox';}
-                        echo("' data-placement='top' title='پارکینگ'><i class='icon_set_1_icon-27'></i></a>
+                                                    if($rooms_rows["room_parking"] == 1){ echo 'rooms_checkbox';}
+                                                    echo("' data-placement='top' title='پارکینگ'><i class='icon_set_1_icon-27'></i></a>
                                                 </li>
                                             </ul>
                                         </div>
                                     </div>
                                     <div class='col-lg-2 col-md-2 col-sm-2'>");
-                        if($rooms_rows['room_person_count'] != 0){ echo("<div class='room_person_count_show'>{$rooms_rows['room_person_count']} نفره</div>"); }
-                        echo("
+                                            if($rooms_rows['room_person_count'] != 0){ echo("<div class='room_person_count_show'>{$rooms_rows['room_person_count']} نفره</div>"); }
+                                            echo("
                                         <div class='price_list'>
                                             <div>
                                             <sup>{$Functions->EN_numTo_FA($database->escape_value($Functions->insert_seperator($rooms_rows['room_main_price'])),true)} تومان</sup>
@@ -452,7 +455,6 @@
                             ");
                     }
                 }
-
 
                 if (isset($_POST["user_sort_price_room"])){
                     switch ($_POST["user_sort_price_room"]){
@@ -512,56 +514,57 @@
         public function UserََSerachRoom($grid = "",$roomSearchPage){
             global $database,$Functions,$users;
             settype($roomSearchPage,"integer");
-            if (isset($_POST["user_submit_search_room"]) && !(empty($_POST["user_keyword_room"]))) {
-                $keyword = $database->escape_value($_POST['user_keyword_room']);
-                if (isset($_POST["user_ByWitch_room"])) {
-                    switch ($_POST["user_ByWitch_room"]) {
-                        case 'Address':
-                            $sql = "SELECT * FROM rooms WHERE room_address LIKE '%{$keyword}%'";
-                            $pagination = $Functions->pagination(10, $roomSearchPage, 'rooms', 'room_id'," WHERE room_address LIKE '%{$keyword}%'");
-                            $ByWhich = array("Address" => $keyword);
-                            break;
-                        case 'Title':
-                            $sql = "SELECT * FROM rooms WHERE room_title LIKE '%{$keyword}%'";
-                            $pagination = $Functions->pagination(10, $roomSearchPage, 'rooms', 'room_id'," WHERE room_title LIKE '%{$keyword}%'");
-                            $ByWhich = array("Title" => $keyword);
-                            break;
-                        case 'Descript':
-                            $sql = "SELECT * FROM rooms WHERE room_description LIKE '%{$keyword}%'";
-                            $pagination = $Functions->pagination(10, $roomSearchPage, 'rooms', 'room_id'," WHERE room_description LIKE '%{$keyword}%'");
-                            $ByWhich = array("Descript" => $keyword);
-                            break;
-                        case 'Price':
-                            $sql = "SELECT * FROM rooms WHERE room_main_price LIKE '{$keyword}%'";
-                            $pagination = $Functions->pagination(10, $roomSearchPage, 'rooms', 'room_id'," WHERE room_main_price LIKE '{$keyword}%'");
-                            $ByWhich = array("Price" => $keyword);
-                            break;
-                        default:
-                            $ByWhich = array("Address" => $keyword);
-                            $sql = "SELECT * FROM rooms WHERE room_address LIKE '%{$keyword}%'";
-                            $pagination = $Functions->pagination(10, $roomSearchPage, 'rooms', 'room_id'," WHERE room_address LIKE '%{$keyword}%'");
-                            break;
+            if(isset($_GET['roomSearchPage']) && isset($_GET["keyword"]) && isset($_GET["ByWhich"]) || isset($_POST["user_submit_search_room"]) && !(empty($_POST["user_keyword_room"]))) {
+                if (isset($_POST["user_submit_search_room"]) && !(empty($_POST["user_keyword_room"]))) {
+                    $keyword = $database->escape_value($_POST['user_keyword_room']);
+                    if (isset($_POST["user_ByWitch_room"])) {
+                        switch ($_POST["user_ByWitch_room"]) {
+                            case 'Address':
+                                $sql = "SELECT * FROM rooms WHERE room_address LIKE '%{$keyword}%'";
+                                $pagination = $Functions->pagination(10, $roomSearchPage, 'rooms', 'room_id', " WHERE room_address LIKE '%{$keyword}%'");
+                                $ByWhich = array("Address" => $keyword);
+                                break;
+                            case 'Title':
+                                $sql = "SELECT * FROM rooms WHERE room_title LIKE '%{$keyword}%'";
+                                $pagination = $Functions->pagination(10, $roomSearchPage, 'rooms', 'room_id', " WHERE room_title LIKE '%{$keyword}%'");
+                                $ByWhich = array("Title" => $keyword);
+                                break;
+                            case 'Descript':
+                                $sql = "SELECT * FROM rooms WHERE room_description LIKE '%{$keyword}%'";
+                                $pagination = $Functions->pagination(10, $roomSearchPage, 'rooms', 'room_id', " WHERE room_description LIKE '%{$keyword}%'");
+                                $ByWhich = array("Descript" => $keyword);
+                                break;
+                            case 'Price':
+                                $sql = "SELECT * FROM rooms WHERE room_main_price LIKE '{$keyword}%'";
+                                $pagination = $Functions->pagination(10, $roomSearchPage, 'rooms', 'room_id', " WHERE room_main_price LIKE '{$keyword}%'");
+                                $ByWhich = array("Price" => $keyword);
+                                break;
+                            default:
+                                $ByWhich = array("Address" => $keyword);
+                                $sql = "SELECT * FROM rooms WHERE room_address LIKE '%{$keyword}%'";
+                                $pagination = $Functions->pagination(10, $roomSearchPage, 'rooms', 'room_id', " WHERE room_address LIKE '%{$keyword}%'");
+                                break;
+                        }
                     }
                 }
-            }
-                if(isset($_GET['roomSearchPage'])){
+                if (isset($_GET['roomSearchPage']) && isset($_GET["keyword"]) && isset($_GET["ByWhich"])) {
                     $keyword = $database->escape_value($_GET["keyword"]);
-                    switch ($_GET["ByWhich"]){
+                    switch ($_GET["ByWhich"]) {
                         case 'Address':
                             $sql = "SELECT * FROM rooms WHERE room_address LIKE '%{$keyword}%'";
-                            $pagination = $Functions->pagination(10, $roomSearchPage, 'rooms', 'room_id'," WHERE room_address LIKE '%{$keyword}%'");
+                            $pagination = $Functions->pagination(10, $roomSearchPage, 'rooms', 'room_id', " WHERE room_address LIKE '%{$keyword}%'");
                             break;
                         case 'Title':
                             $sql = "SELECT * FROM rooms WHERE room_title LIKE '%{$keyword}%'";
-                            $pagination = $Functions->pagination(10, $roomSearchPage, 'rooms', 'room_id'," WHERE room_title LIKE '%{$keyword}%'");
+                            $pagination = $Functions->pagination(10, $roomSearchPage, 'rooms', 'room_id', " WHERE room_title LIKE '%{$keyword}%'");
                             break;
                         case 'Descript':
                             $sql = "SELECT * FROM rooms WHERE room_description LIKE '%{$keyword}%'";
-                            $pagination = $Functions->pagination(10, $roomSearchPage, 'rooms', 'room_id'," WHERE room_description LIKE '%{$keyword}%'");
+                            $pagination = $Functions->pagination(10, $roomSearchPage, 'rooms', 'room_id', " WHERE room_description LIKE '%{$keyword}%'");
                             break;
                         case 'Price':
                             $sql = "SELECT * FROM rooms WHERE room_main_price LIKE '{$keyword}%'";
-                            $pagination = $Functions->pagination(10, $roomSearchPage, 'rooms', 'room_id'," WHERE room_main_price LIKE '{$keyword}%'");
+                            $pagination = $Functions->pagination(10, $roomSearchPage, 'rooms', 'room_id', " WHERE room_main_price LIKE '{$keyword}%'");
                             break;
                         default:
                             $users->redirect_to("RoomsList.php");
@@ -572,29 +575,33 @@
                 $result = $database->query($sql);
                 if ($database->num_rows($result) > 0) {
                     while ($rooms_rows = $database->fetch_array($result)) {
-                        if (isset($grid) && $grid == true){
+                        if (isset($grid) && $grid == true) {
                             echo("
                             <div class='col-md-6 col-sm-6 wow zoomIn' data-wow-delay='0.1s'>
                                 <div class='hotel_container'>
                                     <div class='img_container'>
                                         <a href='Room.php?roomId={$Functions->encrypt_id($rooms_rows['room_id'])}'>
-                                            <img src='"); self::select_room_image($rooms_rows['room_image']); echo("' width='800' height='533' class='img-responsive' alt='تی شین'>
+                                            <img src='");
+                                                self::select_room_image($rooms_rows['room_image']);
+                                                echo("' width='800' height='533' class='img-responsive' alt='تی شین'>
                                             <div class='ribbon top_rated'></div>
                                         </a>");
-                            if($rooms_rows['room_person_count'] != 0){ echo("<div class='room_person_count_show' id='room_person_count_grid_show'>{$rooms_rows['room_person_count']} نفره</div>"); }
-                                            echo("
+                                                if ($rooms_rows['room_person_count'] != 0) {
+                                                    echo("<div class='room_person_count_show' id='room_person_count_grid_show'>{$rooms_rows['room_person_count']} نفره</div>");
+                                                }
+                                                echo("
                                             <div class='score'>");
-                            echo(self::word_score($rooms_rows['room_score']));
-                            echo("<span>{$database->escape_value($Functions->EN_numTo_FA($rooms_rows['room_score'], true))}</span>
+                                                echo(self::word_score($rooms_rows['room_score']));
+                                                echo("<span>{$database->escape_value($Functions->EN_numTo_FA($rooms_rows['room_score'], true))}</span>
                                             </div>
                                             <div class='short_info hotel'>{$database->escape_value($rooms_rows['room_address'])}<span class='price'><sup>{$Functions->EN_numTo_FA($Functions->insert_seperator($rooms_rows['room_main_price']),true)} تومان</sup></span></div>
                                     </div>
                                     <div class='hotel_title'>
                                         <h3>{$database->escape_value($rooms_rows['room_title'])}</h3>
                                         <div class='rating'>
-                                        ");
-                            echo($Functions->give_start_by_number($rooms_rows['room_score']));
-                            echo ("
+                                                        ");
+                                            echo($Functions->give_start_by_number($rooms_rows['room_score']));
+                                            echo("
                                         </div>
                                         <div class='wishlist'> <a class='tooltip_flip tooltip-effect-1' href='#'>+<span class='tooltip-content-flip'><span class='tooltip-back'>علاقمند شدم</span></span></a>
                                         </div>
@@ -605,8 +612,8 @@
                                 </div>
                             </div>
                     ");
-                        } else{
-                            echo ("
+                        } else {
+                            echo("
                                 <div class='strip_all_tour_list wow fadeIn' data-wow-delay='0.1s'>
                                 <div class='row'>
                                     <div class='col-lg-4 col-md-4 col-sm-4'>
@@ -615,7 +622,9 @@
                                         <div class='img_list'>
                                             <a href='Room.php?roomId={$Functions->encrypt_id($rooms_rows['room_id'])}'> 
                                                 <div class='ribbon top_rated'></div>
-                                                <img src='"); self::select_room_image($rooms_rows['room_image']); echo("' alt='تی شین'>
+                                                <img src='");
+                                                    self::select_room_image($rooms_rows['room_image']);
+                                                    echo("' alt='تی شین'>
                                                 <div class='short_info'></div>
                                             </a>
                                         </div>
@@ -625,49 +634,64 @@
                                         <div class='tour_list_desc'>
                                         <h4 class='room_address'>{$database->escape_value($rooms_rows['room_address'])}</h4>
                                             <div class='score'>");
-                            echo(self::word_score($rooms_rows['room_score']));
-                            echo("<span>{$database->escape_value($Functions->EN_numTo_FA($rooms_rows['room_score'],true))}</span>
+                                                echo(self::word_score($rooms_rows['room_score']));
+                                                echo("<span>{$database->escape_value($Functions->EN_numTo_FA($rooms_rows['room_score'],true))}</span>
                                             </div>
                                             <div class='rating' style='background: white'>
                                             ");
-                            echo($Functions->give_start_by_number($rooms_rows['room_score']));
-                            echo ("
+                                                echo($Functions->give_start_by_number($rooms_rows['room_score']));
+                                                echo("
                                             </div>
                                             <h3>{$database->escape_value($rooms_rows['room_title'])}</h3>
                                             <p>");
-                            echo(substr(nl2br(htmlentities($rooms_rows['room_description'])),0,250)."...");
-                            echo("</p>
+                                                echo(substr(nl2br(htmlentities($rooms_rows['room_description'])), 0, 250) . "...");
+                                                echo("
+                                            </p>
                                             <ul class='add_info'>
                                                 <li> <a href='javascript:void(0);' class='tooltip-1 ");
-                            if($rooms_rows["room_wifi"] == 1){ echo 'rooms_checkbox';}
-                            echo("' data-placement='top' title='وای فای رایگان'><i class='icon_set_1_icon-86'></i></a>
+                                                    if ($rooms_rows["room_wifi"] == 1) {
+                                                        echo 'rooms_checkbox';
+                                                    }
+                                                    echo("' data-placement='top' title='وای فای رایگان'><i class='icon_set_1_icon-86'></i></a>
                                                 </li>
                                                 <li> <a href='javascript:void(0);' class='tooltip-1 ");
-                            if($rooms_rows["room_television"] == 1){ echo 'rooms_checkbox';}
-                            echo("' data-placement='top' title='تلویزیون پلاسما با کانال های اچ دی'><i class='icon_set_2_icon-116'></i></a>
+                                                    if ($rooms_rows["room_television"] == 1) {
+                                                        echo 'rooms_checkbox';
+                                                    }
+                                                    echo("' data-placement='top' title='تلویزیون پلاسما با کانال های اچ دی'><i class='icon_set_2_icon-116'></i></a>
                                                 </li>
                                                 <li> <a href='javascript:void(0);' class='tooltip-1 ");
-                            if($rooms_rows["room_pool"] == 1){ echo 'rooms_checkbox';}
-                            echo("' data-placement='top' title='استخر شنا'><i class='icon_set_2_icon-110'></i></a>
+                                                    if ($rooms_rows["room_pool"] == 1) {
+                                                        echo 'rooms_checkbox';
+                                                    }
+                                                    echo("' data-placement='top' title='استخر شنا'><i class='icon_set_2_icon-110'></i></a>
                                                 </li>
                                                 <li> <a href='javascript:void(0);' class='tooltip-1 ");
-                            if($rooms_rows["room_gym"] == 1){ echo 'rooms_checkbox';}
-                            echo("' data-placement='top' title='مرکز تناسب اندام'><i class='icon_set_2_icon-117'></i></a>
+                                                    if ($rooms_rows["room_gym"] == 1) {
+                                                        echo 'rooms_checkbox';
+                                                    }
+                                                    echo("' data-placement='top' title='مرکز تناسب اندام'><i class='icon_set_2_icon-117'></i></a>
                                                 </li>
                                                 <li> <a href='javascript:void(0);' class='tooltip-1 ");
-                            if($rooms_rows["room_food"] == 1){ echo 'rooms_checkbox';}
-                            echo("' data-placement='top' title='رستوران'><i class='icon_set_1_icon-58'></i></a>
+                                                    if ($rooms_rows["room_food"] == 1) {
+                                                        echo 'rooms_checkbox';
+                                                    }
+                                                    echo("' data-placement='top' title='رستوران'><i class='icon_set_1_icon-58'></i></a>
                                                 </li>
                                                 <li> <a href='javascript:void(0);' class='tooltip-1 ");
-                            if($rooms_rows["room_parking"] == 1){ echo 'rooms_checkbox';}
-                            echo("' data-placement='top' title='پارکینگ'><i class='icon_set_1_icon-27'></i></a>
+                                                    if ($rooms_rows["room_parking"] == 1) {
+                                                        echo 'rooms_checkbox';
+                                                    }
+                                                    echo("' data-placement='top' title='پارکینگ'><i class='icon_set_1_icon-27'></i></a>
                                                 </li>
                                             </ul>
                                         </div>
                                     </div>
                                     <div class='col-lg-2 col-md-2 col-sm-2'>");
-                            if($rooms_rows['room_person_count'] != 0){ echo("<div class='room_person_count_show'>{$Functions->EN_numTo_FA($rooms_rows['room_person_count'],true)} نفره</div>"); }
-                            echo("
+                                            if ($rooms_rows['room_person_count'] != 0) {
+                                                echo("<div class='room_person_count_show'>{$Functions->EN_numTo_FA($rooms_rows['room_person_count'],true)} نفره</div>");
+                                            }
+                                            echo("
                                         <div class='price_list'>
                                             <div>
                                             <sup>{$Functions->EN_numTo_FA($Functions->insert_seperator($rooms_rows['room_main_price']),true)} تومان</sup>
@@ -685,33 +709,37 @@
                             ");
                         }
                     }
-                }else { echo "<h1 class='no-result'>متاسفانه یافت نشد !</h1>"; }
+                } else {
+                    echo "<h1 class='no-result'>متاسفانه یافت نشد !</h1>";
+                }
 
-                if (isset($_POST["user_submit_search_room"]) && !(empty($_POST["user_keyword_room"]))){
-                            echo "<div class='pagination-outside col-lg-10 col-md-10 col-sm-10 col-xs-12'>
+                if (isset($_POST["user_submit_search_room"]) && !(empty($_POST["user_keyword_room"]))) {
+                    echo "<div class='pagination-outside col-lg-10 col-md-10 col-sm-10 col-xs-12'>
                                 <div class='pagination'>";
-                            for ($i = 1; $i <= $pagination["total_page"]; $i++):
-                                foreach ((array) $ByWhich as $key => $value){
-                                    echo "<a href='{$_SERVER['PHP_SELF']}?roomSearchPage={$i}&ByWhich={$key}&keyword={$value}' ";
-                                }
-                                if ($i == $roomSearchPage) echo "id='current-page'";
-                                echo">&nbsp;{$i}&nbsp;</a>";
-                            endfor;
-                            echo"</div>
+                    for ($i = 1; $i <= $pagination["total_page"]; $i++):
+                        foreach ((array)$ByWhich as $key => $value) {
+                            echo "<a href='{$_SERVER['PHP_SELF']}?roomSearchPage={$i}&ByWhich={$key}&keyword={$value}' ";
+                        }
+                        if ($i == $roomSearchPage) echo "id='current-page'";
+                        echo ">&nbsp;{$i}&nbsp;</a>";
+                    endfor;
+                    echo "</div>
                                 </div>";
                 }
-                if(isset($_GET["ByWhich"])){
+                if (isset($_GET["ByWhich"])) {
                     echo "<div class='pagination-outside col-lg-10 col-md-10 col-sm-10 col-xs-12'>
                                 <div class='pagination'>";
                     for ($i = 1; $i <= $pagination["total_page"]; $i++):
                         echo "<a href='{$_SERVER['PHP_SELF']}?roomSearchPage={$i}&ByWhich={$_GET['ByWhich']}&keyword={$_GET['keyword']}' ";
                         if ($i == $roomSearchPage) echo "id='current-page'";
-                        echo">&nbsp;{$i}&nbsp;</a>";
+                        echo ">&nbsp;{$i}&nbsp;</a>";
                     endfor;
-                    echo"</div>
+                    echo "</div>
                                 </div>";
                 }
-
+            }else{
+                $users->redirect_to("RoomsList.php");
+            }
 
         }
 
@@ -1246,43 +1274,43 @@
                                         <div class='tour_list_desc'>
                                         <h3 class='room_address'>{$database->escape_value($rooms_rows['room_address'])}</h3>
                                             <div class='score'>");
-                        echo(self::word_score($rooms_rows['room_score']));
-                        echo("<span>{$database->escape_value($Functions->EN_numTo_FA($rooms_rows['room_score'],true))}</span>
+                                                echo(self::word_score($rooms_rows['room_score']));
+                                                echo("<span>{$database->escape_value($Functions->EN_numTo_FA($rooms_rows['room_score'],true))}</span>
                                             </div>
                                             <div class='rating'>
                                             ");
-                        echo($Functions->give_start_by_number($rooms_rows['room_score']));
-                        echo ("
+                                                echo($Functions->give_start_by_number($rooms_rows['room_score']));
+                                                echo ("
                                             </div>
                                             <h3>{$database->escape_value($rooms_rows['room_title'])}</h3>
                                             <p>"); echo(nl2br(htmlentities($rooms_rows['room_description']))); echo("</p>
                                             <ul class='add_info'>
                                                     <li> <a href='javascript:void(0);' class='tooltip-1 ");
-                        if($rooms_rows['room_wifi'] == 1){ echo 'rooms_checkbox';}
-                        echo("' data-placement='top' title='وای فای رایگان'><i class='icon_set_1_icon-86'></i></a>
-                                                </li>
-                                                <li> <a href='javascript:void(0);' class='tooltip-1 ");
-                        if($rooms_rows['room_television'] == 1){ echo 'rooms_checkbox';}
-                        echo("' data-placement='top' title='تلویزیون پلاسما با کانال های اچ دی'><i class='icon_set_2_icon-116'></i></a>
-                                                </li>
-                                                <li> <a href='javascript:void(0);' class='tooltip-1 ");
-                        if($rooms_rows['room_pool'] == 1){ echo 'rooms_checkbox';}
-                        echo("' data-placement='top' title='استخر شنا'><i class='icon_set_2_icon-110'></i></a>
-                                                </li>
-                                                <li> <a href='javascript:void(0);' class='tooltip-1 ");
-                        if($rooms_rows['room_gym'] == 1){ echo 'rooms_checkbox';}
-                        echo("' data-placement='top' title='مرکز تناسب اندام'><i class='icon_set_2_icon-117'></i></a>
-                                                </li>
-                                                <li> <a href='javascript:void(0);' class='tooltip-1 ");
-                        if($rooms_rows['room_food'] == 1){ echo 'rooms_checkbox';}
-                        echo("' data-placement='top' title='رستوران'><i class='icon_set_1_icon-58'></i></a>
-                                                </li>
+                                                        if($rooms_rows['room_wifi'] == 1){ echo 'rooms_checkbox';}
+                                                        echo("' data-placement='top' title='وای فای رایگان'><i class='icon_set_1_icon-86'></i></a>
+                                                    </li>
+                                                    <li> <a href='javascript:void(0);' class='tooltip-1 ");
+                                                        if($rooms_rows['room_television'] == 1){ echo 'rooms_checkbox';}
+                                                        echo("' data-placement='top' title='تلویزیون پلاسما با کانال های اچ دی'><i class='icon_set_2_icon-116'></i></a>
+                                                    </li>
+                                                    <li> <a href='javascript:void(0);' class='tooltip-1 ");
+                                                        if($rooms_rows['room_pool'] == 1){ echo 'rooms_checkbox';}
+                                                        echo("' data-placement='top' title='استخر شنا'><i class='icon_set_2_icon-110'></i></a>
+                                                    </li>
+                                                    <li> <a href='javascript:void(0);' class='tooltip-1 ");
+                                                        if($rooms_rows['room_gym'] == 1){ echo 'rooms_checkbox';}
+                                                        echo("' data-placement='top' title='مرکز تناسب اندام'><i class='icon_set_2_icon-117'></i></a>
+                                                    </li>
+                                                    <li> <a href='javascript:void(0);' class='tooltip-1 ");
+                                                        if($rooms_rows['room_food'] == 1){ echo 'rooms_checkbox';}
+                                                        echo("' data-placement='top' title='رستوران'><i class='icon_set_1_icon-58'></i></a>
+                                                    </li>
                                             </ul>
                                         </div>
                                     </div>
                                     <div class='col-lg-2 col-md-2 col-sm-2'>");
-                        if($rooms_rows['room_person_count'] != 0){ echo("<div class='room_person_count_show'>{$Functions->EN_numTo_FA($rooms_rows['room_person_count'],true)}</div>"); }
-                        echo("
+                                        if($rooms_rows['room_person_count'] != 0){ echo("<div class='room_person_count_show'>{$Functions->EN_numTo_FA($rooms_rows['room_person_count'],true)}</div>"); }
+                                        echo("
                                         <div class='price_list'>
                                             <div>
                                             <sup>{$database->escape_value($Functions->EN_numTo_FA($Functions->insert_seperator($rooms_rows['room_main_price']),true))} تومان</sup>
@@ -1308,8 +1336,7 @@
                             foreach ((array) $ByWhich as $key => $value){
                                 echo "<a href='rooms_show.php?roomSearchPage={$i}&ByWhich={$key}&keyword={$value}' ";
                             }
-                            if ($i == $roomSearchPage) echo "id='current-page'";
-                            echo">&nbsp;{$i}&nbsp;</a>";
+                            if ($i == $roomSearchPage) echo "id='current-page'"; echo">&nbsp;{$i}&nbsp;</a>";
                         endfor;
                         echo"</div>
                                 </div>";
@@ -1319,8 +1346,7 @@
                                 <div class='pagination'>";
                         for ($i = 1; $i <= $pagination["total_page"]; $i++):
                             echo "<a href='rooms_show.php?roomSearchPage={$i}&ByWhich={$_GET['ByWhich']}&keyword={$_GET['keyword']}' ";
-                            if ($i == $roomSearchPage) echo "id='current-page'";
-                            echo">&nbsp;{$i}&nbsp;</a>";
+                            if ($i == $roomSearchPage) echo "id='current-page'"; echo">&nbsp;{$i}&nbsp;</a>";
                         endfor;
                         echo"</div>
                                 </div>";
