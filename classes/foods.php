@@ -289,6 +289,7 @@ class Foods{
                 }
             }
         }
+        echo $sql;
             $database->query("SET NAMES 'utf8'");
             $result = $database->query($sql);
             if($database->num_rows($result) == 0){ echo "<h1 class='no-result'>متاسفانه یافت نشد !</h1>"; }
