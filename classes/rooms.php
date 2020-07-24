@@ -1214,7 +1214,7 @@
                     }
                 }
             }
-            if (isset($_GET['roomSearchPage'])){
+            if (isset($_GET['roomSearchPage']) && isset($_GET['keyword']) && isset($_GET["ByWhich"])){
                 $keyword = $database->escape_value($_GET['keyword']);
                 switch ($_GET["ByWhich"]) {
                     case 'Address':
@@ -1329,6 +1329,7 @@
                             </div>
                             ");
                     }
+
                     if (isset($_GET["panel_keyword_room"]) && !(empty($_GET["panel_keyword_room"])) && isset($_GET["panel_ByWitch_room"]) && !(empty($_GET["panel_ByWitch_room"]))){
                         echo "<div class='pagination-outside col-lg-10 col-md-10 col-sm-10 col-xs-12'>
                                 <div class='pagination'>";
@@ -1351,6 +1352,7 @@
                         echo"</div>
                                 </div>";
                     }
+
                 }else { echo "<h1 class='no-result'>یافت نشد !</h1>"; }
 
         }

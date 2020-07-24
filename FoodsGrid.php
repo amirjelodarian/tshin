@@ -5,7 +5,7 @@
         isset($_GET["foodSearchPage"]) ? $foodSearchPage = $_GET["foodSearchPage"] : $foodSearchPage = 1;
 
         if(isset($_POST["user_show_by_all_hotels_food"]) || isset($_GET["foodByPage"])){
-            $foods->ShowAllFoodsBy(true,$roomByPage);
+            $foods->ShowAllFoodsBy(true,$foodByPage);
         }elseif (isset($_POST["user_submit_search_food"]) && isset($_POST["user_keyword_food"]) && !(empty($_POST["user_keyword_food"])) || isset($_GET["foodSearchPage"])){
             $foods->UserََSerachFood(true,$foodSearchPage);
         }else {

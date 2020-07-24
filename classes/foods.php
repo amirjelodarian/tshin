@@ -923,34 +923,84 @@ class Foods{
     }
 
     //function for search food
-    public function SerachFood(){
+    public function SerachFood($foodSearchPage = ""){
         global $database,$users,$Functions;
+        settype($foodSearchPage, "integer");
         if (isset($_GET["panel_keyword_food"]) && !(empty($_GET["panel_keyword_food"])) && isset($_GET["panel_ByWitch_food"]) && !(empty($_GET["panel_ByWitch_food"]))) {
             $keyword = $database->escape_value($_GET['panel_keyword_food']);
-            if (isset($_GET["panel_ByWitch_food"])){
-                switch ($_GET["panel_ByWitch_food"]){
+            if (isset($_GET["panel_ByWitch_food"])) {
+                switch ($_GET["panel_ByWitch_food"]) {
                     case 'Title':
                         $sql = "SELECT * FROM foods WHERE food_title LIKE '%{$keyword}%'";
+                        $ByWhich = array("Title" => $keyword);
+                        $pagination = $Functions->pagination(10, $foodSearchPage, 'foods', 'food_id', " WHERE food_title LIKE '%{$keyword}%'");
                         break;
                     case 'Descript':
                         $sql = "SELECT * FROM foods WHERE food_description LIKE '%{$keyword}%'";
+                        $ByWhich = array("Descript" => $keyword);
+                        $pagination = $Functions->pagination(10, $foodSearchPage, 'foods', 'food_id', " WHERE food_description LIKE '%{$keyword}%'");
                         break;
                     case 'Score':
                         $sql = "SELECT * FROM foods WHERE food_score LIKE '{$keyword}'";
+                        $ByWhich = array("Score" => $keyword);
+                        $pagination = $Functions->pagination(10, $foodSearchPage, 'foods', 'food_id', " WHERE food_score LIKE '{$keyword}'");
                         break;
                     case 'Price':
                         $sql = "SELECT * FROM foods WHERE food_main_price LIKE '{$keyword}%'";
+                        $ByWhich = array("Price" => $keyword);
+                        $pagination = $Functions->pagination(10, $foodSearchPage, 'foods', 'food_id', " WHERE food_main_price LIKE '{$keyword}%'");
                         break;
                     case 'Off-Price':
                         $sql = "SELECT * FROM foods WHERE food_off_price LIKE '{$keyword}%'";
+                        $ByWhich = array("Off-Price" => $keyword);
+                        $pagination = $Functions->pagination(10, $foodSearchPage, 'foods', 'food_id', " WHERE food_off_price LIKE '{$keyword}%'");
                         break;
                     case 'Details':
                         $sql = "SELECT * FROM foods WHERE food_details LIKE '%{$keyword}%'";
+                        $ByWhich = array("Details" => $keyword);
+                        $pagination = $Functions->pagination(10, $foodSearchPage, 'foods', 'food_id', " WHERE food_details LIKE '%{$keyword}%'");
                         break;
                     default:
                         $sql = "SELECT * FROM foods WHERE food_title LIKE '%{$keyword}%'";
+                        $ByWhich = array("Title" => $keyword);
+                        $pagination = $Functions->pagination(10, $foodSearchPage, 'foods', 'food_id', " WHERE food_title LIKE '%{$keyword}%'");
+                        break;
                 }
             }
+        }
+        if (isset($_GET['foodSearchPage']) && isset($_GET['keyword']) && isset($_GET["ByWhich"])) {
+            $keyword = $database->escape_value($_GET['keyword']);
+            switch ($_GET["ByWhich"]) {
+                case 'Title':
+                    $sql = "SELECT * FROM foods WHERE food_title LIKE '%{$keyword}%'";
+                    $pagination = $Functions->pagination(10, $foodSearchPage, 'foods', 'food_id', " WHERE food_title LIKE '%{$keyword}%'");
+                    break;
+                case 'Descript':
+                    $sql = "SELECT * FROM foods WHERE food_description LIKE '%{$keyword}%'";
+                    $pagination = $Functions->pagination(10, $foodSearchPage, 'foods', 'food_id', " WHERE food_description LIKE '%{$keyword}%'");
+                    break;
+                case 'Score':
+                    $sql = "SELECT * FROM foods WHERE food_score LIKE '{$keyword}'";
+                    $pagination = $Functions->pagination(10, $foodSearchPage, 'foods', 'food_id', " WHERE food_score LIKE '{$keyword}'");
+                    break;
+                case 'Price':
+                    $sql = "SELECT * FROM foods WHERE food_main_price LIKE '{$keyword}%'";
+                    $pagination = $Functions->pagination(10, $foodSearchPage, 'foods', 'food_id', " WHERE food_main_price LIKE '{$keyword}%'");
+                    break;
+                case 'Off-Price':
+                    $sql = "SELECT * FROM foods WHERE food_off_price LIKE '{$keyword}%'";
+                    $pagination = $Functions->pagination(10, $foodSearchPage, 'foods', 'food_id', " WHERE food_off_price LIKE '{$keyword}%'");
+                    break;
+                case 'Details':
+                    $sql = "SELECT * FROM foods WHERE food_details LIKE '%{$keyword}%'";
+                    $pagination = $Functions->pagination(10, $foodSearchPage, 'foods', 'food_id', " WHERE food_details LIKE '%{$keyword}%'");
+                    break;
+                default:
+                    $users->redirect_to("foods_show.php");
+                    break;
+            }
+        }
+        $sql .= " ORDER BY food_id DESC LIMIT {$pagination['start_from']},{$pagination['record_per_page']}";
             $result = $database->query($sql);
             if ($database->num_rows($result) > 0) {
                 echo "<h3>جستجو ...</h3>";
@@ -969,27 +1019,28 @@ class Foods{
                             </a>
                         </div>
                     </div>
+                    
                     <div class='clearfix visible-xs-block'></div>
                     <div class='col-lg-6 col-md-6 col-sm-6'>
                         <div class='tour_list_desc'>
                             <div class='score'>");
-                    echo(self::word_score($foods_rows['food_score']));
-                    echo("<span>{$Functions->EN_numTo_FA($database->escape_value($foods_rows['food_score']),true)}</span>
+                                echo(self::word_score($foods_rows['food_score']));
+                                echo("<span>{$Functions->EN_numTo_FA($database->escape_value($foods_rows['food_score']),true)}</span>
                             </div>
                             <div class='rating'>");
-                    echo $Functions->give_start_by_number($foods_rows['food_score']);
-                    echo ("
+                                echo $Functions->give_start_by_number($foods_rows['food_score']);
+                                echo ("
                             </div>
                             <h3><strong>{$database->escape_value($foods_rows['food_title'])}</strong> </h3>
                             <p>");
-                    echo(substr(nl2br(htmlentities($foods_rows['food_description'])),0,200)."...");
-                    echo("</p>
+                                echo(substr(nl2br(htmlentities($foods_rows['food_description'])),0,200)."...");
+                                echo("</p>
                             <ul class='add_info'>
                               <div class='food-detail fade in'>
                                 <h6 class='food-detail-title'>طرز تهیه {$foods_rows['food_title']} </h6>
                                 <p>");
-                    echo(substr(htmlentities($foods_rows['food_details']),0,200)."...");
-                    echo("</p>
+                                echo(substr(htmlentities($foods_rows['food_details']),0,200)."...");
+                                echo("</p>
                               </div>
                             </ul>
                         </div>
@@ -1003,22 +1054,40 @@ class Foods{
                                                 <form method='post' action='foods_delete.php'>
                                                     <input type='submit' name='submit_delete_food' value='حذف' class='delete_room_btn' />
                                                     <input type='hidden' name='food_id' value='");
-                    echo($Functions->encrypt_id($foods_rows['food_id']));
-                    echo("' />
+                                                    echo($Functions->encrypt_id($foods_rows['food_id']));
+                                                    echo("' />
                                                 </form>
                             </div>
                         </div>
                     </div>
             </div>
-            </div>
+             
                             ");
                 }
-            } else {
-                echo "<h1 class='no-result'>یافت نشد !</h1>";
-            }
-        }else{
-            $this->AllFoods_panel('');
-        }
+
+                if (isset($_GET["panel_keyword_food"]) && !(empty($_GET["panel_keyword_food"])) && isset($_GET["panel_ByWitch_food"]) && !(empty($_GET["panel_ByWitch_food"]))) {
+                    echo "<div class='pagination-outside col-lg-10 col-md-10 col-sm-10 col-xs-12'>
+                                <div class='pagination'>";
+                    for ($i = 1; $i <= $pagination["total_page"]; $i++):
+                        foreach ((array) $ByWhich as $key => $value){
+                            echo "<a href='foods_show.php?foodSearchPage={$i}&ByWhich={$key}&keyword={$value}' ";
+                        }
+                        if ($i == $foodSearchPage) echo "id='current-page'"; echo">&nbsp;{$i}&nbsp;</a>";
+                    endfor;
+                    echo"</div>
+                                </div>";
+                }
+                if(isset($_GET["ByWhich"])){
+                    echo "<div class='pagination-outside col-lg-10 col-md-10 col-sm-10 col-xs-12'>
+                                <div class='pagination'>";
+                    for ($i = 1; $i <= $pagination["total_page"]; $i++):
+                        echo "<a href='foods_show.php?foodSearchPage={$i}&ByWhich={$_GET['ByWhich']}&keyword={$_GET['keyword']}' ";
+                        if ($i == $foodSearchPage) echo "id='current-page'"; echo">&nbsp;{$i}&nbsp;</a>";
+                    endfor;
+                    echo"</div>
+                                </div>";
+                }
+            } else { echo "<h1 class='no-result'>یافت نشد !</h1>"; }
     }
 }
 $foods = new Foods();
