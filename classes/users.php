@@ -981,8 +981,7 @@ require_once("functions.php");
                                 $pagination = $Functions->pagination(15, $userSearchPage, 'users', 'id', " WHERE username LIKE '%{$keyword}%'");
                                 break;
                             default:
-                                $sql = "SELECT * FROM users WHERE tel LIKE '{$keyword}%'";
-                                $pagination = $Functions->pagination(15, $userSearchPage, 'users', 'id', " WHERE tel LIKE '{$keyword}%'");
+                                $users->redirect_to("users_show.php");
                                 break;
                         }
                     }
@@ -1111,23 +1110,67 @@ require_once("functions.php");
         }
 
 
-        public function SerachAdminByTelOrUsername(){
-            global $database,$Functions;
-            if (isset($_GET["panel_keyword_admin"]) && !(empty($_GET["panel_keyword_admin"])) && isset($_GET["panel_ByWitch_admin"]) && !(empty($_GET["panel_ByWitch_admin"]))) {
-                $keyword = $database->escape_value($_GET['panel_keyword_admin']);
-                if (isset($_GET["panel_ByWitch_admin"])){
-                    switch ($_GET["panel_ByWitch_admin"]){
+        public function SerachAdminByTelOrUsername($adminSearchPage = ""){
+            global $database,$Functions,$users;
+            settype($adminSearchPage, "integer");
+            if (isset($_GET["panel_keyword_admin"]) && !(empty($_GET["panel_keyword_admin"])) && isset($_GET["panel_ByWitch_admin"]) && !(empty($_GET["panel_ByWitch_admin"])) || isset($_GET['adminSearchPage']) && isset($_GET['keyword']) && isset($_GET["ByWhich"])) {
+                if (isset($_GET["panel_keyword_admin"]) && !(empty($_GET["panel_keyword_admin"])) && isset($_GET["panel_ByWitch_admin"]) && !(empty($_GET["panel_ByWitch_admin"]))) {
+                    $keyword = $database->escape_value($_GET['panel_keyword_admin']);
+                    if (isset($_GET["panel_ByWitch_admin"])) {
+                        switch ($_GET["panel_ByWitch_admin"]) {
+                            case 'Tel':
+                                $ByWhich = array("Tel" => $keyword);
+                                $sql = "SELECT * FROM users WHERE user_mode=1 AND tel LIKE '{$keyword}%'";
+                                $pagination = $Functions->pagination(15, $adminSearchPage, 'users', 'id', " WHERE user_mode=1 AND tel LIKE '{$keyword}%'");
+                                break;
+                            case 'Username':
+                                $ByWhich = array("Username" => $keyword);
+                                $pagination = $Functions->pagination(15, $adminSearchPage, 'users', 'id', " WHERE user_mode=1 AND username LIKE '%{$keyword}%'");
+                                $sql = "SELECT * FROM users WHERE user_mode=1 AND username LIKE '%{$keyword}%'";
+                                break;
+                            default:
+                                $users->redirect_to("admins_show.php");
+                                break;
+                        }
+                        echo "<div class='pagination-outside col-lg-10 col-md-10 col-sm-10 col-xs-12' style='margin: 0'>
+                    <div class='pagination'>";
+                        for ($i = 1; $i <= $pagination["total_page"]; $i++):
+                            foreach ((array)$ByWhich as $key => $value) {
+                                echo "<a href='admins_show.php?adminSearchPage={$i}&ByWhich={$key}&keyword={$value}' ";
+                            }
+                            if ($i == $adminSearchPage) echo "id='current-page'";
+                            echo ">&nbsp;{$i}&nbsp;</a>";
+                        endfor;
+                        echo "</div>
+                                </div>";
+                    }
+                }
+                if (isset($_GET['adminSearchPage']) && isset($_GET['keyword']) && isset($_GET["ByWhich"])) {
+                    $keyword = $database->escape_value($_GET['keyword']);
+                    switch ($_GET["ByWhich"]) {
                         case 'Tel':
                             $sql = "SELECT * FROM users WHERE user_mode=1 AND tel LIKE '{$keyword}%'";
+                            $pagination = $Functions->pagination(15, $adminSearchPage, 'users', 'id', " WHERE user_mode=1 AND tel LIKE '{$keyword}%'");
                             break;
                         case 'Username':
+                            $pagination = $Functions->pagination(15, $adminSearchPage, 'users', 'id', " WHERE user_mode=1 AND username LIKE '%{$keyword}%'");
                             $sql = "SELECT * FROM users WHERE user_mode=1 AND username LIKE '%{$keyword}%'";
                             break;
                         default:
-                            $sql = "SELECT * FROM users WHERE user_mode=1";
+                            $users->redirect_to("admins_show.php");
                             break;
                     }
+                    echo "<div class='pagination-outside col-lg-10 col-md-10 col-sm-10 col-xs-12' style='margin: 0'>
+                                <div class='pagination'>";
+                    for ($i = 1; $i <= $pagination["total_page"]; $i++):
+                        echo "<a href='admins_show.php?adminSearchPage={$i}&ByWhich={$_GET['ByWhich']}&keyword={$_GET['keyword']}' ";
+                        if ($i == $adminSearchPage) echo "id='current-page'";
+                        echo ">&nbsp;{$i}&nbsp;</a>";
+                    endfor;
+                    echo "</div>
+                                </div>";
                 }
+                $sql .= " ORDER BY id DESC LIMIT {$pagination['start_from']},{$pagination['record_per_page']}";
                 $result = $database->query($sql);
                 if ($database->num_rows($result) > 0) {
                     while ($admins_row = $database->fetch_array($result)) {

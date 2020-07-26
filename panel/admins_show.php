@@ -3,6 +3,7 @@ header('Cache-Control: max-age=900');
 require_once("../classes/initialize.php");
 $sessions->login_administrator("../index.php");
 isset($_GET["page"]) ? $page = $_GET["page"] : $page = 1;
+isset($_GET["adminSearchPage"]) ? $adminSearchPage = $_GET["adminSearchPage"] : $adminSearchPage = 1;
 ?>
 <?php include("includes/administrator_menu.php"); ?>
 <div class="add_new_room">
@@ -29,7 +30,15 @@ isset($_GET["page"]) ? $page = $_GET["page"] : $page = 1;
                 <th>Delete</th>
             </tr>
             <tbody id="result"></tbody>
-            <tbody id="main-result"><?php $users->AllAdmins($page); ?></tbody>
+            <tbody id="main-result">
+                <?php
+                    if (isset($_GET['adminSearchPage'])){
+                        $users->SerachAdminByTelOrUsername($adminSearchPage);
+                    }else{
+                        $users->AllAdmins($page);
+                    }
+                ?>
+            </tbody>
             </tbody>
         </table>
     </div>
