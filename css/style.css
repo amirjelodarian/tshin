@@ -5662,7 +5662,6 @@ a.btn_infobox:hover {
     position: fixed;
     margin-top: 15%;
 }
-
 @-webkit-keyframes spin {
     0% { -webkit-transform: rotate(0deg); }
     100% { -webkit-transform: rotate(360deg); }

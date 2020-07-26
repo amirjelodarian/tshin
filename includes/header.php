@@ -41,14 +41,9 @@
                     <ul>
                         <li class="submenu"> <a href="index.php" class="show-submenu">صفحه اصلی <i class="icon-home"></i></a>
                         </li>
-                        <li class="submenu"> <a href="javascript:void(0);" class="show-submenu">جاذبه های تی شین <i class="icon-tree"></i></a>
-                            <ul>
-                                <li><a href="RoomsList.php">لیست همه اقامتگاه ها</a>
-                                </li>
-                                <li><a href="FoodsList.php">لیست همه غذا ها</a>
-                                </li>
-                            </ul>
-                        </li>
+                        <li><a href="RoomsList.php">لیست همه اقامتگاه ها<i class="icon-home-1"></i></a></li>
+                        <li><a href="FoodsList.php">لیست همه غذا ها<i class="icon-food"></i></a></li>
+
                         <li class="submenu"> <a href="blog.php" class="show-submenu">وبلاگ ما<i class="icon-book-open"></i></a>
                         </li>
                         <li class="submenu"> <a href="about.php" class="show-submenu">درباره ما<i class="icon-person"></i></a>

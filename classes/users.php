@@ -599,7 +599,6 @@ require_once("functions.php");
             $result = $database->query($sql);
             while($users_row = $database->fetch_array($result)){
                 echo("
-                    
                         <tr "); if($users_row['user_mode'] == 1){ echo 'style="background: #d75e30;"'; } echo(">
                             <td><img class='finger-img' ");
                             if($users_row['user_mode'] == 1){ echo 'style="border:2px solid darkorange"'; }
@@ -963,28 +962,72 @@ require_once("functions.php");
         }
 
         // This Function For Search Box And By Tel Or Username
-        public function SerachUserByTelOrUsername(){
+        public function SerachUserByTelOrUsername($userSearchPage = ""){
             global $database,$Functions,$users;
-            if (isset($_GET["panel_keyword_user"]) && !(empty($_GET["panel_keyword_user"])) && isset($_GET["panel_ByWitch_user"]) && !(empty($_GET["panel_ByWitch_user"]))) {
-                $keyword = $database->escape_value($_GET['panel_keyword_user']);
-                if (isset($_GET["panel_ByWitch_user"])){
-                    switch ($_GET["panel_ByWitch_user"]){
+            settype($userSearchPage, "integer");
+            if (isset($_GET["panel_keyword_user"]) && !(empty($_GET["panel_keyword_user"])) && isset($_GET["panel_ByWitch_user"]) && !(empty($_GET["panel_ByWitch_user"])) || isset($_GET['userSearchPage']) && isset($_GET['keyword']) && isset($_GET["ByWhich"])) {
+                if (isset($_GET["panel_keyword_user"]) && !(empty($_GET["panel_keyword_user"])) && isset($_GET["panel_ByWitch_user"]) && !(empty($_GET["panel_ByWitch_user"]))) {
+                    $keyword = $database->escape_value($_GET['panel_keyword_user']);
+                    if (isset($_GET["panel_ByWitch_user"])) {
+                        switch ($_GET["panel_ByWitch_user"]) {
+                            case 'Tel':
+                                $sql = "SELECT * FROM users WHERE tel LIKE '{$keyword}%'";
+                                $ByWhich = array("Tel" => $keyword);
+                                $pagination = $Functions->pagination(15, $userSearchPage, 'users', 'id', " WHERE tel LIKE '{$keyword}%'");
+                                break;
+                            case 'Username':
+                                $sql = "SELECT * FROM users WHERE username LIKE '%{$keyword}%'";
+                                $ByWhich = array("Username" => $keyword);
+                                $pagination = $Functions->pagination(15, $userSearchPage, 'users', 'id', " WHERE username LIKE '%{$keyword}%'");
+                                break;
+                            default:
+                                $sql = "SELECT * FROM users WHERE tel LIKE '{$keyword}%'";
+                                $pagination = $Functions->pagination(15, $userSearchPage, 'users', 'id', " WHERE tel LIKE '{$keyword}%'");
+                                break;
+                        }
+                    }
+                    echo "<div class='pagination-outside col-lg-10 col-md-10 col-sm-10 col-xs-12' style='margin: 0'>
+                    <div class='pagination'>";
+                    for ($i = 1; $i <= $pagination["total_page"]; $i++):
+                        foreach ((array)$ByWhich as $key => $value) {
+                            echo "<a href='users_show.php?userSearchPage={$i}&ByWhich={$key}&keyword={$value}' ";
+                        }
+                        if ($i == $userSearchPage) echo "id='current-page'";
+                        echo ">&nbsp;{$i}&nbsp;</a>";
+                    endfor;
+                    echo "</div>
+                                </div>";
+                }
+                if (isset($_GET['userSearchPage']) && isset($_GET['keyword']) && isset($_GET["ByWhich"])) {
+                    $keyword = $database->escape_value($_GET['keyword']);
+                    switch ($_GET["ByWhich"]) {
                         case 'Tel':
                             $sql = "SELECT * FROM users WHERE tel LIKE '{$keyword}%'";
+                            $pagination = $Functions->pagination(15, $userSearchPage, 'users', 'id', " WHERE tel LIKE '{$keyword}%'");
                             break;
                         case 'Username':
                             $sql = "SELECT * FROM users WHERE username LIKE '%{$keyword}%'";
+                            $pagination = $Functions->pagination(15, $userSearchPage, 'users', 'id', " WHERE username LIKE '%{$keyword}%'");
                             break;
                         default:
-                            $sql = "SELECT * FROM users";
+                            $users->redirect_to("users_show.php");
                             break;
                     }
+                    echo "<div class='pagination-outside col-lg-10 col-md-10 col-sm-10 col-xs-12' style='margin: 0'>
+                                <div class='pagination'>";
+                    for ($i = 1; $i <= $pagination["total_page"]; $i++):
+                        echo "<a href='users_show.php?userSearchPage={$i}&ByWhich={$_GET['ByWhich']}&keyword={$_GET['keyword']}' ";
+                        if ($i == $userSearchPage) echo "id='current-page'";
+                        echo ">&nbsp;{$i}&nbsp;</a>";
+                    endfor;
+                    echo "</div>
+                                </div>";
                 }
+                $sql .= " ORDER BY id DESC LIMIT {$pagination['start_from']},{$pagination['record_per_page']}";
                 $result = $database->query($sql);
                 if ($database->num_rows($result) > 0) {
                     while ($users_row = $database->fetch_array($result)) {
                         echo("
-                    
                         <tr ");
                         if ($users_row['user_mode'] == 1) {
                             echo 'style="background: #d75e30;"';
@@ -996,7 +1039,11 @@ require_once("functions.php");
                         }
                         echo " src=";
                         self::select_user_image($users_row['user_image']);
-                        switch ($_GET["panel_ByWitch_user"]){
+                        if (isset($_GET['userSearchPage']) && isset($_GET['keyword']) && isset($_GET["ByWhich"]))
+                            $ByWhichForSwitch = $_GET["ByWhich"];
+                        else
+                            $ByWhichForSwitch = $_GET["panel_ByWitch_user"];
+                        switch ($ByWhichForSwitch) {
                             case 'Tel':
                                 echo(" alt='تی شین'></td>
                                 <td class='admins_username'>{$users_row['username']}</td>
@@ -1059,9 +1106,11 @@ require_once("functions.php");
                     echo "<h1 class='no-result' style='color:white;'>یافت نشد !</h1>";
                 }
             }else{
-                $users->AllUsers('');
+
             }
         }
+
+
         public function SerachAdminByTelOrUsername(){
             global $database,$Functions;
             if (isset($_GET["panel_keyword_admin"]) && !(empty($_GET["panel_keyword_admin"])) && isset($_GET["panel_ByWitch_admin"]) && !(empty($_GET["panel_ByWitch_admin"]))) {

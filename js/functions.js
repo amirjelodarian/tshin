@@ -70,14 +70,14 @@ $(document).ready(function () {
                 data: {panel_keyword_admin: keyword,panel_ByWitch_admin: bywitch},
                 success:function (data) {
                     $(".loader").hide();
-                    $('tbody #main-result').hide();
+                    $('tbody #main-result,.pagination-outside').hide();
                     $('#result').show();
                     $('#result').html(data);
                 }
             });
         }else{
             $(".loader").hide();
-            $('tbody #main-result').show();
+            $('tbody #main-result,.pagination-outside').show();
             $('#result').hide();
         }
     });
@@ -97,14 +97,14 @@ $(document).ready(function () {
                 data: {panel_keyword_user: keyword,panel_ByWitch_user: bywitch},
                 success:function (data) {
                     $(".loader").hide();
-                    $('#main-result').hide();
+                    $('#main-result,.pagination-outside').hide();
                     $('#result').show();
                     $('#result').html(data);
                 }
             });
         }else{
             $(".loader").hide();
-            $('#main-result').show();
+            $('#main-result,.pagination-outside').show();
             $('#result').hide();
         }
     });

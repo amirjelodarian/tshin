@@ -1,4 +1,6 @@
 <?php
     require_once("../classes/initialize.php");
-    $users->SerachUserByTelOrUsername();
+$sessions->login_administrator("../index.php");
+    isset($_GET["userSearchPage"]) ? $userSearchPage = $_GET["userSearchPage"] : $userSearchPage = 1;
+    $users->SerachUserByTelOrUsername($userSearchPage);
 ?>
